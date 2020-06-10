@@ -1,0 +1,60 @@
+.form-wrapper{
+    .vertical-line{
+      height: 250px;
+      width: 1px;
+      background-color: rgba(1,1,1,0.2);
+      position: absolute;
+      top:22%;
+      left: 100%;
+    }
+    position: absolute;
+    width: 50%;
+    height: 80%;
+    top: 10%;
+    left:2%;
+
+    .heading-wrapper{
+
+        #sign-in-heading{
+        @include wrappers();
+         position: absolute;
+         top: 10%;
+         left: 10%;
+         width: 50%;
+         font-family:  Arial, Helvetica, sans-serif;
+         font-weight: bold;
+         font-size: 28px;
+        }
+    
+        #text-wrapper{
+          @include wrappers();
+          top: $topPosition - 10%;
+          left: $leftPositon - 20%;
+        }
+    }
+    
+    .input-wrapper{
+
+        .email-input-wrapper{
+          
+         @include inputProps();
+     }
+        .password-input-wrapper{
+          @include inputProps();
+          input{
+            top:$topPosition + 25%
+          }
+        }
+     }
+
+     .container-brand-wrapper{
+       width: 100px;
+       height: 100px;
+
+       img{
+         width: 160px;
+         
+       }
+     }
+  }
+  

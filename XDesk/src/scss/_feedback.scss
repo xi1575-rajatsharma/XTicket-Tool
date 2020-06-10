@@ -1,0 +1,78 @@
+.feedback-container{
+margin: auto;
+background-color: #ccc;
+width:40vw;
+height: 70vh;
+position: relative;
+z-index: 10;
+}
+ 
+.feedback-header{
+height: 20%;
+background-color:#25afcb;
+}
+ 
+.feedback-body{
+position: relative;
+height: 80%;
+display: block;
+display: flex;
+flex-direction: column;
+align-items: center;
+justify-content: space-evenly;
+background-color: white;
+}
+ .thumb{
+     color: #25afcb;
+     font-size: 2rem;
+ }
+.hand-svg{
+position: absolute;
+margin: auto;
+top:-8%;
+display: flex;
+justify-content: center;
+align-items: center;
+background-color: white;
+height: 60px;
+width: 60px;
+border-radius: 100px; 
+}
+ 
+.checked {
+color: orange;
+ }
+ 
+.star-container{
+font-size: 20px;
+text-align: center;
+}
+textarea {
+width: 70%;
+height: 100px;
+padding: 12px20px;
+box-sizing: border-box;
+border: 2pxsolid#ccc;
+border-radius: 4px;
+background-color: #f8f8f8;
+resize: none;
+}
+ 
+.cross{
+background-color: transparent;
+color:white;
+border: none;
+position: absolute;
+right: 0;
+}
+
+.btn-rating{
+    background-color: #25afcb;
+    color: white;
+    border: none;
+    width: 140px;
+    height: 30px;
+    border-radius: 5px;
+    text-transform: capitalize;
+
+}

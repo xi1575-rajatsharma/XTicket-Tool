@@ -1,0 +1,41 @@
+.report-container{
+margin: auto;
+display:grid;
+height: 100%;
+width:90%;
+grid-gap:20px;
+grid-template-rows:380px 380px;
+grid-template-columns: repeat(2, 1fr);
+//box-shadow: none;
+ }
+
+.chart-1{
+margin-top:20px;
+padding:10px;
+background-color:white;
+box-shadow: inset 0 0 10px #000000;
+
+ }
+
+.chart-2{
+margin-top:20px;
+padding:10px;
+background-color: white;
+box-shadow: inset 0 0 10px #000000;
+
+ }
+
+.chart-3{
+margin-bottom:20px ;
+padding:10px;
+background-color: white;
+box-shadow: inset 0 0 10px #000000;
+
+ }
+ 
+.chart-4{
+margin-bottom:20px ;
+background-color: white;
+box-shadow: inset 0 0 10px #000000;
+ }
+
