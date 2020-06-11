@@ -1,0 +1,29 @@
+{
+  "files": {
+    "main.css": "/static/css/main.5fab4fc6.chunk.css",
+    "main.js": "/static/js/main.8a59139e.chunk.js",
+    "main.js.map": "/static/js/main.8a59139e.chunk.js.map",
+    "runtime-main.js": "/static/js/runtime-main.474a9135.js",
+    "runtime-main.js.map": "/static/js/runtime-main.474a9135.js.map",
+    "static/css/2.4f10b18f.chunk.css": "/static/css/2.4f10b18f.chunk.css",
+    "static/js/2.321ec0e7.chunk.js": "/static/js/2.321ec0e7.chunk.js",
+    "static/js/2.321ec0e7.chunk.js.map": "/static/js/2.321ec0e7.chunk.js.map",
+    "index.html": "/index.html",
+    "precache-manifest.5f3c16dcfd51be0478beafedeb3b0906.js": "/precache-manifest.5f3c16dcfd51be0478beafedeb3b0906.js",
+    "service-worker.js": "/service-worker.js",
+    "static/css/2.4f10b18f.chunk.css.map": "/static/css/2.4f10b18f.chunk.css.map",
+    "static/css/main.5fab4fc6.chunk.css.map": "/static/css/main.5fab4fc6.chunk.css.map",
+    "static/js/2.321ec0e7.chunk.js.LICENSE.txt": "/static/js/2.321ec0e7.chunk.js.LICENSE.txt",
+    "static/media/index.scss": "/static/media/logo.2d746102.svg",
+    "static/media/globe.png": "/static/media/globe.a463b923.png",
+    "static/media/stopwatch.png": "/static/media/stopwatch.fcce34d9.png",
+    "static/media/xebia_logo.png": "/static/media/xebia_logo.52fd0229.png"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.474a9135.js",
+    "static/css/2.4f10b18f.chunk.css",
+    "static/js/2.321ec0e7.chunk.js",
+    "static/css/main.5fab4fc6.chunk.css",
+    "static/js/main.8a59139e.chunk.js"
+  ]
+}
