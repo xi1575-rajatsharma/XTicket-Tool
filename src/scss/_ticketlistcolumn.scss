@@ -1,0 +1,63 @@
+
+@mixin span-text($left, $top) {
+    .span-text{
+            position: relative;
+            top: $top;
+            left: $left;
+            font-weight: normal;
+        }
+}
+
+.Column-container{
+    height: 627px;
+    width: 70px;
+    background: rgba($color: #E7EBF3, $alpha: 0.8);
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: space-evenly;
+    
+
+
+    
+
+    .column-feed-wrapper{
+        
+        .column-feed-icon-wrapper{
+            font-size: 32px;
+            position: relative;
+           
+           
+        }
+           
+    }
+
+   
+
+  div{
+        width: inherit;
+        height: 70px;
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        justify-content: center;
+        transition: all ease-in 0.3s; 
+  }
+
+  div:hover{
+        background: rgba($color: #c0d8ec, $alpha: 1.0);
+        cursor: pointer;
+  }
+    
+}
+
+.bottom-container{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: stretch;
+
+    .ticket-container{
+        flex-grow: 1;
+    }
+}

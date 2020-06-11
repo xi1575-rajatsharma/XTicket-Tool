@@ -1,0 +1,272 @@
+@mixin flexProvider($align,$justify,$direction){
+    display: flex;
+    flex-direction:$direction;
+    align-items: $align;
+    justify-content: $justify;
+}
+
+
+.ticket-reply-bottom-container{
+    
+    height: 96vh;
+
+    .search-field-wrapper{
+        width: 100%;
+        height: 10%;
+        padding-top: 0.1%;
+        position: relative;
+        top:3%;
+        margin-bottom: 3%;
+        @include flexProvider(center,space-around,row);
+
+        
+        .input-field-wrapper{
+            width: 30%;
+            height: 100%;
+            
+            
+            input{
+                border:2px solid rgba(78, 77, 77, 0.349);
+                width: 100%;
+                height: 35%;
+                background: url('../images/icons8-search-26.png') no-repeat;
+                background-size: 5%;
+                background-position: right;
+            }
+            
+        }
+        
+    }
+
+    .reply-flexbox{
+        width: 100%;
+        height: 100%;
+
+        @include flexProvider(center, space-evenly , row );
+
+        .ticket-reply-bottom-container-left-side{
+            @include flexProvider(flex-start, space-evenly , column );
+            width: 50%;
+            height: 100%;
+            padding:50px;
+
+            .ticket-replies-wrapper{
+                @include flexProvider(flex-start,space-evenly ,column );
+                width:100%;
+                height: 100%;
+                overflow: auto;
+                
+                .individual-reply-wrapper{
+                    height: 25%;
+                    width: 98%;
+                    border-bottom: 1px solid rgba(107, 102, 102, 0.795);
+                    padding:5px;
+                    padding-bottom: 0;
+                    margin-bottom: 3px;
+                    @include flexProvider(flex-start,space-evenly ,column);
+                    font-size:14px;
+                    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+
+                    .reply-heading-wrapper{
+                        @include flexProvider(flex-start,space-between ,row );
+                        width: 100%;
+                        span{
+                            color: rgba(0, 0, 0, 0.637);
+                        }
+                    }
+                }
+                .profile-wrapper{
+                    background-image: url('../images/avatar.png');
+                    height:30px;
+                    width: 30px;
+                    border-radius: 50%;
+                    background-size: cover;
+                }
+            }
+        }
+
+        .date-reply-comment-wrapper{
+            font-size: 14px;
+            font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+            @include flexProvider(flex-start,space-between ,row );
+            width: 100%;
+            margin: 0;
+            
+
+            .reply-wrapper-right-side{
+                width: 50%;
+                @include flexProvider(baseline  , space-between ,row );
+
+                div{
+                    @include flexProvider(flex-start,space-evenly ,row );
+                    margin-right: 7%;
+                    width: 40%;
+                    p{
+                        margin-top:0;   
+                    }
+                    i{margin-right: 10%;}
+                }
+            }
+        }
+        
+        .ticket-reply-form-wrapper{
+            width: 100%;
+        }
+        .attach-file-wrapper{
+            width: 50%;
+            @include flexProvider(center,space-around ,row );
+            color: orangered;
+            font-size: 14px;
+
+            .black-text{
+                color: black;
+            }
+        }
+
+        .buttons-wrapper{   
+            width: 80%;
+            input,button{
+            color: white;
+            background-color: rgba(255, 68, 0, 0.952);
+            border: 2px solid rgba(255, 68, 0, 0.952);
+            margin: 1%;
+            padding: 2%;
+            width:25%;
+            height: 90%;
+            border-radius: 2.5px;
+            transition: all 0.51s;
+            transition-delay: 0.1s;
+            }
+
+            .cancel-wrapper{
+                button{
+                    color: black;
+                    background: transparent;
+                    border: 2px solid rgba(78, 77, 77, 0.349);
+                }
+            }
+            input[type=submit]:hover{
+                background-color: rgb(255, 81, 0);
+                cursor: pointer;
+                padding-right: 25px;
+            }
+
+            input[type=submit]::after{
+                content: '\0bb';
+                position: absolute;
+                opacity: 1;
+                top:0;
+                right:-5px;
+                transition: 100s ease;
+            }
+        }
+        
+
+        .ticket-reply-bottom-container-right-side{
+            height: 80vh;
+            width: 28%;
+           overflow: auto;
+            .ticket-brief-information-wrapper{
+                position: relative;
+                top:80px;
+                height: 100%;
+                @include flexProvider(flex-start,space-evenly ,column );
+
+
+                
+                .add-ticket-button{
+                    button{
+                        color: white;
+                        background: orangered;
+                        border: 2px solid rgba(255, 68, 0, 0.829);
+                        border-radius: 3px;
+                        width:100px;
+                        padding: 8px;
+                        height: 35px;
+                    }
+                }
+
+                .edit-ticket-properties-wrapper{
+                    
+                    width: 80%;
+                    @include flexProvider(flex-start,space-between ,row );
+                    p{
+                        margin:0;
+                    }
+                }
+                .assigned-officer-wrapper{
+                    display: flex;
+                    flex-direction: column;
+                    font-size: 14px;
+                    color: rgba(0, 0, 0, 0.795);
+                }
+
+                .profile-wrapper{
+                    display: flex;
+                    flex-direction: row;
+                    align-items: flex-start;
+                    justify-content: stretch;
+                    margin:4px;
+                    
+                    color: black;
+                    font-weight: bold;
+                    span{
+                        margin-left: 4px;
+                    }
+                }
+
+                .profile-picture-wrapper{
+                    background-image: url('../images/avatar.png');
+                    height:30px;
+                    width: 30px;
+                    border-radius: 50%;
+                    background-size: cover;
+                    margin: 0;
+                }
+
+                div{
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: space-between;
+                    margin-bottom: 10px;
+                    color: rgba(0, 0, 0, 0.795);
+    
+                    span{
+                        font-size: 14px;
+                        margin-bottom: 2px; 
+                    }
+                }
+
+                 
+            .date-time-wrapper{
+                font-weight: bold;
+                color: black;
+            }
+            .red-text{
+                color: red;
+            }
+
+            .ticket-brief-location-wrapper{
+                
+                .city-text{
+                    color: black;
+                    font-size: 15px;
+                    font-weight: normal;
+                }
+            }
+
+                select{
+                    border: none;
+                    background-color: transparent;
+                    font-weight: bold;
+    
+                    option{
+                        font-weight: bold;
+                    }
+                }
+            }
+        }
+    }
+
+    
+}

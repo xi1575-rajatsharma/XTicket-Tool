@@ -1,0 +1,67 @@
+@mixin displayProps($width,$height,$display){
+    width: $width;
+    height: $height;
+    display: $display;
+    }
+    
+    a{
+    text-decoration: none;
+    color: black;
+    }
+    .ticket-container-nav{
+    @include displayProps(inherit,21px,flex );
+    // border-bottom: 1px solid black;
+    margin-top:2px;
+    padding:10px;
+    padding-bottom: 0;
+    align-items: center;
+    justify-content: space-around;
+    color: rgb(102, 102, 102);
+    text-transform: uppercase;
+    font-size: 14px;
+    .headings-wrapper{
+    font-size: 10px;
+    @include displayProps(100%,18px ,flex );
+    justify-content: space-evenly;
+    align-items: flex-start;
+    border-bottom: 1px solid #b1abab;
+    div{
+    width: 25%;
+    }
+    .customer-responded-time-wrapper{
+    width: 30%;
+    }
+    }
+    }
+    
+    .ticket-table-info-wrapper{
+    padding:10px;
+    padding-bottom: 2px;
+    margin: 3px 0 ;
+    background: rgba(224, 224, 224, 0.507);
+    border-bottom: 1px solid rgba($color: #d3cecec2, $alpha: 1.0);
+    font-size: 12px;
+    text-transform: capitalize;
+    @include displayProps(98.5%,18px ,flex );
+    justify-content: space-around;
+    align-items: center;
+    .select-all-checkbox{
+    width: 15px;
+    }
+    .ticket-id-wrapper{
+    width: 20%;
+    }
+    div{
+    width: 25%;
+    padding:5px;
+    padding-left: 0;
+    margin-left: 0;
+    margin: 1px;
+    }
+    }
+    
+    .ticket-table-info-wrapper:hover{
+    cursor: pointer;
+    background: rgba(105, 103, 103, 0.349);
+    }
+    

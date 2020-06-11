@@ -1,0 +1,152 @@
+@mixin displayDiv($justify,$align){
+    display: flex;
+    justify-content: $justify;
+    align-items: $align;
+}
+.add-tickets-wrapper{
+    // border: 1px solid blue;
+    height: 100vh;
+    width: 100%;
+    .add-tickets-bottom-wrapper{
+        height: 95.15%;
+        @include displayDiv(space-between,flex-start);
+        flex-direction: column;
+        
+
+        .add-ticket-heading-wrapper{
+            @include displayDiv('',center );
+            top:-0px;
+            padding: 20px;
+            padding-top: 0px ;
+            position: relative;
+            height: 20%;
+            width: 320px;
+
+            .add-ticket-icon-wrapper{
+                padding:10px;
+                img{
+                width: 75px;
+                height:75px;
+                opacity: 0.7;
+            }
+            
+        }
+            .add-ticket-text-wrapper{
+                @include displayDiv(center,center);
+                padding: 20px;
+                position: relative;
+                left: -20px;
+                flex-direction: column;
+                height: 20%;
+                width: 50%;
+                opacity: 0.8;
+
+                h1{
+                    display: block;
+                    font-size: 24px;
+                    margin-bottom: 0;
+                }
+                
+                select{
+                    text-transform: capitalize;
+                    opacity: 0.7;
+                    background-color: inherit;
+                    border: none;
+                    }
+            }
+        }
+
+        .add-ticket-form-wrapper{
+            height: 97%;
+            width:70%;
+            padding-left:40px;
+            
+
+            .ticket-information-text-wrapper{
+                position: relative;
+                left: -3.9%;
+                font-size: 17px;
+                font-weight: bold;          
+                padding-left: 15px;   
+                margin: 30px;
+            }
+            
+            input{
+                background: transparent;
+                width: 100%;
+                border: none;
+                border-bottom: 1.6px solid  rgba(31, 30, 30, 0.247); 
+                margin-bottom: 10px;
+            }
+
+            select{
+                background: transparent;
+                width:220px;
+                border: none;
+                border-bottom: 1.6px solid  rgba(31, 30, 30, 0.247);
+
+                option{
+                    background-color: green;
+                }
+            }
+
+            .red-text{
+                color:rgb(218, 50, 50);
+            }   
+            .label-wrapper,.input-wrapper{
+                font-size: 14px;
+                @include displayDiv(space-between, center );
+            }
+            .label-wrapper{
+                width: 62%;
+            }
+            .extra-phone{
+                width:63%;
+            }
+            .input-wrapper{
+                width: 82%;
+                margin: 15px 0 30px 0;
+            }
+            .extra-owner{
+                width: 67.5%;
+            }
+            .extra-issue{
+                width: 65%;
+            }
+            .extra-priority{
+                width: 63.5%;
+            }
+            
+            .button-wrapper{
+                @include displayDiv(space-between, center);
+                width: 18%;
+                height: 30px;
+                
+                input[type="submit"]{
+                    width:44%;
+                    height:100%;
+                    border-radius: 3.4px;
+                    margin: 20px;
+                    background-color: rgb(0, 113, 243);
+                    border: 1px solid rgb(0, 113, 243);
+                    
+                    color: white;
+                }
+                #submit{
+                    background-color: rgb(0, 113, 243);
+                    border: 1px solid rgb(0, 113, 243);
+                    
+                    color: white;
+                }
+                #cancel{
+                    background: #FEFEFE;
+                    border: 2px solid rgba(20, 19, 19, 0.527);
+                    color: rgba(20, 19, 19, 0.623);
+                    font-weight: bold;
+                }
+                
+            }
+        }
+        
+    }
+}

@@ -1,0 +1,27 @@
+
+@mixin inputProps{
+    input{
+    position: absolute;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    top: $topPosition + 10%;
+    left: $leftPositon - 20%;
+    background: rgba($color: #706868, $alpha: 0.1);
+    border: 1px solid  rgba($color: #4c4747, $alpha: 0.1);
+    border-radius: 2.8px;
+    width: 80%;
+    height: 40px;
+    font-size: 14px;
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    
+    }
+}
+
+@mixin wrappers {
+    margin:10px auto;
+    padding: 10px;
+    position:absolute;
+    top: 30%;
+    left:30%;
+  }

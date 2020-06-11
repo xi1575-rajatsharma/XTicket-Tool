@@ -1,0 +1,20 @@
+.background-container{
+  position: absolute;
+  margin-top: 0;
+  width: 81.18em;
+  height: 41.8em;
+  background-position: center;
+
+  background-repeat: no-repeat;
+  background-image: url('../images/Parent-Bg.jpg');
+}
+
+.container{
+  margin: 70px auto;
+  width: 55%;
+  height: 495px;
+  position: relative;
+  background-color: rgba($color: #ffffff, $alpha: 1.0);
+  box-shadow: -2.5px 3px 10px 3px rgba(76,76,76,0.6);
+}
+
