@@ -56,11 +56,7 @@ export const headerView = (payload) => {
                     <i className="fa fa-gear font-size:24px"></i>
                 </div>
                 <div onClick={onClickLogout} className="profile-picture-wrapper">
-                    <div className="no-display-div-container">
-                        <div className="logout-container">
-                            <p>Logout</p>
-                        </div>
-                    </div>
+                    <p>Logout</p>
                 </div>
             </div>
         </div>

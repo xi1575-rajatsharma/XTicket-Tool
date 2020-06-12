@@ -10,7 +10,9 @@ export default class TestView extends Component {
         this.state = {
             display: "none",
             fromDate: null,
-            toDate: null
+            toDate: null,
+            filterString: null,
+
         }
     }
     onFromDateChange = (value) => {
@@ -19,29 +21,43 @@ export default class TestView extends Component {
     onToDateChange = (value) => {
         this.setState({ toDate: (new Date(value)).getTime() })
     }
+    onInputChange = (value) => {
+        this.setState(value)
+    }
+
+    onDateSubmit = (e) => {
+        e.preventDefault();
+        this.props.filterTickets(this.state.fromDate, this.state.toDate)
+    }
+    onInputSubmit = (id) => {
+
+        this.props.searchByFilter();
+        this.props.searchByFilter(id, this.state.filterString)
+    }
 
     render() {
         const allStatus = this.props.allStatus;
-        const listingData = this.props.listingData;
+        let listingData = this.props.listingData;
+
+
         return (
             <React.Fragment>
-                {console.log(this.props)}
                 <div className="filters-wrapper">
-                    <form>
-                        <select className="-filter-select" onChange={(e) => this.setState({ display: e.currentTarget.value })}>
-                            <option>ALL Tickets</option>
-                            {allStatus ?
-                                <FilterView allStatus={allStatus} />
-                                : null
-                            }
-                            <option value="Date">Filter Between Dates</option>
-                            <option value="Subject">Filter By subject</option>
-                            <option value="Name">Filter by Name</option>
-                        </select>
 
-                        <SelectedFilterView display={this.state.display} onFromDateChange={this.onFromDateChange} onToDateChange={this.onToDateChange} />
+                    <select className="-filter-select" onChange={(e) => this.setState({ display: e.currentTarget.value })} >
+                        <option>ALL Tickets</option>
+                        {allStatus ?
+                            <FilterView allStatus={allStatus} />
+                            : null
+                        }
+                        <option value="Date">Filter Between Dates</option>
+                        <option value="Subject">Filter By subject</option>
+                        <option value="Name">Filter by Name</option>
+                    </select>
 
-                    </form>
+                    <SelectedFilterView display={this.state.display} onFromDateChange={this.onFromDateChange} onToDateChange={this.onToDateChange} onDateSubmit={this.onDateSubmit} onInputSubmit={this.onInputSubmit} onInputChange={this.onInputChange} />
+
+
                 </div>
                 <table className="ticketListingTable">
                     <tbody>

@@ -62,22 +62,12 @@
         }
 
         .profile-picture-wrapper{
-            width:20px;
-            height:20px;
-            border: 1px solid grey;
-            border-radius: 50%;
-            position: relative;
-            bottom: 2.5px;
-            .no-display-div-container{
-                display: none;
-                position: absolute;
-                width: 50px;
-                height: 20px;
-                background: white;
-                color: black;
-                padding: 5px;
-                align-items: center;
-            }
+          display: flex;
+          width: 100px;
+          flex-direction: row;
+          align-items: center;
+              align-items: flex-start;
+        
             
         }
         

@@ -539,24 +539,24 @@
                 font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
                 
                 .reply-heading-wrapper{
-                @include flexProvider(flex-start,space-between ,row );
-                width: 100%;
-                span{
-                float: right;
-                color: rgb(0, 0, 0);
+                    @include flexProvider(flex-start,space-between ,row );
+                    width: 100%;
+                    span{
+                        float: right;
+                        color: rgb(0, 0, 0);
+                    }
                 }
-                }
 
 
 
-                .profile-wrapper{
-                background-image: url('../images/avatar.png');
-                height:30px;
-                width: 30px;
-                border-radius: 50%;
-                background-size: cover;
+                    .profile-wrapper{
+                        background-image: url('../images/avatar.png');
+                        height:30px;
+                        width: 30px;
+                        border-radius: 50%;
+                        background-size: cover;
 
-                }
+                    }
 
                 }
             }
