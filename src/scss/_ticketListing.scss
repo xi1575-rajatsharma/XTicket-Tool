@@ -8,20 +8,24 @@
     flex-direction: column;
     justify-content: flex-start;
     align-items: flex-start;
+    font-family: "Proxima Nova";
 }
-.filter-wrapper{
+.filters-wrapper{
     width: 100%;
-    height: 50%;
-}
-.form-wrapper{
-    width:100%;
-    height:20%;
-    border: 1px solid rgba(0, 0, 0, 0.418);
-    margin-top: 5px;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-evenly;
+    height: 3rem;
+    padding: 10px;
+
+    form{
+        height: 100%;
+        display: flex;
+        flex-direction: row;
+        align-items: flex-end;
+        justify-content: space-between;
+    }
+    input[type="submit"]{
+        background-color: #314c72;
+        color:white;
+    }
 }
 .ticketListingTable{
     width: 100%;
@@ -48,7 +52,6 @@
         font-family: "Proxima Nova";
         font-size: 14px;
         color: black;
-        border-top: 0.5px solid black;
         transition: all ease-in-out 0.3s;
 
         &:hover{
@@ -74,10 +77,8 @@
             font-weight: normal;
         }
     }
-}table{
-    background: rgb(221, 213, 213) ;
-    
 }
+
 body{
     background: #314c72 ;
 }

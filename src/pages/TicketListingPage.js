@@ -3,8 +3,6 @@ import { cloneDeep } from 'lodash';
 import { constants } from '../modules/constants';
 import { fetch } from '../modules/httpServices';
 import TestView from '../Views/TestView';
-import { ticketListingView as TicketListingView } from '../Views/ticketListingView';
-import { sidebarView } from '../Views/sidebarView'
 
 export default class TicketListingPage extends React.Component {
 
@@ -12,7 +10,8 @@ export default class TicketListingPage extends React.Component {
         super(props);
         this.state = {
             isLoading: true,
-            listingData: []
+            listingData: [],
+            allStatus: null
         }
     }
 
@@ -31,13 +30,13 @@ export default class TicketListingPage extends React.Component {
                 const { status, message, payload } = response;
                 const _state = cloneDeep(this.state);
                 _state.isLoading = false;
-                console.log(response)
+
 
                 if (status === constants.SUCCESS) {
                     _state.message = '';
                     _state.listingData = payload.result.tickets;
                     _state.listingData.sort((a, b) => a.id - b.id)
-                    console.log(_state.listingData);
+
                 } else {
                     _state.message = message;
                 }
@@ -46,15 +45,30 @@ export default class TicketListingPage extends React.Component {
 
             }
         });
+
+        this.setState({ isLoading: true }, () => {
+            fetch.get({
+                url: constants.SERVICE_URLS.GET_TICKET_STATUS,
+                callbackHandler: (response) => {
+                    const { message, status, payload } = response;
+                    const _state = cloneDeep(this.state);
+
+                    if (status === constants.SUCCESS) {
+                        _state.message = "";
+                        _state.allStatus = payload.data;
+                    } else {
+                        _state.message = message;
+                    }
+                    this.setState({ allStatus: _state.allStatus })
+                }
+            })
+
+        })
     }
 
     render() {
         return (
             <React.Fragment>
-
-                {/* <TicketListingView
-                    {...this.state}
-                /> */}
                 <TestView {...this.state} />
             </React.Fragment>
         );
