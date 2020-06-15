@@ -85,9 +85,25 @@ export default class TicketListingPage extends React.Component {
         this.setState({ _listingData: _listingData });
 
         if (id === "Subject") {
-            _listingData.filter(ticket => ticket.subject.toLowerCase().includes(filterString.toLowerCase()))
+            this.setState({ listingData: _listingData.filter(ticket => ticket.subject.toLowerCase().includes(filterString.toLowerCase())) })
         }
-
+        else if (id === "employeeName") {
+            if (filterString !== '') {
+                this.setState({ listingData: _listingData.filter(ticket => ticket.displayName === filterString) })
+            } else {
+                this.setState({ listingData: _listingData })
+            }
+        }
+    }
+    statusFilter = (value) => {
+        if (value !== "Date" && value !== "Subject" && value !== "Name") {
+            const _listingData = JSON.parse(window.localStorage.getItem('_listingData'));
+            if (value === "All-tickets") {
+                this.setState({ listingData: _listingData })
+            } else {
+                this.setState({ listingData: _listingData.filter(ticket => ticket.status === value) })
+            }
+        }
     }
 
     getTicketData = () => {
@@ -143,7 +159,10 @@ export default class TicketListingPage extends React.Component {
             <React.Fragment>
                 <TestView {...this.state}
                     filterTickets={this.filterTickets}
-                    searchByFilter={this.searchByFilter} />
+                    searchByFilter={this.searchByFilter}
+                    statusFilter={this.statusFilter}
+                />
+
             </React.Fragment>
         );
 

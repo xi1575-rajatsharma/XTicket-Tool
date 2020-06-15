@@ -11,6 +11,12 @@
     height: 20%;
     background-color:#25afcb;
     }
+    form{
+        width:100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
      
     .feedback-body{
     position: relative;

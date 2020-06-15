@@ -12,7 +12,6 @@ export default class TestView extends Component {
             fromDate: null,
             toDate: null,
             filterString: null,
-
         }
     }
     onFromDateChange = (value) => {
@@ -43,20 +42,23 @@ export default class TestView extends Component {
         return (
             <React.Fragment>
                 <div className="filters-wrapper">
-
-                    <select className="-filter-select" onChange={(e) => this.setState({ display: e.currentTarget.value })} >
-                        <option>ALL Tickets</option>
-                        {allStatus ?
-                            <FilterView allStatus={allStatus} />
-                            : null
-                        }
-                        <option value="Date">Filter Between Dates</option>
-                        <option value="Subject">Filter By subject</option>
-                        <option value="Name">Filter by Name</option>
-                    </select>
-
-                    <SelectedFilterView display={this.state.display} onFromDateChange={this.onFromDateChange} onToDateChange={this.onToDateChange} onDateSubmit={this.onDateSubmit} onInputSubmit={this.onInputSubmit} onInputChange={this.onInputChange} />
-
+                    <div className="filters-left-wrapper">
+                        <select className="filter-select" onChange={(e) => { this.props.statusFilter(e.target.value); this.setState({ display: e.currentTarget.value }) }} >
+                            <option value="All-tickets">ALL Tickets</option>
+                            {allStatus ?
+                                <FilterView allStatus={allStatus} />
+                                : null
+                            }
+                            <optgroup label="Other Filters">
+                                <option value="Date">Filter Between Dates</option>
+                                <option value="Subject">Filter By subject</option>
+                                <option value="Name">Filter by Name</option>
+                            </optgroup>
+                        </select>
+                    </div>
+                    <div className="filters-right-wrapper">
+                        <SelectedFilterView display={this.state.display} onFromDateChange={this.onFromDateChange} onToDateChange={this.onToDateChange} onDateSubmit={this.onDateSubmit} onInputSubmit={this.onInputSubmit} onInputChange={this.onInputChange} />
+                    </div>
 
                 </div>
                 <table className="ticketListingTable">
@@ -71,7 +73,7 @@ export default class TestView extends Component {
                             <th>assignedTo</th>
                         </tr>
                         {
-                            listingData.map((ticket) => {
+                            listingData.length === 0 ? <tr className="no-updates-row"><td></td><td></td><td></td><td>--No tickets here--</td> <td></td><td></td><td></td></tr> : listingData.map((ticket) => {
                                 const creationTime = new Date(ticket.creationTime);
                                 const dueOn = new Date(ticket.dueOn);
                                 return (

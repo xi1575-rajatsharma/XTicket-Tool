@@ -51,19 +51,18 @@ class TicketDetails extends Component {
     }
 
     getTicketInfo = (id) => {
-
-
-
         this.setState({ isLoading: true }, () => {
             fetch.get({
                 url: constants.SERVICE_URLS.TICKET_DETAILING + '/' + id,
                 callbackHandler: (response) => {
+
                     const { status, message, payload } = response;
                     const _state = cloneDeep(this.state);
 
                     _state.isLoading = false;
 
                     if (status === constants.SUCCESS) {
+
                         _state.message = '';
                         _state.ticketData = payload.result.ticketDetails;
                     } else {
@@ -191,9 +190,8 @@ class TicketDetails extends Component {
                 callbackHandler: (response) => {
                     const { status, message, payload } = response;
                     const _state = cloneDeep(this.state);
-
+                    this.getTicketInfo(id)
                     _state.isLoading = false;
-
                     if (status === constants.SUCCESS) {
                         _state.message = '';
                         _state.ticketData = payload.result.ticketDetails;
@@ -207,14 +205,15 @@ class TicketDetails extends Component {
     }
 
     changeSelectValue = (selectValue, ticketStatus) => {
-        if (ticketStatus === "CLOSED") {
-            alert('Cannot change assigned role the ticket is closed!');
+
+        if (ticketStatus !== "OPEN" && ticketStatus !== "REOPEND") {
+            alert('You cannot changed assigned role at this status!');
         } else {
 
             const id = this.props.match.params.ticket_id;
             this.setState({ statusChangeLoading: true }, () => {
                 fetch.put({
-                    url: constants.SERVICE_URLS.TICKET_ASSIGN + '/' + id + '?emailId=' + selectValue,
+                    url: constants.SERVICE_URLS.TICKET_ASSIGN + id + '?emailId=' + selectValue,
                     callbackHandler: (response) => {
                         console.log(response);
                         fetch.get({
@@ -429,29 +428,73 @@ class TicketDetails extends Component {
                     },
                     callbackHandler: (response) => {
                         this.setState({ statusChangeLoading: false });
-                        console.log(response);
-                        fetch.get({
-                            url: constants.SERVICE_URLS.TICKET_DETAILING + '/' + id,
-                            callbackHandler: (response) => {
-                                const { status, message, payload } = response;
-                                const _state = cloneDeep(this.state);
 
-                                _state.isLoading = false;
+                        fetch.put({
+                            url: constants.SERVICE_URLS.TICKET_STATUS + id + "?status=RESOLVED",
+                            callbackHandler: (resonse) => {
+                                this.setState({ statusChangeLoading: false });
+                                fetch.get({
+                                    url: constants.SERVICE_URLS.TICKET_DETAILING + '/' + id,
+                                    callbackHandler: (response) => {
+                                        const { status, message, payload } = response;
+                                        const _state = cloneDeep(this.state);
 
-                                if (status === constants.SUCCESS) {
-                                    _state.message = '';
-                                    _state.ticketData = payload.result.ticketDetails;
-                                } else {
-                                    _state.message = message;
-                                }
-                                this.setState(_state);
+                                        _state.isLoading = false;
+
+                                        if (status === constants.SUCCESS) {
+                                            _state.message = '';
+                                            _state.ticketData = payload.result.ticketDetails;
+                                        } else {
+                                            _state.message = message;
+                                        }
+                                        this.setState({ ticketData: _state.ticketData });
+                                    }
+                                })
+
+                                fetch.get({
+                                    url: constants.SERVICE_URLS.TICKET_HISTORY + id,
+                                    callbackHandler: (response) => {
+                                        const { status, payload, message } = response;
+
+                                        const _state = cloneDeep(this.state);
+
+                                        if (status === constants.SUCCESS) {
+                                            _state.message = "";
+                                            _state.ticketJourney = payload.result.ticketJourneys;
+
+
+                                        } else {
+                                            _state.message = message;
+                                        }
+                                        this.setState({ ticketJourney: _state.ticketJourney })
+                                    }
+                                })
                             }
                         })
+
                     }
                 })
             })
 
         }
+    }
+    onFeedBackSubmit = (starRating, feedBackDescription) => {
+        const id = this.props.match.params.ticket_id;
+        if (feedBackDescription === '') {
+            alert('Please add a description')
+        } else {
+            fetch.post({
+                url: constants.SERVICE_URLS.GIVE_FEEDBACK + id,
+                requestBody: {
+                    body: feedBackDescription,
+                    rating: starRating
+                },
+                callbackHandler: (response) => {
+                    console.log(response)
+                }
+            })
+        }
+
     }
 
 
@@ -470,6 +513,7 @@ class TicketDetails extends Component {
                 updateTicketData={this.updateTicketData}
                 fileSelect={this.fileSelect}
                 downloadFile={this.downloadFile}
+                onFeedBackSubmit={this.onFeedBackSubmit}
             />
 
         )

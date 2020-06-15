@@ -1,16 +1,15 @@
 import React, { useState } from 'react';
 import Loader from 'react-loader-spinner';
-// import TikcetListNav from './TicketListNav';
 import arrow from '../images/arrow.png';
 import globe from '../images/globe.png';
 import clock from '../images/stopwatch.png';
 import orangeChat from '../images/message.png';
 import { Link } from 'react-router-dom';
 import orangeReply from '../images/orange-reply.png';
-import { fireEvent } from '@testing-library/react';
 import FeedBackView from './feedBackView';
 import SlidingPanel from './slidingPanel';
-import { set } from 'lodash';
+
+
 
 
 const TicketView = (payload) => {
@@ -75,14 +74,14 @@ const TicketView = (payload) => {
                         <div className="change-text-wrapper">Ticket Assigned to {ticketData.assignedTo} </div>
                     </React.Fragment>
                 )
-            case "RAISED":
+            case "OPEN":
                 return (
                     <React.Fragment>
                         <div className="raised-icon-wrapper"></div>
                         <div className="change-text-wrapper">Ticket Raised</div>
                     </React.Fragment>
                 )
-            case "RESOLVING":
+            case "INPROGRESS":
                 return (
                     <React.Fragment>
                         <div className="resolving-icon-wrapper"></div>
@@ -138,12 +137,30 @@ const TicketView = (payload) => {
 
     const assignedFinder = (assignedPerson) => {
         switch (assignedPerson) {
-            case "admin default person":
-                return "admin@xebia.com"
-            case "finance default person":
-                return "finance@xebia.com"
-            case "hr default person":
-                return "hr@xebia.com"
+            case "Rajat Rajiv Sharma":
+                return "rajat.sharma@xebia.com"
+            case "Anjali  Akansha":
+                return "anjali.akansha@xebia.com"
+            case "Shanila Suhail":
+                return "shanila.suhail@xebia.com"
+            case "Garima Mohan":
+                return "gmohan@xebia.com"
+            case "Karan Verma":
+                return "karan.verma@xebia.com"
+            case "Shambhavi Mishra":
+                return "shambhavi.mishra@xebia.com"
+            case "Sahil Bhatnagar":
+                return "sahil.bhatnagar@xebia.com"
+            case "Puneet Kohli":
+                return "pkohli@xebia.com"
+            case "Laghu Tiwari":
+                return "ltiwari@xebia.com"
+            case "Jayant Yadav":
+                return "jayant@xebia.com"
+            case "Gautam Jain":
+                return "gautam.jain@xebia.com"
+            case "Vikas Arora":
+                return "vikas.arora@xebia.com"
             default:
                 return "none@xebia.com"
         }
@@ -182,7 +199,7 @@ const TicketView = (payload) => {
                     {
                         ticketStatusPopup === 'yes' ?
                             <div className="popup-background-wrapper">
-                                <FeedBackView shouldDisplay={shouldDisplay} />
+                                <FeedBackView shouldDisplay={shouldDisplay} onFeedBackSubmit={payload.onFeedBackSubmit} />
                             </div>
                             : null
                     }
@@ -231,8 +248,6 @@ const TicketView = (payload) => {
                                     const dueOn = new Date(ticket.creationTime);
 
                                     return (
-
-
                                         ticket.id === ticketData.id ? null :
                                             <Link key={ticket.id} to={'/ticketlist/' + ticket.id}>
                                                 <div className="ticket-snapshot-wrapper" key={ticket.id} onClick={() => updateTicketData(ticket.id)}>
@@ -272,8 +287,7 @@ const TicketView = (payload) => {
                                             {allAdminUsers ?
                                                 allAdminUsers.map((admin) => {
                                                     return (
-                                                        admin.emailId === "rajat.sharma@xebia.com" ? null :
-                                                            <option key={admin.emailId} value={admin.emailId}>{admin.name}</option>
+                                                        <option key={admin.emailId} value={admin.emailId}>{admin.name}</option>
                                                     )
                                                 })
                                                 : null}
@@ -285,12 +299,12 @@ const TicketView = (payload) => {
                                 <div className="status-wrapper">
                                     <span>Status</span>
                                     <select className="ticket-brief-status-select" value={ticketData.status} onChange={(e) => { changeStatusValue(e.target.value) }}>
-                                        {console.log(allStatus)}
+
                                         {
                                             allStatus ?
                                                 allStatus.map((status) => {
                                                     return (
-                                                        status.id === 6 || status.id === 2 || status.id === 7 ? null :
+                                                        status.id === 6 || status.id === 2 || status.id === 7 ? <option key={status.id} value={status.status} disabled>{status.status}</option> :
                                                             <option key={status.id} value={status.status}>{status.status}</option>
 
                                                     )
@@ -305,7 +319,7 @@ const TicketView = (payload) => {
 
                                 <div className="closed-time-wrapper">
                                     <span>Closed Time</span>
-                                    <span className="date-time-wrapper">{console.log(dueOn.getDate())} {dueOn.getUTCDate() + ' ' + dueOnMonth}</span>
+                                    <span className="date-time-wrapper">{dueOn.getUTCDate() + ' ' + dueOnMonth}</span>
                                 </div>
 
                                 <div className="ticket-information-heading-wrapper">
@@ -400,7 +414,7 @@ const TicketView = (payload) => {
 
 
                                                 <div class="buttons-wrapper">
-                                                    <input type="submit" value="Send" ></input>
+                                                    <input type="submit" id="reply-send" value="Send" ></input>
                                                     <button id="cancel-reply" onClick={showreplybox}>Cancel</button>
                                                 </div>
                                             </form>

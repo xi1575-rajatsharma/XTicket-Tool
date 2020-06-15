@@ -22,9 +22,12 @@
     }
   }
 
+  .bottom-container{
+      height: 95vh;
+  }
 .TicketDetails-container{
-    width: 100vw;
-    height: 100vh;
+    width: 100%;
+    height: 100%;
     position: relative;
     
     background-color: #FFFAFA;
@@ -193,7 +196,7 @@
 
     .ticket-brief-wrapper{
         @include scrollbars(5px,rgb(49, 76, 114), #FFFAFA);
-        height: 100vh;
+        height: 100%;
         background-color: #FFFAFA;
         color:	#2F4F4F;
         border-right: 1px solid rgba(0, 0, 0, 0.253);
@@ -622,49 +625,49 @@
             .assigned-icon-wrapper{
                 width: 11.904%;
                 height: 100%;
-                background:url('../images/icons/icons/ticket_assigned.png') no-repeat;
+                background:url('../images/icons/ASSIGNED.png') no-repeat;
                 background-size:100%;
             }
             .raised-icon-wrapper{
                 width: 11.904%;
                 height: 100%;
-                background:url('../images/icons/icons/ticket_raised.png') no-repeat;
+                background:url('../images/icons/OPEN.png') no-repeat;
                 background-size:100%;
             }
             .resolving-icon-wrapper{
                 width: 11.904%;
                 height: 100%;
-                background:url('../images/icons/icons/started_resolving.png') no-repeat;
+                background:url('../images/icons/INPROGRESS.png') no-repeat;
                 background-size:100%;
             }
             .awaiting-icon-wrapper{
                 width: 11.904%;
                 height: 100%;
-                background:url('../images/icons/icons/awaiting_response.png') no-repeat;
+                background:url('../images/icons/AWAITING.png') no-repeat;
                 background-size:100%;
             }
             .review-icon-wrapper{
                 width: 11.904%;
                 height: 100%;
-                background:url('../images/icons/icons/under_review.png') no-repeat;
+                background:url('../images/icons/AWAITING.png') no-repeat;
                 background-size:100%;
             }
             .escalated-icon-wrapper{
                 width: 11.904%;
                 height: 100%;
-                background:url('../images/icons/icons/ticket_escalated.png') no-repeat;
+                background:url('../images/icons/ESCALATED.png') no-repeat;
                 background-size:100%;
             }
             .closed-icon-wrapper{
                 width: 11.904%;
                 height: 100%;
-                background:url('../images/icons/icons/ticket_closed.png') no-repeat;
+                background:url('../images/icons/CLOSED.png') no-repeat;
                 background-size:100%;
             }
             .re-opened-icon-wrapper{
                 width: 11.904%;
                 height: 100%;
-                background:url('../images/icons/icons/ticket_reopened.png') no-repeat;
+                background:url('../images/icons/REOPENED.png') no-repeat;
                 background-size:100%;
             }
             .change-text-wrapper{
@@ -726,7 +729,7 @@ textarea{
     position: absolute;
     width:100vw;
     height: 100vh;
-    background-color: rgba(0,0,0,0.4);
+    background-color: #FFFAFA;
 
     .status-loader-icon-wrapper{
         position: absolute;
@@ -746,3 +749,8 @@ textarea{
     padding: 20px;
     color: 	#2F4F4F;
 }
+input[type="submit"]{
+    background-color: #314c72;
+    color: white;
+}
+
