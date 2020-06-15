@@ -44,9 +44,48 @@ axios.interceptors.response.use(function (config) {
         window.localStorage.removeItem('_userInfo');
         window.location = '/'
     }
+    if (403 === error.response.status) {
+        window.localStorage.removeItem('_token');
+        window.localStorage.removeItem('_userInfo');
+        window.location = '/'
+    }
 
     return Promise.reject(error);
 });
+
+/* 
+[12/06 16:41] Bhardwaj Chaudhary
+    
+
+axios.interceptors.response.use(function (config) {
+if (config.headers['content-type'] === "application/download") {
+consturl = URL.createObjectURL(newBlob([config.data], { type:'application/vnd.ms-excel' }));
+constlink = document.createElement('a');
+link.href = url;
+letfileName = 'download';
+if (config.config && config.config.url) {
+letarr = config.config.url.split('/');
+fileName = arr[arr.length - 1] + "_report.xlsx";
+ }
+link.setAttribute('download', fileName);
+document.body.appendChild(link);
+link.click();
+ }
+returnconfig;
+ 
+}, function (error) {
+if (401 === error.response.status) {
+window.localStorage.removeItem('_token');
+ }
+if (403 === error.response.status) {
+window.localStorage.removeItem('_token');
+window.localStorage.removeItem('_userInfo');
+window.location = '/'
+ }
+returnPromise.reject(error);
+});
+
+ */
 
 export const fetch = {
     get({ url, requestParams = {}, callbackHandler }) {
