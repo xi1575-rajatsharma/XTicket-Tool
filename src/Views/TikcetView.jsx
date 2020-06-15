@@ -9,6 +9,8 @@ import { Link } from 'react-router-dom';
 import orangeReply from '../images/orange-reply.png';
 import { fireEvent } from '@testing-library/react';
 import FeedBackView from './feedBackView';
+import SlidingPanel from './slidingPanel';
+import { set } from 'lodash';
 
 
 const TicketView = (payload) => {
@@ -17,6 +19,24 @@ const TicketView = (payload) => {
     const { ticketData, ticketReplies, changeSelectValue, changeStatusValue, resolutionChangeHandler, resolutionSubmitHandler, statusHandler, resolutionText, allAdminUsers, ticketJourney, replyChangeHandler, replySubmitHandler, allStatus, isLoading, statusChangeLoading, listingData, updateTicketData, fileSelect, downloadFile } = payload;
     const [displayreplybox, showreplybox] = useState(false);
     const [displaycommentbox, showcommentbox] = useState(false);
+    const [sideBarOpen, setSideBarOpen] = useState(false)
+
+    const openHandler = () => {
+        if (!sideBarOpen) {
+            setSideBarOpen(true)
+        } else {
+            setSideBarOpen(false)
+        }
+    }
+    const sideBarCloseHandler = () => {
+        setSideBarOpen(false)
+    }
+
+
+    let sidebar
+    if (sideBarOpen) {
+        sidebar = <SlidingPanel ticketReplies={ticketReplies} close={sideBarCloseHandler} sideBar={"sideBar"} />
+    }
 
     const creationTime = new Date(ticketData.creationTime);
     const dueOn = new Date(ticketData.dueOn)
@@ -132,7 +152,7 @@ const TicketView = (payload) => {
     return (
         <React.Fragment>
             {isLoading ?
-                <div className="ticket-details-loader-wrapper">
+                <div className="ticket-details-loader-wrapper" >
                     <div className="loader-icon">
                         <Loader
                             type="Oval"
@@ -180,10 +200,9 @@ const TicketView = (payload) => {
                             </div>
                         </div>
                         : null} */}
-                    <div className="ticket-details-nav-wrapper">
-                        {/* <TikcetListNav /> */}
-                    </div>
+
                     <div className="ticket-details-bottom-container">
+                        {sidebar}
                         <div className="all-tickets-wrapper">
                             <div className="header-wrapper">
                                 <div className="back-arrow-wrapper">
@@ -266,12 +285,14 @@ const TicketView = (payload) => {
                                 <div className="status-wrapper">
                                     <span>Status</span>
                                     <select className="ticket-brief-status-select" value={ticketData.status} onChange={(e) => { changeStatusValue(e.target.value) }}>
+                                        {console.log(allStatus)}
                                         {
                                             allStatus ?
                                                 allStatus.map((status) => {
                                                     return (
-                                                        status.id === 6 || status.id === 2 ? null :
+                                                        status.id === 6 || status.id === 2 || status.id === 7 ? null :
                                                             <option key={status.id} value={status.status}>{status.status}</option>
+
                                                     )
                                                 }) : null
                                         }
@@ -402,7 +423,8 @@ const TicketView = (payload) => {
                                         <p className="username-wrapper">{ticketData.emailId} <span className="details-date-wrapper">{creationTime.getDay() + ' ' + creationMonth} {}</span></p> <br />
                                         <p className="ticket-description">{ticketData.description}</p>
                                     </div>
-                                    <div className="ticket-replies-wrapper">
+                                    <button onClick={openHandler}>View Replies</button>
+                                    {/* <div className="ticket-replies-wrapper">
                                         {
                                             ticketReplies ? ticketReplies.map((reply) => {
                                                 const replyCreatedOn = new Date(reply.createdOn);
@@ -419,7 +441,7 @@ const TicketView = (payload) => {
                                             })
                                                 : <p> NO activity here yet</p>
                                         }
-                                    </div>
+                                    </div> */}
                                 </div>
                             </React.Fragment> : null}
 

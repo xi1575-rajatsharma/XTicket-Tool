@@ -15,6 +15,7 @@ $leftPositon: 30%;
 @import './login.scss';
 @import './chart';
 @import './feedback';
+@import './slidingPanel';
 
 
 @mixin scrollbars($size, $foreground-color, $background-color: mix($foreground-color, white,  50%)) {

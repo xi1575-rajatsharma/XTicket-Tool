@@ -50,37 +50,43 @@ export default class TicketListingPage extends React.Component {
         // console.log(window.localStorage.getItem('_listingData'))
     }
     searchByFilter = (id, filterString) => {
-        fetch.get({
-            url: constants.SERVICE_URLS.TICKET_LISTING,
-            requestParams: {
-                page: 0,
-                limit: 50
-            },
-            callbackHandler: (response) => {
-                const { status, message, payload } = response;
-                const _state = cloneDeep(this.state);
-                _state.isLoading = false;
+        // fetch.get({
+        //     url: constants.SERVICE_URLS.TICKET_LISTING,
+        //     requestParams: {
+        //         page: 0,
+        //         limit: 50
+        //     },
+        //     callbackHandler: (response) => {
+        //         const { status, message, payload } = response;
+        //         const _state = cloneDeep(this.state);
+        //         _state.isLoading = false;
 
-                if (status === constants.SUCCESS) {
-                    _state.message = '';
-                    _state.listingData = payload.result.tickets;
-                    _state.listingData.sort((a, b) => a.id - b.id)
-                    // window.localStorage.setItem('_listingData', _state.listingData)
-                    // _state.listingData = _state.listingData.filter(ticket => ticket.creationTime > fromDate && ticket.creationTime < toDate)
-                    if (id === "Subject") {
-                        _state.listingData = _state.listingData.filter(ticket => ticket.subject.toLowerCase().includes(filterString.toLowerCase()))
-                    } if (id === "employeeName") {
-                        _state.listingData = _state.listingData.filter(ticket => ticket.displayName === filterString)
-                        // console.log(_state.listingData)
-                    }
-                } else {
-                    _state.message = message;
-                }
+        //         if (status === constants.SUCCESS) {
+        //             _state.message = '';
+        //             _state.listingData = payload.result.tickets;
+        //             _state.listingData.sort((a, b) => a.id - b.id)
+        //             // window.localStorage.setItem('_listingData', _state.listingData)
+        //             // _state.listingData = _state.listingData.filter(ticket => ticket.creationTime > fromDate && ticket.creationTime < toDate)
+        //             if (id === "Subject") {
+        //                 _state.listingData = _state.listingData.filter(ticket => ticket.subject.toLowerCase().includes(filterString.toLowerCase()))
+        //             } if (id === "employeeName") {
+        //                 _state.listingData = _state.listingData.filter(ticket => ticket.displayName === filterString)
+        //                 // console.log(_state.listingData)
+        //             }
+        //         } else {
+        //             _state.message = message;
+        //         }
 
-                this.setState(_state);
+        // this.setState(_state);
 
-            }
-        });
+        //     }
+        // });
+        const _listingData = JSON.parse(window.localStorage.getItem('_listingData'))
+        this.setState({ _listingData: _listingData });
+
+        if (id === "Subject") {
+            _listingData.filter(ticket => ticket.subject.toLowerCase().includes(filterString.toLowerCase()))
+        }
 
     }
 
@@ -101,7 +107,7 @@ export default class TicketListingPage extends React.Component {
                     _state.message = '';
                     _state.listingData = payload.result.tickets;
                     _state.listingData.sort((a, b) => a.id - b.id)
-                    // window.localStorage.setItem('_listingData', _state.listingData)
+                    window.localStorage.setItem('_listingData', JSON.stringify(_state.listingData))
 
                 } else {
                     _state.message = message;

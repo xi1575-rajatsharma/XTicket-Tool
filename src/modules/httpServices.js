@@ -41,6 +41,8 @@ axios.interceptors.response.use(function (config) {
 }, function (error) {
     if (401 === error.response.status) {
         window.localStorage.removeItem('_token');
+        window.localStorage.removeItem('_userInfo');
+        window.location = '/'
     }
 
     return Promise.reject(error);

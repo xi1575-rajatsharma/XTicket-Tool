@@ -83,12 +83,13 @@
     width:100%;
     display: flex;
     flex-direction: row;
+    position: relative;
     font-family: "Proxima Nova";
     
     .all-tickets-wrapper{
         @include scrollbars(5px,rgb(79, 109, 150), #FFFAFA);
         width: 15%;
-        overflow: auto;
+        overflow: scroll;
         background: #FFFAFA;
         
 
@@ -503,63 +504,63 @@
         
     
 
-            .ticket-replies-wrapper{
-            // @include flexProvider(flex-start,space-evenly ,column );
-            // border: 2px solid #dedede;
-                @include scrollbars(5px,rgb(49, 76, 114), #FFFAFA);
-                background-color: #fffbfb;
-                border-radius: 5px;
-                padding: 10px;
-                margin: 10px0;
-                width:100%;
-                height: 100%;
-                float: left;
-                overflow: auto;
-                color: rgb(0, 5, 29);
-                box-shadow: 1px 1px 4px 1px rgba(0,0,0,0.425);
+            // .ticket-replies-wrapper{
+            // // @include flexProvider(flex-start,space-evenly ,column );
+            // // border: 2px solid #dedede;
+            //     @include scrollbars(5px,rgb(49, 76, 114), #FFFAFA);
+            //     background-color: #fffbfb;
+            //     border-radius: 5px;
+            //     padding: 10px;
+            //     margin: 10px0;
+            //     width:100%;
+            //     height: 100%;
+            //     float: left;
+            //     overflow: auto;
+            //     color: rgb(0, 5, 29);
+            //     box-shadow: 1px 1px 4px 1px rgba(0,0,0,0.425);
 
 
-                .individual-reply-wrapper{
-                // border: 2px solid #dedede;
-                // background-color: #f1f1f1;
-                // border-color: #ccc;
-                box-shadow: 1px 1px 4px 1px rgba(0,0,0,0.425);
-                background-color: #FFFAFA;
-                border-radius: 5px;
-                padding: 20px;
-                margin: 10px0;
-                height: 30%;
-                width: 100%;
-                // border-bottom: 0.5px solid rgb(6, 169, 156);
-                // padding:5px;
-                padding-bottom: 0;
-                margin-bottom: 3px;
-                @include flexProvider(flex-start,space-evenly ,column);
-                font-size:14px;
-                font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+            //     .individual-reply-wrapper{
+            //     // border: 2px solid #dedede;
+            //     // background-color: #f1f1f1;
+            //     // border-color: #ccc;
+            //     box-shadow: 1px 1px 4px 1px rgba(0,0,0,0.425);
+            //     background-color: #FFFAFA;
+            //     border-radius: 5px;
+            //     padding: 20px;
+            //     margin: 10px0;
+            //     height: 30%;
+            //     width: 100%;
+            //     // border-bottom: 0.5px solid rgb(6, 169, 156);
+            //     // padding:5px;
+            //     padding-bottom: 0;
+            //     margin-bottom: 3px;
+            //     @include flexProvider(flex-start,space-evenly ,column);
+            //     font-size:14px;
+            //     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
                 
-                .reply-heading-wrapper{
-                    @include flexProvider(flex-start,space-between ,row );
-                    width: 100%;
-                    span{
-                        float: right;
-                        color: rgb(0, 0, 0);
-                    }
-                }
+            //     .reply-heading-wrapper{
+            //         @include flexProvider(flex-start,space-between ,row );
+            //         width: 100%;
+            //         span{
+            //             float: right;
+            //             color: rgb(0, 0, 0);
+            //         }
+            //     }
 
 
 
-                    .profile-wrapper{
-                        background-image: url('../images/avatar.png');
-                        height:30px;
-                        width: 30px;
-                        border-radius: 50%;
-                        background-size: cover;
+            //         .profile-wrapper{
+            //             background-image: url('../images/avatar.png');
+            //             height:30px;
+            //             width: 30px;
+            //             border-radius: 50%;
+            //             background-size: cover;
 
-                    }
+            //         }
 
-                }
-            }
+            //     }
+            // }
 
 
         }
@@ -580,7 +581,7 @@
         height: 100%;
         background:#FFFAFA;
         padding: 25px;
-        overflow: auto;
+        overflow: scroll;
         .individual-change-wrapper{
             position: relative;
             width: 50%;
@@ -711,6 +712,7 @@ textarea{
     width: 100vw;
     height: 100vh;
     background: #FFFAFA;
+    z-index: 400;
     .loader-icon{
         position: absolute;
         left: 45%;
