@@ -39,12 +39,7 @@ axios.interceptors.response.use(function (config) {
     return config;
 
 }, function (error) {
-    if (401 === error.response.status) {
-        window.localStorage.removeItem('_token');
-        window.localStorage.removeItem('_userInfo');
-        window.location = '/'
-    }
-    if (403 === error.response.status) {
+    if (401 === error.response.status && 403 === error.response.status) {
         window.localStorage.removeItem('_token');
         window.localStorage.removeItem('_userInfo');
         window.location = '/'

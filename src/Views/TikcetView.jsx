@@ -168,7 +168,7 @@ const TicketView = (payload) => {
 
     return (
         <React.Fragment>
-            {isLoading ?
+            {isLoading || statusChangeLoading ?
                 <div className="ticket-details-loader-wrapper" >
                     <div className="loader-icon">
                         <Loader
@@ -177,25 +177,11 @@ const TicketView = (payload) => {
                             height={100}
                             width={100}
                             timeout={7000}
-
                         /> </div>
                 </div> :
 
                 <div className="TicketDetails-container" >
-                    {
-                        statusChangeLoading ? <div className="status-loader-wrapper">
-                            <div className="status-loader-icon-wrapper">
-                                <Loader
-                                    type="Oval"
-                                    color="#9D92B2"
-                                    height={100}
-                                    width={100}
-                                    timeout={7000}
 
-                                />
-                            </div>
-                        </div> : null
-                    }
                     {
                         ticketStatusPopup === 'yes' ?
                             <div className="popup-background-wrapper">
