@@ -23,7 +23,7 @@ export default class TicketListingPage extends React.Component {
         fetch.get({
             url: constants.SERVICE_URLS.TICKET_LISTING,
             requestParams: {
-                page: 0,
+                page: 1,
                 limit: 50
             },
             callbackHandler: (response) => {

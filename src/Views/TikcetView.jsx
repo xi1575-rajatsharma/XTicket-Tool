@@ -8,6 +8,8 @@ import { Link } from 'react-router-dom';
 import orangeReply from '../images/orange-reply.png';
 import FeedBackView from './feedBackView';
 import SlidingPanel from './slidingPanel';
+import { constants } from '../modules/constants';
+
 
 
 
@@ -29,6 +31,11 @@ const TicketView = (payload) => {
     }
     const sideBarCloseHandler = () => {
         setSideBarOpen(false)
+    }
+    const allOverPageCloseHandler = () => {
+        if (sideBarOpen) {
+            setSideBarOpen(false)
+        }
     }
 
 
@@ -124,7 +131,13 @@ const TicketView = (payload) => {
                         <div className="change-text-wrapper">Ticket Re-opened</div>
                     </React.Fragment>
                 )
-
+            case "RESOLVED":
+                return (
+                    <React.Fragment>
+                        <div className="resolved-icon-wrapper"></div>
+                        <div className="change-text-wrapper">Ticket Resolved</div>
+                    </React.Fragment>
+                )
 
             default:
                 console.log("nothing here")
@@ -217,37 +230,39 @@ const TicketView = (payload) => {
                             </div>
                             <div className="ticket-snapshot-wrapper">
                                 <div className="ticket-snapshot-left-border"></div>
-                                <div className="snapshot-heading-wrapper">
+                                <div className="snapshot-name-wrapper"><span>{ticketData.displayName}</span></div>
+                                <div className="snapshot-time-globe-wrapper">
                                     <i className="fa fa-globe">
                                         <span className="date-text">
                                             {creationTime.getDay() + ' ' + creationMonth}
                                         </span>
                                     </i>
-                                    <span>{ticketData.displayName}</span>
                                 </div>
                                 <div className="ticket-snapshot-information-wrapper">
-                                    <p> #{ticketData.id}  {ticketData.subject}</p>
+                                    <p> <span className="ticket-id">#{ticketData.id}</span>  {ticketData.subject ? ticketData.subject.substring(0, Math.min(ticketData.subject.length, 40)) + "..." : null}</p>
                                 </div>
                             </div>
                             {
                                 listingData.map((ticket) => {
                                     const dueOn = new Date(ticket.creationTime);
-
+                                    let subject = ticket.subject;
+                                    subject = subject.substring(0, Math.min(subject.length, 40));
                                     return (
                                         ticket.id === ticketData.id ? null :
                                             <Link key={ticket.id} to={'/ticketlist/' + ticket.id}>
                                                 <div className="ticket-snapshot-wrapper" key={ticket.id} onClick={() => updateTicketData(ticket.id)}>
 
-                                                    <div className="snapshot-heading-wrapper">
+                                                    <div className="snapshot-name-wrapper"><span>{ticket.displayName}</span></div>
+                                                    <div className="snapshot-time-globe-wrapper">
                                                         <i className="fa fa-globe">
                                                             <span className="date-text">
-                                                                {dueOn.getDate() + '/' + (dueOn.getMonth() + 1)}
+                                                                {dueOn.getDate() + ' ' + month[dueOn.getMonth()]}
                                                             </span>
                                                         </i>
-                                                        <span>{ticket.displayName}</span>
                                                     </div>
                                                     <div className="ticket-snapshot-information-wrapper">
-                                                        <p> #{ticket.id}  {ticket.subject}</p>
+
+                                                        <p> <span className="ticket-id">#{ticket.id}</span>   {ticket.subject.length > 40 ? subject + "..." : ticket.subject}</p>
                                                     </div>
                                                 </div>
                                             </Link>
@@ -363,7 +378,7 @@ const TicketView = (payload) => {
                                         <div className="subject-right-side-wrapper">
                                             <img className="reply-image" src={orangeReply} title="Reply" alt="nothing here" width="30px" height="30px" tooltip="hey" onClick={() => { showhidereplybox(); showcommentbox(false) }} />
                                             {/* <Link to={'/ticketlist/' + ticketData.id}> */}
-                                            <img className="chat-image" src={orangeChat} title="Comment" alt="nothing here" width="30px" height="30px" onClick={() => { showhidecommentbox(); showreplybox(false) }} />
+                                            <img className="chat-image" src={orangeChat} title="Comment" alt="nothing here" width="30px" height="30px" onClick={() => { showhidecommentbox(); showreplybox(false) }} />   {/**/}
                                             {/* </Link> */}
                                         </div>
                                     </div>
@@ -380,7 +395,7 @@ const TicketView = (payload) => {
 
                                 <div className="attachment-wrapper" onClick={() => isVisible('id_attachment')} > attachment</div>
 
-                                <div className="approval-wrapper">approval</div>
+                                {/* <div className="approval-wrapper">approval</div> */}
                                 <div className="history-wrapper" onClick={() => isVisible('id_history')} style={display === 'id_history' ? { color: '#06A99C', fontSize: "11px", fontWeight: "bolder" } : null} > history</div>
                             </div>
 
@@ -400,7 +415,8 @@ const TicketView = (payload) => {
 
 
                                                 <div class="buttons-wrapper">
-                                                    <input type="submit" id="reply-send" value="Send" ></input>
+
+                                                    <input type="submit" id="reply-send" value="Send" />
                                                     <button id="cancel-reply" onClick={showreplybox}>Cancel</button>
                                                 </div>
                                             </form>
@@ -468,8 +484,8 @@ const TicketView = (payload) => {
                                                     return (
 
                                                         <div className="individual-change-wrapper" key={change.id} >
-                                                            <div className="top-right-corner-dot"></div>
-
+                                                            <div className="top-right-corner-dot"></div >
+                                                            {console.log(change)}
                                                             {
 
                                                                 switchChanges(change.status)
@@ -482,9 +498,11 @@ const TicketView = (payload) => {
                                         </React.Fragment> : <p> NO history of the ticket found</p>
                                     : null
                             }
+                            {console.log(ticketData)}
                             {
                                 display === 'id_attachment' ?
-                                    <a href="/home/ec2-user/helpdesk_deploy/UPLOAD/3/Screenshot from 2020-05-22 12-06-33.jpg_1590465234624" download>Download</a>
+                                    ticketData.fileName ?
+                                        <a href={constants.SERVICE_URLS.DOWNLOAD_FILE + ticketData.fileName} download>Download</a> : <p>No Attachments</p>
                                     : null
 
                             }

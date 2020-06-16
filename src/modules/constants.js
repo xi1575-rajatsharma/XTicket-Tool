@@ -17,7 +17,8 @@ export const constants = {
         TICKET_VIEW_ADMIN: `${API_HOST_PATH}/ticket-tool/v1/users/admins`,
         TICKET_HISTORY: `${API_HOST_PATH}/ticket-tool/v1/tickets/ticket-journey/`,
         GET_TICKET_STATUS: `${API_HOST_PATH}/ticket-tool/v1/tickets/ticket-status`,
-        GIVE_FEEDBACK: `${API_HOST_PATH}/ticket-tool/v1/feedback/`
+        GIVE_FEEDBACK: `${API_HOST_PATH}/ticket-tool/v1/feedback/`,
+        DOWNLOAD_FILE: `${API_HOST_PATH}/ticket-tool/v1/tickets/download/3?fileName=`
     },
 
 

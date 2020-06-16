@@ -10,9 +10,10 @@ const SlidingPanel = (payload) => {
         payload.close()
     }
 
+
     return (
         <div className={sideBarClass}>
-            <div className="sideBar-heading-wrapper">
+            <div className="sideBar-heading-wrapper"  >
                 <div>Replies <img onClick={closeHandler} src={doubleLeft} alt="back-arrow" height="20px" /></div>
                 {/* <button onClick={closeHandler}>Close X</button> */}
             </div>

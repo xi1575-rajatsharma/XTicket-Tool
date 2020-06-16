@@ -1,3 +1,29 @@
+
+@mixin scrollbars($size, $foreground-color, $background-color: mix($foreground-color, black,  50%)) {
+    // For Google Chrome
+    &::-webkit-scrollbar {
+      width:  $size;
+      height: $size;
+    }
+  
+    &::-webkit-scrollbar-thumb {
+      background: $foreground-color;
+      
+      border-radius: 10px 0 0 10px;
+    }
+  
+    &::-webkit-scrollbar-track {
+      background: $background-color;
+    }
+  
+    // For Internet Explorer
+    & {
+      scrollbar-face-color: $foreground-color;
+      scrollbar-track-color: $background-color;
+    }
+  }
+
+
 .TicketListContainer{
     height: 100vh;
 }
@@ -9,6 +35,7 @@
     justify-content: flex-start;
     align-items: flex-start;
     font-family: "Proxima Nova";
+    @include scrollbars(8px,rgb(3, 39, 90), #FFFAFA);
 }
 .filters-wrapper{
     width: 100%;

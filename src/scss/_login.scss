@@ -112,6 +112,12 @@
         top:45%;
     }
 }
+.login-error{
+    position: absolute;
+    top:60%;
+    margin: auto;
+    color:white;
+}
 
 @media screen and (max-width : 800px){
     .login-container{

@@ -19,6 +19,7 @@ class TicketDetails extends Component {
             ticketJourney: [],
             resolutionText: null,
             replyText: null,
+            allTicketDetails: [],
             allStatus: [],
             isLoading: false,
             statusChangeLoading: false
@@ -36,21 +37,30 @@ class TicketDetails extends Component {
 
 
 
-    downloadFile = () => {
 
-        axios({
-            url: "http://3.7.115.94/ticket-tool/v1/tickets/preview?filepath=/home/ec2-user/helpdesk_deploy/UPLOAD/3/Screenshot from 2020-05-22 12-06-33.jpg_1590465234624",
-            method: 'GET',
-            responseType: "blob"
-        }).then((response) => {
-            console.log(response)
-            FileSaver.saveAs(response.data, "hello.jpg");
-
-
-        });
-    }
 
     getTicketInfo = (id) => {
+
+        this.setState({ isLoading: true }, () => {
+            fetch.get({
+                url: constants.SERVICE_URLS.TICKET_DETAILING,
+                callbackHandler: (response) => {
+                    console.log(response)
+                    const { status, message, payload } = response;
+                    const _state = cloneDeep(this.state);
+                    _state.isLoading = false;
+
+                    if (status === constants.SUCCESS) {
+                        _state.message = '';
+                        _state.allTicketDetails = payload;
+                    } else {
+                        _state.message = message;
+                    }
+                    this.setState(_state);
+                }
+            })
+        })
+
         this.setState({ isLoading: true }, () => {
             fetch.get({
                 url: constants.SERVICE_URLS.TICKET_DETAILING + '/' + id,
@@ -385,28 +395,67 @@ class TicketDetails extends Component {
                     .then((response) => {
                         console.log(response)
                         this.setState({ statusChangeLoading: false })
+                        this.setState({ isLoading: true }, () => {
+                            fetch.get({
+                                url: constants.SERVICE_URLS.TICKET_REPLY + id,
+                                callbackHandler: (response) => {
+                                    this.setState({ isLoading: false })
+                                    const { status, message, payload } = response;
+
+                                    const _state = cloneDeep(this.state);
+
+                                    if (status === constants.SUCCESS) {
+                                        _state.message = '';
+                                        _state.ticketReplies = payload.result.conversations;
+
+                                    } else {
+                                        _state.message = message;
+                                    }
+                                    this.setState({ ticketReplies: _state.ticketReplies });
+
+                                }
+                            })
+                        })
                     })
             })
         } else {
-            this.setState(() => {
-                fetch.post({
-                    url: constants.SERVICE_URLS.TICKET_REPLY + id,
-                    requestBody: {
-                        text: this.state.replyText,
-                        conversationType: "comment"
-                    },
-                    callbackHandler: (response) => {
-                        console.log(response);
-                        const { status, message, payload } = response;
-                        const _state = cloneDeep(this.state);
-
-                        if (status === constants.SUCCESS) {
-                            _state.message = message;
-                            window.location.reload();
-                        }
-                    }
-                })
+            const bodyFOrmData = new FormData();
+            const request = JSON.stringify({
+                text: this.state.replyText,
+                conversationType: "Comment"
             })
+            bodyFOrmData.append('request', request)
+            axios({
+                method: 'post',
+                url: constants.SERVICE_URLS.TICKET_REPLY + id,
+                data: bodyFOrmData
+            })
+                .then((response) => {
+                    console.log(response)
+                    this.setState({ statusChangeLoading: false })
+                    this.setState({ isLoading: true }, () => {
+                        fetch.get({
+                            url: constants.SERVICE_URLS.TICKET_REPLY + id,
+                            callbackHandler: (response) => {
+                                this.setState({ isLoading: false })
+                                const { status, message, payload } = response;
+
+                                const _state = cloneDeep(this.state);
+
+                                if (status === constants.SUCCESS) {
+                                    _state.message = '';
+                                    _state.ticketReplies = payload.result.conversations;
+
+                                } else {
+                                    _state.message = message;
+                                }
+                                this.setState({ ticketReplies: _state.ticketReplies });
+
+                            }
+                        })
+                    })
+                })
+
         }
     }
 
@@ -563,4 +612,28 @@ export default TicketDetails;
                             })
                         }
                     }
-                })*/
+                })
+
+                this.setState(() => {
+                fetch.post({
+                    url: constants.SERVICE_URLS.TICKET_REPLY + id,
+                    requestBody: {
+                        text: this.state.replyText,
+                        conversationType: "comment"
+                    },
+                    callbackHandler: (response) => {
+                        console.log(response);
+                        const { status, message, payload } = response;
+                        const _state = cloneDeep(this.state);
+
+                        if (status === constants.SUCCESS) {
+                            _state.message = message;
+                            window.location.reload();
+                        }
+                    }
+                })
+            })
+
+
+
+                */
