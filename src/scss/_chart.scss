@@ -1,12 +1,14 @@
 .report-container{
     margin: auto;
-    display:grid;
-    height: 100%;
-    width:90%;
-    grid-gap:20px;
-    grid-template-rows:300px 300px;
-    grid-template-columns: repeat(2, 1fr);
+    // display:grid;
+    // height: 100%;
+    // width:90%;
+    // grid-gap:20px;
+    // grid-template-rows:300px 300px;
+    // grid-template-columns: repeat(2, 1fr);
     //box-shadow: none;
+    font-family: 'Sriracha', cursive;
+    text-align: center;
   }
   
    .chart-1{

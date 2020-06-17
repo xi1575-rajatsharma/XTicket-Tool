@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import Loader from 'react-loader-spinner';
 import arrow from '../images/arrow.png';
-import globe from '../images/globe.png';
+import rightArrow from '../images/right-arrow.png';
 import clock from '../images/stopwatch.png';
 import orangeChat from '../images/message.png';
 import { Link } from 'react-router-dom';
@@ -41,7 +41,7 @@ const TicketView = (payload) => {
 
     let sidebar
     if (sideBarOpen) {
-        sidebar = <SlidingPanel ticketReplies={ticketReplies} close={sideBarCloseHandler} sideBar={"sideBar"} />
+        sidebar = <SlidingPanel ticketReplies={ticketReplies} close={sideBarCloseHandler} displayName={ticketData.displayName} sideBar={"sideBar"} />
     }
 
     const creationTime = new Date(ticketData.creationTime);
@@ -206,7 +206,7 @@ const TicketView = (payload) => {
                         <div className="popup-background-wrapper">
                             <div className="status-popup-wrapper">
                                 <div className="close-wrapper">
-                                    [X]
+                                    [X]yna
                          </div>
                                 <p>Do you want to close the ticket?</p>
                                 <div className="buttons-wrapper">
@@ -219,7 +219,9 @@ const TicketView = (payload) => {
 
                     <div className="ticket-details-bottom-container">
                         {sidebar}
+                        <img className="all-tickets-show-wrapper" src={rightArrow} height="50px" width="30px" />
                         <div className="all-tickets-wrapper">
+
                             <div className="header-wrapper">
                                 <div className="back-arrow-wrapper">
                                     <img src={arrow} alt="back arrow here" />
@@ -274,12 +276,16 @@ const TicketView = (payload) => {
                         <div className="ticket-brief-wrapper">
                             <div className="ticket-brief-heading-wrapper">
                                 <div className="ticket-brief-heading-horizontal-line-wrapper"></div>
-                                <h3> {ticketData.displayName} <i className="fa fa-globe"></i></h3>
-                                <span>{ticketData.emailId}</span>
-
+                                <h3> {ticketData.displayName}</h3>
+                                <div className="email-wrapper">
+                                    <span>{ticketData.emailId}</span>
+                                </div>
                             </div>
 
                             <div className="ticket-brief-information-wrapper">
+                                <div className="ticket-information-heading-wrapper">
+                                    <h4> Ticket Information</h4>
+                                </div>
                                 <div className="assigned-officer-wrapper">
                                     <span>Assigned To</span>
                                     <div className="profile-wrapper">
@@ -319,27 +325,22 @@ const TicketView = (payload) => {
                                 </div>
 
                                 <div className="closed-time-wrapper">
-                                    <span>Closed Time</span>
+                                    <span class="red-text">Closed Time</span>
                                     <span className="date-time-wrapper">{dueOn.getUTCDate() + ' ' + dueOnMonth}</span>
                                 </div>
 
-                                <div className="ticket-information-heading-wrapper">
-                                    <h4> Ticket Information</h4>
-                                </div>
+
 
                                 <div className="ticket-brief-location-wrapper">
                                     <span className="red-text">Location</span>
                                     <span className="city-text">{ticketData.location}</span>
                                 </div>
 
-                                <div className="ticket-brief-phone-wrapper">
-                                    <span>Phone</span>
-                                    <span className="phone-text">Phone No.</span>
-                                </div>
+
 
                                 <div className="ticket-brief-department-wrapper">
                                     <span className="red-text">Department</span>
-                                    <span>{ticketData.department}</span>
+                                    <span >{ticketData.department}</span>
                                 </div>
 
                                 <div className="ticket-brief-sub-issue-wrapper">
@@ -349,27 +350,23 @@ const TicketView = (payload) => {
                                 </div>
 
                                 <div className="ticket-brief-classifications-wrapper">
-                                    <span>Classifications</span>
+                                    <span class="red-text">Classifications</span>
                                     <span>{ticketData.classification}</span>
                                 </div>
 
                                 <div className="ticket-brief-priority-wrapper">
-                                    <span>Priority</span>
+                                    <span class="red-text">Priority</span>
                                     <span>{ticketData.subIssue}</span>
                                 </div>
 
-                                <div className="ticket-brief-product-name-wrapper">
-                                    <span>Product Name</span>
-                                </div>
+
 
                             </div>
 
                         </div>
                         <div className="selected-ticket-details-wrapper">
                             <div className="selected-ticket-header-wrapper">
-                                <div className="web-icon-wrapper">
-                                    <img src={globe} alt="nothing much here" width="30px" height="30px" />
-                                </div>
+
                                 <div className="selected-ticket-heading-wrapper">
                                     <div className="id-and-subject-wrapper">
                                         <div className="subject-left-side-wrapper">
@@ -464,7 +461,7 @@ const TicketView = (payload) => {
 
                             {display === 'id_resolution' ? ticketData.resolution ? <React.Fragment>
                                 <div className="resolution-text">
-                                    {ticketData.resolution}
+                                    <p>{ticketData.resolution}</p>
                                 </div>
                             </React.Fragment> : <React.Fragment>
                                     <div className="resolution-wrapper">

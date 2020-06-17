@@ -1,15 +1,22 @@
+.popup-background-wrapper{
+    height: 100vh;
+    z-index: 1;
+}
 .feedback-container{
     margin: auto;
     background-color: #ccc;
     width:40vw;
     height: 70vh;
+    top:5%;
     position: relative;
-    z-index: 10;
+    z-index: 1;
+    font-family: Arial, Helvetica, sans-serif;
+    border: 3px solid #314c72;
     }
      
     .feedback-header{
     height: 20%;
-    background-color:#25afcb;
+    background-color:#314c72;
     }
     form{
         width:100%;
@@ -29,7 +36,7 @@
     background-color: white;
     }
      .thumb{
-         color: #25afcb;
+         color: #314c72;
          font-size: 2rem;
      }
     .hand-svg{
@@ -58,7 +65,7 @@
     height: 100px;
     padding: 12px20px;
     box-sizing: border-box;
-    border: 2pxsolid#ccc;
+    border: 2px solid #314c72;
     border-radius: 4px;
     background-color: #f8f8f8;
     resize: none;

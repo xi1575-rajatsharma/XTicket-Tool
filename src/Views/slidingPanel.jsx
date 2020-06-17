@@ -10,9 +10,16 @@ const SlidingPanel = (payload) => {
         payload.close()
     }
 
-
+    const replyClass = (replyCreatedBy) => {
+        if (replyCreatedBy.includes(payload.displayName)) {
+            return "individual-reply-wrapper-right"
+        } else {
+            return "individual-reply-wrapper-left"
+        }
+    }
     return (
         <div className={sideBarClass}>
+            {console.log(payload.ticketReplies)}
             <div className="sideBar-heading-wrapper"  >
                 <div>Replies <img onClick={closeHandler} src={doubleLeft} alt="back-arrow" height="20px" /></div>
                 {/* <button onClick={closeHandler}>Close X</button> */}
@@ -23,12 +30,15 @@ const SlidingPanel = (payload) => {
                         const replyCreatedOn = new Date(reply.createdOn);
 
                         return (
-                            <div className="individual-reply-wrapper" key={reply.id}>
-                                <div className="reply-heading-wrapper">
-                                    <div className="profile-wrapper"></div>
-                                    <span className="reply-createdOn-wrapper">{replyCreatedOn.getDate()}/{replyCreatedOn.getMonth()} ({replyCreatedOn.getHours()} : {replyCreatedOn.getMinutes()}) </span>
+                            <div className={replyClass(reply.createdBy)} key={reply.id}>
+                                <div className="reply-body-wrapper">
+                                    <div className="message-username-seperator"></div>
+                                    <div className="reply-heading-wrapper">
+                                        <div className="createdBy-wrapper" >{reply.createdBy}</div>
+                                        <span className="reply-createdOn-wrapper">{replyCreatedOn.getDate()} {replyCreatedOn.toLocaleString('default', { month: 'long' })} at {replyCreatedOn.toLocaleString('en-US', { hour: 'numeric', hour12: true })}</span> {/*{replyCreatedOn.getDate()}/{replyCreatedOn.getMonth()} ({replyCreatedOn.getHours()} : {replyCreatedOn.getMinutes()} */}
+                                    </div>
+                                    <div className="reply-text-wrapper">{reply.text}</div>
                                 </div>
-                                <div className="reply-text-wrapper">{reply.text}</div>
                             </div>
                         )
                     })

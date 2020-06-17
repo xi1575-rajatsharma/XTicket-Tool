@@ -50,7 +50,7 @@ export default class TestView extends Component {
                                 : null
                             }
                             <optgroup label="Other Filters">
-                                <option value="Date">Filter Between Dates</option>
+                                <option value="Date" >Filter Between Dates</option>
                                 <option value="Subject">Filter By subject</option>
                                 <option value="Name">Filter by Name</option>
                             </optgroup>

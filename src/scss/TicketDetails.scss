@@ -24,8 +24,7 @@
 
   .bottom-container{
       height: 94vh;
-      overflow-x: hidden;
-      
+    overflow-x: hidden;
   }
 .TicketDetails-container{
     width: 100%;
@@ -89,13 +88,21 @@
     display: flex;
     flex-direction: row;
     position: relative;
-    font-family: "Proxima Nova";
-    
+    font-family: Arial, Helvetica, sans-serif;
+    .all-tickets-show-wrapper{
+        
+        position: absolute;
+        top:-10px;
+        border-radius: 0 50% 50% 0;
+        transform: rotateZ(-90deg);
+        
+    }
     .all-tickets-wrapper{
         @include scrollbars(5px,rgb(79, 109, 150), #FFFAFA);
         width: 15%;
         overflow: scroll;
         background: #FFFAFA;
+        display: none;
         
 
         .header-wrapper{
@@ -153,22 +160,29 @@
             position: relative;
             height: 18%;
             padding:20px;
+            
             display: flex;
             flex-direction: column;
-            align-items: center;
+            align-items: flex-start;
             justify-content: space-evenly;
             
+            .email-wrapper{
+                width: 100%;
+                display: flex;
+                justify-content: flex-start;
+            }
             span{
                 width: 80%;
                 margin: 3px;
             }
             h3{
+                text-transform: capitalize;
                 margin-bottom: 0px;
                 width: 40%;
                 display: flex;
                 flex-direction: row;
                 align-items: center;
-                justify-content: space-around;
+                justify-content: flex-start;
             }
 
             .ticket-brief-heading-horizontal-line-wrapper{
@@ -185,7 +199,7 @@
             flex-direction: column;
             justify-content: space-evenly;
             align-items: flex-start;
-            color:rgb(35, 16, 70);
+            color:#2F4F4F;
             font-weight: bold;
             padding: 20px;
             padding-left: 30px;
@@ -202,7 +216,7 @@
                 border-bottom: 1.5px solid #FF9416;
                 background-color: transparent;
                 font-weight: normal;
-                font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+                
                 -webkit-appearance: none;
                 transition: all ease-in-out 0.5s;
                 option{
@@ -244,7 +258,7 @@
                 color: 	#2F4F4F;
             }
             .red-text{
-                color: rgb(255, 138, 4);
+                color: #231046;
                 font-weight: bolder;
             }
 
@@ -314,7 +328,7 @@
             flex-direction: row;
             align-items: flex-start;
             justify-content: flex-start;
-            color:#FF9416;
+            color:#314c72;
 
             .id-and-subject-wrapper{
                 display: flex;
@@ -339,9 +353,11 @@
                 align-items: center;
                 justify-content: center;
             }
-
+            .subject-left-side-wrapper{
+                padding-left: 10px;
+            }
             .selected-ticket-heading-wrapper{
-                width: 80%;
+                width: 100%;
                 height: 50%;
                 padding: 2%;
                 font-weight: bolder;
@@ -357,8 +373,9 @@
                 }
                 .time-wrapper{
                     font-size: 14px;
+                    padding-left: 10px;
                     font-weight: lighter;
-                    color: 	#2F4F4F;
+                    color: 	#314c72;
                     display: flex;
                     flex-direction: row;
                     align-items: center;
@@ -482,7 +499,7 @@
             //     margin-bottom: 3px;
             //     @include flexProvider(flex-start,space-evenly ,column);
             //     font-size:14px;
-            //     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+            //     
                 
             //     .reply-heading-wrapper{
             //         @include flexProvider(flex-start,space-between ,row );
@@ -510,7 +527,7 @@
 
         }
         .resolution-wrapper{
-            font-family: "Proxima Nova";
+            
             form{
                 display: flex;
                 flex-direction: column;
@@ -518,7 +535,10 @@
                 color: black;
                 border: 1px solid rgb(6, 169, 156);
             }
+
         }
+        overflow-wrap: break-word;
+        word-break: break-all;
     }
     .history-container{
         @include scrollbars(5px,rgb(49, 76, 114), #FFFAFA);
@@ -544,7 +564,7 @@
             align-items: center;
             justify-content: space-between;
             color: black;
-            font-family: "Proxima Nova";
+            
             font-size: 18px;
             line-height: 24px;
 
