@@ -49,7 +49,7 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  @include scrollbars(8px,rgb(49, 76, 114),#181C28 );
+  @include scrollbars(8px,linear-gradient(180deg, #6C1D5F 40%, #33082b 60%),#181C28 );
   
 }
 

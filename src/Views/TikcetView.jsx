@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import Loader from 'react-loader-spinner';
 import arrow from '../images/arrow.png';
-import rightArrow from '../images/right-arrow.png';
 import clock from '../images/stopwatch.png';
 import orangeChat from '../images/message.png';
 import { Link } from 'react-router-dom';
@@ -219,7 +218,7 @@ const TicketView = (payload) => {
 
                     <div className="ticket-details-bottom-container">
                         {sidebar}
-                        <img className="all-tickets-show-wrapper" src={rightArrow} height="50px" width="30px" />
+
                         <div className="all-tickets-wrapper">
 
                             <div className="header-wrapper">
@@ -320,7 +319,7 @@ const TicketView = (payload) => {
                                 </div>
 
                                 <div className="closed-time-wrapper">
-                                    <span class="red-text">Closed Time</span>
+                                    <span class="red-text">SLA</span>
                                     <span className="date-time-wrapper">{dueOn.getUTCDate() + ' ' + dueOnMonth}</span>
                                 </div>
 
@@ -349,10 +348,10 @@ const TicketView = (payload) => {
                                     <span>{ticketData.classification}</span>
                                 </div>
 
-                                <div className="ticket-brief-priority-wrapper">
+                                {/* <div className="ticket-brief-priority-wrapper">
                                     <span class="red-text">Priority</span>
                                     <span>{ticketData.subIssue}</span>
-                                </div>
+                                </div> */}
 
 
 
@@ -375,8 +374,8 @@ const TicketView = (payload) => {
                                         </div>
                                     </div>
                                     <div className="time-wrapper">
-                                        <img src={clock} alt="clock icon here" width="15px" height="15px" />
-                                        <p>{dueOn.getDate() + ' ' + creationMonth}</p>
+
+                                        <p> <span style={{ fontWeight: "bold" }}> SLA</span> {dueOn.getDate() + ' ' + creationMonth}</p>
                                     </div>
                                 </div>
                             </div>
@@ -401,7 +400,7 @@ const TicketView = (payload) => {
                                         <React.Fragment>
                                             <form id="reply-form" onSubmit={(e) => { e.preventDefault(); replySubmitHandler("reply"); showreplybox() }}>
                                                 <div className="comment-box-wrapper">
-                                                    <textarea form="reply-form" id="reply" onChange={(e) => { replyChangeHandler(e.target.value) }} cols="95" rows="8" placeholder="Please add a reply.Note: This will send an email to the user who raised the ticket"></textarea>
+                                                    <textarea form="reply-form" id="reply" onChange={(e) => { replyChangeHandler(e.target.value) }} cols="95" rows="8" placeholder="Please add a reply.&#10;Note: This will send an email to the user who raised the ticket"></textarea>
 
                                                 </div>
 
@@ -417,7 +416,7 @@ const TicketView = (payload) => {
                                         <React.Fragment>
                                             <form id="comment-form" onSubmit={(e) => { e.preventDefault(); replySubmitHandler("comment"); showreplybox() }}>
                                                 <div class="comment-box-wrapper">
-                                                    <textarea form="comment-form" id="reply" onChange={(e) => { replyChangeHandler(e.target.value) }} cols="101" rows="15" placeholder="Please add a comment.Note: This will NOT send an email to the user who raised the ticket"></textarea>
+                                                    <textarea form="comment-form" id="reply" onChange={(e) => { replyChangeHandler(e.target.value) }} cols="101" rows="15" placeholder="Please add a comment.&#10;Note: This will NOT send an email to the user who raised the ticket"></textarea>
                                                 </div>
                                                 <div class="comments-buttons-wrapper">
                                                     <input type="submit" value="Send" ></input>
@@ -428,10 +427,11 @@ const TicketView = (payload) => {
 
                                     <div className="name-wrapper">
 
-                                        <p className="username-wrapper">{ticketData.emailId} <span className="details-date-wrapper">{creationTime.getDay() + ' ' + creationMonth} {}</span></p> <br />
+                                        <p className="username-wrapper">{ticketData.displayName} <span className="details-date-wrapper"> Created on {creationTime.getDay() + ' ' + creationMonth} {}</span></p> <br />
                                         <p className="ticket-description">{ticketData.description}</p>
+                                        <button className="view-replies-btn" onClick={openHandler}>View Replies</button>
                                     </div>
-                                    <button onClick={openHandler}>View Replies</button>
+
                                     {/* <div className="ticket-replies-wrapper">
                                         {
                                             ticketReplies ? ticketReplies.map((reply) => {
@@ -470,31 +470,32 @@ const TicketView = (payload) => {
                             {
                                 display === 'id_history' ?
                                     ticketJourney ?
-                                        <React.Fragment>
-                                            <div className="history-container">
-                                                {ticketJourney.map(((change) => {
-                                                    return (
+                                        ticketJourney.length ?
+                                            <React.Fragment>
+                                                <div className="history-container">
+                                                    {ticketJourney.map(((change) => {
+                                                        return (
 
-                                                        <div className="individual-change-wrapper" key={change.id} >
-                                                            <div className="top-right-corner-dot"></div >
-                                                            {console.log(change)}
-                                                            {
+                                                            <div className="individual-change-wrapper" key={change.id} >
+                                                                <div className="top-right-corner-dot"></div >
+                                                                {console.log(change)}
+                                                                {
 
-                                                                switchChanges(change.status)
-                                                            }
-                                                            <div className="change-connector"></div>
-                                                        </div>
-                                                    )
-                                                }))}
-                                            </div>
-                                        </React.Fragment> : <p> NO history of the ticket found</p>
+                                                                    switchChanges(change.status)
+                                                                }
+                                                                <div className="change-connector"></div>
+                                                            </div>
+                                                        )
+                                                    }))}
+                                                </div>
+                                            </React.Fragment> : <div className="nothing-found"> <p> NO history of the ticket found</p> </div> : null
                                     : null
                             }
                             {console.log(ticketData)}
                             {
                                 display === 'id_attachment' ?
                                     ticketData.fileName ?
-                                        <a className="attachment-anchor" href={constants.SERVICE_URLS.DOWNLOAD_FILE + ticketData.fileName} download><div className="attachment-holder"> <img src={attachment} height="30px" width="30px" /> <div className="attachment-icon-holder"></div>{ticketData.fileName}</div></a> : <p>No Attachments</p>
+                                        <a className="attachment-anchor" href={constants.SERVICE_URLS.DOWNLOAD_FILE + ticketData.fileName} download><div className="attachment-holder"> <img src={attachment} height="30px" width="30px" /> <div className="attachment-icon-holder"></div>{ticketData.fileName}</div></a> : <div className="nothing-found"> <p>No Attachments</p></div>
                                     : null
 
                             }

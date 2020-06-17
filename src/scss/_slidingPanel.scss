@@ -24,7 +24,7 @@
 
 
 .sideBar{
-    @include scrollbars(5px,rgb(79, 109, 150), #FFFAFA);
+    @include scrollbars(5px,linear-gradient(180deg, #6C1D5F 40%, #33082b 60%), #FFFAFA);
     position: absolute;
     right: -100%;
     display: flex;

@@ -35,7 +35,7 @@
     justify-content: flex-start;
     align-items: flex-start;
     font-family: "Proxima Nova";
-    @include scrollbars(8px,rgb(3, 39, 90), #FFFAFA);
+    @include scrollbars(8px,linear-gradient(180deg, #6C1D5F 40%, #33082b 60%), #FFFAFA);
 }
 .filters-wrapper{
     width: 100%;
@@ -67,16 +67,20 @@
     }
 
     .filter-select{
-        color: #001f4d;
-        background-color:#e6f0ff;
+        color: black;
+        background-color: #6c1d5f88;
         height: 30px;
         padding: 3px;
         border: transparent;
+        text-transform: uppercase;
+        option{
+            text-transform: uppercase;
+        }
        }
 
     
     input[type="submit"]{
-        background-color: #314c72;
+        background-color: #300d2a;
         color:white;
         align: right;
     }

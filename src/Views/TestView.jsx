@@ -52,7 +52,7 @@ export default class TestView extends Component {
                             <optgroup label="Other Filters">
                                 <option value="Date" >Filter Between Dates</option>
                                 <option value="Subject">Filter By subject</option>
-                                <option value="Name">Filter by Name</option>
+
                             </optgroup>
                         </select>
                     </div>
@@ -66,11 +66,11 @@ export default class TestView extends Component {
                         <tr id="header-row">
                             <th>id</th>
                             <th>subject</th>
-                            <th>displayName</th>
-                            <th>Customer Responded Time</th>
+                            <th>Ticket Raiser</th>
+                            <th>Created on</th>
                             <th>Due Date</th>
                             <th>status</th>
-                            <th>assignedTo</th>
+                            <th>assigned To</th>
                         </tr>
                         {
                             listingData.length === 0 ? <tr className="no-updates-row"><td></td><td></td><td></td><td>--No tickets here--</td> <td></td><td></td><td></td></tr> : listingData.map((ticket) => {
@@ -82,8 +82,8 @@ export default class TestView extends Component {
                                             <td><Link to={'/ticketlist/' + ticket.id} >{ticket.id}</Link></td>
                                             <td><Link to={'/ticketlist/' + ticket.id} >{ticket.subject}</Link></td>
                                             <td><Link to={'/ticketlist/' + ticket.id} >{ticket.displayName}</Link></td>
-                                            <td><Link to={'/ticketlist/' + ticket.id} >{creationTime.toLocaleString()}</Link></td>
-                                            <td><Link to={'/ticketlist/' + ticket.id} >{dueOn.toLocaleString()}</Link></td>
+                                            <td><Link to={'/ticketlist/' + ticket.id} >{creationTime.toLocaleString([], { hour: '2-digit', minute: '2-digit', day: '2-digit', month: '2-digit', year: '2-digit' })}</Link></td>
+                                            <td><Link to={'/ticketlist/' + ticket.id} >{dueOn.toLocaleString([], { hour: '2-digit', minute: '2-digit', day: '2-digit', month: '2-digit', year: '2-digit' })}</Link></td>
                                             <td><Link to={'/ticketlist/' + ticket.id} >{ticket.status}</Link></td>
                                             <td><Link to={'/ticketlist/' + ticket.id} >{ticket.assignedTo}</Link></td>
 
