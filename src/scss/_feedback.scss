@@ -18,12 +18,7 @@
     height: 20%;
     background-color:#314c72;
     }
-    form{
-        width:100%;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-    }
+   
      
     .feedback-body{
     position: relative;
@@ -34,6 +29,12 @@
     align-items: center;
     justify-content: space-evenly;
     background-color: white;
+    form{
+        width:100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
     }
      .thumb{
          color: #314c72;

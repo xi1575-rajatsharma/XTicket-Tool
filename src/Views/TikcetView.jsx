@@ -9,7 +9,7 @@ import orangeReply from '../images/orange-reply.png';
 import FeedBackView from './feedBackView';
 import SlidingPanel from './slidingPanel';
 import { constants } from '../modules/constants';
-
+import attachment from '../images/attachment.png'
 
 
 
@@ -406,15 +406,15 @@ const TicketView = (payload) => {
                                         <React.Fragment>
                                             <form id="reply-form" onSubmit={(e) => { e.preventDefault(); replySubmitHandler("reply"); showreplybox() }}>
                                                 <div className="comment-box-wrapper">
-                                                    <textarea form="reply-form" id="reply" onChange={(e) => { replyChangeHandler(e.target.value) }} cols="82" rows="8" placeholder="Please add a reply.Note: This will send an email to the user who raised the ticket"></textarea>
-                                                    <input type="file" multiple onChange={(e) => fileSelect(e)} />
+                                                    <textarea form="reply-form" id="reply" onChange={(e) => { replyChangeHandler(e.target.value) }} cols="95" rows="8" placeholder="Please add a reply.Note: This will send an email to the user who raised the ticket"></textarea>
+
                                                 </div>
 
 
                                                 <div class="buttons-wrapper">
-
-                                                    <input type="submit" id="reply-send" value="Send" />
-                                                    <button id="cancel-reply" onClick={showreplybox}>Cancel</button>
+                                                    <span><input type="file" multiple onChange={(e) => fileSelect(e)} /></span>
+                                                    <span> <input type="submit" id="reply-send" value="Send" />
+                                                        <button id="cancel-reply" onClick={showreplybox}>Cancel</button></span>
                                                 </div>
                                             </form>
                                         </React.Fragment> : null}
@@ -422,9 +422,9 @@ const TicketView = (payload) => {
                                         <React.Fragment>
                                             <form id="comment-form" onSubmit={(e) => { e.preventDefault(); replySubmitHandler("comment"); showreplybox() }}>
                                                 <div class="comment-box-wrapper">
-                                                    <textarea form="comment-form" id="reply" onChange={(e) => { replyChangeHandler(e.target.value) }} cols="82" rows="8" placeholder="Please add a comment.Note: This will NOT send an email to the user who raised the ticket"></textarea>
+                                                    <textarea form="comment-form" id="reply" onChange={(e) => { replyChangeHandler(e.target.value) }} cols="101" rows="15" placeholder="Please add a comment.Note: This will NOT send an email to the user who raised the ticket"></textarea>
                                                 </div>
-                                                <div class="buttons-wrapper">
+                                                <div class="comments-buttons-wrapper">
                                                     <input type="submit" value="Send" ></input>
                                                     <button id="cancel-reply" onClick={showcommentbox}>Cancel</button>
                                                 </div>
@@ -499,7 +499,7 @@ const TicketView = (payload) => {
                             {
                                 display === 'id_attachment' ?
                                     ticketData.fileName ?
-                                        <a href={constants.SERVICE_URLS.DOWNLOAD_FILE + ticketData.fileName} download>Download</a> : <p>No Attachments</p>
+                                        <a className="attachment-anchor" href={constants.SERVICE_URLS.DOWNLOAD_FILE + ticketData.fileName} download><div className="attachment-holder"> <img src={attachment} height="30px" width="30px" /> <div className="attachment-icon-holder"></div>{ticketData.fileName}</div></a> : <p>No Attachments</p>
                                     : null
 
                             }
