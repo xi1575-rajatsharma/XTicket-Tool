@@ -231,17 +231,15 @@ const TicketView = (payload) => {
                         </div>
                             </div>
                             <div className="ticket-snapshot-wrapper">
-                                <div className="ticket-snapshot-left-border"></div>
-                                <div className="snapshot-name-wrapper"><span>{ticketData.displayName}</span></div>
+                                <div className="snapshot-name-wrapper">{ticketData.displayName}</div>
                                 <div className="snapshot-time-globe-wrapper">
-                                    <i className="fa fa-globe">
-                                        <span className="date-text">
-                                            {creationTime.getDay() + ' ' + creationMonth}
-                                        </span>
-                                    </i>
+                                    <i className="fa fa-globe" />
+                                    <span className="date-text">
+                                        {creationTime.getDay() + ' ' + creationMonth}
+                                    </span>
                                 </div>
                                 <div className="ticket-snapshot-information-wrapper">
-                                    <p> <span className="ticket-id">#{ticketData.id}</span>  {ticketData.subject ? ticketData.subject.substring(0, Math.min(ticketData.subject.length, 40)) + "..." : null}</p>
+                                    <p> <span className="ticket-id">#{ticketData.id}</span>  {ticketData.subject ? ticketData.subject : null}</p>
                                 </div>
                             </div>
                             {
@@ -253,18 +251,15 @@ const TicketView = (payload) => {
                                         ticket.id === ticketData.id ? null :
                                             <Link key={ticket.id} to={'/ticketlist/' + ticket.id}>
                                                 <div className="ticket-snapshot-wrapper" key={ticket.id} onClick={() => updateTicketData(ticket.id)}>
-
-                                                    <div className="snapshot-name-wrapper"><span>{ticket.displayName}</span></div>
+                                                    <div className="snapshot-name-wrapper">{ticket.displayName}</div>
                                                     <div className="snapshot-time-globe-wrapper">
-                                                        <i className="fa fa-globe">
-                                                            <span className="date-text">
-                                                                {dueOn.getDate() + ' ' + month[dueOn.getMonth()]}
-                                                            </span>
-                                                        </i>
+                                                        <i className="fa fa-globe" />
+                                                        <span className="date-text">
+                                                            {dueOn.getDate() + ' ' + month[dueOn.getMonth()]}
+                                                        </span>
                                                     </div>
                                                     <div className="ticket-snapshot-information-wrapper">
-
-                                                        <p> <span className="ticket-id">#{ticket.id}</span>   {ticket.subject.length > 40 ? subject + "..." : ticket.subject}</p>
+                                                        <p> <span className="ticket-id">#{ticket.id}</span>   {ticket.subject}</p>
                                                     </div>
                                                 </div>
                                             </Link>
