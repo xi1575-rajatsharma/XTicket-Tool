@@ -80,7 +80,7 @@ export default class TicketListingPage extends React.Component {
             url: constants.SERVICE_URLS.TICKET_LISTING,
             requestParams: {
                 page: 0,
-                limit: 50
+                limit: 1000
             },
             callbackHandler: (response) => {
                 const { status, message, payload } = response;
@@ -91,7 +91,7 @@ export default class TicketListingPage extends React.Component {
                 if (status === constants.SUCCESS) {
                     _state.message = '';
                     _state.listingData = payload.result.tickets;
-                    _state.listingData.sort((a, b) => a.id - b.id)
+                    _state.listingData.sort((a, b) => b.id - a.id)
                     window.localStorage.setItem('_listingData', JSON.stringify(_state.listingData))
                     _state.listingData = _state.listingData.filter(ticket => ticket.status === "OPEN")
 

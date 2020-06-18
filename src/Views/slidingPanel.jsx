@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import doubleLeft from '../images/double-right.png'
+// import closeWindow from '../images/close-window.png'
 
 const SlidingPanel = (payload) => {
     const [sideBarClass, setSideBarClass] = useState(payload.sideBar)
@@ -23,6 +24,7 @@ const SlidingPanel = (payload) => {
             <div className="sideBar-heading-wrapper"  >
                 <div>Replies <img onClick={closeHandler} src={doubleLeft} alt="back-arrow" height="20px" /></div>
                 {/* <button onClick={closeHandler}>Close X</button> */}
+                <div><img /></div>
             </div>
             <div className="ticket-replies-wrapper">
                 {
