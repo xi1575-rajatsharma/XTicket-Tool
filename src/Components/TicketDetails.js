@@ -352,41 +352,82 @@ class TicketDetails extends Component {
 
 
     replySubmitHandler = (replyOrComment) => {
-        axios.interceptors.request.use(function (config) {
-            const token = window.localStorage.getItem('_token');
+        if (this.state.replyText === null) {
+            alert("Reply field can't be empty!")
+        } else {
+            axios.interceptors.request.use(function (config) {
+                const token = window.localStorage.getItem('_token');
 
-            config.headers['x-access-channel'] = 'ANDROID';
-            config.headers['Content-Type'] = 'application/json';
+                config.headers['x-access-channel'] = 'ANDROID';
+                config.headers['Content-Type'] = 'application/json';
 
-            if (token != null) {
-                config.headers.Authorization = `Bearer ${token}`;
-            }
+                if (token != null) {
+                    config.headers.Authorization = `Bearer ${token}`;
+                }
 
-            return config;
-        }, function (err) {
+                return config;
+            }, function (err) {
 
-            return Promise.reject(err);
+                return Promise.reject(err);
 
-        });
-
-
-        const id = this.props.match.params.ticket_id;
-
-        const request = JSON.stringify({
-            text: this.state.replyText,
-            conversationType: "Reply",
-            mailRecepients: this.state.ticketData.emailId
-        });
-        const bodyFOrmData = new FormData();
+            });
 
 
-        bodyFOrmData.append('request', request);
-        bodyFOrmData.append('file', this.state.fileSelects)
-        // bodyFOrmData.set('conversationType', "Reply");
-        // bodyFOrmData.set('mailRecepients', this.state.ticketData.emailId);
-        if (replyOrComment === "reply") {
-            this.setState({ statusChangeLoading: true }, () => {
+            const id = this.props.match.params.ticket_id;
 
+            const request = JSON.stringify({
+                text: this.state.replyText,
+                conversationType: "Reply",
+                mailRecepients: this.state.ticketData.emailId
+            });
+            const bodyFOrmData = new FormData();
+
+
+            bodyFOrmData.append('request', request);
+            bodyFOrmData.append('file', this.state.fileSelects)
+            // bodyFOrmData.set('conversationType', "Reply");
+            // bodyFOrmData.set('mailRecepients', this.state.ticketData.emailId);
+            if (replyOrComment === "reply") {
+                this.setState({ statusChangeLoading: true }, () => {
+
+                    axios({
+                        method: 'post',
+                        url: constants.SERVICE_URLS.TICKET_REPLY + id,
+                        data: bodyFOrmData
+                    })
+                        .then((response) => {
+                            console.log(response)
+                            this.setState({ statusChangeLoading: false })
+                            this.setState({ isLoading: true }, () => {
+                                fetch.get({
+                                    url: constants.SERVICE_URLS.TICKET_REPLY + id,
+                                    callbackHandler: (response) => {
+                                        this.setState({ isLoading: false })
+                                        const { status, message, payload } = response;
+
+                                        const _state = cloneDeep(this.state);
+
+                                        if (status === constants.SUCCESS) {
+                                            _state.message = '';
+                                            _state.ticketReplies = payload.result.conversations;
+
+                                        } else {
+                                            _state.message = message;
+                                        }
+                                        this.setState({ ticketReplies: _state.ticketReplies });
+
+                                    }
+                                })
+                            })
+                        })
+                })
+            } else {
+                const bodyFOrmData = new FormData();
+                const request = JSON.stringify({
+                    text: this.state.replyText,
+                    conversationType: "Comment"
+                })
+                bodyFOrmData.append('request', request)
                 axios({
                     method: 'post',
                     url: constants.SERVICE_URLS.TICKET_REPLY + id,
@@ -417,45 +458,8 @@ class TicketDetails extends Component {
                             })
                         })
                     })
-            })
-        } else {
-            const bodyFOrmData = new FormData();
-            const request = JSON.stringify({
-                text: this.state.replyText,
-                conversationType: "Comment"
-            })
-            bodyFOrmData.append('request', request)
-            axios({
-                method: 'post',
-                url: constants.SERVICE_URLS.TICKET_REPLY + id,
-                data: bodyFOrmData
-            })
-                .then((response) => {
-                    console.log(response)
-                    this.setState({ statusChangeLoading: false })
-                    this.setState({ isLoading: true }, () => {
-                        fetch.get({
-                            url: constants.SERVICE_URLS.TICKET_REPLY + id,
-                            callbackHandler: (response) => {
-                                this.setState({ isLoading: false })
-                                const { status, message, payload } = response;
 
-                                const _state = cloneDeep(this.state);
-
-                                if (status === constants.SUCCESS) {
-                                    _state.message = '';
-                                    _state.ticketReplies = payload.result.conversations;
-
-                                } else {
-                                    _state.message = message;
-                                }
-                                this.setState({ ticketReplies: _state.ticketReplies });
-
-                            }
-                        })
-                    })
-                })
-
+            }
         }
     }
 

@@ -387,7 +387,7 @@ const TicketView = (payload) => {
                                 <div className="attachment-wrapper" onClick={() => isVisible('id_attachment')} > attachment</div>
 
                                 {/* <div className="approval-wrapper">approval</div> */}
-                                <div className="history-wrapper" onClick={() => isVisible('id_history')} style={display === 'id_history' ? { color: '#06A99C', fontSize: "11px", fontWeight: "bolder" } : null} > history</div>
+                                <div className="history-wrapper" onClick={() => isVisible('id_history')} style={display === 'id_history' ? { color: '#06A99C', fontSize: "11px", fontWeight: "bolder" } : null} > ticket journey</div>
                             </div>
 
                             {/* <form>
@@ -406,9 +406,9 @@ const TicketView = (payload) => {
 
 
                                                 <div class="buttons-wrapper">
-                                                    <span><input type="file" multiple onChange={(e) => fileSelect(e)} /></span>
                                                     <span> <input type="submit" id="reply-send" value="Send" />
                                                         <button id="cancel-reply" onClick={showreplybox}>Cancel</button></span>
+                                                    <span><input type="file" multiple onChange={(e) => fileSelect(e)} /></span>
                                                 </div>
                                             </form>
                                         </React.Fragment> : null}
