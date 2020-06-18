@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import doubleLeft from '../images/double-right.png'
-// import closeWindow from '../images/close-window.png'
+import closeWindow from '../images/closewindow.png'
 
 const SlidingPanel = (payload) => {
     const [sideBarClass, setSideBarClass] = useState(payload.sideBar)
