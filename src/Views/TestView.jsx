@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import FilterView from './filterView';
 import SelectedFilterView from './selectedFilterView';
+import Xenie from '../images/Xenie.png'
 
 
 export default class TestView extends Component {

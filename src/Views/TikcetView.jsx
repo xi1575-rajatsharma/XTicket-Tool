@@ -91,7 +91,7 @@ const TicketView = (payload) => {
                 return (
                     <React.Fragment>
                         <div className="resolving-icon-wrapper"></div>
-                        <div className="change-text-wrapper">Someone is working on resolution of your ticket </div>
+                        <div className="change-text-wrapper">{ticketData.assignedTo} is working on resolution of your ticket </div>
                     </React.Fragment>
                 )
             case "AWAITING":

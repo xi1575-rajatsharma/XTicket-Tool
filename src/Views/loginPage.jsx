@@ -11,7 +11,7 @@ export const loginPages = (payload) => {
     return (
         <div className="login-container">
             <div className="logo-container"></div>
-            <div className="login-text-container">Help Desk Login</div>
+            <div className="login-text-container">Xenie Help Desk Login</div>
             <div className="login-form-container">
                 <form onSubmit={onSubmitHandler}>
                     {isValid ? null : <div className='login-error'><p>Please Enter the Correct Credentials</p></div>}

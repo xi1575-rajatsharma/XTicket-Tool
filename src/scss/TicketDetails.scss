@@ -325,7 +325,10 @@
                     width: 20%;
                     display: flex;
                     align-items: center;
-                    justify-content: space-evenly;
+                    justify-content: flex-end;
+                    .reply-image{
+                        margin-right: 25px;
+                    }
                 }
             }
 
@@ -524,7 +527,7 @@
                 padding: 20px;
                 width: 80%;
                 border: 1px solid #6C1D5F;
-
+                margin-bottom: 20px;
                
             }
         }
@@ -542,7 +545,7 @@
         overflow: scroll;
         .individual-change-wrapper{
             position: relative;
-            width: 50%;
+            width: 70%;
             height: 14%;
             margin-bottom: 35px;
             background: #FFFAFA;
@@ -569,6 +572,7 @@
             // }
 
             .change-connector{
+                display: none;
                 position: absolute;
                 width: 2px;
                 height: 50%;
@@ -578,55 +582,55 @@
             }
             
             .assigned-icon-wrapper{
-                width: 11.904%;
+                width: 8.404%;
                 height: 120%;
                 background:url('../images/icons/ASSIGNED.png') no-repeat;
                 background-size:100%;
             }
             .raised-icon-wrapper{
-                width: 11.904%;
+                width: 8.404%;
                 height: 120%;
                 background:url('../images/icons/OPEN.png') no-repeat;
                 background-size:100%;
             }
             .resolving-icon-wrapper{
-                width: 11.904%;
+                width: 8.404%;
                 height: 120%;
                 background:url('../images/icons/INPROGRESS.png') no-repeat;
                 background-size:100%;
             }
             .awaiting-icon-wrapper{
-                width: 11.904%;
+                width: 8.404%;
                 height: 120%;
                 background:url('../images/icons/AWAITING.png') no-repeat;
                 background-size:100%;
             }
             .review-icon-wrapper{
-                width: 11.904%;
+                width: 8.404%;
                 height: 120%;
                 background:url('../images/icons/AWAITING.png') no-repeat;
                 background-size:100%;
             }
             .escalated-icon-wrapper{
-                width: 11.904%;
+                width: 8.404%;
                 height: 120%;
                 background:url('../images/icons/ESCALATED.png') no-repeat;
                 background-size:100%;
             }
             .closed-icon-wrapper{
-                width: 11.904%;
+                width: 8.404%;
                 height: 120%;
                 background:url('../images/icons/CLOSED.png') no-repeat;
                 background-size:100%;
             }
             .re-opened-icon-wrapper{
-                width: 11.904%;
+                width: 8.404%;
                 height: 120%;
                 background:url('../images/icons/REOPENED.png') no-repeat;
                 background-size:100%;
             }
             .resolved-icon-wrapper{
-                width: 11.904%;
+                width: 8.404%;
                 height: 120%;
                 background:url('../images/icons/RESOLVED.png') no-repeat;
                 background-size:100%;
@@ -742,7 +746,7 @@ textarea{
 }
 
 .buttons-wrapper{
-    width: 70%;
+    width: 89%;
     height: 10%;
     display: flex;
     flex-direction: row;
