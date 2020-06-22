@@ -74,25 +74,26 @@ export default class TestView extends Component {
                             <th>assigned To</th>
                         </tr>
                         {
-                            listingData.length === 0 ? <tr className="no-updates-row"><td></td><td></td><td></td><td>--No tickets here--</td> <td></td><td></td><td></td></tr> : listingData.map((ticket) => {
-                                const creationTime = new Date(ticket.creationTime);
-                                const dueOn = new Date(ticket.dueOn);
-                                return (
-                                    <React.Fragment >
-                                        <tr key={ticket.id}>
-                                            <td><Link to={'/ticketlist/' + ticket.id} >{ticket.id}</Link></td>
-                                            <td><Link to={'/ticketlist/' + ticket.id} >{ticket.subject}</Link></td>
-                                            <td><Link to={'/ticketlist/' + ticket.id} >{ticket.displayName}</Link></td>
-                                            <td><Link to={'/ticketlist/' + ticket.id} >{creationTime.toLocaleString([], { hour: '2-digit', minute: '2-digit', day: '2-digit', month: '2-digit', year: '2-digit' })}</Link></td>
-                                            <td><Link to={'/ticketlist/' + ticket.id} >{dueOn.toLocaleString([], { hour: '2-digit', minute: '2-digit', day: '2-digit', month: '2-digit', year: '2-digit' })}</Link></td>
-                                            <td><Link to={'/ticketlist/' + ticket.id} >{ticket.status}</Link></td>
-                                            <td><Link to={'/ticketlist/' + ticket.id} >{ticket.assignedTo}</Link></td>
+                            listingData.length === 0 ? <tr className="no-updates-row"><td></td><td></td><td></td><td>--No tickets here--</td><td></td><td></td><td></td></tr> :
+                                listingData.map((ticket) => {
+                                    const creationTime = new Date(ticket.creationTime);
+                                    const dueOn = new Date(ticket.dueOn);
+                                    return (
+                                        <React.Fragment key={ticket.id} >
+                                            <tr key={ticket.id}>
+                                                <td><Link to={'/ticketlist/' + ticket.id} >{ticket.id}</Link></td>
+                                                <td><Link to={'/ticketlist/' + ticket.id} >{ticket.subject}</Link></td>
+                                                <td><Link to={'/ticketlist/' + ticket.id} >{ticket.displayName}</Link></td>
+                                                <td><Link to={'/ticketlist/' + ticket.id} >{creationTime.toLocaleString([], { hour: '2-digit', minute: '2-digit', day: '2-digit', month: '2-digit', year: '2-digit' })}</Link></td>
+                                                <td><Link to={'/ticketlist/' + ticket.id} >{dueOn.toLocaleString([], { hour: '2-digit', minute: '2-digit', day: '2-digit', month: '2-digit', year: '2-digit' })}</Link></td>
+                                                <td><Link to={'/ticketlist/' + ticket.id} >{ticket.status}</Link></td>
+                                                <td><Link to={'/ticketlist/' + ticket.id} >{ticket.assignedTo}</Link></td>
 
-                                        </tr>
+                                            </tr>
 
-                                    </React.Fragment>
-                                )
-                            })
+                                        </React.Fragment>
+                                    )
+                                })
                         }
                     </tbody>
                 </table>

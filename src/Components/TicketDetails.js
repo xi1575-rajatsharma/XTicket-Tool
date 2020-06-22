@@ -45,7 +45,7 @@ class TicketDetails extends Component {
             fetch.get({
                 url: constants.SERVICE_URLS.TICKET_DETAILING,
                 callbackHandler: (response) => {
-                    console.log(response)
+
                     const { status, message, payload } = response;
                     const _state = cloneDeep(this.state);
                     _state.isLoading = false;

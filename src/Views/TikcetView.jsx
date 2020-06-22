@@ -319,7 +319,7 @@ const TicketView = (payload) => {
                                 </div>
 
                                 <div className="closed-time-wrapper">
-                                    <span class="red-text">SLA</span>
+                                    <span className="red-text">SLA</span>
                                     <span className="date-time-wrapper">{dueOn.getUTCDate() + ' ' + dueOnMonth}</span>
                                 </div>
 
@@ -344,7 +344,7 @@ const TicketView = (payload) => {
                                 </div>
 
                                 <div className="ticket-brief-classifications-wrapper">
-                                    <span class="red-text">Classifications</span>
+                                    <span className="red-text">Classifications</span>
                                     <span>{ticketData.classification}</span>
                                 </div>
 
@@ -405,7 +405,7 @@ const TicketView = (payload) => {
                                                 </div>
 
 
-                                                <div class="buttons-wrapper">
+                                                <div className="buttons-wrapper">
                                                     <span> <input type="submit" id="reply-send" value="Send" />
                                                         <button id="cancel-reply" onClick={showreplybox}>Cancel</button></span>
                                                     <span><input type="file" multiple onChange={(e) => fileSelect(e)} /></span>
@@ -491,7 +491,7 @@ const TicketView = (payload) => {
                                             </React.Fragment> : <div className="nothing-found"> <p> NO history of the ticket found</p> </div> : null
                                     : null
                             }
-                            {console.log(ticketData)}
+                            \
                             {
                                 display === 'id_attachment' ?
                                     ticketData.fileName ?
