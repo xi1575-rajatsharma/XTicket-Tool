@@ -63,7 +63,7 @@ export default class TestView extends Component {
 
                 </div>
                 <table className="ticketListingTable">
-                    <tbody>
+                    <thead>
                         <tr id="header-row">
                             <th>id</th>
                             <th>subject</th>
@@ -73,6 +73,8 @@ export default class TestView extends Component {
                             <th>status</th>
                             <th>assigned To</th>
                         </tr>
+                    </thead>
+                    <tbody>
                         {
                             listingData.length === 0 ? <tr className="no-updates-row"><td></td><td></td><td></td><td>--No tickets here--</td> <td></td><td></td><td></td></tr> : listingData.map((ticket) => {
                                 const creationTime = new Date(ticket.creationTime);
