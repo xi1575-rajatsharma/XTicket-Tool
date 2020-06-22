@@ -113,10 +113,15 @@
         font-size: 14px;
         color: black;
         transition: all ease-in-out 0.3s;
-
-        &:hover{
-            box-shadow: 0px 1px 50px 2px rgb(0, 0, 0);
-        }
+    }
+    tbody>tr:hover{
+        // box-shadow: 0px 1px 50px 2px rgb(0, 0, 0);
+        box-sizing: border-box;
+        box-shadow: 0 1px 9px 1px rgba(0, 0, 0, 0.28);
+    }
+    tbody > tr:nth-child(even){
+        // background-color:#ededed;
+        background-color: #f4f1fa;
     }
     th,td{
         padding: 0px 12px;
@@ -125,11 +130,11 @@
     }
     th{
         color: black;
-        background-color: #FFFAFA;
+        background-color: #ddd3ee;
         font-family: "Proxima Nova";
     }
     #header-row{
-        background-color: white;
+        background-color: #ddd3ee;
         text-align: left;
         font-size: 14px;
         text-transform: uppercase;
