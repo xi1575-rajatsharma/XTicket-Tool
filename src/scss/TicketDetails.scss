@@ -865,6 +865,20 @@ textarea{
     text-align: center;
     padding: 30px;
 }
+#add-comment{
+    .modal-footer{
+        justify-content: space-between;
+        pre{
+            margin:0px;
+        }
+        .form-text{
+            margin-top: 0;
+        }
+        .btn-primary{
+            background-color: purple;
+        }
+    }
+}
 // #reply-send{
 //     background-color: #0c2549;
 //     width: 150px;
