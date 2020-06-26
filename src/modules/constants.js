@@ -1,6 +1,6 @@
-const API_HOST_PATH = ' http://168.63.250.105';
+// const API_HOST_PATH = 'http://168.63.250.105';
 // http://3.7.115.94
-// https://xdesk.herokuapp.com
+const API_HOST_PATH = 'https://xdesk.herokuapp.com'
 export const constants = {
     SUCCESS: 'success',
     FAILURE: 'failure',

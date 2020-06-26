@@ -3,6 +3,7 @@ import { cloneDeep } from 'lodash';
 import TicketView from '../Views/TikcetView';
 import { fetch } from '../modules/httpServices'
 import { constants } from '../modules/constants';
+import CommentModel from '../Views/addCommentModel';
 import axios from 'axios';
 import FileSaver, { saveAs } from 'file-saver'
 
@@ -19,7 +20,9 @@ class TicketDetails extends Component {
             ticketJourney: [],
             resolutionText: null,
             replyText: null,
+            showModal: false,
             allTicketDetails: [],
+            comment: '',
             allStatus: [],
             isLoading: false,
             statusChangeLoading: false
@@ -213,13 +216,25 @@ class TicketDetails extends Component {
             })
         })
     }
-
+    toggleCommentModal = () => {
+        this.setState((prevState) => ({ showModal: !prevState.showModal, comment: '' }))
+    }
+    handleCommentChange = ({ target: { value } }) => {
+        this.setState({ comment: value })
+    }
     changeSelectValue = (selectValue, ticketStatus) => {
-
+        this.toggleCommentModal();
+        this.setState({
+            selectValue: selectValue,
+            ticketStatus: ticketStatus
+        })
+    }
+    handleAddComment = () => {
+        const { selectValue = null, ticketStatus = null } = this.state;
         if (ticketStatus !== "OPEN" && ticketStatus !== "REOPEND") {
             alert('You cannot changed assigned role at this status!');
-        } else {
-
+        }
+        else {
             const id = this.props.match.params.ticket_id;
             this.setState({ statusChangeLoading: true }, () => {
                 fetch.put({
@@ -243,14 +258,12 @@ class TicketDetails extends Component {
                             }
                         })
                     }
-                })
+                });
+                this.toggleCommentModal();
             })
-
-
         }
 
     }
-
     changeStatusValue = (statusValue) => {
         const id = this.props.match.params.ticket_id;
 
@@ -552,23 +565,32 @@ class TicketDetails extends Component {
 
 
     render() {
+        const { showModal, comment } = this.state;
         return (
-            <TicketView
-                {...this.state}
-                toggleReplyDisplay={this.toggleReplyDisplay}
-                changeSelectValue={this.changeSelectValue}
-                changeStatusValue={this.changeStatusValue}
-                resolutionSubmitHandler={this.resolutionSubmitHandler}
-                resolutionChangeHandler={this.resolutionChangeHandler}
-                statusHandler={this.statusHandler}
-                replyChangeHandler={this.replyChangeHandler}
-                replySubmitHandler={this.replySubmitHandler}
-                updateTicketData={this.updateTicketData}
-                fileSelect={this.fileSelect}
-                downloadFile={this.downloadFile}
-                onFeedBackSubmit={this.onFeedBackSubmit}
-            />
+            <>
+                <CommentModel
+                    showModal={showModal}
+                    toggleModal={this.toggleCommentModal}
+                    handleChange={this.handleCommentChange}
+                    comment={comment}
+                    handleAddComment={this.handleAddComment} />
+                <TicketView
+                    {...this.state}
+                    toggleReplyDisplay={this.toggleReplyDisplay}
+                    changeSelectValue={this.changeSelectValue}
+                    changeStatusValue={this.changeStatusValue}
+                    resolutionSubmitHandler={this.resolutionSubmitHandler}
+                    resolutionChangeHandler={this.resolutionChangeHandler}
+                    statusHandler={this.statusHandler}
+                    replyChangeHandler={this.replyChangeHandler}
+                    replySubmitHandler={this.replySubmitHandler}
+                    updateTicketData={this.updateTicketData}
+                    fileSelect={this.fileSelect}
+                    downloadFile={this.downloadFile}
+                    onFeedBackSubmit={this.onFeedBackSubmit}
+                />
 
+            </>
         )
     }
 }
