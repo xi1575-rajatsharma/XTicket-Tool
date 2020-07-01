@@ -12,6 +12,7 @@ const SlidingPanel = (payload) => {
     }
 
     const replyClass = (replyCreatedBy) => {
+
         if (replyCreatedBy ? replyCreatedBy.includes(payload.displayName) : false) {
             return "individual-reply-wrapper-right"
         } else {
@@ -37,7 +38,7 @@ const SlidingPanel = (payload) => {
                                     <div className="message-username-seperator"></div>
                                     <div className="reply-heading-wrapper">
                                         <div className="createdBy-wrapper" >{reply.createdBy}</div>
-                                        <div className="reply-attachment-wrapper"><a href={reply.s3ReplyUrl}>Attachement</a></div>
+                                        {reply.s3ReplyUrl ? <div className="reply-attachment-wrapper"><a href={reply.s3ReplyUrl}>Attachement</a></div> : null}
                                         <span className="reply-createdOn-wrapper">{replyCreatedOn.getDate()} {replyCreatedOn.toLocaleString('default', { month: 'long' })} at {replyCreatedOn.toLocaleString('en-US', { hour: 'numeric', hour12: true })}</span> {/*{replyCreatedOn.getDate()}/{replyCreatedOn.getMonth()} ({replyCreatedOn.getHours()} : {replyCreatedOn.getMinutes()} */}
                                     </div>
                                     <div className="reply-text-wrapper">{reply.text}</div>

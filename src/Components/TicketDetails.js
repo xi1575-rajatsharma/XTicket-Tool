@@ -364,7 +364,7 @@ class TicketDetails extends Component {
     }
 
 
-    replySubmitHandler = (replyOrComment) => {
+    replySubmitHandler = (replyOrComment, ticketStatus) => {
         if (this.state.replyText === null) {
             alert("Reply field can't be empty!")
         } else {
@@ -411,6 +411,50 @@ class TicketDetails extends Component {
                         .then((response) => {
                             console.log(response)
                             this.setState({ statusChangeLoading: false })
+                            if (ticketStatus === "OPEN") {
+                                fetch.put({
+                                    url: constants.SERVICE_URLS.TICKET_STATUS + id + "?status=INPROGRESS",
+                                    callbackHandler: (resonse) => {
+                                        this.setState({ statusChangeLoading: false });
+                                        fetch.get({
+                                            url: constants.SERVICE_URLS.TICKET_DETAILING + '/' + id,
+                                            callbackHandler: (response) => {
+                                                const { status, message, payload } = response;
+                                                const _state = cloneDeep(this.state);
+
+                                                _state.isLoading = false;
+
+                                                if (status === constants.SUCCESS) {
+                                                    _state.message = '';
+                                                    _state.ticketData = payload.result.ticketDetails;
+                                                } else {
+                                                    _state.message = message;
+                                                }
+                                                this.setState({ ticketData: _state.ticketData });
+                                            }
+                                        })
+
+                                        fetch.get({
+                                            url: constants.SERVICE_URLS.TICKET_HISTORY + id,
+                                            callbackHandler: (response) => {
+                                                const { status, payload, message } = response;
+
+                                                const _state = cloneDeep(this.state);
+
+                                                if (status === constants.SUCCESS) {
+                                                    _state.message = "";
+                                                    _state.ticketJourney = payload.result.ticketJourneys;
+
+
+                                                } else {
+                                                    _state.message = message;
+                                                }
+                                                this.setState({ ticketJourney: _state.ticketJourney })
+                                            }
+                                        })
+                                    }
+                                })
+                            }
                             this.setState({ isLoading: true }, () => {
                                 fetch.get({
                                     url: constants.SERVICE_URLS.TICKET_REPLY + id,
@@ -453,6 +497,50 @@ class TicketDetails extends Component {
                             fetch.get({
                                 url: constants.SERVICE_URLS.TICKET_REPLY + id,
                                 callbackHandler: (response) => {
+                                    if (ticketStatus === "OPEN") {
+                                        fetch.put({
+                                            url: constants.SERVICE_URLS.TICKET_STATUS + id + "?status=INPROGRESS",
+                                            callbackHandler: (resonse) => {
+                                                this.setState({ statusChangeLoading: false });
+                                                fetch.get({
+                                                    url: constants.SERVICE_URLS.TICKET_DETAILING + '/' + id,
+                                                    callbackHandler: (response) => {
+                                                        const { status, message, payload } = response;
+                                                        const _state = cloneDeep(this.state);
+
+                                                        _state.isLoading = false;
+
+                                                        if (status === constants.SUCCESS) {
+                                                            _state.message = '';
+                                                            _state.ticketData = payload.result.ticketDetails;
+                                                        } else {
+                                                            _state.message = message;
+                                                        }
+                                                        this.setState({ ticketData: _state.ticketData });
+                                                    }
+                                                })
+
+                                                fetch.get({
+                                                    url: constants.SERVICE_URLS.TICKET_HISTORY + id,
+                                                    callbackHandler: (response) => {
+                                                        const { status, payload, message } = response;
+
+                                                        const _state = cloneDeep(this.state);
+
+                                                        if (status === constants.SUCCESS) {
+                                                            _state.message = "";
+                                                            _state.ticketJourney = payload.result.ticketJourneys;
+
+
+                                                        } else {
+                                                            _state.message = message;
+                                                        }
+                                                        this.setState({ ticketJourney: _state.ticketJourney })
+                                                    }
+                                                })
+                                            }
+                                        })
+                                    }
                                     this.setState({ isLoading: false })
                                     const { status, message, payload } = response;
 
