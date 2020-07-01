@@ -342,7 +342,12 @@ const TicketView = (payload) => {
                                     <span>{ticketData.subIssue}</span>
 
                                 </div>
-
+                                {ticketData.subCategory ?
+                                    <div className="ticket-brief-sub-issue-wrapper">
+                                        <span className="red-text">Sub Category</span>
+                                        <span>{ticketData.subCategory}</span>
+                                    </div> : null
+                                }
                                 <div className="ticket-brief-classifications-wrapper">
                                     <span className="red-text">Classifications</span>
                                     <span>{ticketData.classification}</span>
