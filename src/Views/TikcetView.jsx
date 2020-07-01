@@ -398,7 +398,7 @@ const TicketView = (payload) => {
                                 <div className="total-ticket-details-wrapper">
                                     {displayreplybox === true ?
                                         <React.Fragment>
-                                            <form id="reply-form" onSubmit={(e) => { e.preventDefault(); replySubmitHandler("reply"); showreplybox() }}>
+                                            <form id="reply-form" onSubmit={(e) => { e.preventDefault(); replySubmitHandler("reply", ticketData.status); showreplybox() }}>
                                                 <div className="comment-box-wrapper">
                                                     <textarea form="reply-form" id="reply" onChange={(e) => { replyChangeHandler(e.target.value) }} cols="95" rows="8" placeholder="Please add a reply.&#10;Note: This will send an email to the user who raised the ticket"></textarea>
 
@@ -414,7 +414,7 @@ const TicketView = (payload) => {
                                         </React.Fragment> : null}
                                     {displaycommentbox === true ?
                                         <React.Fragment>
-                                            <form id="comment-form" onSubmit={(e) => { e.preventDefault(); replySubmitHandler("comment"); showreplybox() }}>
+                                            <form id="comment-form" onSubmit={(e) => { e.preventDefault(); replySubmitHandler("comment", ticketData.status); showreplybox() }}>
                                                 <div class="comment-box-wrapper">
                                                     <textarea form="comment-form" id="reply" onChange={(e) => { replyChangeHandler(e.target.value) }} cols="101" rows="15" placeholder="Please add a comment.&#10;Note: This will NOT send an email to the user who raised the ticket"></textarea>
                                                 </div>
@@ -458,14 +458,24 @@ const TicketView = (payload) => {
                                 <div className="resolution-text">
                                     <p>{ticketData.resolution}</p>
                                 </div>
+                                <div className="resolution-wrapper">
+                                    <form id="resolution-form" onSubmit={resolutionSubmitHandler}>
+                                        <textarea form="resolution-form" rows="7" cols="88" placeholder="Enter the resolution here..." onChange={(e) => { resolutionChangeHandler(e.target.value) }}></textarea>
+                                        <input type="submit" onClick={() => resolutionText ? shouldDisplay('yes') : null} value="Send" />
+                                    </form>
+
+                                </div>
                             </React.Fragment> : <React.Fragment>
+                                    <div className="resolution-text">
+                                        <p>No existing resolution found..</p>
+                                    </div>
                                     <div className="resolution-wrapper">
                                         <form id="resolution-form" onSubmit={resolutionSubmitHandler}>
                                             <textarea form="resolution-form" rows="7" cols="88" placeholder="Enter the resolution here..." onChange={(e) => { resolutionChangeHandler(e.target.value) }}></textarea>
                                             <input type="submit" onClick={() => resolutionText ? shouldDisplay('yes') : null} value="Send" />
                                         </form>
-
                                     </div>
+
                                 </React.Fragment> : null}
                             {
                                 display === 'id_history' ?
