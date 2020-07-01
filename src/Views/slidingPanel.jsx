@@ -12,7 +12,7 @@ const SlidingPanel = (payload) => {
     }
 
     const replyClass = (replyCreatedBy) => {
-        if (replyCreatedBy.includes(payload.displayName)) {
+        if (replyCreatedBy ? replyCreatedBy.includes(payload.displayName) : false) {
             return "individual-reply-wrapper-right"
         } else {
             return "individual-reply-wrapper-left"
