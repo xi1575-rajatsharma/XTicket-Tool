@@ -83,14 +83,14 @@ export default class TicketListingPage extends React.Component {
                 limit: 1000
             },
             callbackHandler: (response) => {
-                const { status, message, payload:{result:{tickets}} } = response;
+                const { status, message, payload } = response;
                 const _state = cloneDeep(this.state);
                 _state.isLoading = false;
 
 
                 if (status === constants.SUCCESS) {
                     _state.message = '';
-                    _state.listingData = cloneDeep(tickets);
+                    _state.listingData = cloneDeep(payload.result.tickets);
                     _state.listingData.sort((a, b) => b.id - a.id)
                     console.log(_state.listingData)
                     window.localStorage.setItem('_listingData', JSON.stringify(_state.listingData))

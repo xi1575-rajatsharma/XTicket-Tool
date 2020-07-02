@@ -39,11 +39,11 @@ axios.interceptors.response.use(function (config) {
     return config;
 
 }, function (error) {
-    if ([403].includes(error.response.status)) {
-        window.localStorage.removeItem('_token');
-        window.localStorage.removeItem('_userInfo');
-        window.location = '/'
-    }
+    // if ([403].includes(error.response.status)) {
+    //     window.localStorage.removeItem('_token');
+    //     window.localStorage.removeItem('_userInfo');
+    //     window.location = '/'
+    // }
 
     return Promise.reject(error);
 });

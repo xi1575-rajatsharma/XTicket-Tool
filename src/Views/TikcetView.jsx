@@ -173,6 +173,8 @@ const TicketView = (payload) => {
                 return "gautam.jain@xebia.com"
             case "Vikas Arora":
                 return "vikas.arora@xebia.com"
+            case "Tushar":
+                return "tushar.kaushik@xebia.com"
             default:
                 return "none@xebia.com"
         }
@@ -506,7 +508,7 @@ const TicketView = (payload) => {
                                             </React.Fragment> : <div className="nothing-found"> <p> NO history of the ticket found</p> </div> : null
                                     : null
                             }
-                            \
+
                             {
                                 display === 'id_attachment' ?
                                     ticketData.fileName ?
