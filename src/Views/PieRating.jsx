@@ -1,41 +1,59 @@
-import React from 'react';
-import {Doughnut} from 'react-chartjs-2';
+import React from "react";
+import { Doughnut } from "react-chartjs-2";
 
- const PieRating=()=> {
-    const state={
-        chartData:{
-            labels:['1 rating','2 rating', '3 rating','4 rating','5 rating'],
-            datasets:[{
-                label:'Population',
-                data:[1,2,3,4,5],
-                backgroundColor:[`rgba(255,206,86,0.6)`,
-                                 `rgba(75,192,192,0.6)`,
-                                 `rgba(153,102,255,0.6)`,
-                                 `rgba(255,159,64,0.6)`,
-                                `rgba(255,99,132,0.6)`]
-            }]
-        }
-    }
+const PieRating = ({ ratings }) => {
+  //console.log(ratings);
+  const xlabel = Object.keys(ratings);
+  //console.log(xlabel);
+  const ylabel = Object.values(ratings);
+  //console.log(ylabel);
+  const state = {
+    chartData: {
+      labels: xlabel,
+      datasets: [
+        {
+          data: ylabel,
+          backgroundColor: [
+            "#FFFFCC	",
+            "#FFFF99",
+            "#FFFF66",
+            "#FFFF33",
+            "#ffc40c",
+          ],
+        },
+      ],
+    },
+  };
 
-    return (
-        <div>
-             <Doughnut
-                data={state.chartData}
-                option={{
-                    title:{
-                        display:true,
-                        text:'Asdf gfjehf wbdhd',
-                        fontSize:25
-                    },
-                    legend:{
-                        display:true,
-                        position:'right'
-                    }
-                }}
+  return (
+    <div>
+      <Doughnut
+        data={state.chartData}
+        height={130}
+        options={{
+          title: {
+            display: true,
+            text: "Overall Rating",
+            fontSize: 20,
+            align: "left",
+          },
+          animation: {
+            animateScale: true,
+          },
+          cutoutPercentage: 70,
 
-                />
-        </div>
-    )
-}
+          legend: {
+            display: true,
+            position: "right",
+            labels: {
+              fontColor: "#000000",
+              fontSize: 10,
+            },
+          },
+        }}
+      />
+    </div>
+  );
+};
 
 export default PieRating;
