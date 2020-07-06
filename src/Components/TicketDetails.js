@@ -161,7 +161,6 @@ class TicketDetails extends Component {
                 url: constants.SERVICE_URLS.TICKET_HISTORY + id,
                 callbackHandler: (response) => {
                     const { status, payload, message } = response;
-
                     const _state = cloneDeep(this.state);
 
                     if (status === constants.SUCCESS) {
@@ -295,7 +294,6 @@ class TicketDetails extends Component {
                         url: constants.SERVICE_URLS.TICKET_HISTORY + id,
                         callbackHandler: (response) => {
                             const { status, payload, message } = response;
-
                             const _state = cloneDeep(this.state);
 
                             if (status === constants.SUCCESS) {

@@ -293,7 +293,6 @@ const TicketView = (payload) => {
                                 <div className="assigned-officer-wrapper">
                                     <span>Assigned To</span>
                                     <div className="profile-wrapper">
-
                                         <select value={ticketData.assignedToEmailId} onChange={(e) => { changeSelectValue(e.target.value, ticketData.status) }}>
                                             {allAdminUsers ?
                                                 allAdminUsers.map((admin) => {
@@ -409,6 +408,9 @@ const TicketView = (payload) => {
                             <textarea rows="10" cols="50"></textarea>
                             <button>submit</button>
                         </form> */}
+                            {/* {
+                            role === "superAdmin" ? <ToolTip<TrashIcon></TranshIcon></ToolTip> : null 
+                        } */}
                             {display === 'id_conversation' ? <React.Fragment>
                                 <div className="total-ticket-details-wrapper">
                                     {displayreplybox === true ?
@@ -438,7 +440,7 @@ const TicketView = (payload) => {
                                                     <button id="cancel-reply" onClick={showcommentbox}>Cancel</button>
                                                 </div>
                                             </form>
-                                        </React.Fragment> : null}{console.log(ticketData)}
+                                        </React.Fragment> : null}
 
                                     <div className="name-wrapper">
 
