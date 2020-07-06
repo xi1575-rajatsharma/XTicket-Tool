@@ -43,7 +43,7 @@ const TicketView = (payload) => {
         sidebar = <SlidingPanel ticketReplies={ticketReplies} close={sideBarCloseHandler} displayName={ticketData.displayName} sideBar={"sideBar"} />
     }
 
-    const creationTime = new Date(ticketData.creationTime);
+    let creationTime = new Date(ticketData.creationTime);
     const dueOn = new Date(ticketData.dueOn)
     var month = new Array();
     month[0] = "January";
@@ -61,7 +61,15 @@ const TicketView = (payload) => {
     var creationMonth = month[creationTime.getMonth()];
     var dueOnMonth = month[dueOn.getMonth()];
 
+    let ticketCreationTime = new Date(ticketData.creationTime);
+    const creationDd = String(creationTime.getDate()).padStart(2, '0');
+    const creationMm = String(creationTime.getMonth() + 1).padStart(2, '0');
+    ticketCreationTime = creationDd + '/' + creationMm;
 
+    let ticketSLATime = new Date(ticketData.dueOn);
+    const dueOnDd = String(ticketSLATime.getDate()).padStart(2, '0');
+    const dueOnMm = String(ticketSLATime.getMonth() + 1).padStart(2, '0');
+    ticketSLATime = dueOnDd + '/' + dueOnMm
 
     const selectMapper = (mapValues) => {
         mapValues.map((option) => {
@@ -236,7 +244,7 @@ const TicketView = (payload) => {
                                 <div className="snapshot-time-globe-wrapper">
                                     <i className="fa fa-globe" />
                                     <span className="date-text">
-                                        {creationTime.getDay() + ' ' + creationMonth}
+                                        {ticketCreationTime}
                                     </span>
                                 </div>
                                 <div className="ticket-snapshot-information-wrapper">
@@ -286,7 +294,7 @@ const TicketView = (payload) => {
                                     <span>Assigned To</span>
                                     <div className="profile-wrapper">
 
-                                        <select value={assignedFinder(ticketData.assignedTo)} onChange={(e) => { changeSelectValue(e.target.value, ticketData.status) }}>
+                                        <select value={ticketData.assignedToEmailId} onChange={(e) => { changeSelectValue(e.target.value, ticketData.status) }}>
                                             {allAdminUsers ?
                                                 allAdminUsers.map((admin) => {
                                                     return (
@@ -322,7 +330,7 @@ const TicketView = (payload) => {
 
                                 <div className="closed-time-wrapper">
                                     <span className="red-text">SLA</span>
-                                    <span className="date-time-wrapper">{dueOn.getUTCDate() + ' ' + dueOnMonth}</span>
+                                    <span className="date-time-wrapper">{ticketSLATime}</span>
                                 </div>
 
 
@@ -382,7 +390,7 @@ const TicketView = (payload) => {
                                     </div>
                                     <div className="time-wrapper">
 
-                                        <p> <span style={{ fontWeight: "bold" }}> SLA</span> {dueOn.getDate() + ' ' + creationMonth}</p>
+                                        <p> <span style={{ fontWeight: "bold" }}> SLA</span> {ticketSLATime}</p>
                                     </div>
                                 </div>
                             </div>
@@ -430,11 +438,11 @@ const TicketView = (payload) => {
                                                     <button id="cancel-reply" onClick={showcommentbox}>Cancel</button>
                                                 </div>
                                             </form>
-                                        </React.Fragment> : null}
+                                        </React.Fragment> : null}{console.log(ticketData)}
 
                                     <div className="name-wrapper">
 
-                                        <p className="username-wrapper">{ticketData.displayName} <span className="details-date-wrapper"> Created on {creationTime.getDay() + ' ' + creationMonth} {}</span></p> <br />
+                                        <p className="username-wrapper">{ticketData.displayName} <span className="details-date-wrapper"> Created on {ticketCreationTime} {}</span></p> <br />
                                         <p className="ticket-description">{ticketData.description}</p>
                                         <button className="view-replies-btn" onClick={openHandler}>View Replies</button>
                                     </div>

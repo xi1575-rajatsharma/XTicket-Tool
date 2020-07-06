@@ -11,6 +11,7 @@ export const userHasLogin = (WrapperView) => {
 
         onClickLogout = () => {
             window.localStorage.removeItem('_token');
+            window.localStorage.removeItem('_listingData')
             this.props.history.push('/');
         }
 

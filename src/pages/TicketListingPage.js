@@ -11,7 +11,9 @@ export default class TicketListingPage extends React.Component {
         this.state = {
             isLoading: true,
             listingData: [],
-            allStatus: null
+            zohoTicketData: [],
+            allStatus: null,
+            view: "Xenie"
         }
     }
 
@@ -34,7 +36,7 @@ export default class TicketListingPage extends React.Component {
                 if (status === constants.SUCCESS) {
                     _state.message = '';
                     _state.listingData = payload.result.tickets;
-                    _state.listingData.sort((a, b) => a.id - b.id)
+                    // _state.listingData.sort((a, b) => a.id - b.id)
                     // window.localStorage.setItem('_listingData', _state.listingData)
                     _state.listingData = _state.listingData.filter(ticket => ticket.creationTime > fromDate && ticket.creationTime < toDate)
 
@@ -67,14 +69,18 @@ export default class TicketListingPage extends React.Component {
     statusFilter = (value) => {
         if (value !== "Date" && value !== "Subject" && value !== "Name") {
             const _listingData = JSON.parse(window.localStorage.getItem('_listingData'));
+
             if (value === "All-tickets") {
                 this.setState({ listingData: _listingData })
             } else {
-                this.setState({ listingData: _listingData.filter(ticket => ticket.status === value) })
+                this.setState({ listingData: _listingData ? _listingData.filter(ticket => ticket.status === value) : null })
             }
         }
     }
-
+    getZohoTicketData = () => {
+        this.setState({ listingData: this.state.zohoTicketData.filter(ticket => ticket.status === "OPEN"), view: "Zoho" })
+        window.localStorage.setItem('_listingData', JSON.stringify(this.state.zohoTicketData))
+    }
     getTicketData = () => {
         fetch.get({
             url: constants.SERVICE_URLS.TICKET_LISTING,
@@ -91,10 +97,11 @@ export default class TicketListingPage extends React.Component {
                 if (status === constants.SUCCESS) {
                     _state.message = '';
                     _state.listingData = cloneDeep(payload.result.tickets);
-                    _state.listingData.sort((a, b) => b.id - a.id)
+                    // _state.listingData.sort((a, b) => b.id - a.id)
                     console.log(_state.listingData)
                     window.localStorage.setItem('_listingData', JSON.stringify(_state.listingData))
                     _state.listingData = _state.listingData.filter(ticket => ticket.status === "OPEN")
+                    _state.view = "Xenie"
 
                 } else {
                     _state.message = message;
@@ -104,6 +111,24 @@ export default class TicketListingPage extends React.Component {
 
             }
         });
+
+
+        fetch.get({
+            url: constants.SERVICE_URLS.ZOHO_TICKET_LISTING,
+            requestParams: {
+                page: 0,
+                limit: 1000
+            },
+            callbackHandler: (response) => {
+                const { message, status, payload } = response;
+
+                if (status === constants.SUCCESS) {
+                    payload.result.tickets = payload.result.tickets.sort((a, b) => b.id - a.id)
+                    this.setState({ zohoTicketData: payload.result.tickets })
+
+                }
+            }
+        })
 
         this.setState({ isLoading: true }, () => {
             fetch.get({
@@ -132,6 +157,8 @@ export default class TicketListingPage extends React.Component {
                     filterTickets={this.filterTickets}
                     searchByFilter={this.searchByFilter}
                     statusFilter={this.statusFilter}
+                    getTicketData={this.getTicketData}
+                    getZohoTicketData={this.getZohoTicketData}
                 />
 
             </React.Fragment>

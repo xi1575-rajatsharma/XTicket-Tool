@@ -7,6 +7,7 @@ export const constants = {
     SERVICE_URLS: {
         LOGIN: `${API_HOST_PATH}/ticket-tool/v1/users/login`,
         TICKET_LISTING: `${API_HOST_PATH}/ticket-tool/v1/tickets`,
+        ZOHO_TICKET_LISTING: `${API_HOST_PATH}/ticket-tool/v1/history`,
         TICKET_DETAILING: `${API_HOST_PATH}/ticket-tool/v1/tickets`,
         TICKET_REPLY: `${API_HOST_PATH}/ticket-tool/v1/tickets/replies/`,
         TICKET_ASSIGN: `${API_HOST_PATH}/ticket-tool/v1/tickets/assign/`,

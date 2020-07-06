@@ -13,6 +13,9 @@ export default class TestView extends Component {
             fromDate: null,
             toDate: null,
             filterString: null,
+            selectValue: "OPEN",
+            xenieButton: "history-btn btn-regal-blue",
+            zohoButton: "history-btn btn-white"
         }
     }
     onFromDateChange = (value) => {
@@ -44,7 +47,7 @@ export default class TestView extends Component {
             <React.Fragment>
                 <div className="filters-wrapper">
                     <div className="filters-left-wrapper">
-                        <select className="filter-select" onChange={(e) => { this.props.statusFilter(e.target.value); this.setState({ display: e.currentTarget.value }) }} >
+                        <select value={this.state.selectValue} className="filter-select" onChange={(e) => { this.props.statusFilter(e.target.value); this.setState({ display: e.currentTarget.value, selectValue: e.currentTarget.value }) }} >
                             <option value="All-tickets">ALL Tickets</option>
                             {allStatus ?
                                 <FilterView allStatus={allStatus} />
@@ -53,13 +56,16 @@ export default class TestView extends Component {
                             <optgroup label="Other Filters">
                                 <option value="Date" >Filter Between Dates</option>
                                 <option value="Subject">Filter By subject</option>
-
                             </optgroup>
                         </select>
                     </div>
                     <div className="filters-right-wrapper">
                         <SelectedFilterView display={this.state.display} onFromDateChange={this.onFromDateChange} onToDateChange={this.onToDateChange} onDateSubmit={this.onDateSubmit} onInputSubmit={this.onInputSubmit} onInputChange={this.onInputChange} />
+
+                        <a onClick={() => { this.props.getTicketData(); this.setState({ selectValue: "OPEN", xenieButton: "history-btn btn-regal-blue", zohoButton: "history-btn btn-white" }) }} className={this.state.xenieButton} href="#">Xenie Tickets</a>
+                        <a onClick={() => { this.props.getZohoTicketData(); this.setState({ selectValue: "OPEN", xenieButton: "history-btn btn-white", zohoButton: "history-btn btn-regal-blue" }) }} className={this.state.zohoButton} href="#">Tickets From Zoho</a>
                     </div>
+                    {/* <a className="history-btn btn-regal-blue" href="#">Tickets From Zoho</a> */}
 
                 </div>
                 <table className="ticketListingTable">
@@ -74,28 +80,48 @@ export default class TestView extends Component {
                             <th>assigned To</th>
                         </tr>
                     </thead>
+
                     <tbody>
                         {
-                            listingData.length === 0 ? <tr className="no-updates-row"><td></td><td></td><td></td><td>--No tickets here--</td><td></td><td></td><td></td></tr> :
-                                listingData.map((ticket) => {
-                                    const creationTime = new Date(ticket.creationTime);
-                                    const dueOn = new Date(ticket.dueOn);
-                                    return (
-                                        <React.Fragment key={ticket.id} >
-                                            <tr key={ticket.id}>
-                                                <td><Link to={'/ticketlist/' + ticket.id} >{ticket.id}</Link></td>
-                                                <td><Link to={'/ticketlist/' + ticket.id} >{ticket.subject}</Link></td>
-                                                <td><Link to={'/ticketlist/' + ticket.id} >{ticket.displayName}</Link></td>
-                                                <td><Link to={'/ticketlist/' + ticket.id} >{creationTime.toLocaleString([], { hour: '2-digit', minute: '2-digit', day: '2-digit', month: '2-digit', year: '2-digit' })}</Link></td>
-                                                <td><Link to={'/ticketlist/' + ticket.id} >{dueOn.toLocaleString([], { hour: '2-digit', minute: '2-digit', day: '2-digit', month: '2-digit', year: '2-digit' })}</Link></td>
-                                                <td><Link to={'/ticketlist/' + ticket.id} >{ticket.status}</Link></td>
-                                                <td><Link to={'/ticketlist/' + ticket.id} >{ticket.assignedTo}</Link></td>
+                            this.props.view === "Xenie" ?
+                                listingData ? listingData.length === 0 ? <tr className="no-updates-row"><td></td><td></td><td></td><td>--No tickets here--</td><td></td><td></td><td></td></tr> :
+                                    listingData.map((ticket) => {
+                                        const creationTime = new Date(ticket.creationTime);
+                                        const dueOn = new Date(ticket.dueOn);
+                                        return (
+                                            <React.Fragment key={ticket.id} >
+                                                <tr key={ticket.id}>
+                                                    <td><Link to={'/ticketlist/' + ticket.id} >{ticket.id}</Link></td>
+                                                    <td><Link to={'/ticketlist/' + ticket.id} >{ticket.subject}</Link></td>
+                                                    <td><Link to={'/ticketlist/' + ticket.id} >{ticket.displayName}</Link></td>
+                                                    <td><Link to={'/ticketlist/' + ticket.id} >{creationTime.toLocaleString([], { hour: '2-digit', minute: '2-digit', day: '2-digit', month: '2-digit', year: '2-digit' })}</Link></td>
+                                                    <td><Link to={'/ticketlist/' + ticket.id} >{dueOn.toLocaleString([], { hour: '2-digit', minute: '2-digit', day: '2-digit', month: '2-digit', year: '2-digit' })}</Link></td>
+                                                    <td><Link to={'/ticketlist/' + ticket.id} >{ticket.status}</Link></td>
+                                                    <td><Link to={'/ticketlist/' + ticket.id} >{ticket.assignedTo}</Link></td>
+                                                </tr>
+                                            </React.Fragment>
+                                        )
+                                    }) : <p>NO tickets here</p> :
+                                listingData ? listingData.length === 0 ? <tr className="no-updates-row"><td></td><td></td><td></td><td>--No tickets here--</td><td></td><td></td><td></td></tr> :
+                                    listingData.map((ticket) => {
+                                        const creationTime = new Date(ticket.creationTime);
+                                        const dueOn = new Date(ticket.dueOn);
+                                        return (
+                                            <React.Fragment key={ticket.id} >
+                                                <tr key={ticket.id}>
+                                                    <td>{ticket.id}</td>
+                                                    <td>{ticket.subject}</td>
+                                                    <td>{ticket.displayName}</td>
+                                                    <td>{creationTime.toLocaleString([], { hour: '2-digit', minute: '2-digit', day: '2-digit', month: '2-digit', year: '2-digit' })}</td>
+                                                    <td>{dueOn.toLocaleString([], { hour: '2-digit', minute: '2-digit', day: '2-digit', month: '2-digit', year: '2-digit' })}</td>
+                                                    <td>{ticket.status}</td>
+                                                    <td>{ticket.assignedTo}</td>
 
-                                            </tr>
+                                                </tr>
 
-                                        </React.Fragment>
-                                    )
-                                })
+                                            </React.Fragment>
+                                        )
+                                    }) : <p>NO tickets here</p>
                         }
                     </tbody>
                 </table>
