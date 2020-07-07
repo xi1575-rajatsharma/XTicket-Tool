@@ -18,6 +18,18 @@
 .report-container__left {
   position: relative;
   clear: both;
+  nav{
+    width: 100%;
+    height: 100%;
+    position: relative;
+    ul{
+      position: fixed;
+      top:4.8%;
+      left: 0;
+      width: 20%;
+      height: 100%;
+    }
+  }
 }
 @media only screen and (min-width: 1200px) {
   .container {

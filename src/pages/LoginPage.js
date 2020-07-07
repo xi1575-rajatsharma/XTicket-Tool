@@ -18,6 +18,8 @@ export default class LoginPage extends React.Component {
     }
 
     componentDidMount() {
+        console.log(this.props.match.params.ticket_id);
+        ///ticketlist/' + ticket.id
         this.redirectTicketList();
     }
 

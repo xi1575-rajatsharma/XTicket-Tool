@@ -150,31 +150,6 @@ class ReportPage extends Component {
                     <strong>Happiness rating</strong>
                   </a>
                 </li>
-                <li>
-                  <a href="">
-                    <strong>Monthly SLA violated</strong>
-                  </a>
-                </li>
-                <li>
-                  <a href="">
-                    <strong>Violation by status</strong>
-                  </a>
-                </li>
-                <li>
-                  <a href="">
-                    <strong>Violations by time</strong>
-                  </a>
-                </li>
-                <li>
-                  <a href="">
-                    <strong>Achieved vs Violated tickets</strong>
-                  </a>
-                </li>
-                <li>
-                  <a href="">
-                    <strong>Average efficiency</strong>
-                  </a>
-                </li>
               </ul>
             </nav>
           </div>

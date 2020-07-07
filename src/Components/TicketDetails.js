@@ -237,7 +237,9 @@ class TicketDetails extends Component {
             const id = this.props.match.params.ticket_id;
             this.setState({ statusChangeLoading: true }, () => {
                 fetch.put({
-                    url: constants.SERVICE_URLS.TICKET_ASSIGN + id + '?emailId=' + selectValue,
+                    url: constants.SERVICE_URLS.TICKET_ASSIGN + id +
+                        '?emailId=' + selectValue +
+                        `&reason=${this.state.comment}`,
                     callbackHandler: (response) => {
                         console.log(response);
                         fetch.get({
