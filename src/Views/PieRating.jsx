@@ -2,17 +2,15 @@ import React from "react";
 import { Doughnut } from "react-chartjs-2";
 
 const PieRating = ({ ratings }) => {
-  //console.log(ratings);
-  const xlabel = Object.keys(ratings);
-  //console.log(xlabel);
-  const ylabel = Object.values(ratings);
-  //console.log(ylabel);
+  // const xlabel = Object.keys(ratings);
+
+  // const ylabel = Object.values(ratings);
   const state = {
     chartData: {
-      labels: xlabel,
+      //labels: xlabel,
       datasets: [
         {
-          data: ylabel,
+          //data: ylabel,
           backgroundColor: [
             "#FFFFCC	",
             "#FFFF99",

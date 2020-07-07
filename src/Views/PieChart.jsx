@@ -19,6 +19,7 @@ const PieChart = () => {
     <div>
       <Pie
         data={state.chartData}
+        height={200}
         options={{
           title: {
             display: true,

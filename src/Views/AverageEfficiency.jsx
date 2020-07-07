@@ -2,25 +2,18 @@ import React from "react";
 import { Bar } from "react-chartjs-2";
 import "chartjs-plugin-datalabels";
 
-const BarView = ({ statusData }) => {
-  console.log(statusData);
-  const xlabel = Object.keys(statusData);
-  const ylabel = Object.values(statusData);
-
+const AverageEfficiency = () => {
   const state = {
     chartData: {
-      labels: xlabel,
+      labels: ["week1", "week2", "week3", "week4"],
       datasets: [
         {
-          data: ylabel,
+          data: ["9", "4", "7", "9"],
           backgroundColor: [
             "#32CD32",
-            "#ffbf00",
             "#FFFF00",
             "#0000CD",
-            "#DC143C",
             "#ff471a",
-            "#333300",
             "#008fb3",
           ],
         },
@@ -32,11 +25,11 @@ const BarView = ({ statusData }) => {
     <div>
       <Bar
         data={state.chartData}
-        height={130}
+        height={200}
         options={{
           title: {
             display: true,
-            text: "Tickets Status",
+            text: "Average Efficiency",
             align: "left",
             fontSize: 20,
           },
@@ -60,15 +53,20 @@ const BarView = ({ statusData }) => {
             ],
             yAxes: [
               {
-                display: true,
+                barPercentage: 0.4,
+                display: false,
                 gridLines: {
-                  display: true,
+                  display: false,
                 },
               },
             ],
           },
           legend: {
             display: false,
+            labels: {
+              fontColor: "#000000",
+              fontSize: 20,
+            },
           },
         }}
       />
@@ -76,4 +74,4 @@ const BarView = ({ statusData }) => {
   );
 };
 
-export default BarView;
+export default AverageEfficiency;

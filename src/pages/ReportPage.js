@@ -2,6 +2,10 @@ import React, { Component } from "react";
 import BarView from "../Views/BarView";
 import PieChart from "../Views/PieChart";
 import PieRating from "../Views/PieRating";
+import ViolationByStatus from "../Views/ViolationByStatus";
+import ViolationByTime from "../Views/ViolationByTime";
+import AchievedVsViolated from "../Views/AchievedVsViolated";
+import AverageEfficiency from "../Views/AverageEfficiency";
 
 import { fetch } from "../modules/httpServices";
 import { constants } from "../modules/constants";
@@ -186,8 +190,19 @@ class ReportPage extends Component {
               <PieRating ratings={this.state.rating} />
             </div>
             <div className="report-container__right__Piechart">
-              PieChart
               <PieChart />
+            </div>
+            <div className="report-container__right__ViolationByStatus">
+              <ViolationByStatus />
+            </div>
+            <div className="report-container__right__ViolationByTime">
+              <ViolationByTime />
+            </div>
+            <div className="report-container__right__AchievedVsViolated">
+              <AchievedVsViolated />
+            </div>
+            <div className="report-container__right__AverageEfficiency">
+              <AverageEfficiency />
             </div>
           </div>
         </div>
