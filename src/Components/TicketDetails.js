@@ -162,7 +162,7 @@ class TicketDetails extends Component {
                 callbackHandler: (response) => {
                     const { status, payload, message } = response;
                     const _state = cloneDeep(this.state);
-
+                    // console.log(response)
                     if (status === constants.SUCCESS) {
                         _state.message = "";
                         _state.ticketJourney = payload.result.ticketJourneys;

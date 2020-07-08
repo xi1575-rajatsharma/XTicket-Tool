@@ -9,6 +9,7 @@ import FeedBackView from './feedBackView';
 import SlidingPanel from './slidingPanel';
 import { constants } from '../modules/constants';
 import attachment from '../images/attachment.png'
+import info from '../images/info.svg'
 
 
 
@@ -45,21 +46,7 @@ const TicketView = (payload) => {
 
     let creationTime = new Date(ticketData.creationTime);
     const dueOn = new Date(ticketData.dueOn)
-    var month = new Array();
-    month[0] = "January";
-    month[1] = "February";
-    month[2] = "March";
-    month[3] = "April";
-    month[4] = "May";
-    month[5] = "June";
-    month[6] = "July";
-    month[7] = "August";
-    month[8] = "September";
-    month[9] = "October";
-    month[10] = "November";
-    month[11] = "December";
-    var creationMonth = month[creationTime.getMonth()];
-    var dueOnMonth = month[dueOn.getMonth()];
+
 
     let ticketCreationTime = new Date(ticketData.creationTime);
     const creationDd = String(creationTime.getDate()).padStart(2, '0');
@@ -80,7 +67,8 @@ const TicketView = (payload) => {
     }
 
     const switchChanges = (status) => {
-        switch (status) {
+        console.log(status)
+        switch (status.status) {
             case "ASSIGNED":
                 return (
                     <React.Fragment>
@@ -92,14 +80,15 @@ const TicketView = (payload) => {
                 return (
                     <React.Fragment>
                         <div className="raised-icon-wrapper"></div>
-                        <div className="change-text-wrapper">Ticket Raised</div>
+                        <div className="change-text-wrapper"  >Ticket Assigned to: {status.assignedTo}</div>
+                        {status.assignedToReason ? <img src={info} height="25px" title={status.assignedToReason.split(':')[1]} /> : null}
                     </React.Fragment>
                 )
             case "INPROGRESS":
                 return (
                     <React.Fragment>
                         <div className="resolving-icon-wrapper"></div>
-                        <div className="change-text-wrapper">{ticketData.assignedTo} is working on resolution of your ticket </div>
+                        <div className="change-text-wrapper">{status.assignedTo} is working on resolution of your ticket </div>
                     </React.Fragment>
                 )
             case "AWAITING":
@@ -155,38 +144,6 @@ const TicketView = (payload) => {
     const showhidereplybox = () => showreplybox(!displayreplybox);
     const showhidecommentbox = () => showcommentbox(!displaycommentbox);
 
-    const assignedFinder = (assignedPerson) => {
-        switch (assignedPerson) {
-            case "Rajat Rajiv Sharma":
-                return "rajat.sharma@xebia.com"
-            case "Anjali  Akansha":
-                return "anjali.akansha@xebia.com"
-            case "Shanila Suhail":
-                return "shanila.suhail@xebia.com"
-            case "Garima Mohan":
-                return "gmohan@xebia.com"
-            case "Karan Verma":
-                return "karan.verma@xebia.com"
-            case "Shambhavi Mishra":
-                return "shambhavi.mishra@xebia.com"
-            case "Sahil Bhatnagar":
-                return "sahil.bhatnagar@xebia.com"
-            case "Puneet Kohli":
-                return "pkohli@xebia.com"
-            case "Laghu Tiwari":
-                return "ltiwari@xebia.com"
-            case "Jayant Yadav":
-                return "jayant@xebia.com"
-            case "Gautam Jain":
-                return "gautam.jain@xebia.com"
-            case "Vikas Arora":
-                return "vikas.arora@xebia.com"
-            case "Tushar":
-                return "tushar.kaushik@xebia.com"
-            default:
-                return "none@xebia.com"
-        }
-    }
 
     return (
         <React.Fragment>
@@ -264,7 +221,7 @@ const TicketView = (payload) => {
                                                     <div className="snapshot-time-globe-wrapper">
                                                         <i className="fa fa-globe" />
                                                         <span className="date-text">
-                                                            {dueOn.getDate() + ' ' + month[dueOn.getMonth()]}
+                                                            {/* {dueOn.getDate() + ' ' + month[dueOn.getMonth()]} */}
                                                         </span>
                                                     </div>
                                                     <div className="ticket-snapshot-information-wrapper">
@@ -438,7 +395,7 @@ const TicketView = (payload) => {
                                                     <button id="cancel-reply" onClick={showcommentbox}>Cancel</button>
                                                 </div>
                                             </form>
-                                        </React.Fragment> : null}{console.log(ticketData)}
+                                        </React.Fragment> : null}
 
                                     <div className="name-wrapper">
 
@@ -503,10 +460,8 @@ const TicketView = (payload) => {
 
                                                             <div className="individual-change-wrapper" key={change.id} >
                                                                 <div className="top-right-corner-dot"></div >
-                                                                {console.log(change)}
                                                                 {
-
-                                                                    switchChanges(change.status)
+                                                                    switchChanges(change)
                                                                 }
                                                                 <div className="change-connector"></div>
                                                             </div>
