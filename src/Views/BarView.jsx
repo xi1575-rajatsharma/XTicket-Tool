@@ -30,10 +30,16 @@ const BarView = ({ statusData }) => {
 
   return (
     <div>
+
       <Bar
         data={state.chartData}
         height={130}
+        // width="500px"
+        // margin="none"
         options={{
+          // responsive: true,
+          // aspectRatio: 2,
+          // maintainAspectRatio: true,
           title: {
             display: true,
             text: "Tickets Status",

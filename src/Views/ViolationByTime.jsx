@@ -18,8 +18,8 @@ const ViolationByTime = ({ ratings }) => {
       ],
       datasets: [
         {
-          //backgroundColor: "#fff",
-          borderColor: "#ff6c23",
+          backgroundColor: "transparent",
+          borderColor: "red",
           borderWidth: 2,
           pointColor: "#fff",
           pointStrokeColor: "#ff6c23",

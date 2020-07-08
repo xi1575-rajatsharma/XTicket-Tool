@@ -8,13 +8,12 @@ const AverageEfficiency = () => {
       labels: ["week1", "week2", "week3", "week4"],
       datasets: [
         {
-          data: ["9", "4", "7", "9"],
+          data: ["8", "8", "8", "8"],
           backgroundColor: [
             "#32CD32",
             "#FFFF00",
             "#0000CD",
-            "#ff471a",
-            "#008fb3",
+            "#ff471a"
           ],
         },
       ],
@@ -30,7 +29,7 @@ const AverageEfficiency = () => {
           title: {
             display: true,
             text: "Average Efficiency",
-            align: "left",
+            // align: "left",
             fontSize: 20,
           },
 
@@ -54,9 +53,9 @@ const AverageEfficiency = () => {
             yAxes: [
               {
                 barPercentage: 0.4,
-                display: false,
+                display: true,
                 gridLines: {
-                  display: false,
+                  display: true,
                 },
               },
             ],
