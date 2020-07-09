@@ -210,9 +210,8 @@ const TicketView = (payload) => {
                             </div>
                             {
                                 listingData.map((ticket) => {
-                                    const dueOn = new Date(ticket.creationTime);
-                                    let subject = ticket.subject;
-                                    subject = subject.substring(0, Math.min(subject.length, 40));
+
+
                                     return (
                                         ticket.id === ticketData.id ? null :
                                             <Link key={ticket.id} to={'/ticketlist/' + ticket.id}>
