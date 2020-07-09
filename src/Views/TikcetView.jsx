@@ -272,7 +272,7 @@ const TicketView = (payload) => {
                                             allStatus ?
                                                 allStatus.map((status) => {
                                                     return (
-                                                        status.id === 6 || status.id === 2 || status.id === 7 ? <option key={status.id} value={status.status} disabled>{status.status}</option> :
+                                                        status.id === 6 || status.id === 2 || status.id === 7 || status.id === 8 ? <option key={status.id} value={status.status} disabled>{status.status}</option> :
                                                             <option key={status.id} value={status.status}>{status.status}</option>
 
                                                     )
