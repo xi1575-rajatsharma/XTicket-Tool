@@ -11,10 +11,12 @@ import Tickets from '../Components/Tickets'
 import ReportPage from '../pages/ReportPage';
 import approvalView from '../Views/approvalView';
 
+
 export const routes = () => {
   return (
     <BrowserRouter >
       <Route exact={true} path='/' component={LoginPage} />
+
       <Route exact={true} path='/approval' component={approvalView} />
       {/* <Route exact={true} path='/:ticket_id' component={LoginPage} /> */}
       <Route exact={true} path='/ticketlist' component={userHasLogin(TicketListingPage)} />

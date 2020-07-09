@@ -13,13 +13,15 @@ export default class LoginPage extends React.Component {
             isLoading: false,
             email: '',
             password: '',
+            redirectTo: '',
             isValid: true
         };
     }
 
     componentDidMount() {
-        console.log(this.props.match.params.ticket_id);
-        ///ticketlist/' + ticket.id
+        const id = this.props.location.search.split("=")[1];
+        // console.log(id)
+        id ? this.setState({ redirectTo: id }) : this.setState({ ...this.state })
         this.redirectTicketList();
     }
 
@@ -69,8 +71,12 @@ export default class LoginPage extends React.Component {
 
     redirectTicketList = () => {
         const token = window.localStorage.getItem('_token');
+        const id = this.props.location.search.split("=")[1]
+        const redirectTo = this.props;
+        console.log(redirectTo)
         if (token != null) {
-            this.props.history.push('/ticketlist');
+            id ? this.props.history.push(`${id}`) :
+                this.props.history.push('/ticketlist');
         }
     }
 
