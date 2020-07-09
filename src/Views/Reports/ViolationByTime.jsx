@@ -18,7 +18,7 @@ const ViolationByTime = ({ ratings }) => {
       ],
       datasets: [
         {
-          //backgroundColor: "#fff",
+          backgroundColor: "transparent",
           borderColor: "#ff6c23",
           borderWidth: 2,
           pointColor: "#fff",
@@ -39,7 +39,7 @@ const ViolationByTime = ({ ratings }) => {
         options={{
           title: {
             display: true,
-            text: "Violation By Time",
+            text: "SLA By Time",
             fontSize: 20,
           },
           legend: {

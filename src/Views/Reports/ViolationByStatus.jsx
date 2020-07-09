@@ -4,18 +4,10 @@ import { Bar } from "react-chartjs-2";
 const ViolationByStatus = () => {
   const state = {
     chartData: {
-      labels: [
-        "OPEN",
-        "INPROGRESS",
-        "AWATING",
-        "REVIEW",
-        "ESCALATED",
-        "RESOLVED",
-        "CLOSED",
-      ],
+      labels: ["OPEN", "INPROGRESS", "AWATING", "REVIEW"],
       datasets: [
         {
-          data: [1, 5, 6, 3, 8, 7, 9],
+          data: [1, 5, 6, 3],
         },
       ],
     },
@@ -25,11 +17,11 @@ const ViolationByStatus = () => {
     <div>
       <Bar
         data={state.chartData}
-        height={100}
+        height={200}
         options={{
           title: {
             display: true,
-            text: "Violation By Status",
+            text: "SLA By Status",
             fontSize: 20,
           },
           scales: {

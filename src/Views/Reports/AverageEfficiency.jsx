@@ -1,28 +1,13 @@
 import React from "react";
 import { Bar } from "react-chartjs-2";
-import "chartjs-plugin-datalabels";
 
-const BarView = ({ statusData }) => {
-  console.log(statusData);
-  const xlabel = Object.keys(statusData);
-  const ylabel = Object.values(statusData);
-
+const AverageEfficiency = () => {
   const state = {
     chartData: {
-      labels: xlabel,
+      labels: ["OPEN", "INPROGRESS", "AWATING", "REVIEW"],
       datasets: [
         {
-          data: ylabel,
-          backgroundColor: [
-            "#32CD32",
-            "#ffbf00",
-            "#FFFF00",
-            "#0000CD",
-            "#DC143C",
-            "#ff471a",
-            "#333300",
-            "#008fb3",
-          ],
+          data: [1, 5, 6, 3],
         },
       ],
     },
@@ -32,22 +17,13 @@ const BarView = ({ statusData }) => {
     <div>
       <Bar
         data={state.chartData}
-        height={130}
+        height={200}
         options={{
           title: {
             display: true,
-            text: "Tickets Status",
-            align: "left",
+            text: "Average Efficiency",
             fontSize: 20,
           },
-
-          plugins: {
-            datalabels: {
-              display: true,
-              color: "white",
-            },
-          },
-
           scales: {
             xAxes: [
               {
@@ -75,5 +51,4 @@ const BarView = ({ statusData }) => {
     </div>
   );
 };
-
-export default BarView;
+export default AverageEfficiency;

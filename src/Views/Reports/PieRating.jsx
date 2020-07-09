@@ -3,7 +3,6 @@ import { Doughnut } from "react-chartjs-2";
 
 const PieRating = ({ ratings }) => {
   // const xlabel = Object.keys(ratings);
-
   // const ylabel = Object.values(ratings);
   const state = {
     chartData: {
@@ -31,7 +30,7 @@ const PieRating = ({ ratings }) => {
         options={{
           title: {
             display: true,
-            text: "Overall Rating",
+            text: "Happiness Rating",
             fontSize: 20,
             align: "left",
           },
