@@ -9,17 +9,20 @@ import Reply from '../pages/ReplyPage';
 import { BrowserRouter, Route } from 'react-router-dom';
 import Tickets from '../Components/Tickets'
 import ReportPage from '../pages/ReportPage';
+import approvalView from '../Views/approvalView';
 
 
 export const routes = () => {
   return (
     <BrowserRouter >
       <Route exact={true} path='/' component={LoginPage} />
-      <Route exact={true} path='/redirect/:ticket_id' component={LoginPage} />
+
+      <Route exact={true} path='/approval' component={approvalView} />
+      {/* <Route exact={true} path='/:ticket_id' component={LoginPage} /> */}
       <Route exact={true} path='/ticketlist' component={userHasLogin(TicketListingPage)} />
       <Route exact={true} path='/ticketlist/:ticket_id' component={userHasLogin(TicketDetails)} />
-      <Route exact={true} path='/ticket/:ticket_id' component={Reply} />
-      <Route exact={true} path='/addtickets' component={userHasLogin(Tickets)} />
+      {/* <Route exact={true} path='/ticket/:ticket_id' component={Reply} /> */}
+      {/* <Route exact={true} path='/addtickets' component={userHasLogin(Tickets)} /> */}
       <Route exact={true} path='/reports' component={userHasLogin(ReportPage)} />
       {/* 
            />
