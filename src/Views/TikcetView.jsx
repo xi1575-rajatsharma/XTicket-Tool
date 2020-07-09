@@ -81,7 +81,8 @@ const TicketView = (payload) => {
                     <React.Fragment>
                         <div className="raised-icon-wrapper"></div>
                         <div className="change-text-wrapper"  >Ticket Assigned to: {status.assignedTo}</div>
-                        {status.assignedToReason ? <img src={info} height="25px" title={status.assignedToReason.split(':')[1]} /> : null}
+                        {status.assignedToReason ? <img src={info} height="25px" title={status.assignedToReason === "Default Assignment" ? "Default Assignment" : status.assignedToReason.split(':')[1]} /> : null}
+                        {console.log(status)}
                     </React.Fragment>
                 )
             case "INPROGRESS":
@@ -355,7 +356,7 @@ const TicketView = (payload) => {
 
                                 <div className="resolution-nav-wrapper" onClick={() => isVisible('id_resolution')} style={display === 'id_resolution' ? { color: '#06A99C', fontSize: "11px", fontWeight: "bolder" } : null}>resolution</div>
 
-                                <div className="attachment-wrapper" onClick={() => isVisible('id_attachment')} > attachment</div>
+                                <div className="attachment-wrapper" onClick={() => isVisible('id_attachment')} style={display === 'id_attachment' ? { color: '#06A99C', fontSize: "11px", fontWeight: "bolder" } : null} > attachment</div>
 
                                 {/* <div className="approval-wrapper">approval</div> */}
                                 <div className="history-wrapper" onClick={() => isVisible('id_history')} style={display === 'id_history' ? { color: '#06A99C', fontSize: "11px", fontWeight: "bolder" } : null} > ticket journey</div>

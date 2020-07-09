@@ -135,7 +135,18 @@ class ReportPage extends Component {
   };
   render() {
     return (
-      <>
+      <div style={{ width: "100%", height: "100%", display: "flex", alignItems: "center", justifyContent: "center" }}>
+        <h1>Coming soon!</h1>
+      </div>
+    );
+  }
+}
+
+export default ReportPage;
+
+
+/*
+ <>
         <div className="report-container">
           <div className="report-container__left">
             <nav>
@@ -167,8 +178,4 @@ class ReportPage extends Component {
           </div>
         </div>
       </>
-    );
-  }
-}
-
-export default ReportPage;
+*/

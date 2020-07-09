@@ -241,7 +241,7 @@ class TicketDetails extends Component {
                         '?emailId=' + selectValue +
                         `&reason=${this.state.comment}`,
                     callbackHandler: (response) => {
-                        console.log(response);
+                        // console.log(response);
                         fetch.get({
                             url: constants.SERVICE_URLS.TICKET_DETAILING + '/' + id,
                             callbackHandler: (response) => {
@@ -256,6 +256,23 @@ class TicketDetails extends Component {
                                     _state.message = message;
                                 }
                                 this.setState({ ticketData: _state.ticketData });
+                            }
+                        })
+                        fetch.get({
+                            url: constants.SERVICE_URLS.TICKET_HISTORY + id,
+                            callbackHandler: (response) => {
+                                const { status, payload, message } = response;
+                                const _state = cloneDeep(this.state);
+
+                                if (status === constants.SUCCESS) {
+                                    _state.message = "";
+                                    _state.ticketJourney = payload.result.ticketJourneys;
+
+
+                                } else {
+                                    _state.message = message;
+                                }
+                                this.setState({ ticketJourney: _state.ticketJourney })
                             }
                         })
                     }
