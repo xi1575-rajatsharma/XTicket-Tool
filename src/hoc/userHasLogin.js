@@ -17,6 +17,7 @@ export const userHasLogin = (WrapperView) => {
 
         componentDidMount() {
             const token = window.localStorage.getItem('_token');
+
             if (token == null) {
                 this.props.history.push('/');
             }

@@ -19,8 +19,8 @@ export default class LoginPage extends React.Component {
     }
 
     componentDidMount() {
-        const id = this.props.location.pathname;
-        console.log(id)
+        const id = this.props.location.search.split("=")[1];
+        // console.log(id)
         id ? this.setState({ redirectTo: id }) : this.setState({ ...this.state })
         this.redirectTicketList();
     }
@@ -71,9 +71,12 @@ export default class LoginPage extends React.Component {
 
     redirectTicketList = () => {
         const token = window.localStorage.getItem('_token');
-        const id = this.state.redirectTo
+        const id = this.props.location.search.split("=")[1]
+        const redirectTo = this.props;
+        console.log(redirectTo)
         if (token != null) {
-            this.props.history.push('/ticketlist');
+            id ? this.props.history.push(`${id}`) :
+                this.props.history.push('/ticketlist');
         }
     }
 

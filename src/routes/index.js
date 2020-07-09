@@ -10,6 +10,7 @@ import { BrowserRouter, Route } from 'react-router-dom';
 import Tickets from '../Components/Tickets'
 import ReportPage from '../pages/ReportPage';
 
+
 export const routes = () => {
   return (
     <BrowserRouter >
