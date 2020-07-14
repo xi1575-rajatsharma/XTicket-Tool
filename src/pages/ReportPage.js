@@ -138,7 +138,7 @@ class ReportPage extends Component {
       },
     });
     fetch.get({
-      url: constants.SERVICE_URLS.SLA_MISSED_VS_ACHIEVED,
+      url: constants.SERVICE_URLS.XYZ,
       callbackHandler: (response) => {
         console.log(response)
       }
