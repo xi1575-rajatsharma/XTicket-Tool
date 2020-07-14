@@ -25,6 +25,8 @@ export const constants = {
     SLAS_DEPARTMENT_MISSED: `${API_HOST_PATH}/ticket-tool/v1/analytics/slas/department/missed`,
     SLAS_USER_RESOLVED: `${API_HOST_PATH}/ticket-tool/v1/analytics/slas/user/resolved`,
     SLAS_DEPARTMENT_RESOLVED: `${API_HOST_PATH}/ticket-tool/v1/analytics/slas/department/resolved`,
+    SLA_MISSED_VS_ACHIEVED: `${API_HOST_PATH}/ticket-tool/v1/tickets/user/achieved/missed`,
+    RESET_PASSWORD: `${API_HOST_PATH}/ticket-tool/v1/users/reset-password`
   },
 
   NO_DATA_FOUND: "No results found...",
