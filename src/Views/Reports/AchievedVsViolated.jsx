@@ -1,13 +1,18 @@
 import React from "react";
 import { Doughnut } from "react-chartjs-2";
 
-const AchievedVsViolated = () => {
+const AchievedVsViolated = (achieved_vs_missed) => {
+  const res_miss = achieved_vs_missed.achieved_vs_missed;
+
+  const xlabel = Object.keys(res_miss);
+  const ylabel = Object.values(res_miss);
+
   const state = {
     chartData: {
-      labels: ["Achieved", "violated"],
+      labels: xlabel,
       datasets: [
         {
-          data: ["12", "3"],
+          data: ylabel,
           backgroundColor: [" #4040a1", "#d64161"],
         },
       ],
