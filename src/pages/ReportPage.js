@@ -3,7 +3,7 @@ import BarView from "../Views/Reports/BarView";
 import SLAUser from "../Views/Reports/SLAUser";
 import PieRating from "../Views/Reports/PieRating";
 import ViolationByStatus from "../Views/Reports/ViolationByStatus";
-import ViolationByTime from "../Views/Reports/ViolationByTime";
+import ViolationByDate from "../Views/Reports/ViolationByDate";
 import AchievedVsViolated from "../Views/Reports/AchievedVsViolated";
 import AverageEfficiency from "../Views/Reports/AverageEfficiency";
 
@@ -34,6 +34,7 @@ class ReportPage extends Component {
         fourStars: 0,
         fiveStars: 0,
       },
+      achieved_vs_missed: {},
     };
   }
 
@@ -137,13 +138,33 @@ class ReportPage extends Component {
         });
       },
     });
+    ///////////////////////////////////////API CALL 3//////////////////////////////////////
     fetch.get({
-      url: constants.SERVICE_URLS.XYZ,
+      url: constants.SERVICE_URLS.MISSED_VS_ACHIEVED,
       callbackHandler: (response) => {
-        console.log(response)
-      }
-    })
+        const {
+          message,
+          payload: { result },
+        } = response;
+
+        //console.log(response.payload.result);
+        this.setState({
+          achieved_vs_missed: result,
+          message: message,
+        });
+        console.log(message);
+      },
+    });
+
+    //////////////////////////////////////API CALL 4/////////////////////////////////////
+    //   fetch.get({
+    //     url: constants.SERVICE_URLS.MISSED_BY_STATUS,
+    //     callbackHandler: (response) => {
+    //       console.log(response);
+    //     },
+    //   });
   };
+
   render() {
     return (
       <div style={{ width: "100%", height: "100%", display: "flex", alignItems: "center", justifyContent: "center" }}>
@@ -172,6 +193,29 @@ export default ReportPage;
                     <strong>Average efficiency</strong>
                   </a>
                 </li>
+<<<<<<< HEAD
+=======
+                <li>
+                  <a href="">
+                    <strong>Happiness rating</strong>
+                  </a>
+                </li>
+                <li>
+                  <a href="">
+                    <strong>SLA by status</strong>
+                  </a>
+                </li>
+                <li>
+                  <a href="">
+                    <strong>Achieved vs Violated tickets</strong>
+                  </a>
+                </li>
+                <li>
+                  <a href="">
+                    <strong>SLA by time</strong>
+                  </a>
+                </li>
+>>>>>>> 2ca6127c5c5c6f4648ea6f9f472ba5031ee60eb2
               </ul>
             </nav>
           </div>
@@ -185,20 +229,16 @@ export default ReportPage;
             <div className="report-container__right__Pierating">
               <PieRating ratings={this.state.rating} />
             </div>
-            <div className="report-container__right__SLAUser">
-              <SLAUser />
-            </div>
-            <div className="report-container__right__SLAUser">
-              <SLAUser />
-            </div>
             <div className="report-container__right__ViolationByStatus">
               <ViolationByStatus />
             </div>
             <div className="report-container__right__AchievedVsViolated">
-              <AchievedVsViolated />
+              <AchievedVsViolated
+                achieved_vs_missed={this.state.achieved_vs_missed}
+              />
             </div>
             <div className="report-container__right__ViolationByTime">
-              <ViolationByTime />
+              <ViolationByDate />
             </div>
           </div>
         </div>
