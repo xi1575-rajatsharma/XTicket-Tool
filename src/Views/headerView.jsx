@@ -1,41 +1,46 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import logout from '../images/logout.png'
-
-export const headerView = (payload) => {
+export const HeaderView = (payload) => {
 
     const { onClickLogout } = payload;
+    const [islogoutWrapperVisible, setIslogoutWrapperVisible] = useState(false);
+
+    const toggleLgoutWrapper = () => {
+        setIslogoutWrapperVisible(!islogoutWrapperVisible)
+    }
 
     return (
-        <div className="nav-wrapper">
-            <div className="navbar-left-side">
+        <>
+            <div className="nav-wrapper">
+                <div className="navbar-left-side">
 
-                <div className="navbar-ticket-wrapper">
-                    <Link to='/ticketlist'> Tickets </Link>
-                </div>
-                {/* 
+                    <div className="navbar-ticket-wrapper">
+                        <Link to='/ticketlist'> Tickets </Link>
+                    </div>
+                    {/* 
                 <div className="navbar-customer-wrapper">
                     Customer
                 </div> */}
-                <div className="navbar-report-wrapper">
-                    <Link to='/reports'> Reports </Link>
-                </div>
-                {/* <div className="navbar-activites-wrapper">
+                    <div className="navbar-report-wrapper">
+                        <Link to='/reports'> Reports </Link>
+                    </div>
+                    {/* <div className="navbar-activites-wrapper">
                     Activities
             </div> */}
-                {/* <div className="navbar-community-wrapper">
+                    {/* <div className="navbar-community-wrapper">
                     Community
             </div>
                 <div className="navbar-social-wrapper">
                     Social
             </div> */}
-            </div>
-
-            <div className="navbar-right-side">
-                <div className="navbar-xebia-brand-wrapper">
-                    <Link to='/ticketlist'> Xebia </Link>
                 </div>
-                {/* <div className="navbar-search-icon-wrapper">
+
+                <div className="navbar-right-side">
+                    <div className="navbar-xebia-brand-wrapper">
+                        <Link to='/ticketlist'> Xebia </Link>
+                    </div>
+                    {/* <div className="navbar-search-icon-wrapper">
                     <svg className="bi bi-search" width="45px" height="1.1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                         <path fillRule="evenodd" d="M10.442 10.442a1 1 0 011.415 0l3.85 3.85a1 1 0 01-1.414 1.415l-3.85-3.85a1 1 0 010-1.415z" clipRule="evenodd" />
                         <path fillRule="evenodd" d="M6.5 12a5.5 5.5 0 100-11 5.5 5.5 0 000 11zM13 6.5a6.5 6.5 0 11-13 0 6.5 6.5 0 0113 0z" clipRule="evenodd" />
@@ -56,10 +61,26 @@ export const headerView = (payload) => {
                 <div className="navbar-settings-icon-wrapper">
                     <i className="fa fa-gear font-size:24px"></i>
                 </div> */}
-                <div onClick={onClickLogout} className="profile-picture-wrapper">
-                    <img src={logout} width="30px" height="30px" />
+                    {/* onClickLogout */}
+                    <div className="nav__change-password"><Link to="/reset-password">Reset Password</Link></div>
+                    <div onClick={onClickLogout} className="profile-picture-wrapper">
+                        <img src={logout} width="30px" height="30px" />
+                    </div>
                 </div>
             </div>
-        </div>
+            {/* {islogoutWrapperVisible ?
+                <div className="logout__wrapper">
+                    <ul>
+                        <li onClick={onClickLogout}>
+                            Logout
+                        </li>
+                        <Link to="/reset-password">
+                            <li>
+                                Reset Password
+                            </li>
+                        </Link>
+                    </ul>
+                </div> : null} */}
+        </>
     );
 };

@@ -120,6 +120,7 @@ class ReportPage extends Component {
           }
         });
       }
+
     );
     /////////////////////////////////API CALL 2////////////////////////////////////////////////
     fetch.get({
@@ -136,6 +137,12 @@ class ReportPage extends Component {
         });
       },
     });
+    fetch.get({
+      url: constants.SERVICE_URLS.SLA_MISSED_VS_ACHIEVED,
+      callbackHandler: (response) => {
+        console.log(response)
+      }
+    })
   };
   render() {
     return (

@@ -1,5 +1,5 @@
 import React from 'react';
-import { headerView as HeaderView } from '../Views/headerView';
+import { HeaderView as HeaderView } from '../Views/headerView';
 import { sidebarView as SidebarView } from '../Views/sidebarView';
 
 export const userHasLogin = (WrapperView) => {

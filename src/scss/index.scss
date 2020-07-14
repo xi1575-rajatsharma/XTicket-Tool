@@ -16,6 +16,7 @@ $leftPositon: 30%;
 @import './chart';
 @import './feedback';
 @import './slidingPanel';
+@import './reset';
 
 
 @mixin scrollbars($size, $foreground-color, $background-color: mix($foreground-color, white,  50%)) {
