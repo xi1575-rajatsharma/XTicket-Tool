@@ -1,14 +1,13 @@
 import React from "react";
 import { Pie } from "react-chartjs-2";
 
-const PieChart = () => {
+const SLADepartment = () => {
   const state = {
     chartData: {
       labels: ["SLA Met", "SLA Missed"],
       datasets: [
         {
-          label: "Population",
-          data: [3, 9],
+          data: [12, 8],
           backgroundColor: [`#FFA500`, `#6495ED`],
         },
       ],
@@ -19,21 +18,21 @@ const PieChart = () => {
     <div>
       <Pie
         data={state.chartData}
+        height={200}
         options={{
           title: {
             display: true,
-            text: "SLA track - June 2020",
-            fontSize: 25,
+            text: "SLA track -Department",
+            fontSize: 12,
           },
           legend: {
             display: true,
             position: "bottom",
           },
-          rotation: Math.PI * -0.1,
         }}
       />
     </div>
   );
 };
 
-export default PieChart;
+export default SLADepartment;

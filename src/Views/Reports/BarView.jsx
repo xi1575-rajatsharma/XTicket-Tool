@@ -12,7 +12,6 @@ const BarView = ({ statusData }) => {
       labels: xlabel,
       datasets: [
         {
-          label: "tickets",
           data: ylabel,
           backgroundColor: [
             "#32CD32",
@@ -31,10 +30,16 @@ const BarView = ({ statusData }) => {
 
   return (
     <div>
+
       <Bar
         data={state.chartData}
         height={130}
+        // width="500px"
+        // margin="none"
         options={{
+          // responsive: true,
+          // aspectRatio: 2,
+          // maintainAspectRatio: true,
           title: {
             display: true,
             text: "Tickets Status",
@@ -61,20 +66,15 @@ const BarView = ({ statusData }) => {
             ],
             yAxes: [
               {
-                barPercentage: 0.4,
-                display: false,
+                display: true,
                 gridLines: {
-                  display: false,
+                  display: true,
                 },
               },
             ],
           },
           legend: {
             display: false,
-            labels: {
-              fontColor: "#000000",
-              fontSize: 20,
-            },
           },
         }}
       />

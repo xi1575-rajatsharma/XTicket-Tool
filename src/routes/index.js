@@ -9,6 +9,9 @@ import Reply from '../pages/ReplyPage';
 import { BrowserRouter, Route } from 'react-router-dom';
 import Tickets from '../Components/Tickets'
 import ReportPage from '../pages/ReportPage';
+
+import ResetPassword from '../Views/resetPassword';
+
 import approvalView from '../Views/approvalView';
 
 
@@ -24,6 +27,7 @@ export const routes = () => {
       {/* <Route exact={true} path='/ticket/:ticket_id' component={Reply} /> */}
       {/* <Route exact={true} path='/addtickets' component={userHasLogin(Tickets)} /> */}
       <Route exact={true} path='/reports' component={userHasLogin(ReportPage)} />
+      <Route exact={true} path='/reset-password' component={userHasLogin(ResetPassword)} />
       {/* 
            />
            */}

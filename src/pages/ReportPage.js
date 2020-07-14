@@ -1,7 +1,11 @@
 import React, { Component } from "react";
-import BarView from "../Views/BarView";
-import PieChart from "../Views/PieChart";
-import PieRating from "../Views/PieRating";
+import BarView from "../Views/Reports/BarView";
+import SLAUser from "../Views/Reports/SLAUser";
+import PieRating from "../Views/Reports/PieRating";
+import ViolationByStatus from "../Views/Reports/ViolationByStatus";
+import ViolationByTime from "../Views/Reports/ViolationByTime";
+import AchievedVsViolated from "../Views/Reports/AchievedVsViolated";
+import AverageEfficiency from "../Views/Reports/AverageEfficiency";
 
 import { fetch } from "../modules/httpServices";
 import { constants } from "../modules/constants";
@@ -116,6 +120,7 @@ class ReportPage extends Component {
           }
         });
       }
+
     );
     /////////////////////////////////API CALL 2////////////////////////////////////////////////
     fetch.get({
@@ -132,6 +137,12 @@ class ReportPage extends Component {
         });
       },
     });
+    fetch.get({
+      url: constants.SERVICE_URLS.SLA_MISSED_VS_ACHIEVED,
+      callbackHandler: (response) => {
+        console.log(response)
+      }
+    })
   };
   render() {
     return (
@@ -158,7 +169,7 @@ export default ReportPage;
                 </li>
                 <li>
                   <a href="">
-                    <strong>Happiness rating</strong>
+                    <strong>Average efficiency</strong>
                   </a>
                 </li>
               </ul>
@@ -168,12 +179,26 @@ export default ReportPage;
             <div className="report-container__right__BarChart">
               <BarView statusData={this.state.statusData} />
             </div>
+            <div className="report-container__right__AverageEfficiency">
+              <AverageEfficiency />
+            </div>
             <div className="report-container__right__Pierating">
               <PieRating ratings={this.state.rating} />
             </div>
-            <div className="report-container__right__Piechart">
-              PieChart
-              <PieChart />
+            <div className="report-container__right__SLAUser">
+              <SLAUser />
+            </div>
+            <div className="report-container__right__SLAUser">
+              <SLAUser />
+            </div>
+            <div className="report-container__right__ViolationByStatus">
+              <ViolationByStatus />
+            </div>
+            <div className="report-container__right__AchievedVsViolated">
+              <AchievedVsViolated />
+            </div>
+            <div className="report-container__right__ViolationByTime">
+              <ViolationByTime />
             </div>
           </div>
         </div>
