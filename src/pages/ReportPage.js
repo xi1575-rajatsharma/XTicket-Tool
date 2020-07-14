@@ -3,7 +3,7 @@ import BarView from "../Views/Reports/BarView";
 import SLAUser from "../Views/Reports/SLAUser";
 import PieRating from "../Views/Reports/PieRating";
 import ViolationByStatus from "../Views/Reports/ViolationByStatus";
-import ViolationByTime from "../Views/Reports/ViolationByTime";
+import ViolationByDate from "../Views/Reports/ViolationByDate";
 import AchievedVsViolated from "../Views/Reports/AchievedVsViolated";
 import AverageEfficiency from "../Views/Reports/AverageEfficiency";
 
@@ -34,6 +34,7 @@ class ReportPage extends Component {
         fourStars: 0,
         fiveStars: 0,
       },
+      achieved_vs_missed: {},
     };
   }
 
@@ -136,7 +137,33 @@ class ReportPage extends Component {
         });
       },
     });
+    ///////////////////////////////////////API CALL 3//////////////////////////////////////
+    fetch.get({
+      url: constants.SERVICE_URLS.MISSED_VS_ACHIEVED,
+      callbackHandler: (response) => {
+        const {
+          message,
+          payload: { result },
+        } = response;
+
+        //console.log(response.payload.result);
+        this.setState({
+          achieved_vs_missed: result,
+          message: message,
+        });
+        console.log(message);
+      },
+    });
+
+    //////////////////////////////////////API CALL 4/////////////////////////////////////
+    //   fetch.get({
+    //     url: constants.SERVICE_URLS.MISSED_BY_STATUS,
+    //     callbackHandler: (response) => {
+    //       console.log(response);
+    //     },
+    //   });
   };
+
   render() {
     return (
       <>
@@ -157,13 +184,6 @@ class ReportPage extends Component {
                 <li>
                   <a href="">
                     <strong>Happiness rating</strong>
-                  </a>
-                </li>
-                <li>
-                  <a href="">
-                    <strong>Monthly SLA violated</strong>
-                    <small>User</small>
-                    <small>Department</small>
                   </a>
                 </li>
                 <li>
@@ -194,20 +214,16 @@ class ReportPage extends Component {
             <div className="report-container__right__Pierating">
               <PieRating ratings={this.state.rating} />
             </div>
-            <div className="report-container__right__SLAUser">
-              <SLAUser />
-            </div>
-            <div className="report-container__right__SLAUser">
-              <SLAUser />
-            </div>
             <div className="report-container__right__ViolationByStatus">
               <ViolationByStatus />
             </div>
             <div className="report-container__right__AchievedVsViolated">
-              <AchievedVsViolated />
+              <AchievedVsViolated
+                achieved_vs_missed={this.state.achieved_vs_missed}
+              />
             </div>
             <div className="report-container__right__ViolationByTime">
-              <ViolationByTime />
+              <ViolationByDate />
             </div>
           </div>
         </div>

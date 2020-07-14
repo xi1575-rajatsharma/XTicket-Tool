@@ -3,7 +3,6 @@ import { Bar } from "react-chartjs-2";
 import "chartjs-plugin-datalabels";
 
 const BarView = ({ statusData }) => {
-  console.log(statusData);
   const xlabel = Object.keys(statusData);
   const ylabel = Object.values(statusData);
 

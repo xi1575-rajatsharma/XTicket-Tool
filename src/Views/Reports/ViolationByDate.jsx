@@ -1,7 +1,7 @@
 import React from "react";
 import { Line } from "react-chartjs-2";
 
-const ViolationByTime = ({ ratings }) => {
+const ViolationByDate = ({ ratings }) => {
   const state = {
     chartData: {
       labels: [
@@ -39,7 +39,7 @@ const ViolationByTime = ({ ratings }) => {
         options={{
           title: {
             display: true,
-            text: "SLA By Time",
+            text: "SLA By Date",
             fontSize: 20,
           },
           legend: {
@@ -51,4 +51,4 @@ const ViolationByTime = ({ ratings }) => {
   );
 };
 
-export default ViolationByTime;
+export default ViolationByDate;
