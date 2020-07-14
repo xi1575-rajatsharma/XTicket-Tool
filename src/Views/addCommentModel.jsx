@@ -2,8 +2,8 @@ import React from 'react';
 import { Modal, Button, Form } from 'react-bootstrap'
 
 function AddCommentModel(props) {
-    const { showModal, toggleModal, handleChange,handleAddComment, comment } = props;
-    console.log(comment)
+    const { showModal, toggleModal, handleChange, handleAddComment, comment } = props;
+
     return <Modal show={showModal} onHide={toggleModal} id='add-comment'>
         <Modal.Header closeButton>
             <Modal.Title>Add Comment</Modal.Title>
