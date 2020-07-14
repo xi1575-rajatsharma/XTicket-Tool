@@ -410,6 +410,12 @@ class TicketDetails extends Component {
                 conversationType: "Reply",
                 mailRecepients: this.state.ticketData.emailId
             });
+
+            /* 
+            "text":"Please check at your end, i just integrated email",
+	"conversationType":"Reply",
+	"mailRecepients":"ankur.saxena@xebia.com"
+            */
             const bodyFOrmData = new FormData();
 
 
@@ -419,7 +425,6 @@ class TicketDetails extends Component {
             // bodyFOrmData.set('mailRecepients', this.state.ticketData.emailId);
             if (replyOrComment === "reply") {
                 this.setState({ statusChangeLoading: true }, () => {
-
                     axios({
                         method: 'post',
                         url: constants.SERVICE_URLS.TICKET_REPLY + id,
