@@ -124,9 +124,17 @@ class ReportPage extends Component {
     );
     /////////////////////////////////API CALL 2////////////////////////////////////////////////
     fetch.get({
-      url: constants.SERVICE_URLS.XYZ,
+      url: constants.SERVICE_URLS.RATING,
       callbackHandler: (response) => {
-        console.log(response)
+        const {
+          message,
+          payload: { result },
+        } = response;
+        // console.log(result);
+        this.setState({
+          rating: result,
+          message: message,
+        });
       },
     });
     fetch.get({
