@@ -120,6 +120,7 @@ class ReportPage extends Component {
           }
         });
       }
+
     );
     /////////////////////////////////API CALL 2////////////////////////////////////////////////
     fetch.get({
@@ -128,10 +129,27 @@ class ReportPage extends Component {
         console.log(response)
       },
     });
+    fetch.get({
+      url: constants.SERVICE_URLS.XYZ,
+      callbackHandler: (response) => {
+        console.log(response)
+      }
+    })
   };
   render() {
     return (
-      <>
+      <div style={{ width: "100%", height: "100%", display: "flex", alignItems: "center", justifyContent: "center" }}>
+        <h1>Coming soon!</h1>
+      </div>
+    );
+  }
+}
+
+export default ReportPage;
+
+
+/*
+ <>
         <div className="report-container">
           <div className="report-container__left">
             <nav>
@@ -144,33 +162,6 @@ class ReportPage extends Component {
                 <li>
                   <a href="">
                     <strong>Average efficiency</strong>
-                  </a>
-                </li>
-                <li>
-                  <a href="">
-                    <strong>Happiness rating</strong>
-                  </a>
-                </li>
-                <li>
-                  <a href="">
-                    <strong>Monthly SLA violated</strong>
-                    <small>User</small>
-                    <small>Department</small>
-                  </a>
-                </li>
-                <li>
-                  <a href="">
-                    <strong>SLA by status</strong>
-                  </a>
-                </li>
-                <li>
-                  <a href="">
-                    <strong>Achieved vs Violated tickets</strong>
-                  </a>
-                </li>
-                <li>
-                  <a href="">
-                    <strong>SLA by time</strong>
                   </a>
                 </li>
               </ul>
@@ -204,8 +195,4 @@ class ReportPage extends Component {
           </div>
         </div>
       </>
-    );
-  }
-}
-
-export default ReportPage;
+*/

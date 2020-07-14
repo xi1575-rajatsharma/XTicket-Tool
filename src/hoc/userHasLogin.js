@@ -1,5 +1,5 @@
 import React from 'react';
-import { headerView as HeaderView } from '../Views/headerView';
+import { HeaderView as HeaderView } from '../Views/headerView';
 import { sidebarView as SidebarView } from '../Views/sidebarView';
 
 export const userHasLogin = (WrapperView) => {
@@ -7,6 +7,7 @@ export const userHasLogin = (WrapperView) => {
 
         constructor(props) {
             super(props);
+            console.log("hello")
         }
 
         onClickLogout = () => {
@@ -17,6 +18,7 @@ export const userHasLogin = (WrapperView) => {
 
         componentDidMount() {
             const token = window.localStorage.getItem('_token');
+
             if (token == null) {
                 this.props.history.push('/');
             }

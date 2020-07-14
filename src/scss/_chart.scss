@@ -5,8 +5,56 @@
 }
 
 .report-container__left {
+
   position: fixed;
   right: 0;
+
+  position: relative;
+  clear: both;
+  nav{
+    width: 100%;
+    height: 100%;
+    position: relative;
+    ul{
+      position: fixed;
+      top:4.8%;
+      left: 0;
+      width: 20%;
+      height: 100%;
+    }
+  }
+}
+@media only screen and (min-width: 1200px) {
+  .container {
+    width: 1210px;
+  }
+}
+
+@media only screen and (min-width: 960px) and (max-width: 1199px) {
+  .container {
+    width: 1030px;
+  }
+}
+
+@media only screen and (min-width: 768px) and (max-width: 959px) {
+  .container {
+    width: 682px;
+  }
+}
+
+@media only screen and (min-width: 480px) and (max-width: 767px) {
+  .container {
+    width: 428px;
+    margin: 0 auto;
+  }
+}
+
+@media only screen and (max-width: 479px) {
+  .container {
+    width: 320px;
+    margin: 0 auto;
+  }
+
 }
 
 .mcd-menu {
