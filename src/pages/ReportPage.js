@@ -1,11 +1,11 @@
 import React, { Component } from "react";
-import BarView from "../Views/BarView";
-import PieChart from "../Views/PieChart";
-import PieRating from "../Views/PieRating";
-import ViolationByStatus from "../Views/ViolationByStatus";
-import ViolationByTime from "../Views/ViolationByTime";
-import AchievedVsViolated from "../Views/AchievedVsViolated";
-import AverageEfficiency from "../Views/AverageEfficiency";
+import BarView from "../Views/Reports/BarView";
+import SLAUser from "../Views/Reports/SLAUser";
+import PieRating from "../Views/Reports/PieRating";
+import ViolationByStatus from "../Views/Reports/ViolationByStatus";
+import ViolationByTime from "../Views/Reports/ViolationByTime";
+import AchievedVsViolated from "../Views/Reports/AchievedVsViolated";
+import AverageEfficiency from "../Views/Reports/AverageEfficiency";
 
 import { fetch } from "../modules/httpServices";
 import { constants } from "../modules/constants";
@@ -151,22 +151,24 @@ class ReportPage extends Component {
                 </li>
                 <li>
                   <a href="">
+                    <strong>Average efficiency</strong>
+                  </a>
+                </li>
+                <li>
+                  <a href="">
                     <strong>Happiness rating</strong>
                   </a>
                 </li>
                 <li>
                   <a href="">
                     <strong>Monthly SLA violated</strong>
+                    <small>User</small>
+                    <small>Department</small>
                   </a>
                 </li>
                 <li>
                   <a href="">
-                    <strong>Violation by status</strong>
-                  </a>
-                </li>
-                <li>
-                  <a href="">
-                    <strong>Violations by time</strong>
+                    <strong>SLA by status</strong>
                   </a>
                 </li>
                 <li>
@@ -176,7 +178,7 @@ class ReportPage extends Component {
                 </li>
                 <li>
                   <a href="">
-                    <strong>Average efficiency</strong>
+                    <strong>SLA by time</strong>
                   </a>
                 </li>
               </ul>
@@ -186,23 +188,26 @@ class ReportPage extends Component {
             <div className="report-container__right__BarChart">
               <BarView statusData={this.state.statusData} />
             </div>
+            <div className="report-container__right__AverageEfficiency">
+              <AverageEfficiency />
+            </div>
             <div className="report-container__right__Pierating">
               <PieRating ratings={this.state.rating} />
             </div>
-            <div className="report-container__right__Piechart">
-              <PieChart />
+            <div className="report-container__right__SLAUser">
+              <SLAUser />
+            </div>
+            <div className="report-container__right__SLAUser">
+              <SLAUser />
             </div>
             <div className="report-container__right__ViolationByStatus">
               <ViolationByStatus />
             </div>
-            <div className="report-container__right__ViolationByTime">
-              <ViolationByTime />
-            </div>
             <div className="report-container__right__AchievedVsViolated">
               <AchievedVsViolated />
             </div>
-            <div className="report-container__right__AverageEfficiency">
-              <AverageEfficiency />
+            <div className="report-container__right__ViolationByTime">
+              <ViolationByTime />
             </div>
           </div>
         </div>

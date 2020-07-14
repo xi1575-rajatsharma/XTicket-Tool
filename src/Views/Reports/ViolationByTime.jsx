@@ -39,7 +39,7 @@ const ViolationByTime = ({ ratings }) => {
         options={{
           title: {
             display: true,
-            text: "Violation By Time",
+            text: "SLA By Time",
             fontSize: 20,
           },
           legend: {

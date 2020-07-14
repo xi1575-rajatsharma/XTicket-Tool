@@ -1,11 +1,10 @@
 import React from "react";
 import { Bar } from "react-chartjs-2";
-import "chartjs-plugin-datalabels";
 
 const AverageEfficiency = () => {
   const state = {
     chartData: {
-      labels: ["week1", "week2", "week3", "week4"],
+      labels: ["OPEN", "INPROGRESS", "AWATING", "REVIEW"],
       datasets: [
         {
           data: ["8", "8", "8", "8"],
@@ -32,14 +31,6 @@ const AverageEfficiency = () => {
             // align: "left",
             fontSize: 20,
           },
-
-          plugins: {
-            datalabels: {
-              display: true,
-              color: "white",
-            },
-          },
-
           scales: {
             xAxes: [
               {
@@ -62,15 +53,10 @@ const AverageEfficiency = () => {
           },
           legend: {
             display: false,
-            labels: {
-              fontColor: "#000000",
-              fontSize: 20,
-            },
           },
         }}
       />
     </div>
   );
 };
-
 export default AverageEfficiency;
