@@ -39,11 +39,21 @@ axios.interceptors.response.use(function (config) {
     return config;
 
 }, function (error) {
-    // if ([403].includes(error.response.status)) {
-    //     window.localStorage.removeItem('_token');
-    //     window.localStorage.removeItem('_userInfo');
-    //     window.location = '/'
-    // }
+    if ([403].includes(error.response.status)) {
+        if (window.location.pathname.includes('/ticketlist/')) {
+            window.localStorage.removeItem('_token');
+            window.localStorage.removeItem('_userInfo');
+            window.location = `/?redirectTo=${window.location.pathname}`
+            console.log("hello")
+
+        } else {
+            window.localStorage.removeItem('_token');
+            window.localStorage.removeItem('_userInfo');
+            window.location = `/`
+        }
+
+
+    }
 
     return Promise.reject(error);
 });

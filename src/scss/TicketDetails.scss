@@ -582,56 +582,83 @@
             }
             
             .assigned-icon-wrapper{
+                position:absolute;
+                left: .5em;
+                top:.15em;
                 width: 8.404%;
-                height: 120%;
+                height: 100%;
                 background:url('../images/icons/ASSIGNED.png') no-repeat;
                 background-size:100%;
             }
             .raised-icon-wrapper{
+                position:absolute;
+                left: .5em;
+                top:.15em;
                 width: 8.404%;
-                height: 120%;
+                height: 100%;
                 background:url('../images/icons/OPEN.png') no-repeat;
                 background-size:100%;
             }
             .resolving-icon-wrapper{
+                position:absolute;
+                left: .5em;
+                top:.15em;
                 width: 8.404%;
-                height: 120%;
+                height: 100%;
                 background:url('../images/icons/INPROGRESS.png') no-repeat;
                 background-size:100%;
             }
             .awaiting-icon-wrapper{
+                position:absolute;
+                left: .5em;
+                top:.15em;
                 width: 8.404%;
-                height: 120%;
+                height: 100%;
                 background:url('../images/icons/AWAITING.png') no-repeat;
                 background-size:100%;
             }
             .review-icon-wrapper{
+                position:absolute;
+                left: .5em;
+                top:.15em;
                 width: 8.404%;
-                height: 120%;
+                height: 100%;
                 background:url('../images/icons/AWAITING.png') no-repeat;
                 background-size:100%;
             }
             .escalated-icon-wrapper{
+                position:absolute;
+                left: .5em;
+                top:.15em;
                 width: 8.404%;
-                height: 120%;
+                height: 100%;
                 background:url('../images/icons/ESCALATED.png') no-repeat;
                 background-size:100%;
             }
             .closed-icon-wrapper{
+                position:absolute;
+                left: .5em;
+                top:.15em;
                 width: 8.404%;
-                height: 120%;
+                height: 100%;
                 background:url('../images/icons/CLOSED.png') no-repeat;
                 background-size:100%;
             }
             .re-opened-icon-wrapper{
+                position:absolute;
+                left: .5em;
+                top:.15em;
                 width: 8.404%;
-                height: 120%;
+                height: 100%;
                 background:url('../images/icons/REOPENED.png') no-repeat;
                 background-size:100%;
             }
             .resolved-icon-wrapper{
+                position:absolute;
+                left: .5em;
+                top:.15em;
                 width: 8.404%;
-                height: 120%;
+                height: 100%;
                 background:url('../images/icons/RESOLVED.png') no-repeat;
                 background-size:100%;
             }
@@ -642,7 +669,7 @@
                 justify-content: flex-start;
                 align-items: center;
                 border-bottom: 1px solid black;
-                margin-left: 10px;
+                margin-left: 5em;
             }
         }
     }
