@@ -1,15 +1,30 @@
 import React from "react";
 import { Bar } from "react-chartjs-2";
 
-const ViolationByStatus = () => {
+const ViolationByStatus = ({ status }) => {
+  const statusData = status ? status.map((data) => data.status) : null;
+  const countData = status ? status.map((data) => data.count) : null;
+
+
   const state = {
     chartData: {
-      labels: ["OPEN", "INPROGRESS", "AWATING", "REVIEW"],
+      labels: statusData,
       datasets: [
         {
-          data: [1, 5, 6, 3],
-        },
+          data: countData,
+          backgroundColor: [
+            "#32CD32",
+            "#ffbf00",
+            "#FFFF00",
+            "#0000CD",
+            "#DC143C",
+            "#ff471a",
+            "#333300",
+            "#008fb3",
+          ]
+        }
       ],
+
     },
   };
 
@@ -21,9 +36,10 @@ const ViolationByStatus = () => {
         options={{
           title: {
             display: true,
-            text: "SLA By Status",
+            text: "SLA's Missed By Status",
             fontSize: 20,
           },
+
           scales: {
             xAxes: [
               {
@@ -40,6 +56,7 @@ const ViolationByStatus = () => {
                 gridLines: {
                   display: true,
                 },
+                stacked: true
               },
             ],
           },

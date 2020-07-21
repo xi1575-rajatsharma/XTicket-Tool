@@ -27,12 +27,17 @@
         height: 3rem;
         border-radius: 4px;
         border: none;
-        outline-offset: 10px;
-        transition: all .2s;
-
+        outline-offset: 3px;
+        transition: all .1s ease-out;
+        box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.678);
+        
         &:focus{
-            outline: 5px solid white;
-            transform: translateY(-3px) skewY(2deg);
+            outline: 3px solid white;
+            // transform: translateY(-1px);
+            box-shadow: 0 2rem 3rem rgb(0, 0, 0);
+        }
+        &:focus reset-eye--closed{
+            margin-left:0 ;
         }
     }
     &__emailInput{
@@ -45,8 +50,19 @@
         text-decoration: none;
         font-size: 1.2rem;
         padding: 5px 40px;
-        border-radius: 100px;
+        // border-radius: 100px;
         position: relative;
+        transition: all .2s;
+        
+    }
+
+    &__btn:hover{
+        transform: translateY(-4px);
+        box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.678);
+    }
+    &__btn:active{
+        transform: translateY(-1px);
+        box-shadow: 0 .5rem 1rem rgba(0, 0, 0, 0.678);
     }
 
     &__btn--white{
@@ -64,20 +80,36 @@
         left: 0;
         width: 100%;
         height: 100%;
-        border-radius: 100px;
+        // border-radius: 100px;
         z-index: -1;
         transition: all .4s ease-out;
     }
 
     &__btn:hover::after{
-        transform: scaleX(1.6) scaleY(1.4);
+        transform: scaleX(1.1) scaleY(1.2);
         opacity: 0;
     }
     &__btn:hover{
         color: #300d2a;
     }
 
-
+    &__password{
+        &--visible{
+        margin-left: -2rem;
+        z-index: 1000;
+    }
+    &-eye--closed{
+        height: 16px;
+        cursor: pointer;
+        z-index: 1000;
+    }
+    &-eye--open{
+        height: 16px;
+        cursor: pointer;
+    }
+    }
+    
+    
 
     
 }

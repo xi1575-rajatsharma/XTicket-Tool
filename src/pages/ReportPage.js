@@ -35,6 +35,11 @@ class ReportPage extends Component {
         fiveStars: 0,
       },
       achieved_vs_missed: {},
+      status: null,
+      average_efficiency: {},
+      averageHours: 0,
+      statusByDate: [],
+      view: "ticketStatus"
     };
   }
 
@@ -121,7 +126,6 @@ class ReportPage extends Component {
           }
         });
       }
-
     );
     /////////////////////////////////API CALL 2////////////////////////////////////////////////
     fetch.get({
@@ -152,24 +156,127 @@ class ReportPage extends Component {
           achieved_vs_missed: result,
           message: message,
         });
-        console.log(message);
+        // console.log(message);
       },
     });
 
     //////////////////////////////////////API CALL 4/////////////////////////////////////
-    //   fetch.get({
-    //     url: constants.SERVICE_URLS.MISSED_BY_STATUS,
-    //     callbackHandler: (response) => {
-    //       console.log(response);
-    //     },
-    //   });
+    fetch.get({
+      url: constants.SERVICE_URLS.MISSED_BY_STATUS,
+      callbackHandler: (response) => {
+        const {
+          message,
+          payload: { data },
+        } = response;
+        this.setState({
+          status: data,
+        });
+      },
+    });
+
+    /////////////////////////////////////////API CALL 5//////////////////////////////////
+    fetch.get({
+      url: constants.SERVICE_URLS.AVERAGE_EFFICIENCY,
+      callbackHandler: (response) => {
+        // console.log(response);
+        const {
+          message,
+          payload: { data },
+        } = response;
+        this.setState({
+          average_efficiency: data,
+        });
+        //console.log(payload);
+        //console.log(this.state.average_efficiency);
+        let sum = 0;
+        for (let i of this.state.average_efficiency) {
+          sum += i.hoursToRespond;
+        }
+        let average = sum / this.state.average_efficiency.length;
+        //console.log("average" + average);
+        this.setState({
+          averageHours: average,
+        });
+        //console.log(this.state.averageHours);
+      },
+    });
+    ////////////////////////////////////////////API CALL 6///////
+    fetch.get({
+      url: constants.SERVICE_URLS.SLA_DATE,
+      callbackHandler: (response) => {
+        const { message, payload: { data } } = response
+        this.setState({ statusByDate: data })
+        // const {
+        //   message,
+        //   payload: { result },
+        // } = response;
+        // console.log(result);
+        // this.setState({
+        //   rating: result,
+        //   message: message,
+        // });
+      },
+    });
   };
 
   render() {
     return (
-      <div style={{ width: "100%", height: "100%", display: "flex", alignItems: "center", justifyContent: "center" }}>
-        <h1>Coming soon!</h1>
-      </div>
+      <>
+        <div className="report-container">
+          <div className="report-container__left">
+            <nav>
+              <ul class="mcd-menu">
+                <li>
+                  <a href="#" onClick={() => this.setState({ view: "ticketStatus" })}>
+                    <strong>Ticket Status</strong>
+                  </a>
+                </li>
+                <li>
+                  <a href="#" onClick={() => this.setState({ view: "performance" })}>
+                    <strong>Your Performance</strong>
+                  </a>
+                </li>
+                <li>
+                  <a href="#" onClick={() => this.setState({ view: "SLA" })}>
+                    <strong>SLA's Missed</strong>
+                  </a>
+                </li>
+
+              </ul>
+            </nav>
+          </div>
+          <div className="report-container__right">
+            {this.state.view === "ticketStatus" ?
+              <div className="report-container__right__BarChart">
+                <BarView statusData={this.state.statusData} />
+              </div> : null}
+            {this.state.view === "performance" ?
+              <>
+                <div className="report-container__right__AverageEfficiency" title="Average time taken to solve tickets">
+                  <AverageEfficiency averageHours={this.state.averageHours} />
+                </div>
+                <div className="report-container__right__Pierating">
+                  <PieRating ratings={this.state.rating} />
+                </div> </> : null}
+            {this.state.view === "SLA" ?
+              <>
+                <div className="report-container__right__ViolationByStatus">
+                  <ViolationByStatus status={this.state.status} />
+                </div>
+                <div className="report-container__right__AchievedVsViolated" >
+                  <AchievedVsViolated
+                    achieved_vs_missed={this.state.achieved_vs_missed}
+                  />
+                </div>
+                <div className="report-container__right__ViolationByTime" >
+                  <ViolationByDate statusByDate={this.state.statusByDate} />
+                </div>
+              </>
+              : null}
+
+          </div>
+        </div>
+      </>
     );
   }
 }
@@ -178,69 +285,59 @@ export default ReportPage;
 
 
 /*
- <>
-        <div className="report-container">
+
+ <div className="report-container">
           <div className="report-container__left">
             <nav>
               <ul class="mcd-menu">
                 <li>
-                  <a href="">
+                  <a href="#" onClick={() => this.setState({ view: "ticketStatus" })}>
                     <strong>Ticket Status</strong>
                   </a>
                 </li>
                 <li>
-                  <a href="">
-                    <strong>Average efficiency</strong>
-                  </a>
-                </li>
-<<<<<<< HEAD
-=======
-                <li>
-                  <a href="">
-                    <strong>Happiness rating</strong>
+                  <a href="#" onClick={() => this.setState({ view: "performance" })}>
+                    <strong>Your Performance</strong>
                   </a>
                 </li>
                 <li>
-                  <a href="">
-                    <strong>SLA by status</strong>
+                  <a href="#" onClick={() => this.setState({ view: "SLA" })}>
+                    <strong>SLA's Missed</strong>
                   </a>
                 </li>
-                <li>
-                  <a href="">
-                    <strong>Achieved vs Violated tickets</strong>
-                  </a>
-                </li>
-                <li>
-                  <a href="">
-                    <strong>SLA by time</strong>
-                  </a>
-                </li>
->>>>>>> 2ca6127c5c5c6f4648ea6f9f472ba5031ee60eb2
+
               </ul>
             </nav>
           </div>
           <div className="report-container__right">
-            <div className="report-container__right__BarChart">
-              <BarView statusData={this.state.statusData} />
-            </div>
-            <div className="report-container__right__AverageEfficiency">
-              <AverageEfficiency />
-            </div>
-            <div className="report-container__right__Pierating">
-              <PieRating ratings={this.state.rating} />
-            </div>
-            <div className="report-container__right__ViolationByStatus">
-              <ViolationByStatus />
-            </div>
-            <div className="report-container__right__AchievedVsViolated">
-              <AchievedVsViolated
-                achieved_vs_missed={this.state.achieved_vs_missed}
-              />
-            </div>
-            <div className="report-container__right__ViolationByTime">
-              <ViolationByDate />
-            </div>
+            {this.state.view === "ticketStatus" ?
+              <div className="report-container__right__BarChart">
+                <BarView statusData={this.state.statusData} />
+              </div> : null}
+            {this.state.view === "performance" ?
+              <>
+                <div className="report-container__right__AverageEfficiency">
+                  <AverageEfficiency averageHours={this.state.averageHours} />
+                </div>
+                <div className="report-container__right__Pierating">
+                  <PieRating ratings={this.state.rating} />
+                </div> </> : null}
+            {this.state.view === "SLA" ?
+              <>
+                <div className="report-container__right__ViolationByStatus">
+                  <ViolationByStatus status={this.state.status} />
+                </div>
+                <div className="report-container__right__AchievedVsViolated">
+                  <AchievedVsViolated
+                    achieved_vs_missed={this.state.achieved_vs_missed}
+                  />
+                </div>
+                <div className="report-container__right__ViolationByTime">
+                  <ViolationByDate />
+                </div>
+              </>
+              : null}
+
           </div>
         </div>
-      </>
 */

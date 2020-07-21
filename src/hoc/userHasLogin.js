@@ -7,7 +7,7 @@ export const userHasLogin = (WrapperView) => {
 
         constructor(props) {
             super(props);
-            console.log("hello")
+
         }
 
         onClickLogout = () => {

@@ -1,61 +1,28 @@
-import React from "react";
-import { Bar } from "react-chartjs-2";
+import React, { useState, useEffect } from "react";
+import CountUp from "react-countup";
 
-const AverageEfficiency = () => {
-  const state = {
-    chartData: {
-      labels: ["OPEN", "INPROGRESS", "AWATING", "REVIEW"],
-      datasets: [
-        {
-          data: ["8", "8", "8", "8"],
-          backgroundColor: [
-            "#32CD32",
-            "#FFFF00",
-            "#0000CD",
-            "#ff471a"
-          ],
-        },
-      ],
-    },
-  };
+const AverageEfficiency = ({ averageHours }) => {
+  const [count, setCount] = useState(0);
+
+  useEffect(() => {
+    let x = 0;
+    const timer = setInterval(() => {
+      if (x <= Math.floor(averageHours)) {
+        x++;
+        setCount(x);
+      } else {
+        clearInterval(timer);
+      }
+    }, 10);
+  }, []);
 
   return (
-    <div>
-      <Bar
-        data={state.chartData}
-        height={200}
-        options={{
-          title: {
-            display: true,
-            text: "Average Efficiency",
-            // align: "left",
-            fontSize: 20,
-          },
-          scales: {
-            xAxes: [
-              {
-                barPercentage: 0.4,
-                display: true,
-                gridLines: {
-                  display: false,
-                },
-              },
-            ],
-            yAxes: [
-              {
-                barPercentage: 0.4,
-                display: true,
-                gridLines: {
-                  display: true,
-                },
-              },
-            ],
-          },
-          legend: {
-            display: false,
-          },
-        }}
-      />
+    <div className="averageEfficiency">
+      <p>average Hours</p>
+      <div className="averageEfficiency__hour" title={false} >
+        <CountUp end={averageHours ? averageHours : 0} duration={3} />
+        <span className="averageEfficiency__hrs">Hrs</span>
+      </div>
     </div>
   );
 };

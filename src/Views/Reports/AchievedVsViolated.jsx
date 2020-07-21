@@ -27,9 +27,15 @@ const AchievedVsViolated = (achieved_vs_missed) => {
         options={{
           title: {
             display: true,
-            text: "Achieved vs Violated",
+            text: "Achieved vs Violated SLA's",
             fontSize: 20,
             align: "right",
+          },
+          plugins: {
+            datalabels: {
+              display: true,
+              color: "white",
+            },
           },
           cutoutPercentage: 80,
           legend: {
