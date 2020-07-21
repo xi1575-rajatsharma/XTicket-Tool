@@ -3,7 +3,6 @@ import CountUp from "react-countup";
 
 const AverageEfficiency = ({ averageHours }) => {
   const [count, setCount] = useState(0);
-
   useEffect(() => {
     let x = 0;
     const timer = setInterval(() => {

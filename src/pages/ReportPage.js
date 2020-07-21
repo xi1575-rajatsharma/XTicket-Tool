@@ -204,17 +204,14 @@ class ReportPage extends Component {
     fetch.get({
       url: constants.SERVICE_URLS.SLA_DATE,
       callbackHandler: (response) => {
-        const { message, payload: { data } } = response
-        this.setState({ statusByDate: data })
-        // const {
-        //   message,
-        //   payload: { result },
-        // } = response;
-        // console.log(result);
-        // this.setState({
-        //   rating: result,
-        //   message: message,
-        // });
+        const {
+          message,
+          payload: { data }
+        } = response;
+        console.log(data);
+        this.setState({
+          statusByDate: data
+        });
       },
     });
   };
@@ -227,13 +224,13 @@ class ReportPage extends Component {
             <nav>
               <ul class="mcd-menu">
                 <li>
-                  <a href="#" onClick={() => this.setState({ view: "ticketStatus" })}>
+                  <a href="#" onClick={() => this.setState({ view: "ticketStatus" })} >
                     <strong>Ticket Status</strong>
                   </a>
                 </li>
                 <li>
                   <a href="#" onClick={() => this.setState({ view: "performance" })}>
-                    <strong>Your Performance</strong>
+                    <strong>Performance</strong>
                   </a>
                 </li>
                 <li>
@@ -241,7 +238,6 @@ class ReportPage extends Component {
                     <strong>SLA's Missed</strong>
                   </a>
                 </li>
-
               </ul>
             </nav>
           </div>
@@ -249,31 +245,29 @@ class ReportPage extends Component {
             {this.state.view === "ticketStatus" ?
               <div className="report-container__right__BarChart">
                 <BarView statusData={this.state.statusData} />
-              </div> : null}
-            {this.state.view === "performance" ?
-              <>
-                <div className="report-container__right__AverageEfficiency" title="Average time taken to solve tickets">
-                  <AverageEfficiency averageHours={this.state.averageHours} />
-                </div>
-                <div className="report-container__right__Pierating">
-                  <PieRating ratings={this.state.rating} />
-                </div> </> : null}
-            {this.state.view === "SLA" ?
-              <>
-                <div className="report-container__right__ViolationByStatus">
-                  <ViolationByStatus status={this.state.status} />
-                </div>
-                <div className="report-container__right__AchievedVsViolated" >
-                  <AchievedVsViolated
-                    achieved_vs_missed={this.state.achieved_vs_missed}
-                  />
-                </div>
-                <div className="report-container__right__ViolationByTime" >
-                  <ViolationByDate statusByDate={this.state.statusByDate} />
-                </div>
-              </>
-              : null}
-
+              </div> :
+              this.state.view === "performance" ?
+                <>
+                  <div className="report-container__right__AverageEfficiency">
+                    <AverageEfficiency averageHours={this.state.averageHours} />
+                  </div>
+                  <div className="report-container__right__Pierating">
+                    <PieRating ratings={this.state.rating} />
+                  </div> </> :
+                this.state.view === "SLA" ?
+                  <>
+                    <div className="report-container__right__ViolationByStatus">
+                      <ViolationByStatus status={this.state.status} />
+                    </div>
+                    <div className="report-container__right__AchievedVsViolated">
+                      <AchievedVsViolated
+                        achieved_vs_missed={this.state.achieved_vs_missed}
+                      />
+                    </div>
+                    <div className="report-container__right__ViolationByTime">
+                      <ViolationByDate statusByDate={this.state.statusByDate} />
+                    </div></> : null
+            }
           </div>
         </div>
       </>
@@ -282,62 +276,3 @@ class ReportPage extends Component {
 }
 
 export default ReportPage;
-
-
-/*
-
- <div className="report-container">
-          <div className="report-container__left">
-            <nav>
-              <ul class="mcd-menu">
-                <li>
-                  <a href="#" onClick={() => this.setState({ view: "ticketStatus" })}>
-                    <strong>Ticket Status</strong>
-                  </a>
-                </li>
-                <li>
-                  <a href="#" onClick={() => this.setState({ view: "performance" })}>
-                    <strong>Your Performance</strong>
-                  </a>
-                </li>
-                <li>
-                  <a href="#" onClick={() => this.setState({ view: "SLA" })}>
-                    <strong>SLA's Missed</strong>
-                  </a>
-                </li>
-
-              </ul>
-            </nav>
-          </div>
-          <div className="report-container__right">
-            {this.state.view === "ticketStatus" ?
-              <div className="report-container__right__BarChart">
-                <BarView statusData={this.state.statusData} />
-              </div> : null}
-            {this.state.view === "performance" ?
-              <>
-                <div className="report-container__right__AverageEfficiency">
-                  <AverageEfficiency averageHours={this.state.averageHours} />
-                </div>
-                <div className="report-container__right__Pierating">
-                  <PieRating ratings={this.state.rating} />
-                </div> </> : null}
-            {this.state.view === "SLA" ?
-              <>
-                <div className="report-container__right__ViolationByStatus">
-                  <ViolationByStatus status={this.state.status} />
-                </div>
-                <div className="report-container__right__AchievedVsViolated">
-                  <AchievedVsViolated
-                    achieved_vs_missed={this.state.achieved_vs_missed}
-                  />
-                </div>
-                <div className="report-container__right__ViolationByTime">
-                  <ViolationByDate />
-                </div>
-              </>
-              : null}
-
-          </div>
-        </div>
-*/
