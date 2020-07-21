@@ -1,10 +1,16 @@
-import React from "react";
+import React, { useState } from "react";
 import { Doughnut } from "react-chartjs-2";
+import { set } from "lodash";
 
 const PieRating = ({ ratings }) => {
-  // console.log(ratings);
+  const [count, setCount] = useState(0);
+  // for (let rating of ratings) {
+  //   console.log(rating)
+  // }
+
   const xlabel = Object.keys(ratings);
   const ylabel = Object.values(ratings);
+
   const state = {
     chartData: {
       labels: xlabel,
@@ -12,11 +18,11 @@ const PieRating = ({ ratings }) => {
         {
           data: ylabel,
           backgroundColor: [
-            "#FFFFCC	",
-            "#FFFF99",
-            "#FFFF66",
-            "#FFFF33",
-            "#ffc40c",
+            "red",
+            "#FF4D00",
+            "#FF4D00",
+            "#76BA1B",
+            "#1E5631",
           ],
         },
       ],
@@ -25,15 +31,23 @@ const PieRating = ({ ratings }) => {
 
   return (
     <div>
+
       <Doughnut
         data={state.chartData}
         height={130}
         options={{
+
           title: {
             display: true,
             text: "Happiness Rating",
             fontSize: 20,
             align: "left",
+          },
+          plugins: {
+            datalabels: {
+              display: true,
+              color: "white",
+            },
           },
           animation: {
             animateScale: true,
@@ -45,9 +59,10 @@ const PieRating = ({ ratings }) => {
             position: "right",
             labels: {
               fontColor: "#000000",
-              fontSize: 10,
+              fontSize: 12,
             },
           },
+          responsiveAnimationDuration: 5
         }}
       />
     </div>

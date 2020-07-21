@@ -98,7 +98,7 @@ export default class TicketListingPage extends React.Component {
                     _state.message = '';
                     _state.listingData = cloneDeep(payload.result.tickets);
                     // _state.listingData.sort((a, b) => b.id - a.id)
-                    console.log(_state.listingData)
+
                     window.localStorage.setItem('_listingData', JSON.stringify(_state.listingData))
                     _state.listingData = _state.listingData.filter(ticket => ticket.status === "OPEN")
                     _state.view = "Xenie"

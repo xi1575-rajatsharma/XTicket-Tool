@@ -1,6 +1,6 @@
 const API_HOST_PATH = "http://168.63.250.105";
 // http://3.7.115.94
-//const API_HOST_PATH = "https://xdesk.herokuapp.com";
+// const API_HOST_PATH = "https://xdesk.herokuapp.com";
 export const constants = {
   SUCCESS: "success",
   FAILURE: "failure",
@@ -26,8 +26,11 @@ export const constants = {
     SLAS_USER_RESOLVED: `${API_HOST_PATH}/ticket-tool/v1/analytics/slas/user/resolved`,
     SLAS_DEPARTMENT_RESOLVED: `${API_HOST_PATH}/ticket-tool/v1/analytics/slas/department/resolved`,
     MISSED_VS_ACHIEVED: `${API_HOST_PATH}/ticket-tool/v1/tickets/user/achieved/missed`,
-    MISSED_BY_STATUS: `${API_HOST_PATH}/ticket-tool/v1/tickets/missed/{date}`,
+    MISSED_BY_STATUS: `${API_HOST_PATH}/ticket-tool/v1/tickets/missed/byuser/status`,
+    AVERAGE_EFFICIENCY: `${API_HOST_PATH}/ticket-tool/v1/tickets/user/efficiency`,
+    SLA_DATE: `${API_HOST_PATH}/ticket-tool/v1/tickets/user/missed/datewise/count`,
+    RESET_PASSWORD: `${API_HOST_PATH}/ticket-tool/v1/users/reset-password`
   },
-
+  // /v1/tickets/missed/byuser/status
   NO_DATA_FOUND: "No results found...",
 };

@@ -67,7 +67,7 @@ const TicketView = (payload) => {
     }
 
     const switchChanges = (status) => {
-        console.log(status)
+
         switch (status.status) {
             case "ASSIGNED":
                 return (
@@ -82,7 +82,7 @@ const TicketView = (payload) => {
                         <div className="raised-icon-wrapper"></div>
                         <div className="change-text-wrapper"  >Ticket Assigned to: {status.assignedTo}</div>
                         {status.assignedToReason ? <img src={info} height="25px" title={status.assignedToReason === "Default Assignment" ? "Default Assignment" : status.assignedToReason.split(':')[1]} /> : null}
-                        {console.log(status)}
+
                     </React.Fragment>
                 )
             case "INPROGRESS":
@@ -272,7 +272,7 @@ const TicketView = (payload) => {
                                             allStatus ?
                                                 allStatus.map((status) => {
                                                     return (
-                                                        status.id === 6 || status.id === 2 || status.id === 7 || status.id === 8 ? <option key={status.id} value={status.status} disabled>{status.status}</option> :
+                                                        status.id === 1 || status.id === 6 || status.id === 2 || status.id === 7 || status.id === 8 || status.id === 9 ? <option key={status.id} value={status.status} disabled>{status.status}</option> :
                                                             <option key={status.id} value={status.status}>{status.status}</option>
 
                                                     )
@@ -449,6 +449,7 @@ const TicketView = (payload) => {
                                     </div>
 
                                 </React.Fragment> : null}
+
                             {
                                 display === 'id_history' ?
                                     ticketJourney ?
@@ -476,6 +477,7 @@ const TicketView = (payload) => {
                                 display === 'id_attachment' ?
                                     ticketData.fileName ?
                                         <a className="attachment-anchor" href={constants.SERVICE_URLS.DOWNLOAD_FILE + ticketData.fileName} download><div className="attachment-holder"> <img src={attachment} height="30px" width="30px" /> <div className="attachment-icon-holder"></div>{ticketData.fileName}</div></a> : <div className="nothing-found"> <p>No Attachments</p></div>
+
                                     : null
 
                             }

@@ -43,21 +43,17 @@ axios.interceptors.response.use(function (config) {
         if (window.location.pathname.includes('/ticketlist/')) {
             window.localStorage.removeItem('_token');
             window.localStorage.removeItem('_userInfo');
+            // window.location = `/?redirectTo=${window.location.pathname}`
             window.location = `/?redirectTo=${window.location.pathname}`
-            console.log("hello")
-
-        } else {
-            window.localStorage.removeItem('_token');
-            window.localStorage.removeItem('_userInfo');
-            window.location = `/`
         }
-
-
     }
 
     return Promise.reject(error);
 });
 
+const redirect = () => {
+    window.location = `/?redirectTo=${window.location.pathname}`
+}
 /* 
 [12/06 16:41] Bhardwaj Chaudhary
     

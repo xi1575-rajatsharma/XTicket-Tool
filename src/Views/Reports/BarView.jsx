@@ -29,16 +29,10 @@ const BarView = ({ statusData }) => {
 
   return (
     <div>
-
       <Bar
         data={state.chartData}
-        height={130}
-        // width="500px"
-        // margin="none"
+        height={100}
         options={{
-          // responsive: true,
-          // aspectRatio: 2,
-          // maintainAspectRatio: true,
           title: {
             display: true,
             text: "Tickets Status",
@@ -69,6 +63,7 @@ const BarView = ({ statusData }) => {
                 gridLines: {
                   display: true,
                 },
+                stacked: true
               },
             ],
           },
