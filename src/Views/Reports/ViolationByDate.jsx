@@ -4,7 +4,6 @@ import { Line } from "react-chartjs-2";
 const ViolationByDate = ({ statusByDate }) => {
 
   const dates = statusByDate.map(xLabel => {
-    const dateObj = new Date(xLabel.localDateTime)
     return (
       xLabel.localDateTime
     )

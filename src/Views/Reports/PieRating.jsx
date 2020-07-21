@@ -7,9 +7,10 @@ const PieRating = ({ ratings }) => {
   // for (let rating of ratings) {
   //   console.log(rating)
   // }
+  // console.log(ratings)
+  const xlabel = Object.keys(ratings ? ratings : null);
 
-  const xlabel = Object.keys(ratings);
-  const ylabel = Object.values(ratings);
+  const ylabel = Object.values(ratings ? ratings : null);
 
   const state = {
     chartData: {
