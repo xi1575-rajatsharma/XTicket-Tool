@@ -906,6 +906,21 @@ textarea{
         }
     }
 }
+
+.ticket-brief-approvers{
+    margin-bottom: 0 !important;
+}
+
+#approved{
+    color: green;
+    font-size: 20px;
+    cursor: pointer;
+}
+#rejected{
+    color: red;
+    font-size: 20px;
+    cursor: pointer;
+}
 // #reply-send{
 //     background-color: #0c2549;
 //     width: 150px;

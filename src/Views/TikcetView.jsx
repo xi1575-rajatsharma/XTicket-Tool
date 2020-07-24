@@ -10,14 +10,14 @@ import SlidingPanel from './slidingPanel';
 import { constants } from '../modules/constants';
 import attachment from '../images/attachment.png'
 import info from '../images/info.svg'
-
+import loading from '../images/loading.png'
 
 
 
 const TicketView = (payload) => {
     const [display, isVisible] = useState('id_conversation');
     const [ticketStatusPopup, shouldDisplay] = useState('no');
-    const { ticketData, ticketReplies, changeSelectValue, changeStatusValue, resolutionChangeHandler, resolutionSubmitHandler, statusHandler, resolutionText, allAdminUsers, ticketJourney, replyChangeHandler, replySubmitHandler, allStatus, isLoading, statusChangeLoading, listingData, updateTicketData, fileSelect, downloadFile } = payload;
+    const { ticketData, ticketReplies, changeSelectValue, changeStatusValue, resolutionChangeHandler, resolutionSubmitHandler, statusHandler, resolutionText, allAdminUsers, ticketJourney, replyChangeHandler, replySubmitHandler, allStatus, isLoading, statusChangeLoading, listingData, updateTicketData, fileSelect, approvals } = payload;
     const [displayreplybox, showreplybox] = useState(false);
     const [displaycommentbox, showcommentbox] = useState(false);
     const [sideBarOpen, setSideBarOpen] = useState(false)
@@ -96,7 +96,7 @@ const TicketView = (payload) => {
                 return (
                     <React.Fragment>
                         <div className="awaiting-icon-wrapper"></div>
-                        <div className="change-text-wrapper">Awaiting for your response</div>
+                        <div className="change-text-wrapper">Awaiting for approvers to approve</div>
                     </React.Fragment>
                 )
             case "REVIEW":
@@ -265,23 +265,26 @@ const TicketView = (payload) => {
                                 </div>
 
                                 <div className="status-wrapper">
+
                                     <span>Status</span>
-                                    <select className="ticket-brief-status-select" value={ticketData.status} onChange={(e) => { changeStatusValue(e.target.value) }}>
+                                    {
+                                        ticketData.status === "AWAITING" ? "AWAITING" :
+                                            <select className="ticket-brief-status-select" value={ticketData.status} onChange={(e) => { changeStatusValue(e.target.value) }}>
 
-                                        {
-                                            allStatus ?
-                                                allStatus.map((status) => {
-                                                    return (
-                                                        status.id === 1 || status.id === 6 || status.id === 2 || status.id === 7 || status.id === 8 || status.id === 9 ? <option key={status.id} value={status.status} disabled>{status.status}</option> :
-                                                            <option key={status.id} value={status.status}>{status.status}</option>
+                                                {
+                                                    allStatus ?
+                                                        allStatus.map((status) => {
+                                                            return (
+                                                                status.id === 1 || status.id === 6 || status.id === 2 || status.id === 7 || status.id === 8 || status.id === 4 || status.id === 9 ? <option key={status.id} value={status.status} disabled>{status.status}</option> :
+                                                                    <option key={status.id} value={status.status}>{status.status}</option>
 
-                                                    )
-                                                }) : null
-                                        }
+                                                            )
+                                                        }) : null
+                                                }
 
-                                        {/* <option value="OPEN">OPEN</option>
+                                                {/* <option value="OPEN">OPEN</option>
                                 <option value="CLOSED">CLOSED</option> */}
-                                    </select>
+                                            </select>}
                                     {/* <span>{ticketData.status}</span> */}
                                 </div>
 
@@ -325,8 +328,23 @@ const TicketView = (payload) => {
                                     <span>{ticketData.subIssue}</span>
                                 </div> */}
 
-
-
+                                {console.log(approvals)}
+                                {approvals ?
+                                    <div className="ticket-brief-approvals-wrapper">
+                                        <span className="red-text">Pending Approvals</span>
+                                        <div className="ticket-brief-approvers">Approvers:</div>
+                                        {approvals ? approvals.map(approval =>
+                                            <div className="approvers">
+                                                <span>{approval.approver}
+                                                    <span>&nbsp;&nbsp;&nbsp;</span>
+                                                    {approval.approvalStatus === "APPROVED" ?
+                                                        <span id="approved" title="Request accepted">&#x2713;</span> :
+                                                        approval.approvalStatus === "REJECTED" ?
+                                                            <span id="rejected" title="Request rejected">&#10007;</span> : <img src={loading} title="Waiting for approval" />}
+                                                </span>
+                                            </div>) :
+                                            null}
+                                    </div> : null}
                             </div>
 
                         </div>

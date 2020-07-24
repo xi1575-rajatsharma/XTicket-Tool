@@ -15,7 +15,7 @@ const ResetPassword = () => {
     useEffect(() => {
         const userInfo = JSON.parse(window.localStorage.getItem('_userInfo'));
         setEmail(userInfo.contactInfo.email)
-    })
+    }, [])
 
     const isPasswordVisibleHandler = (e) => {
         e.preventDefault()
@@ -68,7 +68,7 @@ const ResetPassword = () => {
                     </span>
                 </div>
                 <div className="reset__confirm-password--input">
-                    <input className="reset__passwordInput reset--input" type={isPasswordVisible ? "text" : "password"} onChange={(e) => setConfirmPassword(e.currentTarget.value)} placeholder="Confirm Password" />
+                    <input className="reset__passwordInput reset--input" type="password" onChange={(e) => setConfirmPassword(e.currentTarget.value)} placeholder="Confirm Password" />
                 </div>
                 {didPasswordReset ?
                     <div className="reset__did-Password-Reset">

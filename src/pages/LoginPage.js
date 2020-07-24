@@ -54,6 +54,8 @@ export default class LoginPage extends React.Component {
                         _state.isValid = true;
                         window.localStorage.setItem('_token', payload.token);
                         window.localStorage.setItem('_userInfo', JSON.stringify(payload.result));
+                        window.localStorage.setItem('_resetPassword', payload.result.resetPassword);
+
                     } else {
                         _state.message = message;
                         _state.isValid = false;

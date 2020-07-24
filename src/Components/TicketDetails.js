@@ -18,12 +18,13 @@ class TicketDetails extends Component {
             ticketReplies: [],
             allAdminUsers: [],
             ticketJourney: [],
+            allTicketDetails: [],
+            allStatus: [],
+            approvals: [],
             resolutionText: null,
             replyText: null,
             showModal: false,
-            allTicketDetails: [],
             comment: '',
-            allStatus: [],
             isLoading: false,
             statusChangeLoading: false
         }
@@ -192,6 +193,10 @@ class TicketDetails extends Component {
                 }
             })
 
+            fetch.get({
+                url: constants.SERVICE_URLS.APPROVAL_JOURNEY + id,
+                callbackHandler: (response => this.setState({ approvals: response.payload.data }))
+            })
         })
     }
 

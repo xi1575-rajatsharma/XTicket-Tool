@@ -1,30 +1,31 @@
 {
   "files": {
-    "main.css": "/static/css/main.09cbef8b.chunk.css",
-    "main.js": "/static/js/main.f4fdd6e2.chunk.js",
-    "main.js.map": "/static/js/main.f4fdd6e2.chunk.js.map",
+    "main.css": "/static/css/main.4d359f3c.chunk.css",
+    "main.js": "/static/js/main.85622ced.chunk.js",
+    "main.js.map": "/static/js/main.85622ced.chunk.js.map",
     "runtime-main.js": "/static/js/runtime-main.474a9135.js",
     "runtime-main.js.map": "/static/js/runtime-main.474a9135.js.map",
     "static/css/2.4f10b18f.chunk.css": "/static/css/2.4f10b18f.chunk.css",
-    "static/js/2.944ca0db.chunk.js": "/static/js/2.944ca0db.chunk.js",
-    "static/js/2.944ca0db.chunk.js.map": "/static/js/2.944ca0db.chunk.js.map",
+    "static/js/2.8db67cc0.chunk.js": "/static/js/2.8db67cc0.chunk.js",
+    "static/js/2.8db67cc0.chunk.js.map": "/static/js/2.8db67cc0.chunk.js.map",
     "index.html": "/index.html",
-    "precache-manifest.c141bf67d8f30e479516e35a566c8409.js": "/precache-manifest.c141bf67d8f30e479516e35a566c8409.js",
+    "precache-manifest.0922b7e7700e88cc500b32a0e85f3d9d.js": "/precache-manifest.0922b7e7700e88cc500b32a0e85f3d9d.js",
     "service-worker.js": "/service-worker.js",
     "static/css/2.4f10b18f.chunk.css.map": "/static/css/2.4f10b18f.chunk.css.map",
-    "static/css/main.09cbef8b.chunk.css.map": "/static/css/main.09cbef8b.chunk.css.map",
-    "static/js/2.944ca0db.chunk.js.LICENSE.txt": "/static/js/2.944ca0db.chunk.js.LICENSE.txt",
+    "static/css/main.4d359f3c.chunk.css.map": "/static/css/main.4d359f3c.chunk.css.map",
+    "static/js/2.8db67cc0.chunk.js.LICENSE.txt": "/static/js/2.8db67cc0.chunk.js.LICENSE.txt",
     "static/media/index.scss": "/static/media/logo.2d746102.svg",
     "static/media/Xenie.png": "/static/media/Xenie.393139c0.png",
     "static/media/info.svg": "/static/media/info.a01ec69f.svg",
+    "static/media/newIcon.png": "/static/media/newIcon.21ccbc97.png",
     "static/media/stopwatch.png": "/static/media/stopwatch.fcce34d9.png",
     "static/media/xebia_logo.png": "/static/media/xebia_logo.52fd0229.png"
   },
   "entrypoints": [
     "static/js/runtime-main.474a9135.js",
     "static/css/2.4f10b18f.chunk.css",
-    "static/js/2.944ca0db.chunk.js",
-    "static/css/main.09cbef8b.chunk.css",
-    "static/js/main.f4fdd6e2.chunk.js"
+    "static/js/2.8db67cc0.chunk.js",
+    "static/css/main.4d359f3c.chunk.css",
+    "static/js/main.85622ced.chunk.js"
   ]
 }

@@ -13,12 +13,20 @@ export default class TicketListingPage extends React.Component {
             listingData: [],
             zohoTicketData: [],
             allStatus: null,
-            view: "Xenie"
+            view: "Xenie",
+            resetPassword: "",
+            viewResetPopup: true
         }
     }
 
     componentDidMount() {
         this.getTicketData();
+        const _resetPassword = { resetPassword: window.localStorage.getItem('_resetPassword') }
+        this.setState({ ...this.state, ..._resetPassword })
+        // setTimeout(() => {
+        //     if (resetPassword === "false") alert("We advice you to change your password")
+        // }, 1000)
+
     }
     filterTickets = (fromDate, toDate) => {
         // this.getTicketData();
@@ -149,6 +157,10 @@ export default class TicketListingPage extends React.Component {
 
         })
     }
+    changeresetPasswordtoTrue = () => {
+        this.setState({ resetPassword: "true" })
+        window.localStorage.setItem('_resetPassword', true);
+    }
 
     render() {
         return (
@@ -159,6 +171,7 @@ export default class TicketListingPage extends React.Component {
                     statusFilter={this.statusFilter}
                     getTicketData={this.getTicketData}
                     getZohoTicketData={this.getZohoTicketData}
+                    changeresetPasswordtoTrue={this.changeresetPasswordtoTrue}
                 />
 
             </React.Fragment>

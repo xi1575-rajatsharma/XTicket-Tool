@@ -1,0 +1,26 @@
+.approval{
+    width: 95vw;
+    height: 95vh;
+    margin: auto;
+    margin-top: 10px;
+    background-image: linear-gradient(to right bottom, #6C1D5F 19%, #300d2a 81%);
+    position: relative;
+
+    &__ticket-info{
+        position: absolute;
+        background-color: rgb(255, 255, 255);
+        color: #000;
+        border-radius: 4px;
+        box-shadow: 0 4rem 3rem rgbA(0,0,0,.425);
+        text-align: center;
+        left: 50%;
+        top:50%;
+        transform: translate(-50%,-50%);
+        padding: 20px;
+    }
+
+    &__icon{
+        // position: absolute;
+        height: 100px;
+    }
+}

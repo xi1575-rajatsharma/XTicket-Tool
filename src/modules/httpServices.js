@@ -2,6 +2,7 @@ import axios from 'axios';
 import shortid from 'shortid';
 import APP from '../modules/index';
 
+
 const requestId = shortid.generate();
 
 axios.interceptors.request.use(function (config) {
@@ -45,6 +46,8 @@ axios.interceptors.response.use(function (config) {
             window.localStorage.removeItem('_userInfo');
             // window.location = `/?redirectTo=${window.location.pathname}`
             window.location = `/?redirectTo=${window.location.pathname}`
+        } else {
+            window.location = '/'
         }
     }
 
@@ -129,11 +132,12 @@ const outputHandler = ({ ins, callbackHandler }) => {
             payload: response.data
         });
 
-    }).catch(() => {
+    }).catch((error) => {
         callbackHandler({
             status: APP.Constants.FAILURE,
             message: 'Something went worng...',
-            payload: {}
+            payload: {},
+            error: error
         });
     });
 

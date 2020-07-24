@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import FilterView from './filterView';
 import SelectedFilterView from './selectedFilterView';
 import Xenie from '../images/Xenie.png'
+import icon from '../images/newIcon.png'
 
 
 export default class TestView extends Component {
@@ -41,10 +42,25 @@ export default class TestView extends Component {
     render() {
         const allStatus = this.props.allStatus;
         let listingData = this.props.listingData;
-
+        const resetPassword = this.props.resetPassword;
 
         return (
             <React.Fragment>
+                {resetPassword === "false" ?
+                    <div className="reset__popup">
+
+                        <div className="reset__popup--info">
+                            <span className="reset__popup--close" onClick={this.props.changeresetPasswordtoTrue}>X</span>
+                            <div className="reset__popup--icon-wrapper">
+                                <img src={icon} alt="Xenie Icon" className="reset__popup--icon" />
+                            </div>
+                            <p className="reset__popup--info-text">
+                                We recommend you to change your existing password. You have logged in as admin and we want you to keep your account safe. Click Here to &rarr; <Link to='/reset-password'> 'change password'.</Link>
+                            </p>
+                        </div>
+                    </div> : null
+                }
+
                 <div className="filters-wrapper">
                     <div className="filters-left-wrapper">
                         <select value={this.state.selectValue} className="filter-select" onChange={(e) => { this.props.statusFilter(e.target.value); this.setState({ display: e.currentTarget.value, selectValue: e.currentTarget.value }) }} >

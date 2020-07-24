@@ -52,8 +52,7 @@
         padding: 5px 40px;
         // border-radius: 100px;
         position: relative;
-        transition: all .2s;
-        
+        transition: all .2s;   
     }
 
     &__btn:hover{
@@ -109,7 +108,47 @@
     }
     }
     
-    
+    &__popup{
+        position: absolute;
+        width: 100vw;
+        height: 95vh;
+        background-color: rgba(0, 0, 0, 0.274);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 3000;
+        &--info{
+            position: relative;
+            width: 35%;
+            height: 35%;
+            background-color: whitesmoke;
+            opacity: 1;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 10px;
+            border-radius: 4px;
+            box-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.712);
+            overflow: auto;
+        }   
+
+        &--icon{
+            height: 100%;
+        }
+        &--icon-wrapper{
+            height: 40%;
+            margin-right: 10px;
+        }
+        &--close{
+            position: absolute;
+            cursor: pointer;
+            top:5%;
+            right: 3%;
+            font-weight: 900;
+            font-size: 1.3rem;
+            color: #6C1D5F;
+        }
+    }
 
     
 }

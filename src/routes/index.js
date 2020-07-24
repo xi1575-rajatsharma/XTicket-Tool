@@ -12,7 +12,7 @@ import ReportPage from '../pages/ReportPage';
 
 import ResetPassword from '../Views/resetPassword';
 
-import approvalView from '../Views/approvalView';
+import ApprovalView from '../Views/approvalView';
 
 
 export const routes = () => {
@@ -20,7 +20,7 @@ export const routes = () => {
     <BrowserRouter >
       <Route exact={true} path='/' component={LoginPage} />
 
-      <Route exact={true} path='/approval' component={approvalView} />
+      <Route exact={true} path='/approval' component={ApprovalView} />
       {/* <Route exact={true} path='/:ticket_id' component={LoginPage} /> */}
       <Route exact={true} path='/ticketlist' component={userHasLogin(TicketListingPage)} />
       <Route exact={true} path='/ticketlist/:ticket_id' component={userHasLogin(TicketDetails)} />

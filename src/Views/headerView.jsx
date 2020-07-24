@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import logout from '../images/logout.png'
+import logout from '../images/logout.png';
+import icon from '../images/newIcon.png'
 export const HeaderView = (payload) => {
 
     const { onClickLogout } = payload;
@@ -38,7 +39,7 @@ export const HeaderView = (payload) => {
 
                 <div className="navbar-right-side">
                     <div className="navbar-xebia-brand-wrapper">
-                        <Link to='/ticketlist'> Xebia </Link>
+                        <Link to='/ticketlist'> <img src={icon} alt="Xenie" height="30px" />Xenie</Link>
                     </div>
                     {/* <div className="navbar-search-icon-wrapper">
                     <svg className="bi bi-search" width="45px" height="1.1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
@@ -62,7 +63,7 @@ export const HeaderView = (payload) => {
                     <i className="fa fa-gear font-size:24px"></i>
                 </div> */}
                     {/* onClickLogout */}
-                    <div className="nav__change-password"><Link to="/reset-password">Reset Password</Link></div>
+                    <div className="nav__change-password"><Link to="/reset-password">Change Password</Link></div>
                     <div onClick={onClickLogout} className="profile-picture-wrapper">
                         <img src={logout} width="30px" height="30px" />
                     </div>

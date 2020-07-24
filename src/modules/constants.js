@@ -29,7 +29,8 @@ export const constants = {
     MISSED_BY_STATUS: `${API_HOST_PATH}/ticket-tool/v1/tickets/missed/byuser/status`,
     AVERAGE_EFFICIENCY: `${API_HOST_PATH}/ticket-tool/v1/tickets/user/efficiency`,
     SLA_DATE: `${API_HOST_PATH}/ticket-tool/v1/tickets/user/missed/datewise/count`,
-    RESET_PASSWORD: `${API_HOST_PATH}/ticket-tool/v1/users/reset-password`
+    RESET_PASSWORD: `${API_HOST_PATH}/ticket-tool/v1/users/reset-password`,
+    APPROVAL_JOURNEY: `${API_HOST_PATH}/ticket-tool/v1/approval/`
   },
   // /v1/tickets/missed/byuser/status
   NO_DATA_FOUND: "No results found...",
