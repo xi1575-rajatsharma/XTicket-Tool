@@ -47,6 +47,8 @@ axios.interceptors.response.use(function (config) {
             // window.location = `/?redirectTo=${window.location.pathname}`
             window.location = `/?redirectTo=${window.location.pathname}`
         } else {
+            window.localStorage.removeItem('_token');
+            window.localStorage.removeItem('_userInfo');
             window.location = '/'
         }
     }
