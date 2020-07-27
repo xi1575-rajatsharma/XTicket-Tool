@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import FilterView from './filterView';
 import SelectedFilterView from './selectedFilterView';
-import Xenie from '../images/Xenie.png'
 import icon from '../images/newIcon.png'
+import TicketFilters from './ticketFilters';
 
 
 export default class TestView extends Component {
@@ -37,6 +37,9 @@ export default class TestView extends Component {
 
         this.props.searchByFilter();
         this.props.searchByFilter(id, this.state.filterString)
+    }
+    changeFilterSelectValue = (value) => {
+        this.setState({ display: value, selectValue: value })
     }
 
     render() {
@@ -77,9 +80,12 @@ export default class TestView extends Component {
                     </div>
                     <div className="filters-right-wrapper">
                         <SelectedFilterView display={this.state.display} onFromDateChange={this.onFromDateChange} onToDateChange={this.onToDateChange} onDateSubmit={this.onDateSubmit} onInputSubmit={this.onInputSubmit} onInputChange={this.onInputChange} />
+                        {listingData ? this.state.display === "Date" || this.state.display === "Subject" ? null : <TicketFilters listingData={listingData} statusFilter={this.props.statusFilter} changeFilterSelectValue={this.changeFilterSelectValue} /> : null}
 
-                        <a onClick={() => { this.props.getTicketData(); this.setState({ selectValue: "OPEN", xenieButton: "history-btn btn-regal-blue", zohoButton: "history-btn btn-white" }) }} className={this.state.xenieButton} href="#">Xenie Tickets</a>
-                        <a onClick={() => { this.props.getZohoTicketData(); this.setState({ selectValue: "OPEN", xenieButton: "history-btn btn-white", zohoButton: "history-btn btn-regal-blue" }) }} className={this.state.zohoButton} href="#">Tickets From Zoho</a>
+                        <div className="xenie-buttons-wrapper">
+                            <a onClick={() => { this.props.getTicketData(); this.setState({ selectValue: "OPEN", xenieButton: "history-btn btn-regal-blue", zohoButton: "history-btn btn-white" }) }} className={this.state.xenieButton} href="#">Xenie Tickets</a>
+                            <a onClick={() => { this.props.getZohoTicketData(); this.setState({ selectValue: "OPEN", xenieButton: "history-btn btn-white", zohoButton: "history-btn btn-regal-blue" }) }} className={this.state.zohoButton} href="#">Tickets From Zoho</a>
+                        </div>
                     </div>
                     {/* <a className="history-btn btn-regal-blue" href="#">Tickets From Zoho</a> */}
 

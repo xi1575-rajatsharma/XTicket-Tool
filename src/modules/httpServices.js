@@ -56,9 +56,7 @@ axios.interceptors.response.use(function (config) {
     return Promise.reject(error);
 });
 
-const redirect = () => {
-    window.location = `/?redirectTo=${window.location.pathname}`
-}
+
 /* 
 [12/06 16:41] Bhardwaj Chaudhary
     
