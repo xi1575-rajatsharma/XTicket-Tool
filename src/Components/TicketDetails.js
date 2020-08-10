@@ -21,6 +21,7 @@ class TicketDetails extends Component {
             allTicketDetails: [],
             allStatus: [],
             approvals: [],
+            userDetails: [],
             resolutionText: null,
             replyText: null,
             showModal: false,
@@ -97,7 +98,7 @@ class TicketDetails extends Component {
                 callbackHandler: (response) => {
                     const { status, message, payload } = response;
                     const _state = cloneDeep(this.state);
-                    _state.isLoading = false;
+
 
 
                     if (status === constants.SUCCESS) {
@@ -110,6 +111,17 @@ class TicketDetails extends Component {
                     }
 
                     this.setState(_state);
+
+                    fetch.get({
+                        url: constants.SERVICE_URLS.USER_DETAILS,
+                        requestParams: {
+                            email: _state.ticketData.emailId
+                        },
+                        callbackHandler: response => {
+                            const { status, payload } = response
+                            if (status === constants.SUCCESS) this.setState({ isLoading: false, userDetails: payload });
+                        }
+                    })
 
                 }
             })
@@ -198,6 +210,7 @@ class TicketDetails extends Component {
                 callbackHandler: (response => this.setState({ approvals: response.payload.data }))
             })
         })
+
     }
 
     updateTicketData = (id) => {
@@ -235,7 +248,7 @@ class TicketDetails extends Component {
     }
     handleAddComment = () => {
         const { selectValue = null, ticketStatus = null } = this.state;
-        if (ticketStatus !== "OPEN" && ticketStatus !== "REOPEND") {
+        if (ticketStatus !== "OPEN" && ticketStatus !== "REOPEND" && ticketStatus !== "INPROGRESS") {
             alert('You cannot changed assigned role at this status!');
         }
         else {

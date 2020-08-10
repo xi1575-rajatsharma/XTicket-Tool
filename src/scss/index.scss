@@ -26,22 +26,24 @@ $leftPositon: 30%;
   &::-webkit-scrollbar {
     width:  $size;
     height: $size;
+    z-index: 1000;
   }
 
   &::-webkit-scrollbar-thumb {
     background: $foreground-color;
-    
-    
+    z-index: 1000;
   }
 
   &::-webkit-scrollbar-track {
     background: $background-color;
+    z-index: 1000;
   }
 
   // For Internet Explorer
   & {
     scrollbar-face-color: $foreground-color;
     scrollbar-track-color: $background-color;
+    z-index: 1000;
   }
 }
 @media (max-width:1300px){

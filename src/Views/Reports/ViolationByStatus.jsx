@@ -15,8 +15,8 @@ const ViolationByStatus = ({ status }) => {
           backgroundColor: [
             "#32CD32",
             "#ffbf00",
-            "#FFFF00",
-            "#0000CD",
+            "#394989",
+            "#e8505b",
             "#DC143C",
             "#ff471a",
             "#333300",
@@ -39,7 +39,12 @@ const ViolationByStatus = ({ status }) => {
             text: "SLA's Missed By Status",
             fontSize: 20,
           },
-
+          plugins: {
+            datalabels: {
+              display: true,
+              color: "white",
+            },
+          },
           scales: {
             xAxes: [
               {

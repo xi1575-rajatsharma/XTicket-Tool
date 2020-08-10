@@ -17,7 +17,7 @@ import loading from '../images/loading.png'
 const TicketView = (payload) => {
     const [display, isVisible] = useState('id_conversation');
     const [ticketStatusPopup, shouldDisplay] = useState('no');
-    const { ticketData, ticketReplies, changeSelectValue, changeStatusValue, resolutionChangeHandler, resolutionSubmitHandler, statusHandler, resolutionText, allAdminUsers, ticketJourney, replyChangeHandler, replySubmitHandler, allStatus, isLoading, statusChangeLoading, listingData, updateTicketData, fileSelect, approvals } = payload;
+    const { ticketData, ticketReplies, changeSelectValue, changeStatusValue, resolutionChangeHandler, resolutionSubmitHandler, statusHandler, resolutionText, allAdminUsers, ticketJourney, replyChangeHandler, replySubmitHandler, allStatus, isLoading, statusChangeLoading, listingData, updateTicketData, fileSelect, approvals, userDetails } = payload;
     const [displayreplybox, showreplybox] = useState(false);
     const [displaycommentbox, showcommentbox] = useState(false);
     const [sideBarOpen, setSideBarOpen] = useState(false)
@@ -67,7 +67,11 @@ const TicketView = (payload) => {
     }
 
     const switchChanges = (status) => {
-
+        console.log(status)
+        let statusCreationTime = new Date(status.creationTime);
+        const creationDay = String(statusCreationTime.getDate()).padStart(2, '0');
+        const creationMonth = String(statusCreationTime.getMonth() + 1).padStart(2, '0');
+        let finalDate = creationDay + '/' + creationMonth;
         switch (status.status) {
             case "ASSIGNED":
                 return (
@@ -80,30 +84,29 @@ const TicketView = (payload) => {
                 return (
                     <React.Fragment>
                         <div className="raised-icon-wrapper"></div>
-                        <div className="change-text-wrapper"  >Ticket Assigned to: {status.assignedTo}</div>
+                        <div className="change-text-wrapper"  >Ticket Assigned to: {status.assignedTo} &nbsp;<span className="status-time-wrapper"> | {finalDate}</span></div>
                         {status.assignedToReason ? <img src={info} height="25px" title={status.assignedToReason === "Default Assignment" ? "Default Assignment" : status.assignedToReason.split(':')[1]} /> : null}
-
                     </React.Fragment>
                 )
             case "INPROGRESS":
                 return (
                     <React.Fragment>
                         <div className="resolving-icon-wrapper"></div>
-                        <div className="change-text-wrapper">{status.assignedTo} is working on resolution of your ticket </div>
+                        <div className="change-text-wrapper">{status.assignedTo} is working on resolution of your ticket  &nbsp;<span className="status-time-wrapper"> | {finalDate}</span></div>
                     </React.Fragment>
                 )
             case "AWAITING":
                 return (
                     <React.Fragment>
                         <div className="awaiting-icon-wrapper"></div>
-                        <div className="change-text-wrapper">Awaiting for approvers to approve</div>
+                        <div className="change-text-wrapper">Awaiting for approvers to approve &nbsp;<span className="status-time-wrapper"> | {finalDate}</span></div>
                     </React.Fragment>
                 )
             case "REVIEW":
                 return (
                     <React.Fragment>
                         <div className="review-icon-wrapper"></div>
-                        <div className="change-text-wrapper">Ticket is under Review</div>
+                        <div className="change-text-wrapper">Ticket is under Review &nbsp;<span className="status-time-wrapper"> | {finalDate}</span></div>
                     </React.Fragment>
                 )
 
@@ -111,28 +114,28 @@ const TicketView = (payload) => {
                 return (
                     <React.Fragment>
                         <div className="escalated-icon-wrapper"></div>
-                        <div className="change-text-wrapper">Ticket has escalated</div>
+                        <div className="change-text-wrapper">Ticket has escalated &nbsp;<span className="status-time-wrapper"> | {finalDate}</span></div>
                     </React.Fragment>
                 )
             case "CLOSED":
                 return (
                     <React.Fragment>
                         <div className="closed-icon-wrapper"></div>
-                        <div className="change-text-wrapper">Ticket Closed</div>
+                        <div className="change-text-wrapper">Ticket Closed &nbsp;<span className="status-time-wrapper"> | {finalDate}</span></div>
                     </React.Fragment>
                 )
             case "REOPENED":
                 return (
                     <React.Fragment>
                         <div className="re-opened-icon-wrapper"></div>
-                        <div className="change-text-wrapper">Ticket Re-opened</div>
+                        <div className="change-text-wrapper">Ticket Re-opened  &nbsp;<span className="status-time-wrapper"> | {finalDate}</span></div>
                     </React.Fragment>
                 )
             case "RESOLVED":
                 return (
                     <React.Fragment>
                         <div className="resolved-icon-wrapper"></div>
-                        <div className="change-text-wrapper">Ticket Resolved</div>
+                        <div className="change-text-wrapper">Ticket Resolved &nbsp;<span className="status-time-wrapper">| {finalDate}</span></div>
                     </React.Fragment>
                 )
 
@@ -241,6 +244,9 @@ const TicketView = (payload) => {
                                 <div className="email-wrapper">
                                     <span>{ticketData.emailId}</span>
                                 </div>
+                                <div className="contact-number-wrapper">
+                                    <span>{userDetails.contactNumber}</span>
+                                </div>
                             </div>
 
                             <div className="ticket-brief-information-wrapper">
@@ -327,8 +333,6 @@ const TicketView = (payload) => {
                                     <span class="red-text">Priority</span>
                                     <span>{ticketData.subIssue}</span>
                                 </div> */}
-
-                                {console.log(approvals)}
                                 {approvals ?
                                     <div className="ticket-brief-approvals-wrapper">
                                         <span className="red-text">Pending Approvals</span>

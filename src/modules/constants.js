@@ -1,4 +1,4 @@
-const API_HOST_PATH = "http://168.63.250.105";
+const API_HOST_PATH = "https://xenieapi.xebia.in";
 // http://3.7.115.94
 // const API_HOST_PATH = "https://xdesk.herokuapp.com";
 export const constants = {
@@ -8,6 +8,7 @@ export const constants = {
     LOGIN: `${API_HOST_PATH}/ticket-tool/v1/users/login`,
     TICKET_LISTING: `${API_HOST_PATH}/ticket-tool/v1/tickets`,
     ZOHO_TICKET_LISTING: `${API_HOST_PATH}/ticket-tool/v1/history`,
+    GET_DEPARTMENTS: `${API_HOST_PATH}/ticket-tool/v1/master-data/departments`,
     TICKET_DETAILING: `${API_HOST_PATH}/ticket-tool/v1/tickets`,
     TICKET_REPLY: `${API_HOST_PATH}/ticket-tool/v1/tickets/replies/`,
     TICKET_ASSIGN: `${API_HOST_PATH}/ticket-tool/v1/tickets/assign/`,
@@ -30,7 +31,9 @@ export const constants = {
     AVERAGE_EFFICIENCY: `${API_HOST_PATH}/ticket-tool/v1/tickets/user/efficiency`,
     SLA_DATE: `${API_HOST_PATH}/ticket-tool/v1/tickets/user/missed/datewise/count`,
     RESET_PASSWORD: `${API_HOST_PATH}/ticket-tool/v1/users/reset-password`,
-    APPROVAL_JOURNEY: `${API_HOST_PATH}/ticket-tool/v1/approval/`
+    APPROVAL_JOURNEY: `${API_HOST_PATH}/ticket-tool/v1/approval/`,
+    USER_DETAILS: `${API_HOST_PATH}/ticket-tool/v1/users/userDetails`,
+    ADMIN_STATUS_COUNT: `${API_HOST_PATH}/ticket-tool/v1/analytics/tickets/statusCount`
   },
   // /v1/tickets/missed/byuser/status
   NO_DATA_FOUND: "No results found...",
