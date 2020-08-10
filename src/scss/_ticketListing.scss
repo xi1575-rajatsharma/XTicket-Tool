@@ -34,7 +34,6 @@
     flex-direction: column;
     justify-content: flex-start;
     align-items: flex-start;
-    font-family: "Proxima Nova";
     @include scrollbars(8px,linear-gradient(180deg, #6C1D5F 40%, #33082b 60%), #FFFAFA);
 }
 .filters-wrapper{
@@ -79,9 +78,9 @@
         height: 30px;
         padding: 3px;
         border: transparent;
-        text-transform: uppercase;
+        // text-transform: uppercase;
         option{
-            text-transform: uppercase;
+            // text-transform: uppercase;
         }
         animation: moveInRight 1s cubic-bezier(0.23, 1, 0.320, 1) forwards;
        }
@@ -117,8 +116,7 @@
     tr{
         height: 2.5rem;
         background-color: #FFFAFA;
-        margin-bottom: 100px;
-        font-family: "Proxima Nova";
+        margin-bottom: 100px;;
         font-size: 14px;
         color: black;
         transition: all ease-in-out 0.3s;
@@ -139,8 +137,7 @@
     }
     th{
         color: black;
-        background-color: #ddd3ee;
-        font-family: "Proxima Nova";
+        background-color: #ddd3ee;;
     }
     #header-row{
         background-color: #ddd3ee;
@@ -156,7 +153,6 @@
 .no-updates-row{
     tr{
     color: black;
-    font-family: "Proxima Nova";
     font-size: 30px;
     line-height: 30px;
     text-transform: capitalize;
@@ -280,6 +276,27 @@ body{
     }
 }
 .ticketlistFilters{
-    font-size: 13px;
+    font-size: 18px;
+    text-transform: capitalize;
     cursor: pointer;
+    font-weight: 700;
+
+    &--value{
+        font-weight: 500;
+        color: black;
+    }
+
+    &--OPEN{
+        color: #300d2a;
+    }
+
+    &--INPROGRESS{
+        color: orangered;
+    }
+    &--ESCALATED{
+        color: red;
+    }
+    &--RESOLVED{
+        color: rgb(3, 83, 17);
+    }
 }

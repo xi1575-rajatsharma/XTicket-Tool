@@ -124,14 +124,14 @@ export default class TicketFilters extends Component {
         return (
             <div className="ticketlistFilters">
                 <>
-                    <span className="ticketlistFilters--OPEN" onClick={() => { this.props.statusFilter("OPEN"); this.props.changeFilterSelectValue("OPEN") }}>OPEN:{this.state.statusData.OPEN}</span>&nbsp;&nbsp;
-                    <span className="ticketlistFilters--INPROGRESS" onClick={() => { this.props.statusFilter("INPROGRESS"); this.props.changeFilterSelectValue("INPROGRESS") }}>INPROGRESS:{this.state.statusData.INPROGRESS}</span>&nbsp;&nbsp;
-                    <span className="ticketlistFilters--AWAITING" onClick={() => { this.props.statusFilter("AWAITING"); this.props.changeFilterSelectValue("AWAITING") }}>AWAITING:{console.log(this.state.statusData.AWAITING)}{this.state.statusData.AWAITING}</span>&nbsp;&nbsp;
-                    <span className="ticketlistFilters--REVIEW" onClick={() => { this.props.statusFilter("REVIEW"); this.props.changeFilterSelectValue("REVIEW") }}>REVIEW:{this.state.statusData.REVIEW}</span>&nbsp;&nbsp;
-                    <span className="ticketlistFilters--ESCALATED" onClick={() => { this.props.statusFilter("ESCALATED"); this.props.changeFilterSelectValue("ESCALATED") }}>ESCALATED:{this.state.statusData.ESCALATED}</span>&nbsp;&nbsp;
-                    <span className="ticketlistFilters--CLOSED" onClick={() => { this.props.statusFilter("CLOSED"); this.props.changeFilterSelectValue("CLOSED") }}>CLOSED:{this.state.statusData.CLOSED}</span>&nbsp;&nbsp;
-                    <span className="ticketlistFilters--REOPENED" onClick={() => { this.props.statusFilter("REOPENED"); this.props.changeFilterSelectValue("REOPENED") }}>REOPENED:{this.state.statusData.REOPENED}</span>&nbsp;&nbsp;
-                    <span className="ticketlistFilters--RESOLVED" onClick={() => { this.props.statusFilter("RESOLVED"); this.props.changeFilterSelectValue("RESOLVED") }}>RESOLVED:{this.state.statusData.RESOLVED}</span>&nbsp;&nbsp;
+                    <span className="ticketlistFilters--OPEN " onClick={() => { this.props.statusFilter("OPEN"); this.props.changeFilterSelectValue("OPEN") }}>Open:<span className="ticketlistFilters--value">{this.state.statusData.OPEN}</span></span>&nbsp;&nbsp;&nbsp;&nbsp;
+                    <span className="ticketlistFilters--INPROGRESS" onClick={() => { this.props.statusFilter("INPROGRESS"); this.props.changeFilterSelectValue("INPROGRESS") }}>Inprogress:<span className="ticketlistFilters--value">{this.state.statusData.INPROGRESS}</span></span>&nbsp;&nbsp;&nbsp;&nbsp;
+                    {/* <span className="ticketlistFilters--AWAITING" onClick={() => { this.props.statusFilter("AWAITING"); this.props.changeFilterSelectValue("AWAITING") }}>AWAITING:{console.log(this.state.statusData.AWAITING)}{this.state.statusData.AWAITING}</span>&nbsp;&nbsp; */}
+                    {/* <span className="ticketlistFilters--REVIEW" onClick={() => { this.props.statusFilter("REVIEW"); this.props.changeFilterSelectValue("REVIEW") }}>REVIEW:{this.state.statusData.REVIEW}</span>&nbsp;&nbsp; */}
+                    <span className="ticketlistFilters--ESCALATED" onClick={() => { this.props.statusFilter("ESCALATED"); this.props.changeFilterSelectValue("ESCALATED") }}>Escalated:<span className="ticketlistFilters--value">{this.state.statusData.ESCALATED}</span></span>&nbsp;&nbsp;&nbsp;&nbsp;
+                    {/* <span className="ticketlistFilters--CLOSED" onClick={() => { this.props.statusFilter("CLOSED"); this.props.changeFilterSelectValue("CLOSED") }}>CLOSED:{this.state.statusData.CLOSED}</span>&nbsp;&nbsp; */}
+                    <span className="ticketlistFilters--REOPENED" onClick={() => { this.props.statusFilter("REOPENED"); this.props.changeFilterSelectValue("REOPENED") }}>Repoened:<span className="ticketlistFilters--value">{this.state.statusData.REOPENED}</span></span>&nbsp;&nbsp;&nbsp;
+                    <span className="ticketlistFilters--RESOLVED" onClick={() => { this.props.statusFilter("RESOLVED"); this.props.changeFilterSelectValue("RESOLVED") }}>Resolved:<span className="ticketlistFilters--value">{this.state.statusData.RESOLVED}</span></span>&nbsp;&nbsp;&nbsp;&nbsp;
                 </>
             </div>
         )

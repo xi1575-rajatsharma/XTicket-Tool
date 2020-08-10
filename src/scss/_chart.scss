@@ -7,7 +7,7 @@
 
 .report-container__left {
   position: fixed;
-  right: 0;
+  right: 5px;
 }
 
 .mcd-menu {
@@ -44,51 +44,59 @@ small {
 }
 
 .report-container__right {
-  left: -2rem;
+  
   width: 70vw;
   height: 100vh;
   display: grid;
   grid-gap: 2rem;
   grid-template-columns: 50% 50%;
   grid-template-rows: auto;
-  margin-left: 2rem;
+  margin-left: 1rem;
   margin-right: 2rem;
   margin-bottom: 4rem;
+  position: relative;
+  
+
+  &__select{
+    position: absolute;
+    right: .1rem;
+    top:2.7rem;
+  }
   &__BarChart {height: 50%;
 
     margin-top: 2rem;
     grid-column: 1/-1;
-    box-shadow: 3px 3px 5px 6px rgb(128, 125, 125);
+    box-shadow: 0px 4px 10px  rgba(0,0,0,.425);
   }
   &__AverageEfficiency {
-    box-shadow: 3px 3px 5px 6px rgb(128, 125, 125);
+    box-shadow: 0px 4px 10px  rgba(0,0,0,.425);
     height: 50%;
   }
 
   &__Pierating {
-    box-shadow: 3px 3px 5px 6px rgb(128, 125, 125);
+    box-shadow: 0px 4px 10px  rgba(0,0,0,.425);
     height: 50%;
   }
 
   &__SLAUser {
-    box-shadow: 3px 3px 5px 6px rgb(128, 125, 125);
+    box-shadow: 0px 4px 10px  rgba(0,0,0,.425);
     height: 50%;
   }
 
   &__ViolationByStatus {
-    box-shadow: 3px 3px 5px 6px rgb(128, 125, 125);
+    box-shadow: 0px 4px 10px  rgba(0,0,0,.425);
     height: 100%;
   }
 
   &__ViolationByTime {
-    box-shadow: 3px 3px 5px 6px rgb(128, 125, 125);
+    box-shadow: 0px 4px 10px  rgba(0,0,0,.425);
     grid-column: 1/-1;
     margin-bottom: 4rem;
     height: 100%;
   }
 
   &__AchievedVsViolated {
-    box-shadow: 3px 3px 5px 6px rgb(128, 125, 125);
+    box-shadow: 0px 4px 10px  rgba(0,0,0,.425);
     height: 100%;
   }
 }

@@ -6,7 +6,7 @@ import ViolationByStatus from "../Views/Reports/ViolationByStatus";
 import ViolationByDate from "../Views/Reports/ViolationByDate";
 import AchievedVsViolated from "../Views/Reports/AchievedVsViolated";
 import AverageEfficiency from "../Views/Reports/AverageEfficiency";
-
+import DeparmtmentFilter from '../Views/departmentFilter';
 import { fetch } from "../modules/httpServices";
 import { constants } from "../modules/constants";
 
@@ -27,6 +27,19 @@ class ReportPage extends Component {
         CLOSED: 0,
         RESOLVED: 0,
       },
+      statusDataCopy: {
+        OPEN: 0,
+        INPROGRESS: 0,
+        AWATING: 0,
+        REVIEW: 0,
+        ESCALATED: 0,
+        REOPENED: 0,
+        CLOSED: 0,
+        RESOLVED: 0,
+      },
+      departmentStatusCount: [],
+      isDepartmentStatusCountValid: false,
+      departments: [],
       rating: {
         oneStars: 0,
         twoStars: 0,
@@ -62,6 +75,7 @@ class ReportPage extends Component {
               this.setState((prevState) => {
                 let statusData = Object.assign({}, prevState.statusData);
                 statusData.OPEN = statusData.OPEN + 1;
+                this.setState({ statusDataCopy: statusData })
                 return { statusData };
               });
               break;
@@ -69,6 +83,7 @@ class ReportPage extends Component {
               this.setState((prevState) => {
                 let statusData = Object.assign({}, prevState.statusData);
                 statusData.ASSIGNED = statusData.ASSIGNED + 1;
+                this.setState({ statusDataCopy: statusData })
                 return { statusData };
               });
               break;
@@ -76,6 +91,7 @@ class ReportPage extends Component {
               this.setState((prevState) => {
                 let statusData = Object.assign({}, prevState.statusData);
                 statusData.INPROGRESS = statusData.INPROGRESS + 1;
+                this.setState({ statusDataCopy: statusData })
                 return { statusData };
               });
               break;
@@ -83,6 +99,7 @@ class ReportPage extends Component {
               this.setState((prevState) => {
                 let statusData = Object.assign({}, prevState.statusData);
                 statusData.AWATING = statusData.AWATING + 1;
+                this.setState({ statusDataCopy: statusData })
                 return { statusData };
               });
               break;
@@ -90,6 +107,7 @@ class ReportPage extends Component {
               this.setState((prevState) => {
                 let statusData = Object.assign({}, prevState.statusData);
                 statusData.REVIEW = statusData.REVIEW + 1;
+                this.setState({ statusDataCopy: statusData })
                 return { statusData };
               });
               break;
@@ -97,6 +115,7 @@ class ReportPage extends Component {
               this.setState((prevState) => {
                 let statusData = Object.assign({}, prevState.statusData);
                 statusData.ESCALATED = statusData.ESCALATED + 1;
+                this.setState({ statusDataCopy: statusData })
                 return { statusData };
               });
               break;
@@ -104,6 +123,7 @@ class ReportPage extends Component {
               this.setState((prevState) => {
                 let statusData = Object.assign({}, prevState.statusData);
                 statusData.REOPENED = statusData.REOPENED + 1;
+                this.setState({ statusDataCopy: statusData })
                 return { statusData };
               });
               break;
@@ -111,6 +131,7 @@ class ReportPage extends Component {
               this.setState((prevState) => {
                 let statusData = Object.assign({}, prevState.statusData);
                 statusData.CLOSED = statusData.CLOSED + 1;
+                this.setState({ statusDataCopy: statusData })
                 return { statusData };
               });
               break;
@@ -118,6 +139,7 @@ class ReportPage extends Component {
               this.setState((prevState) => {
                 let statusData = Object.assign({}, prevState.statusData);
                 statusData.RESOLVED = statusData.RESOLVED + 1;
+                this.setState({ statusDataCopy: statusData })
                 return { statusData };
               });
               break;
@@ -125,6 +147,7 @@ class ReportPage extends Component {
             // console.log("oops");
           }
         });
+        this.setState({ statusDataCopy: this.state.statusData })
       }
     );
     /////////////////////////////////API CALL 2////////////////////////////////////////////////
@@ -178,7 +201,7 @@ class ReportPage extends Component {
     fetch.get({
       url: constants.SERVICE_URLS.AVERAGE_EFFICIENCY,
       callbackHandler: (response) => {
-        // console.log(response);
+
         const {
           message,
           payload: { data },
@@ -186,8 +209,6 @@ class ReportPage extends Component {
         this.setState({
           average_efficiency: data,
         });
-        //console.log(payload);
-        //console.log(this.state.average_efficiency);
         let sum = 0;
         for (let i of this.state.average_efficiency) {
           sum += i.hoursToRespond;
@@ -208,13 +229,68 @@ class ReportPage extends Component {
           message,
           payload: { data }
         } = response;
-        console.log(data);
         this.setState({
           statusByDate: data
         });
       },
     });
+    ////////////////////////////////////////// API CALL 7 ////////////////////////
+
+    fetch.get({
+      url: constants.SERVICE_URLS.ADMIN_STATUS_COUNT,
+      callbackHandler: response => {
+        const { status, payload } = response;
+
+        if (status === constants.SUCCESS) {
+          this.setState({ departmentStatusCount: payload.result.departments, isDepartmentStatusCountValid: true })
+        } else {
+          this.setState({ isDepartmentStatusCountValid: false })
+        }
+      }
+    })
+
+    ////////////////////////////////////////// API CALL 7 ////////////////////////
+    fetch.get({
+      url: constants.SERVICE_URLS.GET_DEPARTMENTS,
+      callbackHandler: response => {
+        const { status, payload: { result: { departments } } } = response;
+        if (status === constants.SUCCESS) {
+          this.setState({ departments: departments });
+        }
+      }
+    })
   };
+
+  onDepartmentChange = (value) => {
+    let statusData = JSON.stringify(this.state.statusData);
+    switch (value) {
+      case "All":
+        this.setState({ statusData: this.state.statusDataCopy });
+        break;
+      case "Human Resource":
+        let hrDepartmentStatusCount = JSON.stringify(this.state.departmentStatusCount['Human Resource']);
+        statusData = hrDepartmentStatusCount;
+        this.setState({ statusData: JSON.parse(statusData) });
+        break;
+      case "Administration":
+        let adminDepartmentStatusCount = JSON.stringify(this.state.departmentStatusCount.Administration);
+        statusData = adminDepartmentStatusCount;
+        this.setState({ statusData: JSON.parse(statusData) });
+        break;
+      case "Finance":
+        let financeDepartmentStatusCount = JSON.stringify(this.state.departmentStatusCount.Finance);
+        statusData = financeDepartmentStatusCount;
+        this.setState({ statusData: JSON.parse(statusData) });
+        break;
+      case "IT":
+        let ITDepartmentStatusCount = JSON.stringify(this.state.departmentStatusCount.IT);
+        statusData = ITDepartmentStatusCount;
+        this.setState({ statusData: JSON.parse(statusData) });
+        break;
+      default:
+        this.setState({ ...this.state })
+    }
+  }
 
   render() {
     return (
@@ -222,7 +298,7 @@ class ReportPage extends Component {
         <div className="report-container">
           <div className="report-container__left">
             <nav>
-              <ul class="mcd-menu">
+              <ul className="mcd-menu">
                 <li>
                   <a href="#" onClick={() => this.setState({ view: "ticketStatus" })} >
                     <strong>Ticket Status</strong>
@@ -244,6 +320,12 @@ class ReportPage extends Component {
           <div className="report-container__right">
             {this.state.view === "ticketStatus" ?
               <div className="report-container__right__BarChart">
+                {this.state.isDepartmentStatusCountValid ?
+                  <span className="report-container__right__select">
+                    <DeparmtmentFilter
+                      departments={this.state.departments}
+                      onDepartmentChange={this.onDepartmentChange} />
+                  </span> : null}
                 <BarView statusData={this.state.statusData} />
               </div> :
               this.state.view === "performance" ?

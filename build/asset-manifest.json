@@ -1,21 +1,20 @@
 {
   "files": {
-    "main.css": "/static/css/main.5b8d286e.chunk.css",
-    "main.js": "/static/js/main.482da18a.chunk.js",
-    "main.js.map": "/static/js/main.482da18a.chunk.js.map",
+    "main.css": "/static/css/main.417b66b7.chunk.css",
+    "main.js": "/static/js/main.ed2edfe5.chunk.js",
+    "main.js.map": "/static/js/main.ed2edfe5.chunk.js.map",
     "runtime-main.js": "/static/js/runtime-main.474a9135.js",
     "runtime-main.js.map": "/static/js/runtime-main.474a9135.js.map",
-    "static/css/2.4f10b18f.chunk.css": "/static/css/2.4f10b18f.chunk.css",
-    "static/js/2.ecde7306.chunk.js": "/static/js/2.ecde7306.chunk.js",
-    "static/js/2.ecde7306.chunk.js.map": "/static/js/2.ecde7306.chunk.js.map",
+    "static/css/2.3850b2c6.chunk.css": "/static/css/2.3850b2c6.chunk.css",
+    "static/js/2.96803a86.chunk.js": "/static/js/2.96803a86.chunk.js",
+    "static/js/2.96803a86.chunk.js.map": "/static/js/2.96803a86.chunk.js.map",
     "index.html": "/index.html",
-    "precache-manifest.b0f6bfb164029d7c8fca972d74ef795d.js": "/precache-manifest.b0f6bfb164029d7c8fca972d74ef795d.js",
+    "precache-manifest.fad908dbc8e6e35101e9134a23325624.js": "/precache-manifest.fad908dbc8e6e35101e9134a23325624.js",
     "service-worker.js": "/service-worker.js",
-    "static/css/2.4f10b18f.chunk.css.map": "/static/css/2.4f10b18f.chunk.css.map",
-    "static/css/main.5b8d286e.chunk.css.map": "/static/css/main.5b8d286e.chunk.css.map",
-    "static/js/2.ecde7306.chunk.js.LICENSE.txt": "/static/js/2.ecde7306.chunk.js.LICENSE.txt",
+    "static/css/2.3850b2c6.chunk.css.map": "/static/css/2.3850b2c6.chunk.css.map",
+    "static/css/main.417b66b7.chunk.css.map": "/static/css/main.417b66b7.chunk.css.map",
+    "static/js/2.96803a86.chunk.js.LICENSE.txt": "/static/js/2.96803a86.chunk.js.LICENSE.txt",
     "static/media/index.scss": "/static/media/logo.2d746102.svg",
-    "static/media/Xenie.png": "/static/media/Xenie.393139c0.png",
     "static/media/info.svg": "/static/media/info.a01ec69f.svg",
     "static/media/newIcon.png": "/static/media/newIcon.21ccbc97.png",
     "static/media/stopwatch.png": "/static/media/stopwatch.fcce34d9.png",
@@ -23,9 +22,9 @@
   },
   "entrypoints": [
     "static/js/runtime-main.474a9135.js",
-    "static/css/2.4f10b18f.chunk.css",
-    "static/js/2.ecde7306.chunk.js",
-    "static/css/main.5b8d286e.chunk.css",
-    "static/js/main.482da18a.chunk.js"
+    "static/css/2.3850b2c6.chunk.css",
+    "static/js/2.96803a86.chunk.js",
+    "static/css/main.417b66b7.chunk.css",
+    "static/js/main.ed2edfe5.chunk.js"
   ]
 }
