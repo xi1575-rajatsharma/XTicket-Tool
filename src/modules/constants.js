@@ -1,4 +1,4 @@
-const API_HOST_PATH = "https://xenieapi.xebia.in";
+const API_HOST_PATH = "https://xenie.xebia.in/";
 // http://3.7.115.94
 // const API_HOST_PATH = "https://xdesk.herokuapp.com";
 export const constants = {
@@ -33,7 +33,8 @@ export const constants = {
     RESET_PASSWORD: `${API_HOST_PATH}/ticket-tool/v1/users/reset-password`,
     APPROVAL_JOURNEY: `${API_HOST_PATH}/ticket-tool/v1/approval/`,
     USER_DETAILS: `${API_HOST_PATH}/ticket-tool/v1/users/userDetails`,
-    ADMIN_STATUS_COUNT: `${API_HOST_PATH}/ticket-tool/v1/analytics/tickets/statusCount`
+    ADMIN_STATUS_COUNT: `${API_HOST_PATH}/ticket-tool/v1/analytics/tickets/statusCount`,
+    APPROVAL_LIST: `${API_HOST_PATH}/ticket-tool/v1/approval/dashboard`
   },
   // /v1/tickets/missed/byuser/status
   NO_DATA_FOUND: "No results found...",

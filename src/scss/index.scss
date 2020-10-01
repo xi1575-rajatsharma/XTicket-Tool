@@ -19,6 +19,7 @@ $leftPositon: 30%;
 @import './reset';
 @import './utilities/utilities';
 @import './pages/approval';
+@import './approvalPageView.scss';
 
 
 @mixin scrollbars($size, $foreground-color, $background-color: mix($foreground-color, white,  50%)) {

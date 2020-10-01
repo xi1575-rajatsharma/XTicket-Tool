@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import icon from '../images/newIcon.png';
 import { fetch } from '../modules/httpServices';
+import { constants } from '../modules/constants';
 import axios from 'axios'
 
 const ApprovalView = (props) => {
@@ -21,7 +22,7 @@ const ApprovalView = (props) => {
         //     url: `http://168.63.250.105/ticket-tool/v1/approval/${ticketID}?approver=${approver}&token=${token}`,
         //     callbackHandler: (response) => setApprovalStatus(response.error.response.status)
         // })
-        axios.post(`http://168.63.250.105/ticket-tool/v1/approval/${ticketID}?approver=${approver}&token=${token}`)
+        axios.post(`${constants.SERVICE_URLS.APPROVAL_JOURNEY}/${ticketID}?approver=${approver}&token=${token}`)
             .then(res => { setApprovalStatus(res.status); setApprovalMessage(res.data.result.approvalStatus) })
             .catch(error => setApprovalStatus(error.response.status))
     }, [])

@@ -50,75 +50,76 @@ export default class TicketFilters extends Component {
 
     }
     setStatus = () => {
-        this.state.allTickets.map((ticket) => {
-            switch (ticket.status) {
-                case "OPEN":
-                    this.setState((prevState) => {
-                        let statusData = Object.assign({}, prevState.statusData);
-                        statusData.OPEN = statusData.OPEN + 1;
-                        return { statusData };
-                    });
-                    break;
-                case "ASSIGNED":
-                    this.setState((prevState) => {
-                        let statusData = Object.assign({}, prevState.statusData);
-                        statusData.ASSIGNED = statusData.ASSIGNED + 1;
-                        return { statusData };
-                    });
-                    break;
-                case "INPROGRESS":
-                    this.setState((prevState) => {
-                        let statusData = Object.assign({}, prevState.statusData);
-                        statusData.INPROGRESS = statusData.INPROGRESS + 1;
-                        return { statusData };
-                    });
-                    break;
-                case "AWATING":
-                    this.setState((prevState) => {
-                        let statusData = Object.assign({}, prevState.statusData);
-                        statusData.AWATING = statusData.AWATING + 1;
-                        return { statusData };
-                    });
-                    break;
-                case "REVIEW":
-                    this.setState((prevState) => {
-                        let statusData = Object.assign({}, prevState.statusData);
-                        statusData.REVIEW = statusData.REVIEW + 1;
-                        return { statusData };
-                    });
-                    break;
-                case "ESCALATED":
-                    this.setState((prevState) => {
-                        let statusData = Object.assign({}, prevState.statusData);
-                        statusData.ESCALATED = statusData.ESCALATED + 1;
-                        return { statusData };
-                    });
-                    break;
-                case "REOPENED":
-                    this.setState((prevState) => {
-                        let statusData = Object.assign({}, prevState.statusData);
-                        statusData.REOPENED = statusData.REOPENED + 1;
-                        return { statusData };
-                    });
-                    break;
-                case "CLOSED":
-                    this.setState((prevState) => {
-                        let statusData = Object.assign({}, prevState.statusData);
-                        statusData.CLOSED = statusData.CLOSED + 1;
-                        return { statusData };
-                    });
-                    break;
-                case "RESOLVED":
-                    this.setState((prevState) => {
-                        let statusData = Object.assign({}, prevState.statusData);
-                        statusData.RESOLVED = statusData.RESOLVED + 1;
-                        return { statusData };
-                    });
-                    break;
-                default:
-                // console.log("oops");
-            }
-        });
+        this.state.allTickets ?
+            this.state.allTickets.map((ticket) => {
+                switch (ticket.status) {
+                    case "OPEN":
+                        this.setState((prevState) => {
+                            let statusData = Object.assign({}, prevState.statusData);
+                            statusData.OPEN = statusData.OPEN + 1;
+                            return { statusData };
+                        });
+                        break;
+                    case "ASSIGNED":
+                        this.setState((prevState) => {
+                            let statusData = Object.assign({}, prevState.statusData);
+                            statusData.ASSIGNED = statusData.ASSIGNED + 1;
+                            return { statusData };
+                        });
+                        break;
+                    case "INPROGRESS":
+                        this.setState((prevState) => {
+                            let statusData = Object.assign({}, prevState.statusData);
+                            statusData.INPROGRESS = statusData.INPROGRESS + 1;
+                            return { statusData };
+                        });
+                        break;
+                    case "AWATING":
+                        this.setState((prevState) => {
+                            let statusData = Object.assign({}, prevState.statusData);
+                            statusData.AWATING = statusData.AWATING + 1;
+                            return { statusData };
+                        });
+                        break;
+                    case "REVIEW":
+                        this.setState((prevState) => {
+                            let statusData = Object.assign({}, prevState.statusData);
+                            statusData.REVIEW = statusData.REVIEW + 1;
+                            return { statusData };
+                        });
+                        break;
+                    case "ESCALATED":
+                        this.setState((prevState) => {
+                            let statusData = Object.assign({}, prevState.statusData);
+                            statusData.ESCALATED = statusData.ESCALATED + 1;
+                            return { statusData };
+                        });
+                        break;
+                    case "REOPENED":
+                        this.setState((prevState) => {
+                            let statusData = Object.assign({}, prevState.statusData);
+                            statusData.REOPENED = statusData.REOPENED + 1;
+                            return { statusData };
+                        });
+                        break;
+                    case "CLOSED":
+                        this.setState((prevState) => {
+                            let statusData = Object.assign({}, prevState.statusData);
+                            statusData.CLOSED = statusData.CLOSED + 1;
+                            return { statusData };
+                        });
+                        break;
+                    case "RESOLVED":
+                        this.setState((prevState) => {
+                            let statusData = Object.assign({}, prevState.statusData);
+                            statusData.RESOLVED = statusData.RESOLVED + 1;
+                            return { statusData };
+                        });
+                        break;
+                    default:
+                    // console.log("oops");
+                }
+            }) : this.setState({ ...this.state })
     }
     render() {
         return (

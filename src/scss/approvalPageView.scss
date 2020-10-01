@@ -1,0 +1,172 @@
+.approvalHolder{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: -2.5px;
+    &__approvalStatus{
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-end;
+        &--Approved{
+            margin-right: 5px;
+            padding: 5px 12px 0 12px;
+            border-bottom: 3px solid white;
+            cursor: pointer;
+            transition: all 0.5s linear;
+        }
+        &--Pending{
+            margin-right: 5px;
+            padding: 5px 12px 0 12px;
+            border-bottom: 3px solid white;
+            cursor: pointer;
+            transition: all 0.5s linear;
+        }
+        &--Rejected{
+            margin-right: 5px;
+            padding: 5px 12px 0 12px;
+            border-bottom: 3px solid white;
+            cursor: pointer;
+            transition: all 0.5s linear;
+        }
+    }
+
+    &__noApprovals{
+        position: absolute;
+        left: 50%;
+        top:50%;
+        transform: translate(-50%,-50%);
+        font-size: 32px;
+        font-family: 'Caveat', cursive;
+    }
+}
+
+.approvalPopup{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,.75);
+    z-index: 2;
+    &__content{
+        position: absolute;
+        left: 50%;
+        top:50%;
+        padding: 10px;
+        transform: translate(-50%,-50%);
+        background-color: white;
+        width: 30%;
+        border-radius: 10px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-evenly;
+        outline-offset: 10px;
+        &--comment{
+            padding: 10px;
+            &:focus{
+                box-shadow: 0 0 3pt 2pt rgb(0, 0, 0);
+            }
+            margin-bottom: 10px;
+        }
+        &--closeIcon{
+            position: absolute;
+            top: .3rem;
+            right: .5rem;
+            font-weight: 900;
+            cursor: pointer;
+        }
+        &--errorMessage{
+            color: red;
+            font-size:16px;
+            margin-bottom: 10px;
+        }
+        &--successMessage{
+            color: rgb(1, 61, 1);
+            font-size:16px;
+            margin-bottom: 10px;
+        }
+    }
+}
+.approval-btn:link,  
+.approval-btn:visited{
+    text-transform: uppercase;
+    text-decoration: none;
+    border-radius: 100px;
+    padding: 10px 30px;
+    transition: all .2s ease-out;
+    position: relative;
+}
+.approval-btn:hover{
+    transform: translateY(-4px);
+    text-decoration: none;
+    box-shadow: 0 10px 20px #300d2a62;
+}
+.approval-btn:active{
+    transform: translateY(-2px);
+    box-shadow: 0 5px 10px #300d2a62;
+}
+.approval-btn::after{
+    content: "";
+    display: inline-block;
+    width: 100%;
+    height: 100%;
+    border-radius: 100px;
+    position: absolute;
+    color:white;
+    top: 0;
+    left: 0;
+    z-index: -1;
+    transition: all .4s ease-out;
+}
+.approval-btn:hover::after{
+    transform: scaleX(1.2) scaleY(1.6);
+    opacity: 0;
+}
+
+.btn-approve{
+    border-radius: 100px;
+    background-color: #13aa2d;
+    color: #fff;
+    padding: 10px 15px;
+    display: inline-block;
+    animation: moveinLeft 1s cubic-bezier(0.23, 1, 0.320, 1) forwards;
+}
+
+.btn-approve::after{
+    background-color: #117221;
+    text-decoration: none;
+    color: white;
+}
+
+
+.btn-reject{
+    border-radius: 100px;
+    background-color: #cc0f0f;
+    color: #fff;
+    padding: 10px 15px;
+    display: inline-block;
+    animation: moveinLeft 1s cubic-bezier(0.23, 1, 0.320, 1) forwards;
+}
+
+.btn-reject::after{
+    background-color: #cc0f0f;
+    text-decoration: none;
+    color: white;
+}
+
+.btn-close{
+    border-radius: 100px;
+    background-color: #300d2a;
+    color: #fff;
+    padding: 10px 15px;
+    display: inline-block;
+    animation: moveinLeft 1s cubic-bezier(0.23, 1, 0.320, 1) forwards;
+}
+
+.btn-close::after{
+    background-color: #300d2a;
+    text-decoration: none;
+    color: white;
+}

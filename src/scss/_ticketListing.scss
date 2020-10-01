@@ -188,6 +188,7 @@
     height: 100%;
     // border-radius: 100px;
     position: absolute;
+    color:white;
     top: 0;
     left: 0;
     z-index: -1;
@@ -197,14 +198,14 @@
 .btn-regal-blue{
     background-color: #300d2a;
     color: #fff;
-    padding: 10px 30px;
+    padding: 10px 15px;
     display: inline-block;
     animation: moveinLeft 1s cubic-bezier(0.23, 1, 0.320, 1) forwards;
 }
 .btn-white{
     background-color: rgba(132, 135, 211, 0.295);
     color: rgb(168, 125, 125);
-    padding: 10px 30px;
+    padding: 10px  15px;
     display: inline-block;
     animation: moveinLeft 1s cubic-bezier(0.23, 1, 0.320, 1) forwards;   
 }

@@ -1,0 +1,163 @@
+import React, { useState, useEffect } from 'react';
+import { fetch } from '../modules/httpServices';
+import { constants } from '../modules/constants';
+import Accepted from '../images/Accepted.png';
+import Rejected from '../images/Rejected.png';
+
+const ApprovalPageView = () => {
+    const [approvalList, setApprovalList] = useState([]);
+    const [approvalListLoading, setApprovalListLoading] = useState(false);
+    const [view, setView] = useState("Pending")
+    const [message, setMessage] = useState('');
+    const [approvedRequests, setApprovedRequests] = useState([]);
+    const [rejectedRequests, setRejectedRequests] = useState([]);
+    const [pendingRequests, setPendingRequests] = useState([])
+    const [tableData, setTableData] = useState([]);
+    const [buttonText, setButtonText] = useState("");
+    const [token, setToken] = useState(null);
+    const [approver, setApprover] = useState("");
+    const [ticketID, setTicketID] = useState(null);
+    const [showPopup, setShowPopup] = useState(false);
+    const [comment, setComment] = useState("");
+    const [requestSubmitError, setrequestSubmitError] = useState(false);
+    const [successMessage, setSuccessMessage] = useState("");
+
+    console.log(tableData);
+    const setValues = (token, approver, ticketID, buttonText) => {
+        setButtonText(buttonText);
+        setToken(token);
+        setApprover(approver);
+        setTicketID(ticketID);
+        setShowPopup(true);
+    }
+
+    const submitAction = () => {
+        fetch.post({
+            url: constants.SERVICE_URLS.APPROVAL_JOURNEY + `${ticketID}?approver=${approver}&token=${token}&approverComment=${comment}`,
+            callbackHandler: response => {
+                const { payload, status, message } = response;
+                if (status === constants.SUCCESS) {
+                    setSuccessMessage("Request Submitted Successfully")
+                } else {
+                    setrequestSubmitError(true);
+                    setSuccessMessage("Something went wrong...")
+                }
+                console.log(response)
+            }
+        })
+    }
+    useEffect(() => {
+        setApprovalListLoading(true);
+        fetch.post({
+            url: constants.SERVICE_URLS.APPROVAL_LIST,
+            callbackHandler: response => {
+                const { payload, status, message } = response;
+                if (status === constants.SUCCESS) {
+                    setApprovalList(payload.data);
+                    setMessage("");
+                    setApprovalListLoading(false);
+
+                    payload.data.map(approvalItem => {
+                        switch (approvalItem.approvalStatus) {
+                            case "APPROVED":
+                                setApprovedRequests(approvalItem.approval)
+                                break;
+                            case "REJECTED":
+                                setRejectedRequests(approvalItem.approval);
+                                break;
+                            case "PENDING":
+                                setPendingRequests(approvalItem.approval);
+                                setTableData(approvalItem.approval)
+                                break;
+                            default:
+                                console.log("default")
+                        }
+                    })
+                } else {
+                    setMessage(message)
+                    setApprovalListLoading(false);
+                }
+            }
+        })
+    }, [])
+    return (
+        <>
+            {
+                showPopup ?
+                    <div className="approvalPopup">
+                        <div className="approvalPopup__content">
+                            {requestSubmitError ?
+                                <>
+                                    <span className="approvalPopup__content--errorMessage"> {successMessage} </span>
+                                    <a href="#" className={"btn-close approval-btn"} onClick={() => { setShowPopup(false); setSuccessMessage(""); setrequestSubmitError(false); }} >Close</a>
+                                </>
+                                :
+                                successMessage ?
+                                    <>
+                                        <span className="approvalPopup__content--successMessage"> {successMessage} </span>
+                                        <a href="#" className={"btn-close approval-btn"} onClick={() => { setShowPopup(false); setSuccessMessage(""); setrequestSubmitError(false); }} >Close</a>
+                                    </>
+                                    :
+                                    <>
+                                        <span className="approvalPopup__content--closeIcon" onClick={() => setShowPopup(false)}>X</span>
+                                        <span className="approvalPopup__content--heading">Do you want to add a comment?</span>
+                                        <textarea onChange={(e) => setComment(e.currentTarget.value)} name="approvalComment" placeholder="Write your comment here..." className="approvalPopup__content--comment" cols="30" rows="10"></textarea>
+                                        <a href="#" className={buttonText === "Approve" ? "btn-approve approval-btn" : "btn-reject approval-btn"} onClick={(e) => { e.preventDefault(); submitAction(); }} >{buttonText}</a>
+                                    </>}
+
+                        </div>
+                    </div> : null
+            }
+            {
+                approvalList ?
+                    approvalList.length === 0 ?
+                        approvalListLoading ? <div className="approvalHolder__noApprovals">Loading..</div> :
+                            <div className="approvalHolder__noApprovals">No Pending Approvals..</div> :
+                        <>
+                            <div className="approvalHolder">
+                                <div className="approvalHolder__approvalStatus">
+                                    <div className="approvalHolder__approvalStatus--Approved" onClick={() => { setView("Approved"); setTableData(approvedRequests); }} style={view === "Approved" ? { borderBottom: "3px solid #6C1D5F", fontWeight: "800" } : null}>Approved</div>
+                                    <div className="approvalHolder__approvalStatus--Pending" onClick={() => { setView("Pending"); setTableData(pendingRequests); }} style={view === "Pending" ? { borderBottom: "3px solid #6C1D5F", fontWeight: "800" } : null}> Pending</div>
+                                    <div className="approvalHolder__approvalStatus--Rejected" onClick={() => { setView("Rejected"); setTableData(rejectedRequests); }} style={view === "Rejected" ? { borderBottom: "3px solid #6C1D5F", fontWeight: "800" } : null}> Rejected</div>
+                                </div>
+                            </div>
+                            <table className="ticketListingTable">
+                                <thead>
+                                    <tr id="header-row">
+                                        <th>id</th>
+                                        <th>Requested By</th>
+                                        <th>Approver</th>
+                                        <th>Approval Status</th>
+                                        {view !== "Pending" ? <th>Comment</th> : null}
+                                        {view === "Pending" ? <th>Action</th> : null}
+                                    </tr>
+                                </thead>
+
+                                <tbody>
+                                    {
+                                        pendingRequests !== [] ?
+                                            tableData.map(request => {
+                                                return (
+                                                    <React.Fragment key={request.id} >
+                                                        <tr key={request.id}>
+                                                            <td>{request.id}</td>
+                                                            <td>{request.createdByUser}</td>
+                                                            <td>{request.approver}</td>
+                                                            <td>{request.approvalStatus}</td>
+                                                            {view !== "Pending" ? <td>{view === "Pending" ? <input type="text" /> : request.approvarComment ? request.approvarComment : "No Comment"}</td> : null}
+                                                            {view === "Pending" ? <td>{view === "Pending" ? <> <img src={Accepted} height="20px" title="Approve" onClick={() => setValues(request.approvalToken, request.approver, request.ticketId, "Approve")} /> <img src={Rejected} title="Reject" height="20px" onClick={() => setValues(request.rejectionToken, request.approver, request.ticketId, "Reject")} /> </> : null} </td> : null}
+                                                        </tr>
+                                                    </React.Fragment>
+                                                )
+                                            }) : <tr>No approvals Here</tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </> :
+                    <div className="approvalHolder__noApprovals">No Pending Approvals..</div>
+            }
+        </>
+    )
+}
+
+export default ApprovalPageView
