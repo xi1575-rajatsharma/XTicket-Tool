@@ -170,3 +170,118 @@
     text-decoration: none;
     color: white;
 }
+
+/** Sidebar Ticket Details **/
+.ticketDetails-wrapper {
+    padding: 20px 25px;
+    display: flex;
+    min-height: calc(100vh - 50px);
+
+    .ticketDetails-left {
+        width: 250px;
+        border-right: 1px solid #ddd;
+        color: #2F4F4F;
+        .mobile-wrapper {
+            margin: 8px 0 10px;
+        }
+
+        .ticketDetails-border {
+            border: 1px  dashed  #6C1D5F;
+        }
+
+        .ticketDetails-info {
+            margin-top: 20px;
+            .ticketDetails-info-heading {
+                margin-bottom: 15px;
+                > h4 {
+                    color: #000;
+                }
+            }
+            .ticketDetails-info-item {
+                .ticketDetails-info-item-heading {
+                    color: #231046;
+                    margin-bottom: 0px;
+                    font-weight: bold;
+                }
+                .ticketDetails-info-item-value {
+                    margin-bottom: 15px;
+                }
+            }
+        }
+    }
+
+    .ticketDetails-right {
+        width: calc(100% - 250px);
+        #reply-form {
+            padding: 0;
+            margin-bottom: 40px;
+            textarea {
+                width: 100%;
+            }
+            .buttons-wrapper {
+                width: 100%;
+            }
+        }
+        padding-left: 20px;
+        .ticketDetails-top-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            .ticketDetails-approver {
+                > p {
+                    margin: 0;
+                }
+            }
+        }
+        .ticketDetails-origin {
+            margin-top: 10px;
+            .ticketDetails-origin-message {
+                > h5 {
+                    font-size: 14px;
+                    font-weight: bold;
+                    > span {
+                        margin-left: 10px;
+                        font-weight: normal;
+                    }
+                }
+            }
+        }
+        .ticketDetails-reply {
+            max-height: 350px;
+            overflow-y: scroll;
+            border: 1px solid #ddd;
+            margin-top: 25px;
+            padding: 10px;
+            > ul {
+                &.ticketDetails-reply-list {
+                    list-style: none;
+                    padding: 0;
+                    > li {
+                        display: flex;
+                        width: 80%;
+                        margin-bottom: 5px;
+                        background-color: #e0e0e0;
+                        padding: 10px;
+                        border-radius: 10px;
+                        &.reply-own {
+                            float: right;
+                        }
+                        > .reply-item {
+                            width: 100%;
+                            > p {
+                                margin-bottom: 0px;
+                                font-size: 14px;
+                                &.reply-footer {
+                                    color: #300d2a;
+                                    font-size: 13px;
+                                    text-align: right;
+                                    font-weight: bold;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

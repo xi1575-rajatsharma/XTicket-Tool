@@ -3,6 +3,7 @@ import { fetch } from '../modules/httpServices';
 import { constants } from '../modules/constants';
 import Accepted from '../images/Accepted.png';
 import Rejected from '../images/Rejected.png';
+import ApprovalDetails from './ApprovalDetails'
 
 const ApprovalPageView = () => {
     const [approvalList, setApprovalList] = useState([]);
@@ -21,9 +22,14 @@ const ApprovalPageView = () => {
     const [comment, setComment] = useState("");
     const [requestSubmitError, setrequestSubmitError] = useState(false);
     const [successMessage, setSuccessMessage] = useState("");
+    const [sidebar, setSidebar] = useState(false)
+    const [ticketDetails, setTicketDetails] = useState({
+        loading: false
+    })
 
     console.log(tableData);
-    const setValues = (token, approver, ticketID, buttonText) => {
+    const setValues = (event, token, approver, ticketID, buttonText) => {
+        event.stopPropagation();
         setButtonText(buttonText);
         setToken(token);
         setApprover(approver);
@@ -46,6 +52,20 @@ const ApprovalPageView = () => {
             }
         })
     }
+
+    /** Get Ticket Details when an item is clicked (Temp) */
+    const getTicketDetails = ticketId => {
+        if (sidebar) {
+            return
+        }
+        setTicketDetails({...ticketDetails, loading: true})
+        setSidebar(true)
+
+        import("../ticketDetails.json").then(({default: data}) => {
+            setTicketDetails(data.result.ticketDetails)
+        })
+    }
+
     useEffect(() => {
         setApprovalListLoading(true);
         fetch.post({
@@ -82,6 +102,8 @@ const ApprovalPageView = () => {
     }, [])
     return (
         <>
+            {sidebar && <ApprovalDetails ticket={ticketDetails} onToggleSidebar={setSidebar} />}
+
             {
                 showPopup ?
                     <div className="approvalPopup">
@@ -139,13 +161,13 @@ const ApprovalPageView = () => {
                                             tableData.map(request => {
                                                 return (
                                                     <React.Fragment key={request.id} >
-                                                        <tr key={request.id}>
+                                                        <tr className="clickable" onClick={() => getTicketDetails(request.id)}  key={request.id}>
                                                             <td>{request.id}</td>
                                                             <td>{request.createdByUser}</td>
                                                             <td>{request.approver}</td>
                                                             <td>{request.approvalStatus}</td>
                                                             {view !== "Pending" ? <td>{view === "Pending" ? <input type="text" /> : request.approvarComment ? request.approvarComment : "No Comment"}</td> : null}
-                                                            {view === "Pending" ? <td>{view === "Pending" ? <> <img src={Accepted} height="20px" title="Approve" onClick={() => setValues(request.approvalToken, request.approver, request.ticketId, "Approve")} /> <img src={Rejected} title="Reject" height="20px" onClick={() => setValues(request.rejectionToken, request.approver, request.ticketId, "Reject")} /> </> : null} </td> : null}
+                                                            {view === "Pending" ? <td>{view === "Pending" ? <> <img src={Accepted} height="20px" title="Approve" onClick={(e) => setValues(e, request.approvalToken, request.approver, request.ticketId, "Approve")} /> <img src={Rejected} title="Reject" height="20px" onClick={(e) => setValues(e, request.rejectionToken, request.approver, request.ticketId, "Reject")} /> </> : null} </td> : null}
                                                         </tr>
                                                     </React.Fragment>
                                                 )
