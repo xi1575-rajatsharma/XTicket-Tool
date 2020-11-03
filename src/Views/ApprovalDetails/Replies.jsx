@@ -1,19 +1,24 @@
 import React from 'react'
 
 const Replies = ({ items, displayName }) => (
+
   <>
+    {console.log(items)}
     <div className="ticketDetails-reply">
       <ul className="ticketDetails-reply-list">
         {
-          items.map(item => (
-            <li className={`${item.createdBy.includes(displayName) ? 'reply-own' : ''}`}>
-              <div className="reply-item">
-                <p><strong>{item.createdBy}</strong></p>
-                <p>{item.text}</p>
-                <p className="reply-footer">24 September at 9:00 AM</p>
-              </div>
-            </li>
-          ))
+          items.map(item => {
+            const itemCreatedOn = new Date(item.createdOn);
+            return (
+              <li className={`${item.createdBy.includes(displayName) ? 'reply-own' : ''}`}>
+                <div className="reply-item">
+                  <p><strong>{item.createdBy}</strong></p>
+                  <p>{item.text}</p>
+                  <p className="reply-footer">{itemCreatedOn.getDate()} {itemCreatedOn.toLocaleString('default', { month: 'long' })} at {itemCreatedOn.toLocaleString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true })}</p>
+                </div>
+              </li>)
+          }
+          )
         }
       </ul>
     </div>

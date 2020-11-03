@@ -26,8 +26,9 @@ const ApprovalPageView = () => {
     const [ticketDetails, setTicketDetails] = useState({
         loading: false
     })
+    const [ticketApprovers, setTicketApprovers] = useState([]);
+    const [rowDetails, setRowDetails] = useState(null);
 
-    console.log(tableData);
     const setValues = (event, token, approver, ticketID, buttonText) => {
         event.stopPropagation();
         setButtonText(buttonText);
@@ -55,15 +56,32 @@ const ApprovalPageView = () => {
 
     /** Get Ticket Details when an item is clicked (Temp) */
     const getTicketDetails = ticketId => {
-        if (sidebar) {
-            return
-        }
-        setTicketDetails({...ticketDetails, loading: true})
-        setSidebar(true)
 
-        import("../ticketDetails.json").then(({default: data}) => {
-            setTicketDetails(data.result.ticketDetails)
+        setTicketDetails({ ...ticketDetails, loading: true });
+        setSidebar(true);
+
+        fetch.get({
+            url: `${constants.SERVICE_URLS.CUSTOM_TICKET_DETAILS}${ticketId}`,
+            callbackHandler: (response) => {
+                const { payload, status, message } = response;
+                if (status === constants.SUCCESS) {
+                    setTicketDetails(payload.result.ticketDetails)
+                }
+            }
         })
+
+        fetch.get({
+            url: `${constants.SERVICE_URLS.CUSTOM_TICKET_MEMBERS}${ticketId}`,
+            callbackHandler: (response) => {
+                const { payload, status, message } = response;
+                if (status === constants.SUCCESS) {
+                    setTicketApprovers(payload)
+                }
+            }
+        })
+        // import("./ticketDetails.json").then(({ default: data }) => {
+        //     setTicketDetails(data.result.ticketDetails)
+        // })
     }
 
     useEffect(() => {
@@ -102,7 +120,18 @@ const ApprovalPageView = () => {
     }, [])
     return (
         <>
-            {sidebar && <ApprovalDetails ticket={ticketDetails} onToggleSidebar={setSidebar} />}
+            {
+                sidebar
+                &&
+                <ApprovalDetails
+                    ticket={ticketDetails} t
+                    ticketApprovers={ticketApprovers}
+                    onToggleSidebar={setSidebar}
+                    setValues={setValues}
+                    rowDetails={rowDetails}
+                    view={view}
+                />
+            }
 
             {
                 showPopup ?
@@ -161,7 +190,7 @@ const ApprovalPageView = () => {
                                             tableData.map(request => {
                                                 return (
                                                     <React.Fragment key={request.id} >
-                                                        <tr className="clickable" onClick={() => getTicketDetails(request.id)}  key={request.id}>
+                                                        <tr className="clickable" onClick={(e) => { getTicketDetails(request.ticketId); setRowDetails(request) }} key={request.id}>
                                                             <td>{request.id}</td>
                                                             <td>{request.createdByUser}</td>
                                                             <td>{request.approver}</td>

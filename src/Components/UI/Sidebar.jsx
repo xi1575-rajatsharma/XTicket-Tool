@@ -1,14 +1,14 @@
 import React from 'react'
 import closeWindow from '../../images/closewindow.png'
 
-const Sidebar = ({ children, onClose, styles, title, classes }) => {
+const Sidebar = ({ children, onClose, styles, title, classes, id }) => {
   let allClasses = ['sideBar', ...classes || '']
   return (
     <div className={`${allClasses.join(' ')}`} style={styles}>
       <div className="sideBar-heading-wrapper">
 
         <div className="sideBar-title">
-          <p>{title}</p>
+          <p>#{id} {title}</p>
         </div>
 
         <div className="sideBar-close-btn">

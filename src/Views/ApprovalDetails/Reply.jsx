@@ -8,14 +8,15 @@ const Reply = ({ onCancel, onSubmit }) => {
     e.preventDefault()
 
     let { current: formData } = formRef
-    let data = { reply: formData.reply.value }
+    let data = { text: formData.reply.value }
 
     /** Validate */
-    if (!data.reply) {
+    if (!data.text) {
       alert('Reply field can\' be empty')
       return
     }
     onSubmit(data)
+    onCancel();
   }
 
   return (

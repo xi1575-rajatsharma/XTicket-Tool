@@ -34,7 +34,11 @@ export const constants = {
     APPROVAL_JOURNEY: `${API_HOST_PATH}/ticket-tool/v1/approval/`,
     USER_DETAILS: `${API_HOST_PATH}/ticket-tool/v1/users/userDetails`,
     ADMIN_STATUS_COUNT: `${API_HOST_PATH}/ticket-tool/v1/analytics/tickets/statusCount`,
-    APPROVAL_LIST: `${API_HOST_PATH}/ticket-tool/v1/approval/dashboard`
+    // Madhur's Approval Page
+    APPROVAL_LIST: `${API_HOST_PATH}/ticket-tool/v1/approval/dashboard`,
+    CUSTOM_TICKET_DETAILS: `${API_HOST_PATH}/ticket-tool/v1/tickets/custom/`,
+    CUSTOM_TICKET_MEMBERS: `${API_HOST_PATH}/ticket-tool/v1/tickets/custom/detail/`,
+    CUSTOM_TICKET_REPLIES: `${API_HOST_PATH}ticket-tool/v1/tickets/create/cutom/replies/`
   },
   // /v1/tickets/missed/byuser/status
   NO_DATA_FOUND: "No results found...",

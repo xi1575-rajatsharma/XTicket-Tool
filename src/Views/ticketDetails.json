@@ -1,0 +1,60 @@
+{
+    "timestamp": 1601981854644,
+    "code": 200,
+    "message": "success",
+    "result": {
+        "ticketDetails": {
+            "id": 38,
+            "displayName": "Ravi",
+            "name": "Ravi Yadav",
+            "emailId": "ravi.yadav@xebia.com",
+            "location": "Bangalore",
+            "department": "Human Resource",
+            "subIssue": "Miscellaneous",
+            "classification": "Problem",
+            "subject": "Unexpected Salary Deducted ",
+            "description": "Hi,\n\nAs Salary has",
+            "status": "CLOSED",
+            "commentCount": 4,
+            "creationTime": 1593751533000,
+            "dueOn": 1595667799000,
+            "responseDueOn": 1595667799000,
+            "assignedTo": "Lalit Sharma",
+            "channel": "WEB",
+            "conversations": [
+                {
+                    "id": 534,
+                    "text": "Please check at your email, its done",
+                    "createdOn": 1601980737000,
+                    "createdBy": "Madhur Arya",
+                    "fileExtension": ""
+                },
+                {
+                    "id": 533,
+                    "text": "Please check at your end, i just integrated email",
+                    "createdOn": 1601980553000,
+                    "createdBy": "Madhur Arya",
+                    "fileExtension": ""
+                },
+                {
+                    "id": 532,
+                    "fileName": "marya_1601980191493.png",
+                    "createdOn": 1601980193000,
+                    "createdBy": "Madhur Arya",
+                    "s3ReplyUrl": "https://xebiaappsdiag612.blob.core.windows.net/xebiaappsdiag612/marya_1601980191493.png",
+                    "fileExtension": ".png"
+                },
+                {
+                    "id": 35,
+                    "text": "it’s almost 5 days and I didn’t get any update on this",
+                    "createdOn": 1594143615000,
+                    "createdBy": "Ravi Yadav",
+                    "fileExtension": ""
+                }
+            ],
+            "resolution": "Closed in Ticket #112.",
+            "assignedToEmailId": "lalit.sharma@xebia.com",
+            "feedbackGiven": true
+        }
+    }
+}

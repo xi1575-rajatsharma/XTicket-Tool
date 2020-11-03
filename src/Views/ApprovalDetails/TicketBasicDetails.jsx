@@ -1,8 +1,9 @@
 import React from 'react'
 import DMFormatter from '../../Components/UI/DMFormatter';
 
-const TicketBasicDetails = ({ ticket }) => (
+const TicketBasicDetails = ({ ticket, ticketApprovers }) => (
   <>
+    {console.log(ticket)}
     <h3>{ticket.displayName}</h3>
     <div className="email-wrapper">
       <span>{ticket.emailId}</span>
@@ -28,7 +29,7 @@ const TicketBasicDetails = ({ ticket }) => (
         </div>
         <div className="ticketDetails-info-item">
           <p className="ticketDetails-info-item-heading">SLA</p>
-          <p className="ticketDetails-info-item-value"><DMFormatter timestamp={ticket.dueOn}/></p>
+          <p className="ticketDetails-info-item-value"><DMFormatter timestamp={ticket.dueOn} /></p>
         </div>
         <div className="ticketDetails-info-item">
           <p className="ticketDetails-info-item-heading">Location</p>
@@ -52,7 +53,8 @@ const TicketBasicDetails = ({ ticket }) => (
         </div>
         <div className="ticketDetails-info-item">
           <p className="ticketDetails-info-item-heading">Approvers</p>
-          <p className="ticketDetails-info-item-value">John Doe, Jane Doe</p>
+          {ticketApprovers.slice(1).map(approver => <p className="ticketDetails-info-item-value">{approver.email}</p>)}
+
         </div>
       </div>
     </div>
