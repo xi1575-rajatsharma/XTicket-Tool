@@ -1,5 +1,5 @@
 // const API_HOST_PATH = "https://xenie.xebia.in/";
-const API_HOST_PATH = "https://xhelpportal.herokuapp.com/";
+const API_HOST_PATH = "https://xhelpportal.herokuapp.com";
 
 export const constants = {
   SUCCESS: "success",
