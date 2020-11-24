@@ -37,7 +37,7 @@ const BarView = ({ statusData }) => {
           title: {
             display: true,
             text: "Tickets Status",
-            align: "left",
+            align: "right",
             fontSize: 20,
           },
 

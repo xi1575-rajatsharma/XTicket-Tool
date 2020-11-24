@@ -4,7 +4,7 @@ import logout from '../images/logout.png';
 import icon from '../images/newIcon.png'
 export const HeaderView = (payload) => {
 
-    const { onClickLogout } = payload;
+    const { onClickLogout, isTicketListLoading } = payload;
     const [islogoutWrapperVisible, setIslogoutWrapperVisible] = useState(false);
 
     const toggleLgoutWrapper = () => {
@@ -24,7 +24,10 @@ export const HeaderView = (payload) => {
                     Customer
                 </div> */}
                     <div className="navbar-report-wrapper">
-                        <Link to='/reports'> Reports </Link>
+                        {isTicketListLoading ?
+                            <div className="disabledLink">Reports</div> :
+                            <Link to='/reports'> Reports </Link>
+                        }
                     </div>
 
                     <div className="navbar-report-wrapper">

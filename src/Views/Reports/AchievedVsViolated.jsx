@@ -4,8 +4,14 @@ import { Doughnut } from "react-chartjs-2";
 const AchievedVsViolated = (achieved_vs_missed) => {
   const res_miss = achieved_vs_missed.achieved_vs_missed;
 
-  const xlabel = Object.keys(res_miss);
+  let xlabel = Object.keys(res_miss);
   const ylabel = Object.values(res_miss);
+  const total = ylabel[0] + ylabel[1];
+  const zeroPerc = Math.round((ylabel[0] / total) * 100, 1);
+  const onePerc = Math.round((ylabel[1] / total) * 100, 1);
+  xlabel[0] = `${xlabel[0]} (${zeroPerc}%)`;
+  xlabel[1] = `${xlabel[1]} (${onePerc}%)`;
+  console.log(xlabel);
 
   const state = {
     chartData: {

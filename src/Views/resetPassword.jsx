@@ -4,7 +4,7 @@ import { constants } from '../modules/constants';
 import eye from '../images/eye.png';
 import closedEye from '../images/eye-closed.png'
 
-const ResetPassword = () => {
+const ResetPassword = (props) => {
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -14,7 +14,8 @@ const ResetPassword = () => {
     const [isConfirmPasswordVisible, setIfConfirmPasswordVisible] = useState(false)
     useEffect(() => {
         const userInfo = JSON.parse(window.localStorage.getItem('_userInfo'));
-        setEmail(userInfo.contactInfo.email)
+        setEmail(userInfo.contactInfo.email);
+        props.setIsTicketLoading();
     }, [])
 
     const isPasswordVisibleHandler = (e) => {

@@ -26,7 +26,6 @@ export default class TicketListingPage extends React.Component {
         // setTimeout(() => {
         //     if (resetPassword === "false") alert("We advice you to change your password")
         // }, 1000)
-
     }
     filterTickets = (fromDate, toDate) => {
         // this.getTicketData();
@@ -61,11 +60,12 @@ export default class TicketListingPage extends React.Component {
     }
     searchByFilter = (id, filterString) => {
         const _listingData = JSON.parse(window.localStorage.getItem('_listingData'))
+        console.log(_listingData);
         this.setState({ _listingData: _listingData });
 
         if (id === "Subject") {
             this.setState({ listingData: _listingData.filter(ticket => ticket.subject.toLowerCase().includes(filterString.toLowerCase())) })
-        }
+        } else if (id === "SubIssue") this.setState({ listingData: _listingData.filter(ticket => ticket.subIssue.toLowerCase().includes(filterString.toLowerCase())) })
         else if (id === "employeeName") {
             if (filterString !== '') {
                 this.setState({ listingData: _listingData.filter(ticket => ticket.displayName === filterString) })
@@ -75,7 +75,7 @@ export default class TicketListingPage extends React.Component {
         }
     }
     statusFilter = (value) => {
-        if (value !== "Date" && value !== "Subject" && value !== "Name") {
+        if (value !== "Date" && value !== "Subject" && value !== "Name" && value !== "SubIssue") {
             const _listingData = JSON.parse(window.localStorage.getItem('_listingData'));
 
             if (value === "All-tickets") {
@@ -110,7 +110,7 @@ export default class TicketListingPage extends React.Component {
                     window.localStorage.setItem('_listingData', JSON.stringify(_state.listingData))
                     _state.listingData = _state.listingData.filter(ticket => ticket.status === "OPEN")
                     _state.view = "Xenie"
-
+                    this.props.setIsTicketLoading(this.state.listingData);
                 } else {
                     _state.message = message;
                 }

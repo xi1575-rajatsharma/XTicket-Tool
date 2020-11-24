@@ -249,7 +249,7 @@ class ReportPage extends Component {
       }
     })
 
-    ////////////////////////////////////////// API CALL 7 ////////////////////////
+    ////////////////////////////////////////// API CALL 8////////////////////////
     fetch.get({
       url: constants.SERVICE_URLS.GET_DEPARTMENTS,
       callbackHandler: response => {
@@ -259,7 +259,75 @@ class ReportPage extends Component {
         }
       }
     })
+
+    // fetch.get({
+    //   url: constants.SERVICE_URLS.DEPARTMENT_RATING,
+    //   callbackHandler: response => console.log(response)
+    // })
+    this.props.setIsTicketLoading();
   };
+
+  getTicketsByMonth = (date) => {
+    var today = new Date();
+    var dd = String(today.getDate()).padStart(2, '0');
+    var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+    var yyyy = today.getFullYear();
+    console.log(dd, '/', date, '/', yyyy);
+    fetch.get({
+      url: constants.SERVICE_URLS.MONTHLY_FLITER + `${yyyy}-${date}-${dd}`,
+      callbackHandler: response => {
+        const { status, payload: { data } } = response;
+        console.log(data);
+        if (status === constants.SUCCESS) {
+          let statusData = {
+            OPEN: 0,
+            INPROGRESS: 0,
+            AWATING: 0,
+            REVIEW: 0,
+            ESCALATED: 0,
+            REOPENED: 0,
+            CLOSED: 0,
+            RESOLVED: 0,
+          };
+          data.map(ticketStatus => {
+            switch (ticketStatus.status) {
+              case ("OPEN"):
+                statusData.OPEN = ticketStatus.count;
+                break;
+              case ("ASSIGNED"):
+                statusData.ASSIGNED = ticketStatus.count;
+                break;
+              case ("INPROGRESS"):
+                statusData.INPROGRESS = ticketStatus.count;
+                break;
+              case ("AWAITING"):
+                statusData.AWAITING = ticketStatus.count;
+                break;
+              case ("REVIEW"):
+                statusData.REVIEW = ticketStatus.count;
+                break;
+              case ("ESCALATED"):
+                statusData.ESCALATED = ticketStatus.count;
+                break;
+              case ("CLOSED"):
+                statusData.CLOSED = ticketStatus.count;
+                break;
+              case ("REOPENED"):
+                statusData.REOPENED = ticketStatus.count;
+                break;
+              case ("RESOLVED"):
+                statusData.RESOLVED = ticketStatus.count;
+                break;
+              default:
+                this.setState({ statusData: statusData });
+                break;
+            }
+          })
+          this.setState({ statusData: statusData });
+        }
+      }
+    })
+  }
 
   onDepartmentChange = (value) => {
     let statusData = JSON.stringify(this.state.statusData);
@@ -287,8 +355,22 @@ class ReportPage extends Component {
         statusData = ITDepartmentStatusCount;
         this.setState({ statusData: JSON.parse(statusData) });
         break;
+      case "01":
+      case "02":
+      case "03":
+      case "04":
+      case "05":
+      case "06":
+      case "07":
+      case "08":
+      case "09":
+      case "10":
+      case "11":
+      case "12":
+        this.getTicketsByMonth(value);
+        break;
       default:
-        this.setState({ ...this.state })
+        this.setState({ ...this.state });
     }
   }
 
@@ -320,12 +402,12 @@ class ReportPage extends Component {
           <div className="report-container__right">
             {this.state.view === "ticketStatus" ?
               <div className="report-container__right__BarChart">
-                {this.state.isDepartmentStatusCountValid ?
-                  <span className="report-container__right__select">
-                    <DeparmtmentFilter
-                      departments={this.state.departments}
-                      onDepartmentChange={this.onDepartmentChange} />
-                  </span> : null}
+                <span className="report-container__right__select">
+                  <DeparmtmentFilter
+                    departments={this.state.departments}
+                    onDepartmentChange={this.onDepartmentChange}
+                    departmentCount={this.state.isDepartmentStatusCountValid} />
+                </span>
                 <BarView statusData={this.state.statusData} />
               </div> :
               this.state.view === "performance" ?

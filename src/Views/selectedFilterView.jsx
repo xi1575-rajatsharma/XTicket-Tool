@@ -17,7 +17,11 @@ const SelectedFilterView = (payload) => {
                         <form onSubmit={(e) => { e.preventDefault(); onInputSubmit(e.target.id) }} id="Subject">
                             <input type="text" onChange={e => onInputChange({ filterString: e.currentTarget.value })} placeholder="Search for subjects..." />
                         </form>
-                        : display === "Name" ? <form onSubmit={(e) => { e.preventDefault(); onInputSubmit(e.target.id) }} id="employeeName"> <input id="employeeInput" onChange={e => onInputChange({ filterString: e.currentTarget.value })} type="text" placeholder="Filter by Employee Name.." /> </form> : null
+                        : display === "Name" ? <form onSubmit={(e) => { e.preventDefault(); onInputSubmit(e.target.id) }} id="employeeName"> <input id="employeeInput" onChange={e => onInputChange({ filterString: e.currentTarget.value })} type="text" placeholder="Filter by Employee Name.." /> </form> :
+                            display === "SubIssue" ? <form onSubmit={(e) => { e.preventDefault(); onInputSubmit(e.target.id) }} id="SubIssue">
+                                <input type="text" onChange={e => onInputChange({ filterString: e.currentTarget.value })} placeholder="Search for Sub-Issues..." />
+                            </form> :
+                                null
             }
 
         </>

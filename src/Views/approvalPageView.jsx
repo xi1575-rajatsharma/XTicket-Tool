@@ -5,7 +5,7 @@ import Accepted from '../images/Accepted.png';
 import Rejected from '../images/Rejected.png';
 import ApprovalDetails from './ApprovalDetails'
 
-const ApprovalPageView = () => {
+const ApprovalPageView = (props) => {
     const [approvalList, setApprovalList] = useState([]);
     const [approvalListLoading, setApprovalListLoading] = useState(false);
     const [view, setView] = useState("Pending")
@@ -117,6 +117,7 @@ const ApprovalPageView = () => {
                 }
             }
         })
+        props.setIsTicketLoading();
     }, [])
     return (
         <>

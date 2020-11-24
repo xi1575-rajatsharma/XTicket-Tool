@@ -35,7 +35,7 @@ export default class TestView extends Component {
     }
     onInputSubmit = (id) => {
 
-        this.props.searchByFilter();
+        // this.props.searchByFilter();
         this.props.searchByFilter(id, this.state.filterString)
     }
     changeFilterSelectValue = (value) => {
@@ -75,12 +75,13 @@ export default class TestView extends Component {
                             <optgroup label="Other Filters">
                                 <option value="Date" >Filter Between Dates</option>
                                 <option value="Subject">Filter By subject</option>
+                                <option value="SubIssue">SubIssue</option>
                             </optgroup>
                         </select>
                     </div>
                     <div className="filters-right-wrapper">
                         <SelectedFilterView display={this.state.display} onFromDateChange={this.onFromDateChange} onToDateChange={this.onToDateChange} onDateSubmit={this.onDateSubmit} onInputSubmit={this.onInputSubmit} onInputChange={this.onInputChange} />
-                        {listingData ? this.state.display === "Date" || this.state.display === "Subject" ? null : <TicketFilters listingData={listingData} statusFilter={this.props.statusFilter} changeFilterSelectValue={this.changeFilterSelectValue} /> : null}
+                        {listingData ? this.state.display === "Date" || this.state.display === "Subject" || this.state.display === "SubIssue" ? null : <TicketFilters listingData={listingData} statusFilter={this.props.statusFilter} changeFilterSelectValue={this.changeFilterSelectValue} /> : null}
 
                         <div className="xenie-buttons-wrapper">
                             <a onClick={() => { this.props.getTicketData(); this.setState({ selectValue: "OPEN", xenieButton: "history-btn btn-regal-blue", zohoButton: "history-btn btn-white" }) }} className={this.state.xenieButton} href="#">Xenie Tickets</a>
@@ -95,6 +96,7 @@ export default class TestView extends Component {
                         <tr id="header-row">
                             <th>id</th>
                             <th>subject</th>
+                            <th>SubIssue</th>
                             <th>Ticket Raiser</th>
                             <th>Created on</th>
                             <th>Due Date</th>
@@ -115,6 +117,7 @@ export default class TestView extends Component {
                                                 <tr key={ticket.id}>
                                                     <td><Link to={'/ticketlist/' + ticket.id} >{ticket.id}</Link></td>
                                                     <td><Link to={'/ticketlist/' + ticket.id} >{ticket.subject}</Link></td>
+                                                    <td><Link to={'/ticketlist/' + ticket.id} >{ticket.subIssue}</Link></td>
                                                     <td><Link to={'/ticketlist/' + ticket.id} >{ticket.displayName}</Link></td>
                                                     <td><Link to={'/ticketlist/' + ticket.id} >{creationTime.toLocaleString([], { hour: '2-digit', minute: '2-digit', day: '2-digit', month: '2-digit', year: '2-digit' })}</Link></td>
                                                     <td><Link to={'/ticketlist/' + ticket.id} >{dueOn.toLocaleString([], { hour: '2-digit', minute: '2-digit', day: '2-digit', month: '2-digit', year: '2-digit' })}</Link></td>

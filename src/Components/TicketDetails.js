@@ -38,6 +38,7 @@ class TicketDetails extends Component {
     componentDidMount() {
         let id = this.props.match.params.ticket_id;
         this.getTicketInfo(id);
+        this.props.setIsTicketLoading();
     }
 
 
@@ -431,8 +432,8 @@ class TicketDetails extends Component {
 
             /* 
             "text":"Please check at your end, i just integrated email",
-	"conversationType":"Reply",
-	"mailRecepients":"ankur.saxena@xebia.com"
+    "conversationType":"Reply",
+    "mailRecepients":"ankur.saxena@xebia.com"
             */
             const bodyFOrmData = new FormData();
 

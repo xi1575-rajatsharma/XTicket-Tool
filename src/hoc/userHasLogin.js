@@ -7,7 +7,17 @@ export const userHasLogin = (WrapperView) => {
 
         constructor(props) {
             super(props);
+            this.state = {
+                isTicketListLoading: true
+            }
+        }
 
+        setIsTicketLoading = (tickeList) => {
+            if (tickeList) this.setState({ isTicketListLoading: false });
+            else {
+                const _listingData = window.localStorage.getItem('_listingData');
+                if (_listingData) this.setState({ isTicketListLoading: false });
+            }
         }
 
         onClickLogout = () => {
@@ -29,10 +39,13 @@ export const userHasLogin = (WrapperView) => {
                 <div className="TicketListContainer">
                     <HeaderView
                         onClickLogout={this.onClickLogout}
+                        isTicketListLoading={this.state.isTicketListLoading}
                     />
                     <div className="bottom-container">
 
-                        <WrapperView {...this.props} />
+                        <WrapperView {...this.props}
+                            setIsTicketLoading={this.setIsTicketLoading}
+                        />
                     </div>
                 </div>
             );

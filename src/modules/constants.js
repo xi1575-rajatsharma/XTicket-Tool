@@ -22,6 +22,7 @@ export const constants = {
     GIVE_FEEDBACK: `${API_HOST_PATH}/ticket-tool/v1/feedback/`,
     DOWNLOAD_FILE: `${API_HOST_PATH}/ticket-tool/v1/tickets/download/3?fileName=`,
     RATING: `${API_HOST_PATH}/ticket-tool/v1/analytics/feedback/user/ratings`,
+    DEPARTMENT_RATING: `${API_HOST_PATH}/ticket-tool/v1/analytics/feedback/department/ratings`,
     SLAS_USER_MISSED: `${API_HOST_PATH}/ticket-tool/v1/analytics/slas/user/missed`,
     SLAS_DEPARTMENT_MISSED: `${API_HOST_PATH}/ticket-tool/v1/analytics/slas/department/missed`,
     SLAS_USER_RESOLVED: `${API_HOST_PATH}/ticket-tool/v1/analytics/slas/user/resolved`,
@@ -38,7 +39,8 @@ export const constants = {
     APPROVAL_LIST: `${API_HOST_PATH}/ticket-tool/v1/approval/dashboard`,
     CUSTOM_TICKET_DETAILS: `${API_HOST_PATH}/ticket-tool/v1/tickets/custom/`,
     CUSTOM_TICKET_MEMBERS: `${API_HOST_PATH}/ticket-tool/v1/tickets/custom/detail/`,
-    CUSTOM_TICKET_REPLIES: `${API_HOST_PATH}ticket-tool/v1/tickets/create/cutom/replies/`
+    CUSTOM_TICKET_REPLIES: `${API_HOST_PATH}ticket-tool/v1/tickets/create/cutom/replies/`,
+    MONTHLY_FLITER: `${API_HOST_PATH}/ticket-tool/v1/tickets/user/status/monthly/`,
   },
   // /v1/tickets/missed/byuser/status
   NO_DATA_FOUND: "No results found...",
