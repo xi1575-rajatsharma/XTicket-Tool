@@ -93,6 +93,7 @@ returnPromise.reject(error);
 
 export const fetch = {
     get({ url, requestParams = {}, callbackHandler }) {
+        console.log("requestparams",requestParams)
         const ins = axios.get(url, {
             params: requestParams,
             requestId

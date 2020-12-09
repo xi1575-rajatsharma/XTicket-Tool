@@ -9,6 +9,9 @@ import AverageEfficiency from "../Views/Reports/AverageEfficiency";
 import DeparmtmentFilter from '../Views/departmentFilter';
 import { fetch } from "../modules/httpServices";
 import { constants } from "../modules/constants";
+import { saveAs } from 'file-saver';
+var FileSaver = require('file-saver');
+const base64 = require('base64topdf');
 
 class ReportPage extends Component {
   constructor(props) {
@@ -373,7 +376,72 @@ class ReportPage extends Component {
         this.setState({ ...this.state });
     }
   }
+  extractFileName = (contentDispositionValue) => {
+    var filename = "";
+    if (contentDispositionValue && contentDispositionValue.indexOf('attachment') !== -1) {
+        var filenameRegex = /filename[^;=\n]*=((['"]).*?\2|[^;\n]*)/;
+        var matches = filenameRegex.exec(contentDispositionValue);
+        if (matches != null && matches[1]) {
+            filename = matches[1].replace(/['"]/g, '');
+        }
+    }
+    return filename;
+}
+  downloadTickets=(value)=>{
 
+  switch(value){
+    case 'DownloadAlltickets':
+      fetch.getExcel({
+      url: constants.SERVICE_URLS.DOWNLOAD_ALL_TICKETS,
+      responseType: 'blob',
+      callbackHandler: (response) => {
+        const {
+          message,
+          payload: { result },
+        } = response;
+        // var filename=this.extractFileName(response.headers['content-disposition']);
+        // console.log("File name",filename);
+        const url = window.URL.createObjectURL(new Blob([response.payload]));
+        const link = document.createElement('a');
+        link.href = url;
+        link.setAttribute('download', "AllTicketsHistory.xlsx");
+        document.body.appendChild(link);
+        link.click();
+        link.remove();
+        window.URL.revokeObjectURL(url);        
+      },
+    });
+
+     
+      break;
+
+      case 'DownloadMissedtickets':
+
+        fetch.getExcel({
+          url: constants.SERVICE_URLS.DOWNLOAD_MISSED_TICKETS,
+          responseType: 'blob',
+          callbackHandler: (response) => {
+            const {
+              message,
+              payload: { result },
+            } = response;
+            // var filename=this.extractFileName(response.headers['content-disposition']);
+            // console.log("File name",filename);
+            const url = window.URL.createObjectURL(new Blob([response.payload]));
+            const link = document.createElement('a');
+            link.href = url;
+            link.setAttribute('download', "MissedTicketsHistory.xlsx");
+            document.body.appendChild(link);
+            link.click();
+            link.remove();
+            window.URL.revokeObjectURL(url);        
+          },
+        });
+        break;
+  }
+    console.log("hiiiiiiiii")
+    
+  }
   render() {
     return (
       <>
@@ -395,6 +463,24 @@ class ReportPage extends Component {
                   <a href="#" onClick={() => this.setState({ view: "SLA" })}>
                     <strong>SLA's Missed</strong>
                   </a>
+                </li>
+                <li>
+                  <div class="d-flex mt-3 justify-content-center">
+                    <div class="d-flex flex-column pointermouse" onClick={()=>this.downloadTickets('DownloadAlltickets')}>
+                  <div class="d-flex justify-content-center "  ><i class="fa fa-arrow-down" aria-hidden="true" ></i></div>
+                  All tickets history
+                  </div>
+                  <div class="ml-5 d-flex flex-column pointermouse" onClick={()=>this.downloadTickets('DownloadMissedtickets')}>
+                  <div class="d-flex justify-content-center "  >
+                  <i class="fa fa-arrow-down" aria-hidden="true"></i>
+                  </div>
+                
+                missed tickets 
+                  </div>
+                </div>
+
+               
+                  
                 </li>
               </ul>
             </nav>

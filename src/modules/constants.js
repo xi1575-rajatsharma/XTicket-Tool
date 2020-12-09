@@ -1,5 +1,5 @@
-// const API_HOST_PATH = "https://xenie.xebia.in/";
-const API_HOST_PATH = "https://xhelpportal.herokuapp.com";
+const API_HOST_PATH = "https://xenie.xebia.in";
+// const API_HOST_PATH = "https://xhelpportal.herokuapp.com";
 
 export const constants = {
   SUCCESS: "success",
@@ -41,6 +41,8 @@ export const constants = {
     CUSTOM_TICKET_MEMBERS: `${API_HOST_PATH}/ticket-tool/v1/tickets/custom/detail/`,
     CUSTOM_TICKET_REPLIES: `${API_HOST_PATH}ticket-tool/v1/tickets/create/cutom/replies/`,
     MONTHLY_FLITER: `${API_HOST_PATH}/ticket-tool/v1/tickets/user/status/monthly/`,
+    DOWNLOAD_ALL_TICKETS:`${API_HOST_PATH}/ticket-tool/v1/tickets/user/missed/allslas/file`,
+    DOWNLOAD_MISSED_TICKETS:`${API_HOST_PATH}/ticket-tool/v1/tickets/user/missed/department/file`
   },
   // /v1/tickets/missed/byuser/status
   NO_DATA_FOUND: "No results found...",
