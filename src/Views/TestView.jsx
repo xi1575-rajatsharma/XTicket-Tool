@@ -106,13 +106,16 @@ export default class TestView extends Component {
                     </thead>
 
                     <tbody>
+                      
                         {
+                            
                             this.props.view === "Xenie" ?
                                 listingData ? listingData.length === 0 ? <tr className="no-updates-row"><td></td><td></td><td></td><td>--No tickets here--</td><td></td><td></td><td></td></tr> :
                                     listingData.map((ticket) => {
                                         const creationTime = new Date(ticket.creationTime);
                                         const dueOn = new Date(ticket.dueOn);
                                         return (
+                                            
                                             <React.Fragment key={ticket.id} >
                                                 <tr key={ticket.id}>
                                                     <td><Link to={'/ticketlist/' + ticket.id} >{ticket.id}</Link></td>

@@ -177,6 +177,7 @@ const ApprovalPageView = (props) => {
                                 <thead>
                                     <tr id="header-row">
                                         <th>id</th>
+                                        <th>Ticket Id</th>
                                         <th>Requested By</th>
                                         <th>Approver</th>
                                         <th>Approval Status</th>
@@ -193,6 +194,7 @@ const ApprovalPageView = (props) => {
                                                     <React.Fragment key={request.id} >
                                                         <tr className="clickable" onClick={(e) => { getTicketDetails(request.ticketId); setRowDetails(request) }} key={request.id}>
                                                             <td>{request.id}</td>
+                                                            <td>{request.ticketId}</td>
                                                             <td>{request.createdByUser}</td>
                                                             <td>{request.approver}</td>
                                                             <td>{request.approvalStatus}</td>
