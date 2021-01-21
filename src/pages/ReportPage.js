@@ -1,17 +1,25 @@
+/* eslint-disable no-lone-blocks */
+/* eslint-disable no-unused-expressions */
 import React, { Component } from "react";
-import BarView from "../Views/Reports/BarView";
 import SLAUser from "../Views/Reports/SLAUser";
 import PieRating from "../Views/Reports/PieRating";
 import ViolationByStatus from "../Views/Reports/ViolationByStatus";
 import ViolationByDate from "../Views/Reports/ViolationByDate";
 import AchievedVsViolated from "../Views/Reports/AchievedVsViolated";
+import {
+  BarChart, Bar, Cell, XAxis, YAxis, CartesianGrid, Tooltip, Legend,ResponsiveContainer
+} from 'recharts';
 import AverageEfficiency from "../Views/Reports/AverageEfficiency";
 import DeparmtmentFilter from '../Views/departmentFilter';
 import { fetch } from "../modules/httpServices";
 import { constants } from "../modules/constants";
 import { saveAs } from 'file-saver';
+import Reports from '../Views/Reports/Reports.jsx';
 var FileSaver = require('file-saver');
 const base64 = require('base64topdf');
+
+let dataValue = {};
+
 
 class ReportPage extends Component {
   constructor(props) {
@@ -40,6 +48,7 @@ class ReportPage extends Component {
         CLOSED: 0,
         RESOLVED: 0,
       },
+      updatedStatusData: null,
       departmentStatusCount: [],
       isDepartmentStatusCountValid: false,
       departments: [],
@@ -161,9 +170,9 @@ class ReportPage extends Component {
           message,
           payload: { result },
         } = response;
-        // console.log(result);
+        const ratings=  Object.keys(result).map((key,index) => {  return {name: key, value: response.payload.result[key]} }) 
         this.setState({
-          rating: result,
+          rating: ratings,
           message: message,
         });
       },
@@ -177,9 +186,12 @@ class ReportPage extends Component {
           payload: { result },
         } = response;
 
-        //console.log(response.payload.result);
+      
+      const achieved_vs_missed=  Object.keys(response.payload.result).map((key,index) => {  return {name: key.charAt(0).toUpperCase() + key.slice(1), value: response.payload.result[key]} }) 
+      // console.log(achieved_vs_missed);
+      
         this.setState({
-          achieved_vs_missed: result,
+          achieved_vs_missed: achieved_vs_missed,
           message: message,
         });
         // console.log(message);
@@ -194,8 +206,10 @@ class ReportPage extends Component {
           message,
           payload: { data },
         } = response;
+        // console.log(data);
+        const missedByStatus= Object.keys(data).map((key,index) => { return {name: data[key].status, value: data[key].count} } )  // return {name: key, value: data[key]} console.log(data[key].status)
         this.setState({
-          status: data,
+          status: missedByStatus,
         });
       },
     });
@@ -209,19 +223,15 @@ class ReportPage extends Component {
           message,
           payload: { data },
         } = response;
-        this.setState({
-          average_efficiency: data,
-        });
         let sum = 0;
-        for (let i of this.state.average_efficiency) {
+        if(data){
+        for (let i of data) {
           sum += i.hoursToRespond;
         }
-        let average = sum / this.state.average_efficiency.length;
-        //console.log("average" + average);
+        let average = sum / data.length;
         this.setState({
-          averageHours: average,
-        });
-        //console.log(this.state.averageHours);
+          averageHours: Math.round(average),
+        });}
       },
     });
     ////////////////////////////////////////////API CALL 6///////
@@ -232,8 +242,10 @@ class ReportPage extends Component {
           message,
           payload: { data }
         } = response;
+        const slaMissedByDate=  Object.keys(data).map((key,index) => {  return {name: data[key].localDateTime, value: data[key].missedCount} }) 
+        console.log(data)
         this.setState({
-          statusByDate: data
+          statusByDate: slaMissedByDate
         });
       },
     });
@@ -275,12 +287,12 @@ class ReportPage extends Component {
     var dd = String(today.getDate()).padStart(2, '0');
     var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
     var yyyy = today.getFullYear();
-    console.log(dd, '/', date, '/', yyyy);
+    // console.log(dd, '/', date, '/', yyyy);
     fetch.get({
       url: constants.SERVICE_URLS.MONTHLY_FLITER + `${yyyy}-${date}-${dd}`,
       callbackHandler: response => {
         const { status, payload: { data } } = response;
-        console.log(data);
+        // console.log(data);
         if (status === constants.SUCCESS) {
           let statusData = {
             OPEN: 0,
@@ -438,33 +450,153 @@ class ReportPage extends Component {
           },
         });
         break;
+        default: console.log("");
   }
-    console.log("hiiiiiiiii")
+    
     
   }
   render() {
+    {
+      this.state.statusData ? 
+       dataValue =  Object.keys(this.state.statusData).map((key,index) => {  return {name: key, value: this.state.statusData[key]} }) 
+       : null
+      }
     return (
       <>
-        <div className="report-container">
-          <div className="report-container__left">
-            <nav>
-              <ul className="mcd-menu">
-                <li>
-                  <a href="#" onClick={() => this.setState({ view: "ticketStatus" })} >
-                    <strong>Ticket Status</strong>
-                  </a>
-                </li>
-                <li>
-                  <a href="#" onClick={() => this.setState({ view: "performance" })}>
-                    <strong>Performance</strong>
-                  </a>
-                </li>
-                <li>
-                  <a href="#" onClick={() => this.setState({ view: "SLA" })}>
-                    <strong>SLA's Missed</strong>
-                  </a>
-                </li>
-                <li>
+      <Reports
+      SLAPie = {this.state.achieved_vs_missed}
+      ratings = {this.state.rating}
+      missedByStatus= {this.state.status}
+      averageHours={this.state.averageHours}
+      status = {dataValue}
+      slaMissedByDate = {this.state.statusByDate}
+       />
+       {/* <div class="d-flex mt-3 justify-content-center">
+                    <div class="d-flex flex-column pointermouse" onClick={()=>this.downloadTickets('DownloadAlltickets')}>
+                  <div class="d-flex justify-content-center "  ><i class="fa fa-arrow-down" aria-hidden="true" ></i></div>
+                  All tickets history
+                  </div>
+                  <div class="ml-5 d-flex flex-column pointermouse" onClick={()=>this.downloadTickets('DownloadMissedtickets')}>
+                  <div class="d-flex justify-content-center "  >
+                  <i class="fa fa-arrow-down" aria-hidden="true"></i>
+                  </div>
+                
+                missed tickets 
+                  </div>
+                </div> */}
+       </>
+    );
+  }
+}
+
+export default ReportPage;
+
+
+
+// <>
+//         <div className="report-container">
+//           <div className="report-container__left">
+//             <nav>
+//               <ul className="mcd-menu">
+//                 <li>
+//                   <a href="#" onClick={() => this.setState({ view: "ticketStatus" })} >
+//                     <strong>Ticket Status</strong>
+//                   </a>
+//                 </li>
+//                 <li>
+//                   <a href="#" onClick={() => this.setState({ view: "performance" })}>
+//                     <strong>Performance</strong>
+//                   </a>
+//                 </li>
+//                 <li>
+//                   <a href="#" onClick={() => this.setState({ view: "SLA" })}>
+//                     <strong>SLA's Missed</strong>
+//                   </a>
+//                 </li>
+//               </ul>
+//             </nav>
+//           </div>
+//           <div className="report-container__right">
+//             {this.state.view === "ticketStatus" ?
+//               <div className="report-container__right__BarChart">
+//                 { /* <BarView statusData={this.state.statusData} /> */}
+//                 <div className="report-container__right__select">
+//                   <DeparmtmentFilter
+//                     departments={this.state.departments}
+//                     onDepartmentChange={this.onDepartmentChange}
+//                     departmentCount={this.state.isDepartmentStatusCountValid} />
+//                 </div>
+//                 <ResponsiveContainer height={400}>
+//                 <BarChart
+//                   width={1000}
+//                   height={500}
+//                   data={dataValue}
+//                   margin={{
+//                     top: 5, right: 30, left: 20, bottom: 5,
+//                   }}
+//                 >
+//         {/* <CartesianGrid strokeDasharray="10 10" /> */}
+//         <XAxis dataKey="name"/>
+//         <YAxis />
+//         <Tooltip cursor={{width: 110,fill: '#99ffff'}} />
+//         {/* <Legend /> */}
+//         {/* <Bar dataKey="pv" fill="#8884d8" /> */}
+//         <Bar dataKey="value" barSize={35}> {
+//           dataValue.map((entry,index) => {
+//             switch(entry.name){
+//               case "OPEN":
+//               return <Cell width={40} fill= { "#ff8000"} />;
+//               case "INPROGRESS":
+//               return <Cell width={40} fill= { "#99cc00"} />;
+//               case "AWATING":
+//               return <Cell width={40} fill= { "#0000e6"} />;
+//               case "REVIEW":
+//               return <Cell width={40} fill= { "#220066"} />;
+//               case "ESCALATED":
+//               return <Cell width={40} fill= { "#ff3300"} />;
+//               case "REOPENED":
+//               return <Cell width={40} fill= { "#cc0052"} />;
+//               case "CLOSED":
+//               return <Cell width={40} fill= { "#5cd65c"} />;
+//               case "RESOLVED":
+//               return <Cell width={40} fill= { "#003300"} />;
+//               default: 
+//               return <Cell width={40} fill= { "#80ff80"} />;
+//             }
+//           })
+//         } </Bar>
+//       </BarChart>
+//       </ResponsiveContainer>
+//               </div> 
+//               :
+//               this.state.view === "performance" ?
+//                 <>
+//                   <div className="report-container__right__AverageEfficiency">
+//                     <AverageEfficiency averageHours={this.state.averageHours} />
+//                   </div>
+//                   <div className="report-container__right__Pierating">
+//                     <PieRating ratings={this.state.rating} />
+//                   </div> </> :
+//                 this.state.view === "SLA" ?
+//                   <>
+//                     <div className="report-container__right__ViolationByStatus">
+//                       <ViolationByStatus status={this.state.status} />
+//                     </div>
+//                     <div className="report-container__right__AchievedVsViolated">
+//                       <AchievedVsViolated
+//                         achieved_vs_missed={this.state.achieved_vs_missed}
+//                       />
+//                     </div>
+//                     <div className="report-container__right__ViolationByTime">
+//                       <ViolationByDate statusByDate={this.state.statusByDate} />
+//                     </div></> : null
+//             }
+//           </div>
+//         </div>
+//       </>w
+
+
+{/* <li>
                   <div class="d-flex mt-3 justify-content-center">
                     <div class="d-flex flex-column pointermouse" onClick={()=>this.downloadTickets('DownloadAlltickets')}>
                   <div class="d-flex justify-content-center "  ><i class="fa fa-arrow-down" aria-hidden="true" ></i></div>
@@ -481,48 +613,4 @@ class ReportPage extends Component {
 
                
                   
-                </li>
-              </ul>
-            </nav>
-          </div>
-          <div className="report-container__right">
-            {this.state.view === "ticketStatus" ?
-              <div className="report-container__right__BarChart">
-                <span className="report-container__right__select">
-                  <DeparmtmentFilter
-                    departments={this.state.departments}
-                    onDepartmentChange={this.onDepartmentChange}
-                    departmentCount={this.state.isDepartmentStatusCountValid} />
-                </span>
-                <BarView statusData={this.state.statusData} />
-              </div> :
-              this.state.view === "performance" ?
-                <>
-                  <div className="report-container__right__AverageEfficiency">
-                    <AverageEfficiency averageHours={this.state.averageHours} />
-                  </div>
-                  <div className="report-container__right__Pierating">
-                    <PieRating ratings={this.state.rating} />
-                  </div> </> :
-                this.state.view === "SLA" ?
-                  <>
-                    <div className="report-container__right__ViolationByStatus">
-                      <ViolationByStatus status={this.state.status} />
-                    </div>
-                    <div className="report-container__right__AchievedVsViolated">
-                      <AchievedVsViolated
-                        achieved_vs_missed={this.state.achieved_vs_missed}
-                      />
-                    </div>
-                    <div className="report-container__right__ViolationByTime">
-                      <ViolationByDate statusByDate={this.state.statusByDate} />
-                    </div></> : null
-            }
-          </div>
-        </div>
-      </>
-    );
-  }
-}
-
-export default ReportPage;
+                </li> */}

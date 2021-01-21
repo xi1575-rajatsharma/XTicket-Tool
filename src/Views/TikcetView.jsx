@@ -138,7 +138,20 @@ const TicketView = (payload) => {
                         <div className="change-text-wrapper">Ticket Resolved &nbsp;<span className="status-time-wrapper">| {finalDate}</span></div>
                     </React.Fragment>
                 )
-
+            case "AWAITINGVENDOR":
+                return (
+                    <React.Fragment>
+                        <div className="resolved-icon-wrapper"></div>
+                        <div className="change-text-wrapper">Ticket Awaiting for Vendor &nbsp;<span className="status-time-wrapper">| {finalDate}</span></div>
+                    </React.Fragment>
+                )
+            case "AWAITINGUSER":
+                return (
+                    <React.Fragment>
+                        <div className="resolved-icon-wrapper"></div>
+                        <div className="change-text-wrapper">Ticket Awaiting for User &nbsp;<span className="status-time-wrapper">| {finalDate}</span></div>
+                    </React.Fragment>
+                )
             default:
                 console.log("nothing here")
         }

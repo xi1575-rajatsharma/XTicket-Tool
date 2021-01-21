@@ -44,7 +44,6 @@ small {
 }
 
 .report-container__right {
-  
   width: 70vw;
   height: 100vh;
   display: grid;
@@ -55,48 +54,52 @@ small {
   margin-right: 2rem;
   margin-bottom: 4rem;
   position: relative;
-  
 
-  &__select{
-    position: absolute;
-    right: .1rem;
-    top:2.7rem;
+  &__select {
+    // position: absolute;
+    // right: 0.1rem;
+    // top: 2.7rem;
+    margin-left: 80%;
+    margin-top: 1%;
   }
-  &__BarChart {height: 50%;
-
+  &__BarChart {
+    height: 80%;
     margin-top: 2rem;
     grid-column: 1/-1;
-    box-shadow: 0px 4px 10px  rgba(0,0,0,.425);
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.425);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
   }
   &__AverageEfficiency {
-    box-shadow: 0px 4px 10px  rgba(0,0,0,.425);
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.425);
     height: 50%;
   }
 
   &__Pierating {
-    box-shadow: 0px 4px 10px  rgba(0,0,0,.425);
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.425);
     height: 50%;
   }
 
   &__SLAUser {
-    box-shadow: 0px 4px 10px  rgba(0,0,0,.425);
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.425);
     height: 50%;
   }
 
   &__ViolationByStatus {
-    box-shadow: 0px 4px 10px  rgba(0,0,0,.425);
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.425);
     height: 100%;
   }
 
   &__ViolationByTime {
-    box-shadow: 0px 4px 10px  rgba(0,0,0,.425);
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.425);
     grid-column: 1/-1;
     margin-bottom: 4rem;
     height: 100%;
   }
 
   &__AchievedVsViolated {
-    box-shadow: 0px 4px 10px  rgba(0,0,0,.425);
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.425);
     height: 100%;
   }
 }
@@ -106,7 +109,6 @@ small {
   text-transform: capitalize;
   font-size: 2rem;
   color: #777;
-  
 
   &__hour {
     font-size: 10rem;
@@ -118,9 +120,9 @@ small {
   }
 }
 
-.comin-soon-heading{
+.comin-soon-heading {
   position: absolute;
   left: 50%;
   top: 50%;
-  transform: translate(-50%,-50%);
+  transform: translate(-50%, -50%);
 }

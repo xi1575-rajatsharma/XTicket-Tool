@@ -1,0 +1,154 @@
+.reports-container {
+  width: 100%;
+  height: 100%;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  margin-top: auto;
+  background-color: rgb(243, 244, 252);
+
+  &__top {
+    width: 100%;
+    height: 43%;
+    // border: 1px black solid;
+    // padding: 0.3rem;
+    display: flex;
+    // overflow-x: scroll;
+
+    &--report {
+      width: 18%;
+      margin: 0 0.5%;
+      //   flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+      // justify-content: flex-start;
+      align-items: center;
+      border-radius: 4px;
+      box-shadow: 4px 4px 6px 0.2px rgba(31, 30, 30, 0.425);
+      padding-top: 0.5rem;
+      background-color: white;
+
+      &-header {
+        padding: 0.8rem;
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+      }
+    }
+    &--progressBar {
+      position: relative;
+      width: 85%;
+      margin: auto;
+      height: 30px;
+      background-color: rgba(0, 0, 0, 0.288);
+      box-shadow: inset 2px 2px 10px#000000;
+      border: 1.5px solid linear-gradient(to right, #a8b9f4, #8bfea9, #99dfcd);
+      border-radius: 40px;
+      color: grey;
+
+      &-animation {
+        animation: fadeInOut 1s ease-in infinite forwards;
+      }
+      &-filler {
+        // width: 20%;
+        position: absolute;
+        left: 0px;
+        top: 0px;
+        height: 100%;
+        background-image: linear-gradient(to right, #a8b9f4, #8bfea9, #99dfcd);
+        // background-color: #98ff98;
+        border: 1.5px solid linear-gradient(to right, #a8b9f4, #8bfea9, #99dfcd);
+        transition: all 1s ease-in;
+      }
+      &-startTick {
+        position: absolute;
+        left: 0px;
+        top: 93%;
+      }
+      &-endTick {
+        position: absolute;
+        right: 0;
+        top: 100%;
+      }
+    }
+  }
+
+  &__bottom {
+    margin-top: 1rem;
+    margin-left: 0.1rem;
+    width: 100%;
+    height: 57%;
+    padding: 0.5rem;
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    border-radius: 4px;
+    box-shadow: 8px 8px 10px 0.2px rgba(31, 30, 30, 0.425);
+
+    &--header {
+      position: relative;
+      width: 100%;
+      height: 10%;
+      display: flex;
+
+      &-headerBottomLine {
+        position: absolute;
+        left: 0;
+        top: 100%;
+        width: 100%;
+        height: 2px;
+        background-color: rgb(201, 196, 196);
+      }
+      &-headerHighlighter {
+        position: absolute;
+        top: 100%;
+        // width: 12.5%;
+        height: 2px;
+        background-color: seagreen;
+        z-index: 2;
+        transition: all 0.3s;
+      }
+      &-heading {
+        padding: 0.1rem;
+        margin-right: 1rem;
+        text-align: center;
+        cursor: pointer;
+      }
+    }
+
+    &--reports {
+      padding: 10px;
+      width: 100%;
+      height: 90%;
+      // border: 1px solid black;
+      margin-top: 1rem;
+    }
+  }
+}
+
+.recharts-wrapper svg {
+  overflow: inherit !important;
+}
+
+.custom-tooltip {
+  color: #363636;
+  background-color: rgba(151, 151, 151, 0.425);
+  width: 100%;
+  text-align: center;
+}
+
+@keyframes fadeInOut {
+  0% {
+    opacity: 0;
+    // background-color: rgba(99, 99, 99, 0.123);
+  }
+
+  80% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+    // background-color: rgba(128, 128, 128, 0.123);
+  }
+}
