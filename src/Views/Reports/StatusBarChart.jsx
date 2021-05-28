@@ -2,6 +2,7 @@ import React from 'react';
 import {Tooltip, Cell,BarChart, Bar,XAxis, YAxis, CartesianGrid,Legend, ResponsiveContainer} from 'recharts';
 
 const StatusBarChart = ({status}) => {
+  const COLORS = ['#A837FA', '#6D67D6', '#3C8DF0', '#3CCFD6', '#8CFFC6','#5D5A8A','#F2B979', '#BD5A1C', '#767E8A','#48F092', '#39A2A3', '#703728','#6EF07C'];
     return (
         status ? 
             <ResponsiveContainer height="100%" width="70%">
@@ -10,29 +11,9 @@ const StatusBarChart = ({status}) => {
             <YAxis style={{fontSize: 10, textTransform:"capitalize"}} />
     <Bar dataKey="value" fill="#8884d8" width={10} > 
     {
-    status.map((entry,index) => {
-         switch(entry.name){
-           case "OPEN":
-           return <Cell  fill= { "#ff8000"} />;
-           case "INPROGRESS":
-           return <Cell  fill= { "#99cc00"} />;
-           case "AWATING":
-          return <Cell  fill= { "#0000e6"} />;
-           case "REVIEW":
-          return <Cell  fill= { "#220066"} />;
-          case "ESCALATED":
-           return <Cell  fill= { "#ff3300"} />;
-           case "REOPENED":
-           return <Cell  fill= { "#cc0052"} />;
-           case "CLOSED":
-           return <Cell  fill= { "#5cd65c"} />;
-           case "RESOLVED":
-           return <Cell  fill= { "#003300"} />;
-           default: 
-           return <Cell  fill= { "#80ff80"} />;
-     } 
-         }
-    )}
+            status.map((entry, index) => <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />)
+        
+    }
     </Bar>
     <Tooltip cursor={{fillOpacity: 0.3}}    />
   </BarChart>

@@ -21,6 +21,7 @@ $leftPositon: 30%;
 @import "./pages/approval";
 @import "./approvalPageView.scss";
 @import "./pages/reports";
+@import "./components/loader";
 
 @mixin scrollbars(
   $size,

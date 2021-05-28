@@ -1,5 +1,6 @@
 const API_HOST_PATH = "https://xenie.xebia.in";
 // const API_HOST_PATH = "https://xhelpportal.herokuapp.com";
+// const API_HOST_PATH = "http://168.63.250.105";
 
 export const constants = {
   SUCCESS: "success",
@@ -27,8 +28,9 @@ export const constants = {
     SLAS_DEPARTMENT_MISSED: `${API_HOST_PATH}/ticket-tool/v1/analytics/slas/department/missed`,
     SLAS_USER_RESOLVED: `${API_HOST_PATH}/ticket-tool/v1/analytics/slas/user/resolved`,
     SLAS_DEPARTMENT_RESOLVED: `${API_HOST_PATH}/ticket-tool/v1/analytics/slas/department/resolved`,
-    MISSED_VS_ACHIEVED: `${API_HOST_PATH}/ticket-tool/v1/tickets/user/achieved/missed`,
+    MISSED_VS_ACHIEVED: `${API_HOST_PATH}/ticket-tool/v1/tickets/user/achieved/missed/`,
     MISSED_BY_STATUS: `${API_HOST_PATH}/ticket-tool/v1/tickets/missed/byuser/status`,
+    MISSED_BY_DEPARTMENT: `${API_HOST_PATH}//ticket-tool/v1/tickets/department/users/achieved/missed/`,
     AVERAGE_EFFICIENCY: `${API_HOST_PATH}/ticket-tool/v1/tickets/user/efficiency`,
     SLA_DATE: `${API_HOST_PATH}/ticket-tool/v1/tickets/user/missed/datewise/count`,
     RESET_PASSWORD: `${API_HOST_PATH}/ticket-tool/v1/users/reset-password`,
@@ -41,8 +43,8 @@ export const constants = {
     CUSTOM_TICKET_MEMBERS: `${API_HOST_PATH}/ticket-tool/v1/tickets/custom/detail/`,
     CUSTOM_TICKET_REPLIES: `${API_HOST_PATH}ticket-tool/v1/tickets/create/cutom/replies/`,
     MONTHLY_FLITER: `${API_HOST_PATH}/ticket-tool/v1/tickets/user/status/monthly/`,
-    DOWNLOAD_ALL_TICKETS:`${API_HOST_PATH}/ticket-tool/v1/tickets/user/missed/allslas/file`,
-    DOWNLOAD_MISSED_TICKETS:`${API_HOST_PATH}/ticket-tool/v1/tickets/user/missed/department/file`
+    DOWNLOAD_ALL_TICKETS: `${API_HOST_PATH}/ticket-tool/v1/tickets/user/missed/allslas/file`,
+    DOWNLOAD_MISSED_TICKETS: `${API_HOST_PATH}/ticket-tool/v1/tickets/user/missed/department/file`,
   },
   // /v1/tickets/missed/byuser/status
   NO_DATA_FOUND: "No results found...",
