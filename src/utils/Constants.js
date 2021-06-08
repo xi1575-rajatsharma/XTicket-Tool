@@ -6,3 +6,7 @@ export const convertDatetoReportFormat = (dateObject) => {
   };
   return formattedDate;
 };
+
+export const mapChangesToState = (state, value, setState) => {
+  setState({ ...state, ...value });
+};
