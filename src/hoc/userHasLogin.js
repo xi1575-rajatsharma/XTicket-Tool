@@ -35,18 +35,17 @@ export const userHasLogin = (WrapperView) => {
 
     render() {
       return (
-        <div className="TicketListContainer">
+        <>
           <HeaderView
             onClickLogout={this.onClickLogout}
             isTicketListLoading={this.state.isTicketListLoading}
           />
-          <div className="bottom-container">
-            <WrapperView
-              {...this.props}
-              setIsTicketLoading={this.setIsTicketLoading}
-            />
-          </div>
-        </div>
+
+          <WrapperView
+            {...this.props}
+            setIsTicketLoading={this.setIsTicketLoading}
+          />
+        </>
       );
     }
   };

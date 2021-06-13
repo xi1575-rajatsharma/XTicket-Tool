@@ -10,3 +10,13 @@ export const convertDatetoReportFormat = (dateObject) => {
 export const mapChangesToState = (state, value, setState) => {
   setState({ ...state, ...value });
 };
+
+export const isString = (string) => Object.prototype.toString.call(string);
+
+export const capitalizeFirstLetter = (string) => {
+  return (
+    string &&
+    isString(string) &&
+    string.charAt(0).toUpperCase() + string.slice(1).toLowerCase()
+  );
+};

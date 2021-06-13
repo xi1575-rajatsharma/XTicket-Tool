@@ -1,8 +1,9 @@
 import React from "react";
+import GlobalStyles from "../app/themes/GlobalStyles";
 import { userHasLogin } from "../hoc/userHasLogin";
-import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
 import LoginPage from "../pages/LoginPage";
-import TicketListingPage from "../pages/TicketListingPage";
+// import TicketListingPage from "../pages/TicketListingPage";
+import TicketListingPage from "../core/TicketListingPage/TicketListingPage";
 // import Tickets from './Components/Tickets'
 import TicketDetails from "../Components/TicketDetails";
 import Reply from "../pages/ReplyPage";
@@ -16,41 +17,44 @@ import { LoginPages } from "core/LoginPage/loginPage";
 
 export const routes = () => {
   return (
-    <BrowserRouter>
-      <Route exact={true} path="/" component={LoginPages} />
+    <>
+      <GlobalStyles />
+      <BrowserRouter>
+        <Route exact={true} path="/" component={LoginPages} />
 
-      <Route exact={true} path="/approval" component={ApprovalView} />
-      {/* <Route exact={true} path='/:ticket_id' component={LoginPage} /> */}
-      <Route
-        exact={true}
-        path="/ticketlist"
-        component={userHasLogin(TicketListingPage)}
-      />
-      <Route
-        exact={true}
-        path="/ticketlist/:ticket_id"
-        component={userHasLogin(TicketDetails)}
-      />
-      {/* <Route exact={true} path='/ticket/:ticket_id' component={Reply} /> */}
-      {/* <Route exact={true} path='/addtickets' component={userHasLogin(Tickets)} /> */}
-      <Route
-        exact={true}
-        path="/approvals"
-        component={userHasLogin(ApprovalPageView)}
-      />
-      <Route
-        exact={true}
-        path="/reports"
-        component={userHasLogin(ReportPage)}
-      />
-      <Route
-        exact={true}
-        path="/reset-password"
-        component={userHasLogin(ResetPassword)}
-      />
-      {/* 
+        <Route exact={true} path="/approval" component={ApprovalView} />
+        {/* <Route exact={true} path='/:ticket_id' component={LoginPage} /> */}
+        <Route
+          exact={true}
+          path="/ticketlist"
+          component={userHasLogin(TicketListingPage)}
+        />
+        <Route
+          exact={true}
+          path="/ticketlist/:ticket_id"
+          component={userHasLogin(TicketDetails)}
+        />
+        {/* <Route exact={true} path='/ticket/:ticket_id' component={Reply} /> */}
+        {/* <Route exact={true} path='/addtickets' component={userHasLogin(Tickets)} /> */}
+        <Route
+          exact={true}
+          path="/approvals"
+          component={userHasLogin(ApprovalPageView)}
+        />
+        <Route
+          exact={true}
+          path="/reports"
+          component={userHasLogin(ReportPage)}
+        />
+        <Route
+          exact={true}
+          path="/reset-password"
+          component={userHasLogin(ResetPassword)}
+        />
+        {/* 
            />
            */}
-    </BrowserRouter>
+      </BrowserRouter>
+    </>
   );
 };

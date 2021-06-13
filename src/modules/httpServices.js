@@ -6,7 +6,7 @@ const requestId = shortid.generate();
 
 axios.interceptors.request.use(
   function (config) {
-    const token = window.localStorage.getItem("_token");
+    const token = window.localStorage.getItem("xenieToken");
 
     config.headers["x-access-channel"] = "ANDROID";
     config.headers["Content-Type"] = "application/json";
