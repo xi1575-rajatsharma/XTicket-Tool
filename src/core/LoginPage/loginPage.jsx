@@ -15,7 +15,6 @@ export const LoginPages = (payload) => {
   useEffect(() => {
     dispatch(actionCreators.resetLoginCreds());
     if(window.localStorage.getItem("xenieToken"))history.push({ pathname: "/ticketlist" })
-    // if (loginData.isLoginSuccess) history.push({ pathname: "/ticketlist" });
   }, [history, loginData.isLoginSuccess, dispatch]);
 
   const isDisabledButton =
