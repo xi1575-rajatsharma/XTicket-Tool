@@ -1,5 +1,5 @@
 import React from "react";
-import loader from "../../app/images/Loader-Large.gif";
+import loader from "../../app/images/Loader.gif";
 import * as styled from "./Loader.styled";
 
 const Loader = (props) => {
