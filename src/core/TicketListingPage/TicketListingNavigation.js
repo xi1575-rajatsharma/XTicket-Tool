@@ -5,7 +5,7 @@ import { colors } from "../../app/themes/variables";
 const TicketListingNavigation = (props) => {
   const displayItemWithSubMenu = (itemwithSubMenu) => {
     return (
-      <styled.menuContainer>
+      <styled.menuContainer key={itemwithSubMenu.key}>
         <styled.menuHeading>{itemwithSubMenu.itemName}</styled.menuHeading>
         <styled.allSubMenuItems>
           {itemwithSubMenu.items.map((item) => {
@@ -18,6 +18,7 @@ const TicketListingNavigation = (props) => {
                       }
                     : null
                 }
+                key={item.key}
                 onClick={() => props.mapstateChanges({ selectedKey: item.key })}
               >
                 {item.itemName}
@@ -32,6 +33,7 @@ const TicketListingNavigation = (props) => {
   const displayItemWithoutSubMenu = (itemWithoutSubMenu) => {
     return (
       <styled.singleMenuHeading
+        key={itemWithoutSubMenu.key}
         style={
           props.selectedKey === itemWithoutSubMenu.items[0].key
             ? {
