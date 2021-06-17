@@ -14,7 +14,8 @@ export const LoginPages = (payload) => {
 
   useEffect(() => {
     dispatch(actionCreators.resetLoginCreds());
-    if (loginData.isLoginSuccess) history.push({ pathname: "/ticketlist" });
+    if(window.localStorage.getItem("xenieToken"))history.push({ pathname: "/ticketlist" })
+    // if (loginData.isLoginSuccess) history.push({ pathname: "/ticketlist" });
   }, [history, loginData.isLoginSuccess, dispatch]);
 
   const isDisabledButton =
@@ -28,7 +29,7 @@ export const LoginPages = (payload) => {
     };
     dispatch(actionCreators.resetLoginCreds());
     dispatch(actionCreators.startLoginLoader());
-    dispatch(actionCreators.getLoginCreds(requestBody));
+    dispatch(actionCreators.getLoginCreds(requestBody, history));
   };
 
   return (

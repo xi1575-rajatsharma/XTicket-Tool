@@ -1,4 +1,5 @@
 /*eslint-disable*/
+import { logoutUser } from "app/redux/actions/loginActions";
 import http from "axios";
 import axios from "axios";
 import { defaultTimeoutAPI } from "./Constants";
@@ -98,6 +99,29 @@ class XenieApi {
         return Promise.reject(err);
       }
     );
+    axios.interceptors.response.use(
+      (next) => {
+        return Promise.resolve(next);
+      },
+      (error) => {
+        // You can handle error here and trigger warning message without get in the code inside
+        // store.dispatch({
+        //   type: env.actionsTypes.openModal,
+        //   message: error.message,
+        // });
+        // console.log('error caught interceptor', error.config,error.response, error)
+        if(error.response){
+          if(error.response.status == 403){
+            console.log(error.response)
+            alert(error.response.data.message)
+            window.localStorage.removeItem("xenieToken")
+            window.location.replace("./")
+            // this.dispatch(logoutUser())
+          }
+        }
+        return Promise.reject(error);
+      }
+    );
 
     if (requestType === "get" || requestType === "delete") {
       return http[requestType](url, requestConfig)
@@ -105,7 +129,7 @@ class XenieApi {
           return response;
         })
         .catch((error) => {
-          console.log("error for get", error);
+          // console.log("error for get", error);
           // const _error = customErrorHandler.getErrorDetails(error);
           return Promise.reject(error);
         });
