@@ -27,5 +27,4 @@ export const resetLoginCreds = () => (dispatch) => {
 export const logoutUser = () => (dispatch) => {
   const history = useHistory();
   dispatch({ type: types.LOGOUT_USER });
-  // history.push({ pathname: "/" })
 };
