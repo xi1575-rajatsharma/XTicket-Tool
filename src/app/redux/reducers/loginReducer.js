@@ -46,6 +46,15 @@ const loginReducer = (state = initalState, action) => {
         isLoginLoading: false,
       };
     }
+    case types.LOGOUT_USER: {
+      return {
+        ...state,
+        loginData: [],
+        isLoginSuccess: false,
+        isLoginFailure: false,
+        isLoginLoading: false,
+      };
+    }
     default:
       return {
         ...state,
