@@ -60,7 +60,7 @@ export const subMenuItem = styled.div`
 `;
 
 export const ticketListingComponent = styled.div`
-  flex-grow: 2;
+  width: 80%;
   background-color: ${colors.backgroundGrey};
   /* width: 100%; */
 `;

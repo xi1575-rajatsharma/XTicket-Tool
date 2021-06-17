@@ -19,21 +19,29 @@ const TicketListingPage = (props) => {
 
   useEffect(() => {
     dispatch(actionCreators.startTicketStatusLoader());
+    dispatch(actionCreators.startAllAdminUsersLoader());
     dispatch(actionCreators.getAllStatus());
+    dispatch(actionCreators.getAllAdminUsers());
   }, []);
 
   useEffect(() => {
-    if (props.common.allStatus && props.common.allStatus.length) {
+    if (
+      props.common.allStatusData &&
+      props.common.allStatusData.allStatus &&
+      props.common.allStatusData.allStatus.length
+    ) {
       const utilElement = {
         itemName: "Statuses",
         items: [],
       };
-      const updatedStatusArray = props.common.allStatus.map((status) => ({
-        itemName:
-          status.status.charAt(0).toUpperCase() +
-          status.status.slice(1).toLowerCase(),
-        key: status.status,
-      }));
+      const updatedStatusArray = props.common.allStatusData.allStatus.map(
+        (status) => ({
+          itemName:
+            status.status.charAt(0).toUpperCase() +
+            status.status.slice(1).toLowerCase(),
+          key: status.status,
+        })
+      );
       utilElement.items = updatedStatusArray;
       console.log(navItems[0].items.length);
       if (navItems[0].itemName !== "Statuses") {
@@ -41,7 +49,7 @@ const TicketListingPage = (props) => {
         mapstateChanges(menuItems);
       }
     }
-  }, [props.common.allStatus]);
+  }, [props.common.allStatus, props.common.allStatusData.allStatus]);
 
   return (
     <styled.TicketListingPage>

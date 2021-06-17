@@ -3,6 +3,7 @@ import { exportUrl } from "../../httpsRequests/ExportUrl.js";
 import configs from "../../httpsRequests/configs.js";
 import * as types from "../actionTypes";
 
+//get ticket by Status
 export const getTicketByStatus = (requestParams, status) => (dispatch) => {
   XenieApi.get(
     `${exportUrl + configs.getTicketsByStatus}/${status}`,
