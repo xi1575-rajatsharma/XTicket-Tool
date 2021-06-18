@@ -23,8 +23,8 @@ const Ticket = (props) => {
     setState(copyState);
   }, [data])
 
-  const changeAssignee = (assignee, ticketId) => {
-    dispatch(changeTicketAssignee(assignee, ticketId))
+  const changeAssignee = (assignee) => {
+    dispatch(changeTicketAssignee(assignee, data.id))
   }
   return (
     <styled.ticketContainer>
@@ -68,7 +68,7 @@ const Ticket = (props) => {
             defaultValue={state.defaultAssignee}
             value={state.defaultValue}
             options={props.allAdminData}
-            optionSelected={(assignee, ticketId) => changeAssignee(assignee, ticketId)}
+            optionSelected={(assignee) => changeAssignee(assignee)}
             inputStyle={styled.customStyles}
           />
         </styled.assigneeContainer>
