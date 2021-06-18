@@ -1,9 +1,11 @@
+import { changeTicketAssignee } from "app/redux/actions/ticketListingActions";
 import React, { useState, useEffect } from "react";
+import { useDispatch } from "react-redux";
 import {
   capitalizeFirstLetter,
   getDateAndTime,
   returnBlankIfEmpty,
-  truncateText,
+  truncateText
 } from "utils/Constants";
 import DropDown from "../DropDown/DropDown";
 import LabelValueContainer from "./LabelValueContainer";
@@ -11,8 +13,19 @@ import styles from "./Ticket.css";
 import * as styled from "./Ticket.styled";
 
 const Ticket = (props) => {
+  const dispatch = useDispatch();
   const { data } = props;
   const [state, setState] = useState({ defaultValue: {}, selectedValue: {} });
+
+  useEffect(()=> {
+    let copyState = {...state};
+    copyState.defaultValue = {label: data.label, value: data.value};
+    setState(copyState);
+  }, [data])
+
+  const changeAssignee = (assignee, ticketId) => {
+    dispatch(changeTicketAssignee(assignee, ticketId))
+  }
   return (
     <styled.ticketContainer>
       <styled.topContainer>
@@ -50,11 +63,12 @@ const Ticket = (props) => {
         />
         <styled.assigneeContainer>
           <DropDown
+            id={data.id}
             isClearable={true}
             defaultValue={state.defaultAssignee}
-            value={state.currentAssignee}
+            value={state.defaultValue}
             options={props.allAdminData}
-            optionSelected={(option) => console.log(option)}
+            optionSelected={(assignee, ticketId) => changeAssignee(assignee, ticketId)}
             inputStyle={styled.customStyles}
           />
         </styled.assigneeContainer>

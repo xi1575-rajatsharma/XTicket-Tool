@@ -107,11 +107,11 @@ export default class SearchableDropDown extends Component {
       };
     }
   }
-  onSelectChange(item) {
+  onSelectChange(item, ticketId) {
     if (item) {
-      this.props.optionSelected({ ...item, type: this.props.type });
+      this.props.optionSelected({ ...item, type: this.props.type }, ticketId);
     } else {
-      this.props.optionSelected(item);
+      this.props.optionSelected(item, ticketId);
     }
   }
 
@@ -126,7 +126,7 @@ export default class SearchableDropDown extends Component {
       options,
       noMargin,
       title,
-      value,
+      value
     } = this.props;
     return (
       <div
@@ -149,7 +149,7 @@ export default class SearchableDropDown extends Component {
           styles={this.customStyles}
           defaultValue={defaultValue}
           value={value}
-          onChange={(e) => this.onSelectChange(e)}
+          onChange={(e) => this.onSelectChange(e, id)}
           options={options || []}
           isDisabled={disabled}
           placeholder={placeholder}

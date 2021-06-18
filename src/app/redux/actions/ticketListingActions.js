@@ -29,3 +29,14 @@ export const startGetTicketByStatusLoader = () => (dispatch) => {
 export const resetGetTicketByStatus = () => (dispatch) => {
   dispatch({ type: types.RESET_TICKETS_BY_STATUS });
 };
+
+export const changeTicketAssignee = (assignee, ticketId) => (dispatch) => {
+  XenieApi.put(exportUrl + configs.changeTicketAssignee + `${ticketId}?emailId=${assignee.value}&reason=`).then(
+    (response) => {
+      dispatch({ type: types.CHANGE_TICKET_ASSIGNEE, data: {'resp': response.data, assignee, ticketId} });
+    },
+    (error) => {
+      // handle error here
+    }
+  );
+};
