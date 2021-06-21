@@ -33,7 +33,7 @@ export const resetGetTicketByStatus = () => (dispatch) => {
 export const changeTicketAssignee = (assignee, ticketId) => (dispatch) => {
   XenieApi.put(exportUrl + configs.changeTicketAssignee + `${ticketId}?emailId=${assignee.value}&reason=`).then(
     (response) => {
-      dispatch({ type: types.CHANGE_TICKET_ASSIGNEE, data: {'resp': response.data, assignee, ticketId} });
+      dispatch({ type: types.CHANGE_TICKET_ASSIGNEE, data: {'resp': response.data} });
     },
     (error) => {
       // handle error here

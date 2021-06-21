@@ -40,13 +40,6 @@ const ticketListingReducer = (state = initalState, action) => {
       };
     }
     case types.CHANGE_TICKET_ASSIGNEE:
-      state.ticketList.map(ticket => {
-        if(ticket.id == action.data.ticketId){
-          ticket.assignedTo = action.data.assignee.label
-          ticket.assignedToEmailId =  action.data.assignee.value
-        }
-        return ticket
-      })
       return {...state}; 
     default:
       return { ...state };

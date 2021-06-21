@@ -15,17 +15,15 @@ import * as styled from "./Ticket.styled";
 const Ticket = (props) => {
   const dispatch = useDispatch();
   const { data } = props;
-  const [state, setState] = useState({ defaultValue: {}, selectedValue: {} });
-
-  useEffect(()=> {
-    let copyState = {...state};
-    copyState.defaultValue = {label: data.label, value: data.value};
-    setState(copyState);
-  }, [data])
+  const [state, setState] = useState({ selectedValue: {label: data.label, value: data.value} });
 
   const changeAssignee = (assignee) => {
     dispatch(changeTicketAssignee(assignee, data.id))
+    const newAssignee = {label: assignee.label, value: assignee.value}
+    mapChangesToState({selectedValue: newAssignee})
   }
+
+  const mapChangesToState = (value) => setState({ ...state, ...value });
   return (
     <styled.ticketContainer>
       <styled.topContainer>
@@ -66,7 +64,7 @@ const Ticket = (props) => {
             id={data.id}
             isClearable={true}
             defaultValue={state.defaultAssignee}
-            value={state.defaultValue}
+            value={state.selectedValue}
             options={props.allAdminData}
             optionSelected={(assignee) => changeAssignee(assignee)}
             inputStyle={styled.customStyles}
