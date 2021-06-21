@@ -39,6 +39,8 @@ const ticketListingReducer = (state = initalState, action) => {
         ticketListLoading: false,
       };
     }
+    case types.CHANGE_TICKET_ASSIGNEE:
+      return {...state}; 
     default:
       return { ...state };
   }
