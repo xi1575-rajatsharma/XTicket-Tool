@@ -1,4 +1,5 @@
 import { createGlobalStyle } from "styled-components";
+import styled from "styled-components";
 import { colors } from "./variables";
 
 const GlobalStyles = createGlobalStyle`
@@ -17,6 +18,7 @@ html{
     }
 body{
     font-family: 'Montserrat', sans-serif;
+    overflow: hidden;
 }
 
 h3{
@@ -24,6 +26,10 @@ h3{
     font-weight: 300;
 }
 
+`;
+export const loaderContainer = styled.div`
+  width: 100%;
+  height: ${(props) => props.height};
 `;
 
 export default GlobalStyles;

@@ -5,6 +5,7 @@ export const TicketListingPage = styled.div`
   width: 100%;
   min-height: 95.3vh;
   display: flex;
+  overflow: hidden;
 `;
 
 export const NavContainer = styled.div`
@@ -62,5 +63,21 @@ export const subMenuItem = styled.div`
 export const ticketListingComponent = styled.div`
   width: 80%;
   background-color: ${colors.backgroundGrey};
-  /* width: 100%; */
+  overflow: hidden;
 `;
+
+export const paragraphStyles = {
+  padding: "1.8rem",
+  fontSize: "1.5rem",
+  color: `${colors.errorRedBorder}`,
+};
+
+export const errorContainerStyles = {
+  width: "100%",
+  height: "95.3vh",
+  display: "flex",
+  padding: "0 30%",
+  "align-items": "center",
+  "justify-content": "center",
+  overflow: "hidden",
+};

@@ -1,10 +1,16 @@
 import React, { useState, useEffect, useCallback } from "react";
 import { useDispatch, connect } from "react-redux";
-import { navItems } from "../../app/utils/TicketListingNavigationUtils";
+import {
+  navItems,
+  errorText,
+} from "../../app/utils/TicketListingNavigationUtils";
 import * as actionCreators from "../../app/redux/actions/commonActions";
 import * as styled from "./TicketListingPage.styled";
+import * as GlobalStyled from "../../app/themes/GlobalStyles";
 import TicketListingNavigation from "./TicketListingNavigation";
 import TicketListingComponents from "./TicketListingComponents";
+import Loader from "core/Loader/Loader";
+import ComponentError from "core/ComponentError/ComponentError";
 
 const TicketListingPage = (props) => {
   const [state, setState] = useState({
@@ -43,7 +49,6 @@ const TicketListingPage = (props) => {
         })
       );
       utilElement.items = updatedStatusArray;
-      console.log(navItems[0].items.length);
       if (navItems[0].itemName !== "Statuses") {
         const menuItems = navItems.unshift(utilElement);
         mapstateChanges(menuItems);
@@ -51,14 +56,35 @@ const TicketListingPage = (props) => {
     }
   }, [props.common.allStatus, props.common.allStatusData.allStatus]);
 
+  const {
+    allStatusData: { getAllStatusLoading, getAllStatusFailure },
+    allAdminData: { allAdminUsersLoading, allAdminUsersFailure },
+  } = props.common;
   return (
     <styled.TicketListingPage>
-      <TicketListingNavigation
-        selectedKey={state.selectedKey}
-        mapstateChanges={mapstateChanges}
-        navItems={state.menuItems}
-      />
-      <TicketListingComponents selectedKey={state.selectedKey} />
+      {getAllStatusLoading || allAdminUsersLoading ? (
+        <GlobalStyled.loaderContainer height={"95.3vh"}>
+          <Loader
+            height={"80px"}
+            loadingText={"Hold On Tight. Engines heating up..."}
+          />
+        </GlobalStyled.loaderContainer>
+      ) : getAllStatusFailure || allAdminUsersFailure ? (
+        <ComponentError
+          errorContainerStyles={styled.errorContainerStyles}
+          paragraphStyles={styled.paragraphStyles}
+          errorText={errorText}
+        />
+      ) : (
+        <>
+          <TicketListingNavigation
+            selectedKey={state.selectedKey}
+            mapstateChanges={mapstateChanges}
+            navItems={state.menuItems}
+          />
+          <TicketListingComponents selectedKey={state.selectedKey} />
+        </>
+      )}
     </styled.TicketListingPage>
   );
 };

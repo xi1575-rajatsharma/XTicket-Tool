@@ -5,7 +5,7 @@ import { colors } from "../../app/themes/variables";
 const TicketListingNavigation = (props) => {
   const displayItemWithSubMenu = (itemwithSubMenu) => {
     return (
-      <styled.menuContainer key={itemwithSubMenu.key}>
+      <styled.menuContainer key={itemwithSubMenu.itemName}>
         <styled.menuHeading>{itemwithSubMenu.itemName}</styled.menuHeading>
         <styled.allSubMenuItems>
           {itemwithSubMenu.items.map((item) => {

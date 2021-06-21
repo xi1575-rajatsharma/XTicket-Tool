@@ -7,14 +7,21 @@ import {
 } from "utils/Constants";
 import DropDown from "../DropDown/DropDown";
 import LabelValueContainer from "./LabelValueContainer";
-import styles from "./Ticket.css";
+
 import * as styled from "./Ticket.styled";
 
 const Ticket = (props) => {
   const { data } = props;
   const [state, setState] = useState({ defaultValue: {}, selectedValue: {} });
+
   return (
-    <styled.ticketContainer>
+    <styled.ticketContainer
+    // whileHover={{
+    //   scale: 1.01,
+    //   transition: { duration: 0.35 },
+    // }}
+    // whileTap={{ scale: 0.97, transition: { duration: 0.25 } }}
+    >
       <styled.topContainer>
         <styled.ticketIdAndStatusContainer>
           <styled.ticketId>{`#${returnBlankIfEmpty(data.id)}`}</styled.ticketId>
@@ -22,7 +29,9 @@ const Ticket = (props) => {
             {returnBlankIfEmpty(data.status)}
           </styled.ticketStatus>
         </styled.ticketIdAndStatusContainer>
-        <styled.ticketSubjectAndDescriptionContainer>
+        <styled.ticketSubjectAndDescriptionContainer
+          onClick={() => props.handleTicketClick(data)}
+        >
           <styled.ticketSubject>
             {capitalizeFirstLetter(returnBlankIfEmpty(data.subject))}
           </styled.ticketSubject>

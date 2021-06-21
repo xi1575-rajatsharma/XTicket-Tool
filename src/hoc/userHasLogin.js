@@ -1,4 +1,5 @@
 import React from "react";
+import * as actionCreators from "../app/redux/actions/loginActions";
 import { HeaderView as HeaderView } from "../Views/headerView";
 import { sidebarView as SidebarView } from "../Views/sidebarView";
 
@@ -22,6 +23,7 @@ export const userHasLogin = (WrapperView) => {
     onClickLogout = () => {
       window.localStorage.removeItem("xenieToken");
       window.localStorage.removeItem("_listingData");
+      actionCreators.logout();
       this.props.history.push("/");
     };
 

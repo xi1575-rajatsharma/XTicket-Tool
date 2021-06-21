@@ -1,6 +1,7 @@
 import * as types from "../actionTypes";
 
 const initalState = {
+  currentTicketStatus: null,
   ticketList: [],
   ticketListFailure: false,
   ticketListLoading: false,
@@ -16,10 +17,10 @@ const ticketListingReducer = (state = initalState, action) => {
       };
     }
     case types.GET_ALL_TICKETS_BY_STATUS_SUCCESS: {
-      console.log("I'm here");
       return {
         ...state,
         ticketList: action.data.result.tickets,
+        currentTicketStatus: action.status,
         ticketListFailure: false,
         ticketListLoading: false,
       };

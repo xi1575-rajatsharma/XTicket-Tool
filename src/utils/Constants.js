@@ -55,3 +55,22 @@ export const truncateText = (string, maxLength) => {
 export const getDateAndTime = (timestamp) => {
   return moment(timestamp).format("DD/MM/YYYY, hh:mm A");
 };
+
+// returns the initials of a name (Considers only first and last string)
+export const getMemberInitials = (name) => {
+  let initials = name.match(/\b\w/g) || [];
+  initials = ((initials.shift() || "") + (initials.pop() || "")).toUpperCase();
+  return initials;
+};
+
+export const getRandomColor = () => {
+  const letters = "0123456789ABCDEF";
+  let color = "#";
+  for (let i = 0; i < 6; i += 1) {
+    color += letters[Math.floor(Math.random() * 12)];
+  }
+  return color;
+};
+
+export const getDifferenceInDays = (date1, date2) =>
+  moment(date1).diff(moment(date2), "days");

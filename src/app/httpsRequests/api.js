@@ -104,10 +104,10 @@ class XenieApi {
         return Promise.resolve(next);
       },
       (error) => {
-        if(error.response){
-          if(error.response.status == 403){
-            window.localStorage.removeItem("xenieToken")
-            window.location.replace("./")
+        if (error.response) {
+          if (error.response.status == 403) {
+            // window.localStorage.removeItem("xenieToken")
+            // window.location.replace("./")
           }
         }
         return Promise.reject(error);

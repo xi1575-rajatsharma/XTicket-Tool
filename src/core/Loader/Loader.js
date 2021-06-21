@@ -6,6 +6,7 @@ const Loader = (props) => {
   return (
     <styled.container>
       <img src={loader} alt="" height={props.height || "50px"} />
+      <styled.loadingText>{props.loadingText || null}</styled.loadingText>
     </styled.container>
   );
 };

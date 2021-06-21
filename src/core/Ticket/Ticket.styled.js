@@ -1,9 +1,9 @@
 import styled from "styled-components";
+import { motion } from "framer-motion";
 import { colors } from "../../app/themes/variables";
 
 export const ticketContainer = styled.div`
   width: 100%;
-  /* min-height: 20vh; */
   display: flex;
   flex-direction: column;
   background-color: ${colors.colorWhite};

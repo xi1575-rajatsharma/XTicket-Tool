@@ -14,8 +14,8 @@ export const getTicketByStatus = (requestParams, status) => (dispatch) => {
       dispatch({
         type: types.GET_ALL_TICKETS_BY_STATUS_SUCCESS,
         data: response.data,
+        status,
       });
-      console.log("success");
     },
     (error) =>
       dispatch({ type: types.GET_ALL_TICKETS_BY_STATUS_FAILURE, error })

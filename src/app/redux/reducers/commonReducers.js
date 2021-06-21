@@ -31,7 +31,7 @@ const commonReducer = (state = initalState, action) => {
           ...state.allStatusData,
           allStatus: action.data.data,
           getAllStatusFailure: false,
-          getAllStatusLoading: true,
+          getAllStatusLoading: false,
         },
       };
     case types.GET_ALL_TICKETS_STATUSES_FAILURE:

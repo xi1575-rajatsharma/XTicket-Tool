@@ -9,4 +9,6 @@ export const colors = {
   colorLightGrey: "#909090",
   lightBlack: "#707070",
   labelLightGrey: "#a7a7a7",
+  errorRedBorder: "#F50B00",
+  boxShadowSlider: "rgba(179, 179, 179, 0.68)",
 };
