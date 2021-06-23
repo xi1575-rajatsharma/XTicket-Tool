@@ -10,21 +10,33 @@ export const container = styled.div`
   max-height: 82vh;
   overflow: auto;
   scroll-behavior: smooth;
+
   &::-webkit-scrollbar {
-    width: 5px;
+    width: 12px;
   }
+
+  &::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 10px 10px transparent;
+    border: solid 3px transparent;
+  }
+
   &::-webkit-scrollbar-thumb {
-    background-color: ${colors.xenieBlue};
-    border-radius: 8px 0 0 8px;
+    box-shadow: inset 0 0 10px 10px ${colors.xenieBlue};
+    border: solid 3px transparent;
+    border-radius: 8px;
   }
 `;
 
 export const header = styled.div`
   padding: 1.5rem 2.5rem;
+  display: flex;
+  justify-content: space-between;
   /* margin-bottom: 3rem; */
 `;
 
 export const heading = styled.h3``;
+
+export const paginationContainer = styled.div``;
 
 export const paragraphStyles = {
   padding: "1.8rem",
@@ -41,3 +53,5 @@ export const errorContainerStyles = {
   "justify-content": "center",
   overflow: "hidden",
 };
+
+export const pageTracker = styled.p``;

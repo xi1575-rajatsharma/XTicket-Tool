@@ -1,4 +1,5 @@
 import moment from "moment";
+import { colors } from "app/themes/variables";
 
 export const convertDatetoReportFormat = (dateObject) => {
   const formattedDate = {
@@ -74,3 +75,28 @@ export const getRandomColor = () => {
 
 export const getDifferenceInDays = (date1, date2) =>
   moment(date1).diff(moment(date2), "days");
+
+export const getColorBasedOnStatus = (status) => {
+  switch (status) {
+    case "OPEN": {
+      return colors.openTicketBackground;
+    }
+    case "INPROGRESS": {
+      return colors.inProgressTicketBackground;
+    }
+    case "CLOSED": {
+      return colors.closedTicketBackground;
+    }
+    case "ESCALATED": {
+      return colors.escalatedTicketBackground;
+    }
+    case "AWAITING": {
+      return colors.awaitingTicketBackground;
+    }
+    case "RESOLVED": {
+      return colors.awaitingTicketBackground;
+    }
+    default:
+      return colors.xenieBlue;
+  }
+};

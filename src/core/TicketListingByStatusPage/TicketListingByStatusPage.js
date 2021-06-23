@@ -12,31 +12,48 @@ import * as styled from "./TicketListingByStatusPage.styled";
 import * as GlobalStyled from "../../app/themes/GlobalStyles";
 import { useDispatch, connect, batch } from "react-redux";
 import Ticket from "../Ticket/Ticket";
+import { AnimatePresence } from "framer-motion";
 import TicketPreview from "core/TicketPreview/TicketPreview";
+import Pagination from "core/Pagination/Pagination";
 
 const TicketListingByStatusPage = (props) => {
   const dispatch = useDispatch();
   const [state, setState] = useState({
-    allTickets: [],
     allAdminData: [],
     defaultAssignee: { label: "rajat", value: "Rajat" },
     currentAssignee: { label: "rajat", value: "Rajat" },
     isPreviewVisible: false,
     currentSelectedTicket: {},
+    currentPageNumber: 1,
   });
   const mapChangesToState = (value) => {
     setState({ ...state, ...value });
   };
 
   const handleTicketClick = (currentSelectedTicket) => {
-    const isPreviewVisible = !state.isPreviewVisible;
-    mapChangesToState({ currentSelectedTicket, isPreviewVisible });
+    mapChangesToState({ currentSelectedTicket, isPreviewVisible: true });
   };
 
+  const closePreview = () => {
+    mapChangesToState({ isPreviewVisible: false });
+  };
+  const increasePageCount = () => {
+    mapChangesToState({ currentPageNumber: state.currentPageNumber + 1 });
+  };
+  const decreasePageCount = () => {
+    mapChangesToState({ currentPageNumber: state.currentPageNumber - 1 });
+  };
+  const getPageTracingInformation = () => {
+    return (
+      <styled.pageTracker>
+        Page {state.currentPageNumber} of {props.ticketList.totalPages}
+      </styled.pageTracker>
+    );
+  };
   useEffect(() => {
     const requestParams = {
-      page: 0,
-      limit: 1000,
+      page: state.currentPageNumber - 1,
+      limit: 15,
     };
     batch(() => {
       dispatch(actionCreators.resetGetTicketByStatus());
@@ -45,18 +62,7 @@ const TicketListingByStatusPage = (props) => {
         actionCreators.getTicketByStatus(requestParams, props.selectedKey)
       );
     });
-  }, [props.selectedKey]);
-
-  useEffect(() => {
-    if (
-      props.ticketList &&
-      props.ticketList.ticketList &&
-      props.ticketList.ticketList.length
-    ) {
-      const allTickets = props.ticketList.ticketList;
-      mapChangesToState({ allTickets });
-    }
-  }, [props.ticketList, props.ticketList.ticketList]);
+  }, [props.selectedKey, state.currentPageNumber]);
 
   useEffect(() => {
     if (
@@ -82,7 +88,14 @@ const TicketListingByStatusPage = (props) => {
         <styled.heading>
           {capitalizeFirstLetter(props.selectedKey)} Tickets
         </styled.heading>
+        <Pagination
+          currentPage={state.currentPageNumber}
+          maxPages={props.ticketList.totalPages}
+          nextPage={increasePageCount}
+          prevPage={decreasePageCount}
+        />
       </styled.header>
+
       <styled.container>
         {ticketListLoading ? (
           <GlobalStyled.loaderContainer height={"65vh"}>
@@ -94,27 +107,37 @@ const TicketListingByStatusPage = (props) => {
             paragraphStyles={styled.paragraphStyles}
             errorText={errorText}
           />
-        ) : state.allTickets &&
-          Array.isArray(state.allTickets) &&
-          state.allTickets.length ? (
-          state.allTickets.map((ticketData) => {
-            return (
-              <Ticket
-                allAdminData={state.allAdminData}
-                data={ticketData}
-                key={ticketData.id}
-                mapChangesToState={mapChangesToState}
-                handleTicketClick={handleTicketClick}
-              />
-            );
-          })
-        ) : null}
+        ) : (
+          <>
+            {getPageTracingInformation()}
+            {props.ticketList &&
+            props.ticketList.ticketList &&
+            props.ticketList.ticketList.length
+              ? props.ticketList.ticketList.map((ticketData) => {
+                  return (
+                    <Ticket
+                      allAdminData={state.allAdminData}
+                      data={ticketData}
+                      key={ticketData.id}
+                      mapChangesToState={mapChangesToState}
+                      handleTicketClick={handleTicketClick}
+                    />
+                  );
+                })
+              : "No Tickets Found"}
+          </>
+        )}
 
         {/* {console.log(currentTicketData)} */}
       </styled.container>
-      {state.isPreviewVisible ? (
-        <TicketPreview data={state.currentSelectedTicket} />
-      ) : null}
+      <AnimatePresence>
+        {state.isPreviewVisible ? (
+          <TicketPreview
+            data={state.currentSelectedTicket}
+            closePreview={closePreview}
+          />
+        ) : null}
+      </AnimatePresence>
     </>
   );
 };

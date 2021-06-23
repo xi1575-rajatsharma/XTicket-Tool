@@ -50,7 +50,7 @@ export const ticketStatus = styled.div`
   font-size: 1.5rem;
   font-weight: 600;
   text-transform: uppercase;
-  background-color: ${colors.openTicketBackground};
+  background-color: ${(props) => props.color};
 `;
 
 export const ticketSubject = styled.p`

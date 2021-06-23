@@ -126,7 +126,7 @@ export default class SearchableDropDown extends Component {
       options,
       noMargin,
       title,
-      value,
+      value
     } = this.props;
     return (
       <div

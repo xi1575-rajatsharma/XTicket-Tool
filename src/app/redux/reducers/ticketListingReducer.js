@@ -3,6 +3,7 @@ import * as types from "../actionTypes";
 const initalState = {
   currentTicketStatus: null,
   ticketList: [],
+  totalPages: 0,
   ticketListFailure: false,
   ticketListLoading: false,
 };
@@ -20,6 +21,7 @@ const ticketListingReducer = (state = initalState, action) => {
       return {
         ...state,
         ticketList: action.data.result.tickets,
+        totalPages: action.data.numberOfPages,
         currentTicketStatus: action.status,
         ticketListFailure: false,
         ticketListLoading: false,
@@ -40,6 +42,8 @@ const ticketListingReducer = (state = initalState, action) => {
         ticketListLoading: false,
       };
     }
+    case types.CHANGE_TICKET_ASSIGNEE:
+      return { ...state };
     default:
       return { ...state };
   }
