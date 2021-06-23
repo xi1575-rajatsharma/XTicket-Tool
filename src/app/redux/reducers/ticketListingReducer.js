@@ -4,6 +4,10 @@ const initalState = {
   ticketList: [],
   ticketListFailure: false,
   ticketListLoading: false,
+  changeAssigneeError: false,
+  changeAssigneeLoading: false,
+  changeAssigneeErrorMsg : '',
+  currentTicket: 0
 };
 
 const ticketListingReducer = (state = initalState, action) => {
@@ -40,7 +44,22 @@ const ticketListingReducer = (state = initalState, action) => {
       };
     }
     case types.CHANGE_TICKET_ASSIGNEE:
-      return {...state}; 
+      state.ticketList.map(ticket => {
+        if(ticket.id === action.data.ticketId){
+          ticket.assignedTo = action.data.assignee.label;
+          ticket.assignedToEmailId = action.data.assignee.value;
+        }
+      })
+      return {...state, changeAssigneeError: false, changeAssigneeLoading: false, currentTicket: 0};
+    case types.CHANGE_ASSIGNEE_ERROR:
+      return {...state, changeAssigneeError: true, 
+        changeAssigneeLoading: false,
+        currentTicket: action.data.ticketId, 
+        changeAssigneeErrorMsg: action.data.error.message};
+    case types.SHOW_CHANGE_ASSIGNEE_LOADER:
+      return {...state, changeAssigneeLoading: true, currentTicket: action.data.ticketId};
+    case types.CLOSE_ERROR_MODAL:
+      return {...state, changeAssigneeError: false, changeAssigneeErrorMsg: '', currentTicket: 0};
     default:
       return { ...state };
   }
