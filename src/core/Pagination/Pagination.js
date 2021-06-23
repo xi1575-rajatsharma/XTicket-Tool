@@ -11,7 +11,7 @@ const Pagination = (props) => {
       {/* <styled.pageNumber>{props.currentPage}</styled.pageNumber> */}
       <styled.arrowsContainer>
         <styled.arrowContainer
-          onClick={props.currentPage !== props.maxPages ? props.prevPage : null}
+          onClick={props.currentPage > 0 ? props.prevPage : null}
         >
           <img
             src={props.currentPage === 0 ? arrowLeftDisabled : arrowLeft}
@@ -19,7 +19,9 @@ const Pagination = (props) => {
           />
         </styled.arrowContainer>
         <styled.verticalDivider />
-        <styled.arrowContainer onClick={props.nextPage}>
+        <styled.arrowContainer
+          onClick={props.currentPage !== props.maxPages ? props.nextPage : null}
+        >
           <img
             src={
               props.currentPage === props.maxPages

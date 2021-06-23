@@ -24,7 +24,7 @@ const TicketListingByStatusPage = (props) => {
     currentAssignee: { label: "rajat", value: "Rajat" },
     isPreviewVisible: false,
     currentSelectedTicket: {},
-    currentPageNumber: 1,
+    currentPageNumber: 0,
   });
   const mapChangesToState = (value) => {
     setState({ ...state, ...value });
@@ -52,7 +52,7 @@ const TicketListingByStatusPage = (props) => {
   };
   useEffect(() => {
     const requestParams = {
-      page: state.currentPageNumber - 1,
+      page: state.currentPageNumber,
       limit: 15,
     };
     batch(() => {

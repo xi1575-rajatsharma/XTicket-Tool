@@ -1,6 +1,12 @@
-import { changeTicketAssignee } from "app/redux/actions/ticketListingActions";
+import {
+  changeTicketAssignee,
+  closeErrorModalAction,
+  startChangeAssigneeLoader,
+} from "app/redux/actions/ticketListingActions";
+import CommonModal from "core/CommomModal/CommonModal";
+import Loader from "core/Loader/Loader";
 import React, { useState, useEffect } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import {
   capitalizeFirstLetter,
   converDatatoDropDownData,
@@ -19,36 +25,47 @@ const Ticket = (props) => {
   const { data } = props;
   const [state, setState] = useState({
     selectedValue: {},
+    isLoading: false,
+    isError: false,
+    errorMessage: "",
   });
-
+  const reducerstate = useSelector((state) => {
+    return state.ticketList;
+  });
   useEffect(() => {
-    const convertedData = converDatatoDropDownData(
-      [data],
-      "assignedTo",
-      "assignedToEmailId"
-    );
-    const selectedValue = {
-      label: convertedData[0].label,
-      value: convertedData[0].value,
-    };
-    mapChangesToState({ selectedValue });
-  }, [data]);
-
+    console.log("in useeff --");
+    mapChangesToState({
+      selectedValue: { label: data.label, value: data.value },
+      isLoading: reducerstate.changeAssigneeLoading,
+      isError: reducerstate.changeAssigneeError,
+      errorMessage: reducerstate.changeAssigneeErrorMsg,
+    });
+  }, [reducerstate, data]);
   const changeAssignee = (assignee) => {
+    dispatch(startChangeAssigneeLoader(data.id));
     dispatch(changeTicketAssignee(assignee, data.id));
-    const newAssignee = { label: assignee.label, value: assignee.value };
-    mapChangesToState({ selectedValue: newAssignee });
+    // const newAssignee = {label: assignee.label, value: assignee.value}
+    // mapChangesToState({selectedValue: newAssignee})
   };
 
   const mapChangesToState = (value) => setState({ ...state, ...value });
+  const closeErrorModal = () => {
+    // let currentTicket = reducerstate.ticketList.find(ticket => ticket.id == reducerstate.currentTicket)
+    // const oldAssignee = {label: currentTicket.assignedTo, value: currentTicket.assignedToEmailId}
+    // mapChangesToState({selectedValue: oldAssignee})
+    // console.log('curr--', currentTicket);
+    // console.log('close modal', state, data)
+    // mapChangesToState({selectedVslue: {label: data.label, value: data.value}})
+    dispatch(closeErrorModalAction());
+  };
   return (
-    <styled.ticketContainer
-    // whileHover={{
-    //   scale: 1.01,
-    //   transition: { duration: 0.35 },
-    // }}
-    // whileTap={{ scale: 0.97, transition: { duration: 0.25 } }}
-    >
+    <styled.ticketContainer>
+      <CommonModal
+        show={state.isError}
+        title="Error"
+        description={state.errorMessage}
+        close={closeErrorModal}
+      />
       <styled.topContainer>
         <styled.ticketIdAndStatusContainer>
           <styled.ticketId>{`#${returnBlankIfEmpty(data.id)}`}</styled.ticketId>
@@ -85,19 +102,22 @@ const Ticket = (props) => {
           value={getDateAndTime(data.dueOn)}
         />
         <styled.assigneeContainer>
-          <DropDown
-            id={data.id}
-            isClearable={false}
-            defaultValue={state.defaultAssignee}
-            value={state.selectedValue}
-            options={props.allAdminData}
-            optionSelected={(assignee) => changeAssignee(assignee)}
-            inputStyle={styled.customStyles}
-          />
+          {state.isLoading && data.id == reducerstate.currentTicket ? (
+            <Loader />
+          ) : (
+            <DropDown
+              id={data.id}
+              isClearable={false}
+              value={state.selectedValue}
+              options={props.allAdminData}
+              optionSelected={(assignee) => changeAssignee(assignee)}
+              inputStyle={styled.customStyles}
+            />
+          )}
         </styled.assigneeContainer>
       </styled.bottomContainer>
     </styled.ticketContainer>
   );
 };
 
-export default Ticket;
+export default React.memo(Ticket);
