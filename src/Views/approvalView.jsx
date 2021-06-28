@@ -42,17 +42,7 @@ const ApprovalView = (props) => {
         options,
       },
     });
-    // fetch.post({
-    //     url: `http://168.63.250.105/ticket-tool/v1/approval/${ticketID}?approver=${approver}&token=${token}`,
-    //     callbackHandler: (response) => setApprovalStatus(response.error.response.status)
-    // })
   }, []);
-  const closeWindow = () => {
-    console.log("lol");
-    window.opener = null;
-    window.open("", "_self");
-    window.close();
-  };
 
   const onSubmit = () => {
     mapChangesToState({ isApprovalLoading: true });
