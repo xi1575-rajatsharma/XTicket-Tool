@@ -20,6 +20,7 @@ export const arrowContainer = styled.div`
   img {
     height: 1.1rem;
   }
+  cursor: pointer;
 `;
 
 export const verticalDivider = styled.div`

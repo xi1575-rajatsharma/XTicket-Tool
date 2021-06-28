@@ -4,7 +4,8 @@ const configs = {
   getAllStatus: "tickets/ticket-status",
   getTicketsByStatus: "tickets/status",
   getAllAdmins: "users/admins",
-  changeTicketAssignee: "tickets/assign/"
+  changeTicketAssignee: "tickets/assign/",
+  getAllReplies: "tickets/replies",
 };
 
 export default configs;

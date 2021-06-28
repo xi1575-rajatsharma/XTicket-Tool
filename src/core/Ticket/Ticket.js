@@ -33,7 +33,6 @@ const Ticket = (props) => {
     return state.ticketList;
   });
   useEffect(() => {
-    console.log("in useeff --");
     mapChangesToState({
       selectedValue: { label: data.label, value: data.value },
       isLoading: reducerstate.changeAssigneeLoading,

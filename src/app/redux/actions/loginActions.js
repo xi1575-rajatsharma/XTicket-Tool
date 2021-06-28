@@ -2,7 +2,6 @@ import XenieApi from "../../httpsRequests/api.js";
 import { exportUrl } from "../../httpsRequests/ExportUrl.js";
 import configs from "../../httpsRequests/configs.js";
 import * as types from "../actionTypes";
-import { useHistory } from "react-router";
 
 export const getLoginCreds = (params) => (dispatch) => {
   XenieApi.post(exportUrl + configs.getLoginCreds, null, null, params).then(
@@ -28,6 +27,5 @@ export const resetLoginCreds = () => (dispatch) => {
 };
 
 export const logoutUser = () => (dispatch) => {
-  const history = useHistory();
   dispatch({ type: types.LOGOUT_USER });
 };

@@ -24,14 +24,15 @@ const TicketListingByStatusPage = (props) => {
     currentAssignee: { label: "rajat", value: "Rajat" },
     isPreviewVisible: false,
     currentSelectedTicket: {},
-    currentPageNumber: 0,
+    currentPageNumber: 1,
   });
   const mapChangesToState = (value) => {
     setState({ ...state, ...value });
   };
 
   const handleTicketClick = (currentSelectedTicket) => {
-    mapChangesToState({ currentSelectedTicket, isPreviewVisible: true });
+    if (!state.isPreviewVisible)
+      mapChangesToState({ currentSelectedTicket, isPreviewVisible: true });
   };
 
   const closePreview = () => {
@@ -43,7 +44,7 @@ const TicketListingByStatusPage = (props) => {
   const decreasePageCount = () => {
     mapChangesToState({ currentPageNumber: state.currentPageNumber - 1 });
   };
-  const getPageTracingInformation = () => {
+  const getPageTrackingInformation = () => {
     return (
       <styled.pageTracker>
         Page {state.currentPageNumber} of {props.ticketList.totalPages}
@@ -52,7 +53,7 @@ const TicketListingByStatusPage = (props) => {
   };
   useEffect(() => {
     const requestParams = {
-      page: state.currentPageNumber,
+      page: state.currentPageNumber - 1,
       limit: 15,
     };
     batch(() => {
@@ -109,7 +110,7 @@ const TicketListingByStatusPage = (props) => {
           />
         ) : (
           <>
-            {getPageTracingInformation()}
+            {getPageTrackingInformation()}
             {props.ticketList &&
             props.ticketList.ticketList &&
             props.ticketList.ticketList.length
@@ -127,8 +128,6 @@ const TicketListingByStatusPage = (props) => {
               : "No Tickets Found"}
           </>
         )}
-
-        {/* {console.log(currentTicketData)} */}
       </styled.container>
       <AnimatePresence>
         {state.isPreviewVisible ? (
@@ -148,4 +147,4 @@ const mapStatetoProps = (state) => {
     ticketList: state.ticketList,
   };
 };
-export default connect(mapStatetoProps)(TicketListingByStatusPage);
+export default connect(mapStatetoProps)(React.memo(TicketListingByStatusPage));
