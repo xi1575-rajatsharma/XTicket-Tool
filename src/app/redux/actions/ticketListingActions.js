@@ -45,8 +45,8 @@ export const changeTicketAssignee = (assignee, ticketId) => (dispatch) => {
 export const startChangeAssigneeLoader = (ticketId) => (dispatch) => {
   dispatch({ type: types.SHOW_CHANGE_ASSIGNEE_LOADER, data: {ticketId}});
 };
-export const closeErrorModalAction = () => (dispatch) => {
-  dispatch({ type: types.CLOSE_ERROR_MODAL});
+export const closeErrorModalAction = (ticketId) => (dispatch) => {
+  dispatch({ type: types.CLOSE_ERROR_MODAL, data: {ticketId}});
 };
 
 

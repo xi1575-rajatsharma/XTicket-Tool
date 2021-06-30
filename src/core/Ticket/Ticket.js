@@ -6,7 +6,7 @@ import {
 import CommonModal from "core/CommomModal/CommonModal";
 import Loader from "core/Loader/Loader";
 import React, { useState, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import {
   capitalizeFirstLetter,
   converDatatoDropDownData,
@@ -21,6 +21,7 @@ import LabelValueContainer from "./LabelValueContainer";
 import * as styled from "./Ticket.styled";
 
 const Ticket = (props) => {
+  const mapChangesToState = (value) => setState({ ...state, ...value });
   const dispatch = useDispatch();
   const { data } = props;
   const [state, setState] = useState({
@@ -28,40 +29,31 @@ const Ticket = (props) => {
     isLoading: false,
     isError: false,
     errorMessage: "",
-  });
-  const reducerstate = useSelector((state) => {
-    return state.ticketList;
+    errorTitle: "",
   });
   useEffect(() => {
     mapChangesToState({
-      selectedValue: { label: data.label, value: data.value },
-      isLoading: reducerstate.changeAssigneeLoading,
-      isError: reducerstate.changeAssigneeError,
-      errorMessage: reducerstate.changeAssigneeErrorMsg,
+      selectedValue: {label: data.assignedTo, value: data.assignedToEmailId},
+      
+      isLoading : data.isLoading,
+      isError : data.isError,
+      errorMessage : data.errorMsg,
+      errorTitle : data.errorTitle,
     });
-  }, [reducerstate, data]);
+  }, [data]);
   const changeAssignee = (assignee) => {
     dispatch(startChangeAssigneeLoader(data.id));
     dispatch(changeTicketAssignee(assignee, data.id));
-    // const newAssignee = {label: assignee.label, value: assignee.value}
-    // mapChangesToState({selectedValue: newAssignee})
   };
 
-  const mapChangesToState = (value) => setState({ ...state, ...value });
   const closeErrorModal = () => {
-    // let currentTicket = reducerstate.ticketList.find(ticket => ticket.id == reducerstate.currentTicket)
-    // const oldAssignee = {label: currentTicket.assignedTo, value: currentTicket.assignedToEmailId}
-    // mapChangesToState({selectedValue: oldAssignee})
-    // console.log('curr--', currentTicket);
-    // console.log('close modal', state, data)
-    // mapChangesToState({selectedVslue: {label: data.label, value: data.value}})
-    dispatch(closeErrorModalAction());
+    dispatch(closeErrorModalAction(data.id));
   };
   return (
     <styled.ticketContainer>
       <CommonModal
         show={state.isError}
-        title="Error"
+        title={state.errorTitle}
         description={state.errorMessage}
         close={closeErrorModal}
       />
@@ -103,7 +95,7 @@ const Ticket = (props) => {
           value={getDateAndTime(data.dueOn)}
         />
         <styled.assigneeContainer>
-          {state.isLoading && data.id === reducerstate.currentTicket ? (
+          {state.isLoading ? (
             <Loader />
           ) : (
             <DropDown

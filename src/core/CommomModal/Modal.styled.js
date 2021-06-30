@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 
 export const modalOverlay  = styled.div`
-    background-color: rgba(0, 0, 0, 0.2);
+    background-color: rgba(0, 0, 0, 0.8);
     height: 100%;
     position: fixed;
     top: 0px;
@@ -11,12 +11,10 @@ export const modalOverlay  = styled.div`
     left: 0px;
     width: 100%;
     z-index: 10;
-    opacity: 0.2;
   `;
   
   export const modalDialog  = styled.div`
-    --xe-bg-opacity: 1;
-    background-color: rgba(255, 255, 255, var(--xe-bg-opacity));
+    background-color: rgba(255, 255, 255, 1);
     border-radius: 0.75rem;
     margin-left: auto;
     margin-right: auto;
@@ -57,8 +55,8 @@ export const modalOverlay  = styled.div`
   `
   
   export const modalDialogOk  = styled.div`
-    --xe-bg-opacity: 1;
-    background-color: rgba(254, 226, 226, var(--xe-bg-opacity));
+    
+    background-color: rgba(254, 226, 226, 1));
     border-radius: 0.75rem;
     font-weight: 500;
     margin-right: 1rem;

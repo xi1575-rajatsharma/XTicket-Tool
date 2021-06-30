@@ -1,3 +1,4 @@
+import ManageAccess from "core/ManageAccess/ManageAccess";
 import React from "react";
 import TicketListingByStatusPage from "../TicketListingByStatusPage/TicketListingByStatusPage";
 import EmployeeDashboard from "core/EmployeeDasboard/EmployeeDashboard";
@@ -37,6 +38,9 @@ const TicketListingComponents = (props) => {
       ) : null}
       {props.selectedKey === "AWAITINGUSER" ? (
         <TicketListingByStatusPage selectedKey={props.selectedKey} />
+      ) : null}
+      {props.selectedKey === "manageAccess" ? (
+        <ManageAccess selectedKey={props.selectedKey} />
       ) : null}
       {props.selectedKey === "employeeDashboard" ? <EmployeeDashboard /> : null}
     </styled.ticketListingComponent>

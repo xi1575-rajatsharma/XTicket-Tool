@@ -23,6 +23,8 @@ export const userHasLogin = (WrapperView) => {
     onClickLogout = () => {
       window.localStorage.removeItem("xenieToken");
       window.localStorage.removeItem("_listingData");
+      window.sessionStorage.removeItem("userId");
+      window.sessionStorage.removeItem("userEmail");
       actionCreators.logout();
       this.props.history.push("/");
     };
