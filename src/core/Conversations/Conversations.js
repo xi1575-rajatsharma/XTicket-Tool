@@ -10,6 +10,7 @@ import {
 import { errorText, noConverSations } from "./ConversationsUtils";
 import Attachment from "app/images/Attachment.svg";
 import Download from "app/images/Download.svg";
+import File from "app/images/File.svg";
 import * as styled from "./Conversations.styled";
 import Initials from "core/Initals/Initials";
 
@@ -79,14 +80,21 @@ const Conversations = (props) => {
                       <styled.replyBody style={{ originY: 0, originX: 0 }}>
                         <styled.replyText>{reply.text || ""}</styled.replyText>
                         {reply.s3ReplyUrl ? (
-                          <styled.replyAttachment href={reply.s3ReplyUrl}>
-                            {reply.fileName.length > 15
-                              ? `${capitalizeFirstLetter(
-                                  truncateText(reply.fileName, 10)
-                                )}...${reply.fileExtension}`
-                              : reply.fileName}{" "}
-                            <styled.attachmentIcon src={Download} />
-                          </styled.replyAttachment>
+                          <styled.attachmentContainer>
+                            <styled.fileName>
+                              <styled.fileIcon src={File} />
+                              <styled.fileText title={reply.fileName}>
+                                {reply.fileName.length > 15
+                                  ? `${capitalizeFirstLetter(
+                                      truncateText(reply.fileName, 10)
+                                    )}...${reply.fileExtension}`
+                                  : reply.fileName}
+                              </styled.fileText>
+                            </styled.fileName>
+                            <styled.replyAttachment href={reply.s3ReplyUrl}>
+                              <styled.attachmentIcon src={Download} />
+                            </styled.replyAttachment>
+                          </styled.attachmentContainer>
                         ) : null}
                       </styled.replyBody>
                     ) : null}
@@ -106,3 +114,11 @@ const Conversations = (props) => {
 };
 
 export default Conversations;
+
+{
+  /*                           
+                          <styled.replyAttachment href={reply.s3ReplyUrl}>
+                            
+                            <styled.attachmentIcon src={File} />
+                          </styled.replyAttachment> */
+}

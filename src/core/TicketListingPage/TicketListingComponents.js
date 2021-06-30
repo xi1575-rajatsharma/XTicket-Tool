@@ -1,5 +1,6 @@
 import React from "react";
 import TicketListingByStatusPage from "../TicketListingByStatusPage/TicketListingByStatusPage";
+import EmployeeDashboard from "core/EmployeeDasboard/EmployeeDashboard";
 import * as styled from "./TicketListingPage.styled";
 const TicketListingComponents = (props) => {
   return (
@@ -37,6 +38,7 @@ const TicketListingComponents = (props) => {
       {props.selectedKey === "AWAITINGUSER" ? (
         <TicketListingByStatusPage selectedKey={props.selectedKey} />
       ) : null}
+      {props.selectedKey === "employeeDashboard" ? <EmployeeDashboard /> : null}
     </styled.ticketListingComponent>
   );
 };

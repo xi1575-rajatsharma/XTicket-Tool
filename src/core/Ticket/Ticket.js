@@ -73,7 +73,9 @@ const Ticket = (props) => {
           </styled.ticketStatus>
         </styled.ticketIdAndStatusContainer>
         <styled.ticketSubjectAndDescriptionContainer
-          onClick={() => props.handleTicketClick(data)}
+          onClick={() =>
+            props.handleTicketClick && props.handleTicketClick(data)
+          }
         >
           <styled.ticketSubject>
             {capitalizeFirstLetter(returnBlankIfEmpty(data.subject))}
@@ -101,7 +103,7 @@ const Ticket = (props) => {
           value={getDateAndTime(data.dueOn)}
         />
         <styled.assigneeContainer>
-          {state.isLoading && data.id == reducerstate.currentTicket ? (
+          {state.isLoading && data.id === reducerstate.currentTicket ? (
             <Loader />
           ) : (
             <DropDown

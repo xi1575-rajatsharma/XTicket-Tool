@@ -10,6 +10,7 @@ const TicketPreviewHeader = (props) => {
     size: "28px",
     fontSize: "1.3rem",
   };
+  const dayDifference = props.getDayDifference();
   return (
     <styled.header>
       <styled.nameAndInitalsContainer>
@@ -22,7 +23,9 @@ const TicketPreviewHeader = (props) => {
       </styled.nameAndInitalsContainer>
       {props.status !== "RESOLVED" && props.status !== "CLOSED" ? (
         <styled.daysContainer>
-          Due in {props.getDayDifference()} days
+          Due {dayDifference > 0 ? "in" : null}{" "}
+          {(dayDifference > 0 && dayDifference) || "Today"}&nbsp;
+          {dayDifference > 0 ? (dayDifference !== 1 ? "days" : "day") : null}
         </styled.daysContainer>
       ) : (
         <styled.daysContainer>{props.status}</styled.daysContainer>
