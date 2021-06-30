@@ -11,6 +11,7 @@ const initalState = {
     allAdminUsersLoading: false,
     allAdminUsersFailure: false,
   },
+  departments: []
 };
 
 const commonReducer = (state = initalState, action) => {
@@ -70,6 +71,15 @@ const commonReducer = (state = initalState, action) => {
           allAdminUsersLoading: false,
           allAdminUsersFailure: true,
         },
+      };
+    case types.GET_ALL_DEPARTMENTS_SUCCESS:
+      let departments = [];
+      if(action.data.result && action.data.result.departments){
+        departments = action.data.result.departments
+      } 
+      return {
+        ...state,
+        departments
       };
     default:
       return { ...state };

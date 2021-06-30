@@ -28,6 +28,7 @@ const TicketListingPage = (props) => {
     dispatch(actionCreators.startAllAdminUsersLoader());
     dispatch(actionCreators.getAllStatus());
     dispatch(actionCreators.getAllAdminUsers());
+    dispatch(actionCreators.getAllDepartments());
   }, []);
 
   useEffect(() => {

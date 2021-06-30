@@ -21,6 +21,8 @@ const loginReducer = (state = initalState, action) => {
       const token = action.data.token;
       const loginData = action.data.result;
       window.localStorage.setItem("xenieToken", token);
+      window.sessionStorage.setItem("userId", action.data.result.userId);
+      window.sessionStorage.setItem("userEmail", action.data.result.contactInfo.email);
       return {
         ...state,
         loginData,

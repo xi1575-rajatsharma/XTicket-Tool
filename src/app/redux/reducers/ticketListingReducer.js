@@ -5,11 +5,7 @@ const initalState = {
   ticketList: [],
   totalPages: 0,
   ticketListFailure: false,
-  ticketListLoading: false,
-  changeAssigneeError: false,
-  changeAssigneeLoading: false,
-  changeAssigneeErrorMsg: "",
-  currentTicket: 0,
+  ticketListLoading: false
 };
 
 const ticketListingReducer = (state = initalState, action) => {
@@ -22,9 +18,15 @@ const ticketListingReducer = (state = initalState, action) => {
       };
     }
     case types.GET_ALL_TICKETS_BY_STATUS_SUCCESS: {
+      let tickets = []
+      if(action.data.result && action.data.result.tickets){
+        tickets = action.data.result.tickets.map(ticket => (
+          {...ticket, isLoading: false, isError: false, errorTitle: '', errorMsg: '' }
+        ))
+      }
       return {
         ...state,
-        ticketList: action.data.result.tickets,
+        ticketList: tickets,
         totalPages: action.data.numberOfPages - 1,
         currentTicketStatus: action.status,
         ticketListFailure: false,
@@ -46,40 +48,54 @@ const ticketListingReducer = (state = initalState, action) => {
         ticketListLoading: false,
       };
     }
-    case types.CHANGE_TICKET_ASSIGNEE:
-      state.ticketList.map((ticket) => {
-        if (ticket.id === action.data.ticketId) {
-          ticket.assignedTo = action.data.assignee.label;
-          ticket.assignedToEmailId = action.data.assignee.value;
-        }
-      });
+    case types.CHANGE_TICKET_ASSIGNEE:{
+      let tickets = state.ticketList.map(ticket => {
+        return (ticket.id ===action.data.ticketId) ? 
+        {...ticket,
+          assignedTo : action.data.assignee.label,
+          assignedToEmailId: action.data.assignee.value,
+          isLoading: false
+        } : ticket 
+      })
       return {
         ...state,
-        changeAssigneeError: false,
-        changeAssigneeLoading: false,
-        currentTicket: 0,
+        ticketList: tickets
       };
-    case types.CHANGE_ASSIGNEE_ERROR:
+    }
+    case types.CHANGE_ASSIGNEE_ERROR:{
+      let tickets = state.ticketList.map(ticket => {
+        return (ticket.id ===action.data.ticketId) ? 
+        {...ticket,
+          isError : true,
+          isLoading: false,
+          errorTitle: action.data.error.error,
+          errorMsg: action.data.error.message
+        } : ticket 
+      })
       return {
         ...state,
-        changeAssigneeError: true,
-        changeAssigneeLoading: false,
-        currentTicket: action.data.ticketId,
-        changeAssigneeErrorMsg: action.data.error.message,
+        ticketList: tickets
       };
-    case types.SHOW_CHANGE_ASSIGNEE_LOADER:
+    }
+    case types.SHOW_CHANGE_ASSIGNEE_LOADER:{
+      let tickets = state.ticketList.map(ticket => {
+        return (ticket.id ===action.data.ticketId) ? {...ticket, isLoading : true} : ticket 
+      })
       return {
         ...state,
-        changeAssigneeLoading: true,
-        currentTicket: action.data.ticketId,
+        ticketList: tickets
       };
-    case types.CLOSE_ERROR_MODAL:
+    }
+    case types.CLOSE_ERROR_MODAL:{
+      let tickets = state.ticketList.map(ticket => {
+        return (ticket.id ===action.data.ticketId) ? 
+        {...ticket, isError : false, errorMsg: "", errorTitle: ""} : ticket 
+      })
       return {
         ...state,
-        changeAssigneeError: false,
-        changeAssigneeErrorMsg: "",
-        currentTicket: 0,
+        ticketList: tickets
       };
+    }
     default:
       return { ...state };
   }
