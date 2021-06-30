@@ -65,7 +65,9 @@ const Ticket = (props) => {
           </styled.ticketStatus>
         </styled.ticketIdAndStatusContainer>
         <styled.ticketSubjectAndDescriptionContainer
-          onClick={() => props.handleTicketClick(data)}
+          onClick={() =>
+            props.handleTicketClick && props.handleTicketClick(data)
+          }
         >
           <styled.ticketSubject>
             {capitalizeFirstLetter(returnBlankIfEmpty(data.subject))}

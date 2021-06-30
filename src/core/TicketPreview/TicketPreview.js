@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useDispatch, connect } from "react-redux";
 import * as actionCreators from "app/redux/actions/ticketDetailActions";
-import { getDifferenceInDays } from "utils/Constants";
+import { getDaysDifferenceFromToday } from "utils/Constants";
 
 import * as styled from "./TicketPreview.styled";
 import TicketPreviewBody from "./TicketPreviewBody";
@@ -16,10 +16,7 @@ const TicketPreview = (props) => {
     dispatch(actionCreators.getAllReplies(props.data.id));
   }, [dispatch, props.data.id]);
   const getDayDifference = () => {
-    return getDifferenceInDays(
-      props.data.responseDueOn,
-      props.data.creationTime
-    );
+    return getDaysDifferenceFromToday(props.data.responseDueOn);
   };
   const status = props.data.status;
 

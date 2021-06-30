@@ -3,6 +3,7 @@ import loginReducer from "./loginReducer";
 import commonReducer from "./commonReducers";
 import ticketListingReducer from "./ticketListingReducer";
 import ticketDetailsReducer from "./ticketDetailsReducer";
+import employeeDashboardReducer from "./employeeDashboarReducer";
 import * as types from "../actionTypes";
 import manageAccessReducer from "./manageAccessReducer";
 
@@ -12,6 +13,7 @@ const appreducer = combineReducers({
   ticketList: ticketListingReducer,
   manageAccess: manageAccessReducer,
   ticketDetails: ticketDetailsReducer,
+  employeeDashBoard: employeeDashboardReducer,
 });
 
 const rootReducer = (state, action) => {
