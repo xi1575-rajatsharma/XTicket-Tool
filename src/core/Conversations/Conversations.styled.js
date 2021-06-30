@@ -57,13 +57,31 @@ export const noConversationsText = styled.div`
 
 export const replyText = styled.div`
   word-break: break-word;
-  font-size: 1.2rem;
+  font-size: 1.3rem;
   line-height: 1.9rem;
-
+  margin-bottom: 1rem;
   color: ${colors.fontLightBlack};
 `;
 
-export const replyAttachment = styled.a`
+export const attachmentContainer = styled.div`
+  display: inline-flex;
+  align-items: center;
+  border: 1px solid ${colors.colorLightGrey};
+  border-radius: 4px;
+`;
+export const fileIcon = styled.img`
+  margin-right: 0.5rem;
+`;
+export const fileName = styled.div`
+  display: flex;
+  padding: 0.7rem;
+  border-right: 1px solid #c4c4c4;
+  color: #5d5d5d;
+`;
+export const fileText = styled.p`
   font-size: 1.2rem;
-  margin-bottom: 1rem;
+  margin: 0;
+`;
+export const replyAttachment = styled.a`
+  padding: 0.5rem;
 `;
