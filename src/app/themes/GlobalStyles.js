@@ -26,6 +26,11 @@ h3{
     font-weight: 300;
 }
 
+h6 {
+    font-size: 1.3rem;
+    font-weight: 400;
+
+}
 `;
 export const loaderContainer = styled.div`
   width: 100%;

@@ -11,10 +11,10 @@ const Pagination = (props) => {
       {/* <styled.pageNumber>{props.currentPage}</styled.pageNumber> */}
       <styled.arrowsContainer>
         <styled.arrowContainer
-          onClick={props.currentPage > 0 ? props.prevPage : null}
+          onClick={props.currentPage > 1 ? props.prevPage : null}
         >
           <img
-            src={props.currentPage === 0 ? arrowLeftDisabled : arrowLeft}
+            src={props.currentPage === 1 ? arrowLeftDisabled : arrowLeft}
             alt="Previous"
           />
         </styled.arrowContainer>

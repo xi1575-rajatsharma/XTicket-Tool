@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useCallback } from "react";
 import {
   returnBlankIfEmpty,
   getMemberInitials,
@@ -6,7 +6,14 @@ import {
 } from "../../utils/Constants";
 import * as styled from "./Intials.styled";
 const Initials = ({ size, fullName, fontSize }) => {
-  const styles = { size, color: getRandomColor() };
+  const color = useCallback(() => {
+    return getRandomColor();
+  }, []);
+
+  const styles = {
+    size,
+    color: color(),
+  };
   return (
     <styled.container styles={styles}>
       <styled.nameContainer fontSize={fontSize}>
@@ -16,4 +23,4 @@ const Initials = ({ size, fullName, fontSize }) => {
   );
 };
 
-export default Initials;
+export default React.memo(Initials);

@@ -1,26 +1,91 @@
-.approval{
-    width: 95vw;
-    height: 95vh;
-    margin: auto;
-    margin-top: 10px;
-    background-image: linear-gradient(to right bottom, #6C1D5F 19%, #300d2a 81%);
-    position: relative;
+.approval {
+  width: 100vw;
+  height: 100vh;
+  margin: auto;
+  background: #fff;
+  position: relative;
 
-    &__ticket-info{
-        position: absolute;
-        background-color: rgb(255, 255, 255);
-        color: #000;
-        border-radius: 4px;
-        box-shadow: 0 4rem 3rem rgbA(0,0,0,.425);
-        text-align: center;
-        left: 50%;
-        top:50%;
-        transform: translate(-50%,-50%);
-        padding: 20px;
-    }
+  &__overlay {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    left: 0;
+    top: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(29, 29, 29, 0.459);
+  }
 
-    &__icon{
-        // position: absolute;
-        height: 100px;
+  &__form {
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    border-radius: 4px;
+    box-shadow: 0 4px 10px rgbA(0, 0, 0, 0.425);
+    font-size: 1.7rem;
+    color: #404040;
+    &--loading {
+      width: 30rem;
+      height: 24.1rem;
     }
+    &--heading {
+      margin-bottom: 3rem;
+    }
+    &--comment {
+      display: flex;
+      flex-direction: column;
+      textarea {
+        width: 30rem;
+        padding: 0.5rem;
+        font-size: 1.3rem;
+        resize: none;
+      }
+      margin-bottom: 3rem;
+    }
+    &--submit {
+      width: 100%;
+      display: flex;
+      justify-content: flex-end;
+
+      button {
+        border: none;
+        border-radius: 3px;
+        font-size: 1.3rem;
+        padding: 0.6rem 1rem;
+      }
+
+      &--sub {
+        margin-right: 1rem;
+        background: #354255;
+        color: white;
+      }
+      &--can {
+        background-color: rgba(117, 117, 117, 0.75);
+        color: white;
+      }
+    }
+  }
+  &__ticket-info {
+    position: absolute;
+    background-color: rgb(255, 255, 255);
+    color: #000;
+    border-radius: 4px;
+    box-shadow: 0 4rem 3rem rgbA(0, 0, 0, 0.425);
+    text-align: center;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    padding: 20px;
+  }
+
+  &__icon {
+    // position: absolute;
+    height: 100px;
+  }
+}
+
+.asterisk {
+  color: rgb(233, 45, 45);
 }

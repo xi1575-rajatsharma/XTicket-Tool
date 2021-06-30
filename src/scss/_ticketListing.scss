@@ -1,307 +1,311 @@
-
-@mixin scrollbars($size, $foreground-color, $background-color: mix($foreground-color, black,  50%)) {
-    // For Google Chrome
-    &::-webkit-scrollbar {
-      width:  $size;
-      height: $size;
-    }
-  
-    &::-webkit-scrollbar-thumb {
-      background: $foreground-color;
-      
-      border-radius: 10px 0 0 10px;
-    }
-  
-    &::-webkit-scrollbar-track {
-      background: $background-color;
-    }
-  
-    // For Internet Explorer
-    & {
-      scrollbar-face-color: $foreground-color;
-      scrollbar-track-color: $background-color;
-    }
+@mixin scrollbars(
+  $size,
+  $foreground-color,
+  $background-color: mix($foreground-color, black, 50%)
+) {
+  // For Google Chrome
+  &::-webkit-scrollbar {
+    width: $size;
+    height: $size;
   }
 
+  &::-webkit-scrollbar-thumb {
+    background: $foreground-color;
 
-.TicketListContainer{
-    height: 100vh;
+    border-radius: 10px 0 0 10px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: $background-color;
+  }
+
+  // For Internet Explorer
+  & {
+    scrollbar-face-color: $foreground-color;
+    scrollbar-track-color: $background-color;
+  }
 }
-.bottom-container{
-    height: 95vh;
-    background-color: #FFFAFA;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: flex-start;
-    @include scrollbars(8px,linear-gradient(180deg, #6C1D5F 40%, #33082b 60%), #FFFAFA);
+
+.TicketListContainer {
+  height: 100vh;
 }
-.filters-wrapper{
-    width: 100%;
-    height: 75px;
-    padding: 10px;
-    z-index: 10;
-    margin-top: 20px;   
-    padding: 10px;
+.bottom-container {
+  height: 95vh;
+  background-color: #fffafa;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  @include scrollbars(
+    8px,
+    linear-gradient(180deg, #6c1d5f 40%, #33082b 60%),
+    #fffafa
+  );
+}
+.filters-wrapper {
+  width: 100%;
+  height: 75px;
+  padding: 10px;
+  z-index: 10;
+  margin-top: 20px;
+  padding: 10px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  box-shadow: 2px 2px 4px 2px rgba(0, 0, 0, 0.425);
+
+  .filters-right-wrapper {
+    flex: 2;
+    width: 50%;
+    padding-left: 40px;
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
-    box-shadow: 2px 2px 4px 2px rgba(0,0,0,.425);
-
-    .filters-right-wrapper{
-        flex: 2;
-        width: 50%;
-        padding-left: 40px;
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-        justify-content: space-between;
-        form{
-            input,span{
-                margin-left: 10px;
-            }
-            flex: 2;
-            height: 100%;
-            display: flex;
-            flex-direction: row;
-            align-items: center;
-            justify-content: flex-start;
-        }
+    form {
+      input,
+      span {
+        margin-left: 10px;
+      }
+      flex: 2;
+      height: 100%;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: flex-start;
     }
+  }
 
-
-
-    .filter-select{
-        color: black;
-        background-color: #6c1d5f88;
-        height: 30px;
-        padding: 3px;
-        border: transparent;
-        // text-transform: uppercase;
-        option{
-            // text-transform: uppercase;
-        }
-        animation: moveInRight 1s cubic-bezier(0.23, 1, 0.320, 1) forwards;
-       }
-
-    
-    input[type="submit"]{
-        background-color: #300d2a;
-        color:white;
-        align: right;
+  .filter-select {
+    color: black;
+    background-color: #6c1d5f88;
+    height: 30px;
+    padding: 3px;
+    border: transparent;
+    // text-transform: uppercase;
+    option {
+      // text-transform: uppercase;
     }
+    animation: moveInRight 1s cubic-bezier(0.23, 1, 0.32, 1) forwards;
+  }
+
+  input[type="submit"] {
+    background-color: #300d2a;
+    color: white;
+    align: right;
+  }
 }
 
-.ticketListingTable{
-    width: 100%;
-    height: 20vh;
-    border-collapse: separate;
-    border-spacing: 0 3px;
-    overflow: auto;
-    // margin-top: 20px;
-    backface-visibility: hidden;
-    animation: moveInUp 1s cubic-bezier(0.23, 1, 0.320, 1) backwards .3s;
-    a{
-        color: black;
-        text-decoration: none;
-        font-weight: normal;
-        line-height: 24px;
-        transition: all ease-in-out 0.3s;
+.ticketListingTable {
+  width: 100%;
+  height: 20vh;
+  border-collapse: separate;
+  border-spacing: 0 3px;
+  overflow: auto;
+  // margin-top: 20px;
+  backface-visibility: hidden;
+  animation: moveInUp 1s cubic-bezier(0.23, 1, 0.32, 1) backwards 0.3s;
+  a {
+    color: black;
+    text-decoration: none;
+    font-weight: normal;
+    line-height: 24px;
+    transition: all ease-in-out 0.3s;
 
-        &:hover{
-            text-decoration: none;
-        }
+    &:hover {
+      text-decoration: none;
     }
-    tr{
-        height: 2.5rem;
-        background-color: #FFFAFA;
-        margin-bottom: 100px;;
-        font-size: 14px;
-        color: black;
-        transition: all ease-in-out 0.3s;
+  }
+  tr {
+    height: 2.5rem;
+    background-color: #fffafa;
+    margin-bottom: 100px;
+    font-size: 14px;
+    color: black;
+    transition: all ease-in-out 0.3s;
 
-        &.clickable {
-            cursor: pointer;
-        }
+    &.clickable {
+      cursor: pointer;
     }
-    tbody>tr:hover{
-        // box-shadow: 0px 1px 50px 2px rgb(0, 0, 0);
-        box-sizing: border-box;
-        box-shadow: 0 1px 9px 1px rgba(0, 0, 0, 0.28);
+  }
+  tbody > tr:hover {
+    // box-shadow: 0px 1px 50px 2px rgb(0, 0, 0);
+    box-sizing: border-box;
+    box-shadow: 0 1px 9px 1px rgba(0, 0, 0, 0.28);
+  }
+  tbody > tr:nth-child(even) {
+    // background-color:#ededed;
+    background-color: #f4f1fa;
+  }
+  th,
+  td {
+    padding: 0px 12px;
+    text-align: left;
+  }
+  th {
+    color: black;
+    background-color: #ddd3ee;
+  }
+  #header-row {
+    background-color: #ddd3ee;
+    text-align: left;
+    font-size: 14px;
+    text-transform: uppercase;
+    color: rgba($color: #00000000, $alpha: 0.75);
+    th {
+      font-weight: normal;
     }
-    tbody > tr:nth-child(even){
-        // background-color:#ededed;
-        background-color: #f4f1fa;
-    }
-    th,td{
-        padding: 0px 12px;
-        text-align: left;
-        
-    }
-    th{
-        color: black;
-        background-color: #ddd3ee;;
-    }
-    #header-row{
-        background-color: #ddd3ee;
-        text-align: left;
-        font-size: 14px;
-        text-transform: uppercase;
-        color: rgba($color: #00000000, $alpha: 0.75);
-        th{
-            font-weight: normal;
-        }
-    }
+  }
 }
-.no-updates-row{
-    tr{
+.no-updates-row {
+  tr {
     color: black;
     font-size: 30px;
     line-height: 30px;
     text-transform: capitalize;
-    text-align: center;}
+    text-align: center;
+  }
 }
-.ticket-filters-wrapper{
-    border: 1px solid #300d2a;
+.ticket-filters-wrapper {
+  border: 1px solid #300d2a;
 }
-.history-btn:link,  
-.history-btn:visited{
-    text-transform: uppercase;
-    text-decoration: none;
-    // border-radius: 100px;
-    transition: all .2s ease-out;
-    position: relative;
-} 
-.current-tickets-btn:link, .current-tickets-btn:visited{
-    border-right: 1px solid white;
+.history-btn:link,
+.history-btn:visited {
+  text-transform: uppercase;
+  text-decoration: none;
+  // border-radius: 100px;
+  transition: all 0.2s ease-out;
+  position: relative;
 }
-.history-btn:hover{
-    transform: translateY(-4px);
-    text-decoration: none;
-    box-shadow: 0 10px 20px #300d2a62;
+.current-tickets-btn:link,
+.current-tickets-btn:visited {
+  border-right: 1px solid white;
 }
-.history-btn:active{
-    transform: translateY(-2px);
-    box-shadow: 0 5px 10px #300d2a62;
+.history-btn:hover {
+  transform: translateY(-4px);
+  text-decoration: none;
+  box-shadow: 0 10px 20px #300d2a62;
 }
-.history-btn::after{
-    content: "";
-    display: inline-block;
-    width: 100%;
-    height: 100%;
-    // border-radius: 100px;
-    position: absolute;
-    color:white;
-    top: 0;
-    left: 0;
-    z-index: -1;
-    transition: all .4s ease-out;
+.history-btn:active {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 10px #300d2a62;
 }
-
-.btn-regal-blue{
-    background-color: #300d2a;
-    color: #fff;
-    padding: 10px 15px;
-    display: inline-block;
-    animation: moveinLeft 1s cubic-bezier(0.23, 1, 0.320, 1) forwards;
-}
-.btn-white{
-    background-color: rgba(132, 135, 211, 0.295);
-    color: rgb(168, 125, 125);
-    padding: 10px  15px;
-    display: inline-block;
-    animation: moveinLeft 1s cubic-bezier(0.23, 1, 0.320, 1) forwards;   
-}
-.btn-regal-blue::after{
-    background-color: #300d2a;
-    color: white;
+.history-btn::after {
+  content: "";
+  display: inline-block;
+  width: 100%;
+  height: 100%;
+  // border-radius: 100px;
+  position: absolute;
+  color: white;
+  top: 0;
+  left: 0;
+  z-index: -1;
+  transition: all 0.4s ease-out;
 }
 
-.btn-white::after{
-    background-color: rgba(132, 135, 211, 0.295);
-    color: white;
+.btn-regal-blue {
+  background-color: #300d2a;
+  color: #fff;
+  padding: 10px 15px;
+  display: inline-block;
+  animation: moveinLeft 1s cubic-bezier(0.23, 1, 0.32, 1) forwards;
+}
+.btn-white {
+  background-color: rgba(132, 135, 211, 0.295);
+  color: rgb(168, 125, 125);
+  padding: 10px 15px;
+  display: inline-block;
+  animation: moveinLeft 1s cubic-bezier(0.23, 1, 0.32, 1) forwards;
+}
+.btn-regal-blue::after {
+  background-color: #300d2a;
+  color: white;
 }
 
+.btn-white::after {
+  background-color: rgba(132, 135, 211, 0.295);
+  color: white;
+}
 
-.history-btn:hover::after{
-    transform: scaleX(1.4) scaleY(1.6);
+.history-btn:hover::after {
+  transform: scaleX(1.4) scaleY(1.6);
+  opacity: 0;
+}
+
+body {
+  background: #314c72;
+}
+
+@keyframes moveinLeft {
+  0% {
+    transform: translateX(150px);
+    // opacity: 0;
+  }
+
+  80% {
+    transform: translateX(-10px);
+  }
+
+  100% {
+    transform: translateX(0);
+    // opacity: 1;
+  }
+}
+
+@keyframes moveInRight {
+  0% {
+    transform: translateX(-150px);
     opacity: 0;
+  }
+
+  80% {
+    transform: translateX(10px);
+  }
+
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
 }
+@keyframes moveInUp {
+  0% {
+    transform: translateY(150px);
+    opacity: 0;
+  }
 
-body{
-    background: #314c72 ;
+  80% {
+    transform: translateY(-10px);
+  }
+
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
 }
+.ticketlistFilters {
+  font-size: 18px;
+  text-transform: capitalize;
+  cursor: pointer;
+  font-weight: 700;
 
+  &--value {
+    font-weight: 500;
+    color: black;
+  }
 
-@keyframes moveinLeft{
-    0%{
-        transform: translateX(150px);
-        opacity: 0;
-    }
+  &--OPEN {
+    color: #300d2a;
+  }
 
-    80%{
-        transform: translateX(-10px);
-    }
-
-    100%{
-        transform: translateX(0);
-        opacity: 1;
-    }
-}
-
-@keyframes moveInRight{
-    0%{
-        transform: translateX(-150px);
-        opacity: 0;
-    }
-
-    80%{
-        transform: translateX(10px);
-    }
-
-    100%{
-        transform: translateX(0);
-        opacity: 1;
-    }
-}
-@keyframes moveInUp{
-    0%{
-        transform: translateY(150px);
-        opacity: 0;
-    }
-
-    80%{
-        transform: translateY(-10px);
-    }
-
-    100%{
-        transform: translateY(0);
-        opacity: 1;
-    }
-}
-.ticketlistFilters{
-    font-size: 18px;
-    text-transform: capitalize;
-    cursor: pointer;
-    font-weight: 700;
-
-    &--value{
-        font-weight: 500;
-        color: black;
-    }
-
-    &--OPEN{
-        color: #300d2a;
-    }
-
-    &--INPROGRESS{
-        color: orangered;
-    }
-    &--ESCALATED{
-        color: red;
-    }
-    &--RESOLVED{
-        color: rgb(3, 83, 17);
-    }
+  &--INPROGRESS {
+    color: orangered;
+  }
+  &--ESCALATED {
+    color: red;
+  }
+  &--RESOLVED {
+    color: rgb(3, 83, 17);
+  }
 }

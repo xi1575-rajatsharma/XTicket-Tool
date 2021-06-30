@@ -25,7 +25,7 @@ const ticketListingReducer = (state = initalState, action) => {
       return {
         ...state,
         ticketList: action.data.result.tickets,
-        totalPages: action.data.numberOfPages - 1,
+        totalPages: action.data.numberOfPages,
         currentTicketStatus: action.status,
         ticketListFailure: false,
         ticketListLoading: false,

@@ -54,4 +54,8 @@ export const errorContainerStyles = {
   overflow: "hidden",
 };
 
-export const pageTracker = styled.p``;
+export const pageTracker = styled.p`
+  font-size: 1.3rem;
+  color: ${colors.colorLightGrey};
+  margin-left: auto;
+`;

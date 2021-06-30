@@ -1,5 +1,6 @@
 export const colors = {
   xenieBlue: "#354255",
+  xenieBlueLight: "rgba(53, 66, 85, 0.85)",
   itemSelectedBackground: "#556275",
   backgroundGrey: "#EEEEEE",
   colorWhite: "#ffffff",
@@ -18,4 +19,5 @@ export const colors = {
   awaitingTicketBackground: "#6114FD",
   resolvedTicketBackground: "#98FF00",
   borderGray: "rgba(222, 228, 232, 0.5)",
+  previewHeaderText: "#656565",
 };

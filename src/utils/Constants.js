@@ -57,6 +57,11 @@ export const getDateAndTime = (timestamp) => {
   return moment(timestamp).format("DD/MM/YYYY, hh:mm A");
 };
 
+export const getDaysDifferenceFromToday = (date) => {
+  const today = Date.now();
+  return Math.abs(getDifferenceInDays(date, today));
+};
+
 // returns the initials of a name (Considers only first and last string)
 export const getMemberInitials = (name) => {
   let initials = name.match(/\b\w/g) || [];

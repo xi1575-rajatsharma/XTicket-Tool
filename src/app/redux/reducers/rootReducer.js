@@ -2,12 +2,14 @@ import { combineReducers } from "redux";
 import loginReducer from "./loginReducer";
 import commonReducer from "./commonReducers";
 import ticketListingReducer from "./ticketListingReducer";
+import ticketDetailsReducer from "./ticketDetailsReducer";
 import * as types from "../actionTypes";
 
 const appreducer = combineReducers({
   login: loginReducer,
   common: commonReducer,
   ticketList: ticketListingReducer,
+  ticketDetails: ticketDetailsReducer,
 });
 
 const rootReducer = (state, action) => {
