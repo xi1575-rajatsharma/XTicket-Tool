@@ -13,8 +13,6 @@ export const container = styled(motion.div)`
 `;
 
 export const header = styled.div`
-  width: 100%;
-  height: 6vh;
   position: relative;
   background-color: ${colors.colorWhite};
   padding: 0rem 2rem;
@@ -23,6 +21,7 @@ export const header = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
+  box-shadow: 0px 2px 4px 0px rgba(133, 133, 133, 0.221);
 `;
 export const nameAndInitalsContainer = styled.div`
   height: 100%;
@@ -49,20 +48,56 @@ export const daysContainer = styled.p`
 
 export const closeBtn = styled.a`
   position: absolute;
-  background-color: ${colors.buttonDarkGrey};
+  background-color: ${colors.xenieBlueLight};
   color: #fff !important;
   padding: 0.3rem 1.1rem;
-  left: -8.6%;
-  top: 2.2%;
+  left: -4.11094rem;
+  top: 0.0828125rem;
   font-size: 2rem;
   font-weight: 500;
-  opacity: 0.7;
   cursor: pointer;
   img {
     height: 18px;
   }
 `;
 
+// BODY STYLES
+
+export const body = styled.div`
+  width: 100%;
+  padding: 1rem 2rem;
+  overflow-y: auto;
+`;
+
+export const subject = styled.div`
+  /* margin: 1rem 0 0 2.3rem; */
+  font-size: 2.2rem;
+  color: ${colors.previewHeaderText};
+`;
+
+export const linktToDetails = styled.div`
+  width: 50%;
+  margin: 1rem auto;
+  text-decoration: underline;
+  font-size: 1.3rem;
+`;
+
+export const ticketDescription = styled.div`
+  /* width: 100%; */
+  display: flex;
+  flex-direction: column;
+  font-size: 1.3rem;
+  background-color: ${colors.colorWhite};
+  padding: 2rem;
+  border-radius: 6px;
+  color: ${colors.fontLightBlack};
+`;
+
+export const createdOn = styled.div`
+  margin-left: auto;
+  font-size: 1rem;
+  color: ${colors.colorLightGrey};
+`;
 // framer motion stuff
 const item = {
   visible: {

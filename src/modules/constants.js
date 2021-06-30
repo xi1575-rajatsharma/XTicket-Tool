@@ -34,7 +34,7 @@ export const constants = {
     AVERAGE_EFFICIENCY: `${API_HOST_PATH}/ticket-tool/v1/tickets/user/efficiency`,
     SLA_DATE: `${API_HOST_PATH}/ticket-tool/v1/tickets/user/missed/datewise/count`,
     RESET_PASSWORD: `${API_HOST_PATH}/ticket-tool/v1/users/reset-password`,
-    APPROVAL_JOURNEY: `${API_HOST_PATH}/ticket-tool/v1/approval/`,
+    APPROVAL_JOURNEY: `${API_HOST_PATH}/ticket-tool/v1/approval`,
     USER_DETAILS: `${API_HOST_PATH}/ticket-tool/v1/users/userDetails`,
     ADMIN_STATUS_COUNT: `${API_HOST_PATH}/ticket-tool/v1/analytics/tickets/statusCount`,
     // Madhur's Approval Page

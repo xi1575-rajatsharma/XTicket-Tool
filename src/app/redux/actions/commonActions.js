@@ -25,7 +25,8 @@ export const getAllAdminUsers = () => (dispatch) => {
   let currentUserEmail = window.sessionStorage.getItem('userEmail')
   XenieApi.get(
     `${exportUrl + configs.getUserDepartment}?email=${currentUserEmail}`      
-  ).then(resp => {
+  )
+  .then(resp => {
     if(resp && resp.data && resp.data.result){
       return XenieApi.get(
         `${exportUrl+configs.getAllAdmins}?departmentId=${resp.data.result.departmentId}`

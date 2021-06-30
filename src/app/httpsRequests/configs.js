@@ -12,6 +12,7 @@ const configs = {
   changeUserRole: "users/saveUserRole",
   getUserDepartment: "dashboard/user/department",
   getAllRoles: "users/fetchAllRoles",
+  getAllReplies: "tickets/replies",
 };
 
 export default configs;
