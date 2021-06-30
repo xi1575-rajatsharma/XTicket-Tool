@@ -114,11 +114,3 @@ const Conversations = (props) => {
 };
 
 export default Conversations;
-
-{
-  /*                           
-                          <styled.replyAttachment href={reply.s3ReplyUrl}>
-                            
-                            <styled.attachmentIcon src={File} />
-                          </styled.replyAttachment> */
-}
