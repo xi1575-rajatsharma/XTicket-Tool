@@ -19,10 +19,16 @@ const TicketPreviewBody = (props) => {
         <styled.linktToDetails>{linkText}</styled.linktToDetails>{" "}
       </Link>
       <styled.ticketDescription>
-        {props.data.description}
-        <styled.createdOn>
-          {getDateAndTime(props.data.creationTime)}
-        </styled.createdOn>
+        {props.data.description.length ? (
+          <>
+            {props.data.description}
+            <styled.createdOn>
+              {getDateAndTime(props.data.creationTime)}
+            </styled.createdOn>
+          </>
+        ) : (
+          "No Description Available"
+        )}
       </styled.ticketDescription>
       <Conversations data={props.conversations} />
     </styled.body>

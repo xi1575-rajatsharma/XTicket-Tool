@@ -13,6 +13,8 @@ const configs = {
   getUserDepartment: "dashboard/user/department",
   getAllRoles: "users/fetchAllRoles",
   getAllReplies: "tickets/replies",
+  getEmployeeTicketStatusCount: "dashboard/ticketStatusCounts",
+  getEmployeeSla: "dashboard/missedResolvedCounts",
 };
 
 export default configs;

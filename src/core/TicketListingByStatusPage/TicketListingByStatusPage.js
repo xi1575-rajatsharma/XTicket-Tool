@@ -113,19 +113,23 @@ const TicketListingByStatusPage = (props) => {
             {getPageTrackingInformation()}
             {props.ticketList &&
             props.ticketList.ticketList &&
-            props.ticketList.ticketList.length
-              ? props.ticketList.ticketList.map((ticketData) => {
-                  return (
-                    <Ticket
-                      allAdminData={state.allAdminData}
-                      data={ticketData}
-                      key={ticketData.id}
-                      mapChangesToState={mapChangesToState}
-                      handleTicketClick={handleTicketClick}
-                    />
-                  );
-                })
-              : "No Tickets Found"}
+            props.ticketList.ticketList.length ? (
+              props.ticketList.ticketList.map((ticketData) => {
+                return (
+                  <Ticket
+                    allAdminData={state.allAdminData}
+                    data={ticketData}
+                    key={ticketData.id}
+                    mapChangesToState={mapChangesToState}
+                    handleTicketClick={handleTicketClick}
+                  />
+                );
+              })
+            ) : (
+              <styled.noTicketsContainer>
+                <styled.noTicketsText>No Tickets Found</styled.noTicketsText>
+              </styled.noTicketsContainer>
+            )}
           </>
         )}
       </styled.container>

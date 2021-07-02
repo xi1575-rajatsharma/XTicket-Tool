@@ -8,7 +8,7 @@ export const userHasLogin = (WrapperView) => {
     constructor(props) {
       super(props);
       this.state = {
-        isTicketListLoading: true,
+        isTicketListLoading: false,
       };
     }
 

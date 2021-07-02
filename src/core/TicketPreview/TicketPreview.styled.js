@@ -83,18 +83,17 @@ export const linktToDetails = styled.div`
 `;
 
 export const ticketDescription = styled.div`
-  /* width: 100%; */
   display: flex;
   flex-direction: column;
   font-size: 1.3rem;
   background-color: ${colors.colorWhite};
-  padding: 2rem;
+  padding: 1.5rem;
   border-radius: 6px;
   color: ${colors.fontLightBlack};
 `;
 
 export const createdOn = styled.div`
-  margin-left: auto;
+  margin: 0.5rem 0 0 auto;
   font-size: 1rem;
   color: ${colors.colorLightGrey};
 `;

@@ -19,6 +19,16 @@ export const navItems = [
       },
     ],
   },
+  {
+    itemName: "EmployeeDashboard",
+    key: "employeeDashboard1",
+    items: [
+      {
+        itemName: "Employee Dashboard Reports",
+        key: "employeeDashboard1",
+      },
+    ],
+  },
 ];
 
 export const errorText =

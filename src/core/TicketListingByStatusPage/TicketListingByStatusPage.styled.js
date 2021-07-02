@@ -31,10 +31,25 @@ export const header = styled.div`
   padding: 1.5rem 2.5rem;
   display: flex;
   justify-content: space-between;
-  /* margin-bottom: 3rem; */
 `;
 
 export const heading = styled.h3``;
+
+export const noTicketsContainer = styled.div`
+  width: 100%;
+  height: 80vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.6rem;
+  color: ${colors.lightBlack};
+`;
+
+export const noTicketsText = styled.p`
+  border: 1px solid ${colors.lightBlack};
+  border-radius: 4px;
+  padding: 2rem;
+`;
 
 export const paginationContainer = styled.div``;
 
