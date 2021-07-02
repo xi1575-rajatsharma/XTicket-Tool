@@ -10,7 +10,7 @@ export const TicketListingPage = styled.div`
 
 export const NavContainer = styled.div`
   width: 20%;
-  max-height: 100%;
+  height: 96vh;
   padding: 0.5rem;
   padding-left: 2.2rem;
   padding-top: 2.2rem;
@@ -18,6 +18,22 @@ export const NavContainer = styled.div`
   overflow-x: hidden;
   background-color: ${colors.xenieBlue};
   color: ${colors.colorWhite};
+  scroll-behavior: smooth;
+
+  &::-webkit-scrollbar {
+    width: 12px;
+  }
+
+  &::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 10px 10px transparent;
+    border: solid 3px transparent;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    box-shadow: inset 0 0 10px 10px ${colors.labelLightGrey};
+    border: solid 3px transparent;
+    border-radius: 8px;
+  }
 `;
 
 export const menuContainer = styled.div`
