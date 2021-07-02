@@ -38,7 +38,7 @@ export const ticketContainer = styled.div`
   flex-direction: column;
   position: relative;
   padding: 2.5rem;
-  max-height: 82vh;
+  max-height: 70vh;
   overflow: auto;
   margin-top: 2rem;
   scroll-behavior: smooth;
