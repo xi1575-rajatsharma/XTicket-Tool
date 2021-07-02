@@ -15,7 +15,8 @@ const EmployeeDashboardBody = () => {
       allUsers: [],
       allStatus: [],
       selectedStatus: [],
-      currentSelectedTicket: {}
+      currentSelectedTicket: {},
+      isPreviewVisible: false
     });
   const [show, setShow] = useState(false);
   const [fromDate, setFromDate] = useState("");
