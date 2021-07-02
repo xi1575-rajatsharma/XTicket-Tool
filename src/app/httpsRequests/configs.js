@@ -15,6 +15,7 @@ const configs = {
   getAllReplies: "tickets/replies",
   getEmployeeTicketStatusCount: "dashboard/ticketStatusCounts",
   getEmployeeSla: "dashboard/missedResolvedCounts",
+  getUserTickets: "dashboard/getAssignedTickets",
 };
 
 export default configs;

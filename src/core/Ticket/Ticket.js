@@ -42,6 +42,8 @@ const Ticket = (props) => {
     });
   }, [data]);
   const changeAssignee = (assignee) => {
+    
+    mapChangesToState({selectedValue: assignee})
     dispatch(startChangeAssigneeLoader(data.id));
     dispatch(changeTicketAssignee(assignee, data.id));
   };
