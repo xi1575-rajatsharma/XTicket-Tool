@@ -42,9 +42,6 @@ const TicketListingComponents = (props) => {
       ) : null}
       {props.selectedKey === "manageAccess" ? <ManageAccess /> : null}
       {props.selectedKey === "employeeDashboard" ? <EmployeeDashboard /> : null}
-      {props.selectedKey === "employeeDashboard1" ? (
-        <EmployeeDasboardReports />
-      ) : null}
     </styled.ticketListingComponent>
   );
 };

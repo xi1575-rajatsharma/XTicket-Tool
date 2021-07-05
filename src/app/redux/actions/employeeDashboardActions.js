@@ -34,7 +34,6 @@ const transformSlaData = (data) => {
 export const getEmployeeSlaInfo = (requestParams) => (dispatch) => {
   XenieApi.get(exportUrl + configs.getEmployeeSla, null, requestParams).then(
     (response) => {
-      console.log(response);
       dispatch({
         type: types.GET_EMPLOYEE_SLA_INFO_SUCCESS,
         data: transformSlaData(response.data.result) || [],

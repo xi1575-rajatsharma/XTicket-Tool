@@ -1,28 +1,31 @@
 import React, { useState, useEffect } from "react";
 import DropDown from "core/DropDown/DropDown";
-import * as styled from "./EmployeeDashboard.styled";
-import { useDispatch, useSelector } from "react-redux";
+import * as actionCreators from "app/redux/actions/employeeDashboardActions";
+import EmployeeDashBoardFilters from "./EmployeeDashBoardFilters/EmployeeDashBoardFilters";
+import EmployeeDashboardTicketsContainer from "./EmployeeDashboardTickets/EmployeeDashboardTicketsContainer";
+import { useDispatch, useSelector, connect } from "react-redux";
 import {
   converDatatoDropDownData,
   getOnlyLabelValuePair,
 } from "utils/Constants";
-import { Button, Modal } from "react-bootstrap";
-import Select from "react-select";
+import { Button } from "react-bootstrap";
 import {
   getUserTickets,
   showLoader,
   resetData,
 } from "app/redux/actions/employeeDashboardActions";
-import Loader from "core/Loader/Loader";
-import Ticket from "core/Ticket/Ticket";
+import * as styled from "./EmployeeDashboard.styled";
+import EmployeeDashBoardNavbar from "./EmployeeDashBoardNavBar/EmployeeDashBoardNavbar";
+import EmployeeDasboardReports from "./EmployeeDashboardReports/EmployeeDasboardReports";
 
-const EmployeeDashboardBody = () => {
+const EmployeeDashboardBody = (props) => {
   const [state, setState] = useState({
     selectedUser: null,
     allUsers: [],
     allStatus: [],
     selectedStatus: [],
     currentSelectedTicket: {},
+    selectedNavItem: "employeeTickets",
   });
   const [show, setShow] = useState(false);
   const [fromDate, setFromDate] = useState("");
@@ -64,16 +67,29 @@ const EmployeeDashboardBody = () => {
     }
   }, [commonState.allAdminData]);
 
+  const getAllDashboardData = (email, startDate, requestParams) => {
+    dispatch(showLoader());
+    dispatch(getUserTickets(email, startDate, toDate, state.selectedStatus));
+    props.dispatch(actionCreators.resetEmployeeTicketStatusCount());
+    props.dispatch(actionCreators.startEmployeeTicketStatusCountLoader());
+    props.dispatch(actionCreators.getEmployeeTicketStatusCount(requestParams));
+    props.dispatch(actionCreators.resetEmployeeSlaInfo());
+    props.dispatch(actionCreators.startEmployeeSlaInfoLoader());
+    props.dispatch(actionCreators.getEmployeeSlaInfo(requestParams));
+  };
+
   const setUser = (user) => {
     mapChangesToState({ selectedUser: user });
     let todayDate = new Date().toISOString().slice(0, 10);
     let startDate = fromDate || todayDate;
-    dispatch(showLoader());
+    const requestParams = {
+      email: user.value,
+      startDate,
+      endDate: toDate,
+    };
     if (user.value) {
       setValid(true);
-      dispatch(
-        getUserTickets(user.value, startDate, toDate, state.selectedStatus)
-      );
+      getAllDashboardData(user.value, startDate, requestParams);
     }
   };
 
@@ -84,17 +100,14 @@ const EmployeeDashboardBody = () => {
   const filterTickets = () => {
     let todayDate = new Date().toISOString().slice(0, 10);
     let startDate = fromDate || todayDate;
+    const requestParams = {
+      email: state.selectedUser.value,
+      startDate,
+      endDate: toDate,
+    };
     if (state.selectedUser && state.selectedUser.value) {
       setShow(false);
-      dispatch(showLoader());
-      dispatch(
-        getUserTickets(
-          state.selectedUser.value,
-          startDate,
-          toDate,
-          state.selectedStatus
-        )
-      );
+      getAllDashboardData(state.selectedUser.value, startDate, requestParams);
     }
   };
 
@@ -111,95 +124,52 @@ const EmployeeDashboardBody = () => {
       </styled.dropDownContainer>
 
       <styled.filterContainer>
-        <Button variant="light" onClick={handleShow}>
+        <styled.filterBtn variant="light" onClick={handleShow}>
           Filter
-        </Button>
+        </styled.filterBtn>
       </styled.filterContainer>
-
-      <Modal
+      <EmployeeDashBoardFilters
         show={show}
-        onHide={handleClose}
-        backdrop="static"
-        keyboard={false}
-      >
-        <Modal.Header closeButton>
-          <Modal.Title>Filter Users</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          <div className="row g-2 mb-3">
-            <div className="col-auto">
-              <label className="form-label">From</label>
-              <input
-                className="form-control"
-                type="date"
-                value={fromDate}
-                onChange={(e) => setFromDate(e.target.value)}
-              />
-            </div>
-            <div className="col-auto">
-              <label className="form-label">To</label>
-              <input
-                className="form-control"
-                type="date"
-                value={toDate}
-                onChange={(e) => setToDate(e.target.value)}
-              />
-            </div>
-          </div>
-          <div className="mb-3">
-            <label className="form-label">select ticket status</label>
-            <Select
-              isMulti
-              value={state.selectedStatus}
-              options={state.allStatus}
-              onChange={updateSelectedStatus}
-            />
-          </div>
-        </Modal.Body>
-        <Modal.Footer>
-          <Button variant="secondary" onClick={handleClose}>
-            Close
-          </Button>
-          <Button variant="primary" onClick={filterTickets} disabled={!valid}>
-            Filter
-          </Button>
-        </Modal.Footer>
-      </Modal>
-      <styled.ticketContainer>
-        {dashboardState && dashboardState.loading ? (
-          <styled.loaderContainer>
-            <Loader />
-          </styled.loaderContainer>
-        ) : dashboardState && dashboardState.error ? (
-          <div className="card text-center">
-            <div className="card-body">
-              <blockquote className="blockquote mb-0 text-danger">
-                {dashboardState.errorMessage}
-              </blockquote>
-            </div>
-          </div>
-        ) : dashboardState &&
-          dashboardState.tickets &&
-          dashboardState.tickets.length ? (
-          dashboardState.tickets.map((ticket) => (
-            <Ticket
-              allAdminData={state.allUsers}
-              data={ticket}
-              key={ticket.id}
+        handleClose={handleClose}
+        fromDate={fromDate}
+        setFromDate={setFromDate}
+        toDate={toDate}
+        setToDate={setToDate}
+        selectedStatus={state.selectedStatus}
+        allStatus={state.allStatus}
+        updateSelectedStatus={updateSelectedStatus}
+        filterTickets={filterTickets}
+        valid={valid}
+      />
+
+      {state.selectedUser ? (
+        <>
+          <EmployeeDashBoardNavbar
+            mapChangesToState={mapChangesToState}
+            selectedNavItem={state.selectedNavItem}
+          />
+          {state.selectedNavItem === "employeeTickets" && (
+            <EmployeeDashboardTicketsContainer
+              dashboardState={dashboardState}
+              allUsers={state.allUsers}
               mapChangesToState={mapChangesToState}
               handleTicketClick={handleTicketClick}
             />
-          ))
-        ) : (
-          <div className="card text-center">
-            <div className="card-body">
-              <h4 className="card-title">No Tickets</h4>
-            </div>
-          </div>
-        )}
-      </styled.ticketContainer>
+          )}
+          {state.selectedNavItem === "employeeRepors" && (
+            <EmployeeDasboardReports />
+          )}
+        </>
+      ) : null}
     </styled.body>
   );
 };
 
-export default EmployeeDashboardBody;
+const mapStatetoProps = (state) => {
+  return {
+    allAdminData: state.common.allAdminData,
+    employeeDashboard: state.employeeDashboard,
+  };
+};
+
+export default connect(mapStatetoProps)(EmployeeDashboardBody);

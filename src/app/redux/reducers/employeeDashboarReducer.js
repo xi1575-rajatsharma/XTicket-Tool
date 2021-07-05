@@ -112,7 +112,7 @@ const employeeDashboardReducer = (state = initalState, action) => {
         action.data.result.tickets
       ) {
         tickets = action.data.result.tickets.filter((ticket) =>
-          action.status.some((status) => status.label == ticket.status)
+          action.status.some((status) => status.label === ticket.status)
         );
       }
       return {

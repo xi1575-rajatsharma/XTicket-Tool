@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import { motion } from "framer-motion";
 import { colors } from "../../app/themes/variables";
 
 export const ticketContainer = styled.div`

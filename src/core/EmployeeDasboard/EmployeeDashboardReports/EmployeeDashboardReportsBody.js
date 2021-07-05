@@ -15,95 +15,82 @@ const EmployeeDashboardReportsBody = (props) => {
     areAllTicketStatusCountZero: false,
     areAllSlaZero: false,
   });
+
   useEffect(() => {
+    let areAllTicketStatusCountZero = false;
+    let areAllSlaZero = false;
     if (
       props.ticketStatusCountData.ticketStatusCount &&
       props.ticketStatusCountData.ticketStatusCount.length
     ) {
-      const areAllTicketStatusCountZero = checkIfAllValuesAreZero(
+      areAllTicketStatusCountZero = checkIfAllValuesAreZero(
         props.ticketStatusCountData.ticketStatusCount,
         "value"
       );
-      mapChangesToState({ areAllTicketStatusCountZero });
     }
-  }, [props.ticketStatusCountData.ticketStatusCount]);
-
-  useEffect(() => {
     if (props.employeeSlaInfo.slaInfo && props.employeeSlaInfo.slaInfo) {
-      const areAllSlaZero = checkIfAllValuesAreZero(
+      areAllSlaZero = checkIfAllValuesAreZero(
         props.employeeSlaInfo.slaInfo,
         "value"
       );
-      mapChangesToState({ areAllSlaZero });
     }
-  }, [props.employeeSlaInfo.slaInfo]);
+    mapChangesToState({ areAllTicketStatusCountZero, areAllSlaZero });
+  }, [
+    props.ticketStatusCountData.ticketStatusCount,
+    props.employeeSlaInfo.slaInfo,
+  ]);
 
   const mapChangesToState = (value) => setState({ ...state, ...value });
   return (
     <styled.body>
-      <styled.selectSubHeading>Select Employee</styled.selectSubHeading>
-      <styled.dropDownContainer>
-        <DropDown
-          isClearable={false}
-          value={props.selectedUser}
-          options={converDatatoDropDownData(
-            props.allAdminUsers,
-            "name",
-            "emailId"
+      <styled.reportsContainer>
+        <styled.pieChartContainer>
+          <styled.pieChartHeader>Ticket Status Count</styled.pieChartHeader>
+          {props.ticketStatusCountData.ticketStatusCountLoading ? (
+            <Loader />
+          ) : props.ticketStatusCountData.ticketStatusCountFailure ? (
+            <ComponentError
+              errorContainerStyles={styled.errorContainerStyles}
+              paragraphStyles={styled.paragraphStyles}
+              errorText={reportErrorText}
+            />
+          ) : (
+            (!state.areAllTicketStatusCountZero && (
+              <>
+                <PieWithPercent
+                  data={props.ticketStatusCountData.ticketStatusCount}
+                />
+              </>
+            )) || (
+              <styled.noDataContainer>
+                <styled.noDataText>{noDataText}</styled.noDataText>
+              </styled.noDataContainer>
+            )
           )}
-          optionSelected={(user) => props.setUser(user)}
-        />
-      </styled.dropDownContainer>
-      {props.selectedUser && (
-        <styled.reportsContainer>
-          <styled.pieChartContainer>
-            <styled.pieChartHeader>Ticket Status Count</styled.pieChartHeader>
-            {props.ticketStatusCountData.ticketStatusCountLoading ? (
-              <Loader />
-            ) : props.ticketStatusCountData.ticketStatusCountFailure ? (
-              <ComponentError
-                errorContainerStyles={styled.errorContainerStyles}
-                paragraphStyles={styled.paragraphStyles}
-                errorText={reportErrorText}
-              />
-            ) : (
-              (!state.areAllTicketStatusCountZero && (
-                <>
-                  <PieWithPercent
-                    data={props.ticketStatusCountData.ticketStatusCount}
-                  />
-                </>
-              )) || (
-                <styled.noDataContainer>
-                  <styled.noDataText>{noDataText}</styled.noDataText>
-                </styled.noDataContainer>
-              )
-            )}
-          </styled.pieChartContainer>
-          <styled.pieChartContainer>
-            <styled.pieChartHeader>Employee Sla Info</styled.pieChartHeader>
-            {props.employeeSlaInfo.slaInfoLoading ? (
-              <Loader />
-            ) : props.employeeSlaInfo.slaInfoFailure ? (
-              <ComponentError
-                errorContainerStyles={styled.errorContainerStyles}
-                paragraphStyles={styled.paragraphStyles}
-                errorText={reportErrorText}
-              />
-            ) : (
-              (!state.areAllSlaZero && (
-                <>
-                  <PieWithPercent data={props.employeeSlaInfo.slaInfo} />
-                </>
-              )) || (
-                <styled.noDataContainer>
-                  <styled.noDataText>{noDataText}</styled.noDataText>
-                </styled.noDataContainer>
-              )
-            )}
-          </styled.pieChartContainer>
-        </styled.reportsContainer>
-      )}
+        </styled.pieChartContainer>
+        <styled.pieChartContainer>
+          <styled.pieChartHeader>Employee Sla Info</styled.pieChartHeader>
+          {props.employeeSlaInfo.slaInfoLoading ? (
+            <Loader />
+          ) : props.employeeSlaInfo.slaInfoFailure ? (
+            <ComponentError
+              errorContainerStyles={styled.errorContainerStyles}
+              paragraphStyles={styled.paragraphStyles}
+              errorText={reportErrorText}
+            />
+          ) : (
+            (!state.areAllSlaZero && (
+              <>
+                <PieWithPercent data={props.employeeSlaInfo.slaInfo} />
+              </>
+            )) || (
+              <styled.noDataContainer>
+                <styled.noDataText>{noDataText}</styled.noDataText>
+              </styled.noDataContainer>
+            )
+          )}
+        </styled.pieChartContainer>
+      </styled.reportsContainer>
     </styled.body>
   );
 };

@@ -9,7 +9,6 @@ import React, { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import {
   capitalizeFirstLetter,
-  converDatatoDropDownData,
   getColorBasedOnStatus,
   getDateAndTime,
   returnBlankIfEmpty,
@@ -33,17 +32,16 @@ const Ticket = (props) => {
   });
   useEffect(() => {
     mapChangesToState({
-      selectedValue: {label: data.assignedTo, value: data.assignedToEmailId},
-      
-      isLoading : data.isLoading,
-      isError : data.isError,
-      errorMessage : data.errorMsg,
-      errorTitle : data.errorTitle,
+      selectedValue: { label: data.assignedTo, value: data.assignedToEmailId },
+
+      isLoading: data.isLoading,
+      isError: data.isError,
+      errorMessage: data.errorMsg,
+      errorTitle: data.errorTitle,
     });
   }, [data]);
   const changeAssignee = (assignee) => {
-    
-    mapChangesToState({selectedValue: assignee})
+    mapChangesToState({ selectedValue: assignee });
     dispatch(startChangeAssigneeLoader(data.id));
     dispatch(changeTicketAssignee(assignee, data.id));
   };

@@ -7,7 +7,8 @@ export const container = styled.div`
   flex-direction: column;
   position: relative;
   padding: 2.5rem;
-  max-height: 82vh;
+
+  height: 82vh;
   overflow: auto;
   scroll-behavior: smooth;
 

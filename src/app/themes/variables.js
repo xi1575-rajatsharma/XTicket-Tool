@@ -20,4 +20,6 @@ export const colors = {
   resolvedTicketBackground: "#98FF00",
   borderGray: "rgba(222, 228, 232, 0.5)",
   previewHeaderText: "#656565",
+  colorLightBorder: "#c5c5c5",
+  filterButtonBackground: "#647CA1",
 };

@@ -13,7 +13,8 @@ export const header = styled.section`
 export const heading = styled.h3``;
 
 export const body = styled.section`
-  padding: 0 2rem;
+  /* padding: 0 2rem; */
+  margin-top: 2rem;
 `;
 
 export const selectSubHeading = styled.h6`
