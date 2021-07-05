@@ -13,7 +13,7 @@ const appreducer = combineReducers({
   ticketList: ticketListingReducer,
   manageAccess: manageAccessReducer,
   ticketDetails: ticketDetailsReducer,
-  employeeDashBoard: employeeDashboardReducer,
+  employeeDashboard: employeeDashboardReducer,
 });
 
 const rootReducer = (state, action) => {

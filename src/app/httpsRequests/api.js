@@ -58,15 +58,7 @@ class XenieApi {
     );
   }
 
-  static api(
-    requestType,
-    route,
-    headers,
-    params,
-    data,
-    timeout = defaultTimeoutAPI,
-    responseType
-  ) {
+  static api(requestType, route, headers, params, data, timeout, responseType) {
     const host = XenieApi.baseUrl();
     const url = `${host}${route}`;
     const baseHeaders = XenieApi.baseHeaders();

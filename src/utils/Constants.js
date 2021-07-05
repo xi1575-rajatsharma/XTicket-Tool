@@ -31,6 +31,13 @@ export const converDatatoDropDownData = (data, label, value) => {
   );
 };
 
+export const converDatatoReportsData = (data, name, value) => {
+  return (
+    data &&
+    data.map((item) => ({ ...item, name: item[name], value: item[value] }))
+  );
+};
+
 export const getOnlyLabelValuePair = (data) => {
   return data && data.map((item) => ({ label: item.label, value: item.value }));
 };
@@ -104,4 +111,11 @@ export const getColorBasedOnStatus = (status) => {
     default:
       return colors.xenieBlue;
   }
+};
+
+export const checkIfAllValuesAreZero = (data, value) => {
+  const lengthCheckVariable = data.filter(
+    (individualElement) => individualElement[value] === 0
+  );
+  return lengthCheckVariable.length === data.length;
 };
