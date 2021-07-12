@@ -22,7 +22,6 @@ const EmployeeDashboardTicketsContainer = (props) => {
         props.dashboardState.tickets &&
         props.dashboardState.tickets.length ? (
         props.dashboardState.tickets.map((ticket) => (
-          <>
             <Ticket
               allAdminData={props.allUsers}
               data={ticket}
@@ -30,7 +29,6 @@ const EmployeeDashboardTicketsContainer = (props) => {
               mapChangesToState={props.mapChangesToState}
               handleTicketClick={props.handleTicketClick}
             />
-          </>
         ))
       ) : (
         <styled.noRecordsContainer>

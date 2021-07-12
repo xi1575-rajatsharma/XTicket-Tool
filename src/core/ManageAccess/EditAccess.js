@@ -78,7 +78,7 @@ function EditAccess() {
             </styled.select>
           </div>
           <div className="form-group">
-            <label>Select Role</label>
+            <styled.label>Select Role</styled.label>
             <styled.select
               className="form-control"
               onChange={changeRole}
@@ -104,7 +104,7 @@ function EditAccess() {
           </div>
         </div>
         {manageAccessState.editAccess.loading ? (
-          <div className="mt-5 align-self-start">
+          <div className="align-self-start" style={{marginTop: "6rem"}}>
             <Loader height="33px" />
           </div>
         ) : null}

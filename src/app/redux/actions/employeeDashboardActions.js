@@ -60,18 +60,12 @@ export const startEmployeeSlaInfoLoader = () => (dispatch) => {
 };
 
 export const getUserTickets =
-  (email, startDate, endDate = "", status = [], page = 0, limit = 10) =>
-  (dispatch) => {
-    XenieApi.get(
-      `${
-        exportUrl + configs.getUserTickets
-      }?page=${page}&limit=${limit}&email=${email}&startDate=${startDate}&endDate=${endDate}`
-    ).then(
+  (params) => (dispatch) => {
+    XenieApi.get(`${exportUrl + configs.getUserTickets}`, null, params).then(
       (response) => {
         dispatch({
           type: types.GET_USER_TICKETS,
-          data: response.data,
-          status,
+          data: response.data
         });
       },
       (error) => dispatch({ type: types.DASHBOARD_ERROR, error })

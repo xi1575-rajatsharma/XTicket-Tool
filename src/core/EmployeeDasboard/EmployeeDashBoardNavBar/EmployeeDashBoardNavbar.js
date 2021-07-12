@@ -11,7 +11,7 @@ const EmployeeDashBoardNavbar = (props) => {
     <styled.nav>
       {navItems.map((item) => (
         <styled.navItem
-          color={props.selectedNavItem === item.key && colors.xenieBlue}
+          color={(props.selectedNavItem === item.key) ? colors.xenieBlue: null}
           key={item.key}
           onClick={() => onClick(item.key)}
         >

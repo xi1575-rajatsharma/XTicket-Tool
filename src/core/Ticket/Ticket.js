@@ -6,7 +6,7 @@ import {
 import CommonModal from "core/CommomModal/CommonModal";
 import Loader from "core/Loader/Loader";
 import React, { useState, useEffect } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import {
   capitalizeFirstLetter,
   getColorBasedOnStatus,
@@ -22,9 +22,11 @@ import * as styled from "./Ticket.styled";
 const Ticket = (props) => {
   const mapChangesToState = (value) => setState({ ...state, ...value });
   const dispatch = useDispatch();
+  const ticketListState = useSelector(state => state.ticketList)
+  const chanagableStatus = ["OPEN", "INPROGRESS", "REOPENED"]
   const { data } = props;
   const [state, setState] = useState({
-    selectedValue: {},
+    selectedValue: { label: data.assignedTo, value: data.assignedToEmailId },
     isLoading: false,
     isError: false,
     errorMessage: "",
@@ -32,17 +34,15 @@ const Ticket = (props) => {
   });
   useEffect(() => {
     mapChangesToState({
-      selectedValue: { label: data.assignedTo, value: data.assignedToEmailId },
-
-      isLoading: data.isLoading,
-      isError: data.isError,
-      errorMessage: data.errorMsg,
-      errorTitle: data.errorTitle,
-    });
-  }, [data]);
+          isLoading: ticketListState.ticket.loading,
+          isError: ticketListState.ticket.error,
+          errorMessage: ticketListState.ticket.errorMessage,
+          errorTitle: ticketListState.ticket.errorTitle,
+        });
+  }, [ticketListState.ticket])
   const changeAssignee = (assignee) => {
-    mapChangesToState({ selectedValue: assignee });
     dispatch(startChangeAssigneeLoader(data.id));
+    mapChangesToState({ selectedValue: assignee });
     dispatch(changeTicketAssignee(assignee, data.id));
   };
 
@@ -95,7 +95,7 @@ const Ticket = (props) => {
           value={getDateAndTime(data.dueOn)}
         />
         <styled.assigneeContainer>
-          {state.isLoading ? (
+          {(state.isLoading) && ticketListState.ticket.currentTicket == data.id ? (
             <Loader />
           ) : (
             <DropDown
@@ -105,6 +105,7 @@ const Ticket = (props) => {
               options={props.allAdminData}
               optionSelected={(assignee) => changeAssignee(assignee)}
               inputStyle={styled.customStyles}
+              disabled={chanagableStatus.indexOf(data.status) >-1 ? false: true}
             />
           )}
         </styled.assigneeContainer>

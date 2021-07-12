@@ -104,20 +104,9 @@ const employeeDashboardReducer = (state = initalState, action) => {
       };
     }
     case types.GET_USER_TICKETS:
-      let tickets = action.data.result.tickets || [];
-      if (
-        action.status &&
-        action.status.length &&
-        action.data.result &&
-        action.data.result.tickets
-      ) {
-        tickets = action.data.result.tickets.filter((ticket) =>
-          action.status.some((status) => status.label === ticket.status)
-        );
-      }
       return {
         ...state,
-        tickets: tickets,
+        tickets: action.data.result.tickets || [],
         loading: false,
         error: false,
       };

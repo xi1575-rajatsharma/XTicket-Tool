@@ -17,7 +17,7 @@ function ManageAccess() {
         <styled.nav>
           {navItems.map((item) => (
             <styled.navItem
-              color={view === item.key && colors.xenieBlue}
+              color={view === item.key ? colors.xenieBlue : null}
               key={item.key}
               onClick={() => setView(item.key)}
             >
