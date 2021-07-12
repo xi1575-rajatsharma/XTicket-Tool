@@ -8,7 +8,6 @@ import {
   converDatatoDropDownData,
   getOnlyLabelValuePair,
 } from "utils/Constants";
-import { Button } from "react-bootstrap";
 import {
   getUserTickets,
   showLoader,
@@ -69,7 +68,15 @@ const EmployeeDashboardBody = (props) => {
 
   const getAllDashboardData = (email, startDate, requestParams) => {
     dispatch(showLoader());
-    dispatch(getUserTickets(email, startDate, toDate, state.selectedStatus));
+    const getTicketParams = {
+      page: 0,
+      limit: 10,
+      email: email,
+      startDate,
+      endDate: toDate,
+      status: (state.selectedStatus.length && state.selectedStatus.map(status => status.label).toString()) || ""
+    }
+    dispatch(getUserTickets(getTicketParams));
     props.dispatch(actionCreators.resetEmployeeTicketStatusCount());
     props.dispatch(actionCreators.startEmployeeTicketStatusCountLoader());
     props.dispatch(actionCreators.getEmployeeTicketStatusCount(requestParams));
